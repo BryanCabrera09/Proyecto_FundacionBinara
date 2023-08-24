@@ -5,7 +5,7 @@ export class Proyectos {
     _id?: number;
     titulo?: string;
     objetivoPrincipal?: string;
-    objetivosSecundarios?: string;
+    objetivosSecundarios?: string[];
     mapas?: Mapas[];
     parrafoUno?: string;
     parrafoDos?: string;

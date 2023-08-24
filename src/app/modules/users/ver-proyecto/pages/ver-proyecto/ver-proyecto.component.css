@@ -1,57 +1,100 @@
 .project-details {
     font-family: 'Arial', sans-serif;
-    padding: 20px;
-    border: 1px solid #eaeaea;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #ffffff;
 }
 
-.details-container {
+.titulo {
     text-align: center;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    color: #444;
+    font-size: 1.8rem;
+}
+
+.subtitulo {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #888;
+    font-size: 1.1rem;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 30px;
     width: 100%;
 }
 
-.image-and-details {
-    display: flex;
-    flex-direction: row;
-    justify-content: right;
-    margin-bottom: 20px;
-}
-
-.image-column {
-    flex: 1;
-    margin-right: 20px;
-    text-align: right;
-    margin-left: 150px;
+.image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .details-column {
-    flex: 1;
-    text-align: left;
-    margin-right: 180px;
-    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.image-container {
-    margin-top: 20px;
-    max-width: 120%;
-}
-
-.titutlo {
+.titulodetalle {
     text-align: center;
-    margin-top: 15px;
-    margin-bottom: 20px;
+    color: #555;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
 }
 
-.distanciaDetalle{
-    margin-left: 20px;
+.distanciaDetalle {
+    padding: 20px;
+    border-radius: 8px;
     background-color: #f2f2f2;
 }
 
-.titulodetalle{
-  margin-bottom: 10px;
-  text-align: center;
+.distanciaDetalle p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.objetivos p {
+    margin-bottom: 10px;
+}
+
+.objetivos ul {
+    padding-left: 20px;
+}
+
+.text-container {
+    margin-top: 20px;
+}
+
+.map-label {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.map-container {
+    height: 400px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.map-wrapper {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
 }
