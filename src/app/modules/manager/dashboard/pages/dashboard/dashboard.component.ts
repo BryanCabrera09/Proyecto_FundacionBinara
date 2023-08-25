@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
 
@@ -146,7 +146,7 @@ export class DashboardComponent implements OnInit {
           fill: false,
           borderDash: [5, 5],
           tension: 0.4,
-          borderColor: documentStyle.getPropertyValue('--teal-500')
+          borderColor: documentStyle.getPropertyValue('--black-500')
         },
         {
           label: 'Proyectos',

@@ -1,227 +1,224 @@
-
 <main class="container seccion">
     <h1>Fundación<span class="logo__bold">Binara</span></h1>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat molestiae omnis corporis similique suscipit 
-    maxime beatae recusandae hic et doloribus, nemo in voluptate magnam quo placeat ipsum dolor. Dicta, repellendus!
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nesciunt nam voluptatem velit dignissimos eius corporis, 
-    dolor minus? Beatae illo assumenda odit eaque quaerat dolorum iure harum provident hic officia?
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat molestiae omnis corporis similique suscipit 
-    maxime beatae recusandae hic et doloribus, nemo in voluptate magnam quo placeat ipsum dolor. Dicta, repellendus!
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nesciunt nam voluptatem velit dignissimos eius corporis, 
-    dolor minus? Beatae illo assumenda odit eaque quaerat dolorum iure harum provident hic officia?</p>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat molestiae omnis corporis similique suscipit
+        maxime beatae recusandae hic et doloribus, nemo in voluptate magnam quo placeat ipsum dolor. Dicta, repellendus!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nesciunt nam voluptatem velit dignissimos eius
+        corporis,
+        dolor minus? Beatae illo assumenda odit eaque quaerat dolorum iure harum provident hic officia?
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat molestiae omnis corporis similique suscipit
+        maxime beatae recusandae hic et doloribus, nemo in voluptate magnam quo placeat ipsum dolor. Dicta, repellendus!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nesciunt nam voluptatem velit dignissimos eius
+        corporis,
+        dolor minus? Beatae illo assumenda odit eaque quaerat dolorum iure harum provident hic officia?</p>
 </main>
 
-<section class="seccion container">
-    <h2> Proyectos en Marcha</h2>
+<body>
 
-    <div class="contenedor-proyectosmarcha">
-        <div class="proyectomarcha">
-            <picture>
-                <source srcset="build/img/proyecto1.webp" type="image/webp">
-                <source srcset="build/img/proyecto1.jpg" type="image/jpeg">
-                <img loading="lazy" src="build/img/proyecto1.jpg" alt="proyecto1"> 
-            </picture>
+    <div class="seccion container">
+        <h2> Proyectos en Marcha</h2>
 
-            <div class="contenido-proyecto">
-                <h3>Proyecto 1</h3>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab eius reiciendis delectus blanditiis, dolor 
-                    aperiam facilis debitis sint at vero, consequatur, perspiciatis eligendi esse. Deserunt facere soluta 
-                    labore quod magni.</p>
-                <p class="inversion">$2 500</p>
-                <ul class="iconos-caracteristicas">
-                    <li>
-                        <img loading="lazy" src="build/img/icono1.svg" alt="Involucrados">
-                        <p>200</p>
-                    </li>
-                    <li>
-                        <img loading="lazy" src="build/img/icono2.svg" alt="Progreso">
-                        <p>85%</p>
-                    </li>
-                    <li>
-                        <img loading="lazy" src="build/img/icono3.svg" alt="icono">
-                        <p>45</p>
-                    </li>
-                </ul>
+        <span class="background">
+            <span class="centering">
+                <section class="articles">
+                    <article class="article-container">
+                        <div class="image-container">
+                            <figure>
+                                <img src="https://img.freepik.com/free-photo/pathway-middle-green-leafed-trees-with-sun-shining-through-branches_181624-4539.jpg?w=900&t=st=1687123477~exp=1687124077~hmac=6e8b1735a2cb25be79f248b6a3307a37a15b080dee114565d01704b97d432a80"
+                                    alt="Preview" title="Preview" />
+                            </figure>
+                        </div>
+                        <div class="article-preview">
+                            <h2>Proyecto 1</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                                Praesent in mauris eu tortor porttitor accumsan.
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                                Praesent in mauris eu tortor porttitor accumsan.
+                            </p>
+                            <button class="btn">
+                                Leer Mas
+                            </button>
+                        </div>
+                    </article>
 
-                <a routerLink="/proyecto" class="boton-amarillo-block">Ver proyecto</a>
-            </div> <!--.contenido-proyecto-->
-        </div> <!--.proyectomarcha-->
+                    <article *ngFor="let project of projects" class="article-container">
+                        <div class="image-container">
+                            <figure>
+                                <img [src]="project.portada" alt="Preview" title="Preview" />
+                            </figure>
+                        </div>
+                        <div class="article-preview">
+                            <h2>{{ project.titulo }}</h2>
+                            <p>
+                                {{ project.parrafoUno }}
+                                <a (click)="goToArticle(project._id)" class="read-more negrita">
+                                    leer mas
+                                </a>
+                            </p>
+                        </div>
+                    </article>
+                </section>
+            </span>
+        </span>
 
-        <div class="proyectomarcha">
-            <picture>
-                <source srcset="build/img/proyecto2.webp" type="image/webp">
-                <source srcset="build/img/proyecto2.jpg" type="image/jpeg">
-                <img loading="lazy" src="build/img/proyecto1.jpg" alt="proyecto2"> 
-            </picture>
-
-            <div class="contenido-proyecto">
-                <h3>Proyecto 2</h3>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab eius reiciendis delectus blanditiis, dolor 
-                    aperiam facilis debitis sint at vero, consequatur, perspiciatis eligendi esse. Deserunt facere soluta 
-                    labore quod magni.</p>
-                <p class="inversion">$5 000</p>
-                <ul class="iconos-caracteristicas">
-                    <li>
-                        <img loading="lazy" src="build/img/icono1.svg" alt="Involucrados">
-                        <p>200</p>
-                    </li>
-                    <li>
-                        <img loading="lazy" src="build/img/icono2.svg" alt="Progreso">
-                        <p>85%</p>
-                    </li>
-                    <li>
-                        <img loading="lazy" src="build/img/icono3.svg" alt="icono">
-                        <p>45</p>
-                    </li>
-                </ul>
-
-                <a routerLink="/proyecto" class="boton-amarillo-block">Ver proyecto</a>
-            </div> <!--.contenido-proyecto-->
-        </div> <!--.proyectomarcha-->
-
-        <div class="proyectomarcha">
-            <picture>
-                <source srcset="build/img/proyecto3.webp" type="image/webp">
-                <source srcset="build/img/proyecto3.jpg" type="image/jpeg">
-                <img loading="lazy" src="build/img/proyecto1.jpg" alt="proyecto3"> 
-            </picture>
-
-            <div class="contenido-proyecto">
-                <h3>Proyecto 3</h3>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab eius reiciendis delectus blanditiis, dolor 
-                    aperiam facilis debitis sint at vero, consequatur, perspiciatis eligendi esse. Deserunt facere soluta 
-                    labore quod magni.</p>
-                <p class="inversion">$1 000 000</p>
-                <ul class="iconos-caracteristicas">
-                    <li>
-                        <img loading="lazy" src="build/img/icono1.svg" alt="Involucrados">
-                        <p>200</p>
-                    </li>
-                    <li>
-                        <img loading="lazy" src="build/img/icono2.svg" alt="Progreso">
-                        <p>85%</p>
-                    </li>
-                    <li>
-                        <img loading="lazy" src="build/img/icono3.svg" alt="icono">
-                        <p>45</p>
-                    </li>
-                </ul>
-
-                <a routerLink="/proyecto" class="boton-amarillo-block">Ver proyecto</a>
-            </div> <!--.contenido-proyecto-->
-        </div> <!--.proyectomarcha-->
-    </div> <!--.contenedor-proyectomarcha-->
-
-    <div class="alinear-derecha">
-        <a routerLink="/proyectos" class="boton-verde">Todos los Proyectos</a>
     </div>
 
-</section>
-
-<section class="container imagen-contacto">
-    <h2>La mitad del oxígeno de todo el mundo, es producido por los océanos</h2>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur quo quae voluptate vitae consequatur consectetur 
-        cumque voluptatibus ad? Ea consequatur iure qui quisquam sequi totam recusandae voluptates sint sunt distinctio.</p>
-    <a routerLink="/contacto" class="boton-amarillo">Contáctanos</a>
-</section>
-
-<section class="container">
-    <h1>Curiosidades</h1>
-
-    <div class="iconos-nosotros">
-        
-        <div class="icono">
-            <img src="../../img/presion.png" alt="Icono presión" loading="lazy">
-            <h3>Presión</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, itaque asperiores exercitationem eaque 
-                repellat sit dolores error, deserunt rerum esse, suscipit et neque molestiae iste nam reprehenderit cupiditate. 
-                Deserunt, maiores.</p>
-        </div>
-        <div class="icono">
-            <img src="build/img/contaminacion.png" alt="Icono contaminación" loading="lazy">
-            <h3>Contaminación</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, itaque asperiores exercitationem eaque 
-                repellat sit dolores error, deserunt rerum esse, suscipit et neque molestiae iste nam reprehenderit cupiditate. 
-                Deserunt, maiores.</p>
-        </div>
-        <div class="icono">
-            <img src="../../../build/img/temperatura.png" alt="Icono temperatura" loading="lazy">
-            <h3>Temperatura</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, itaque asperiores exercitationem eaque 
-                repellat sit dolores error, deserunt rerum esse, suscipit et neque molestiae iste nam reprehenderit cupiditate. 
-                Deserunt, maiores.</p>
-        </div>
+    <!-- QUIENES SOMOS -->
+    <div class="container quienes-somos">
+        <h2>QUIENES SOMOS</h2>
+        <p>Fundación BINARA una organización sin fines de lucro constituida en 2021 ante el Ministerio de Ambiente, Agua
+            y Transición Ecológica, MAATE, cuya misión es la protección de la biodiversidad del Ecuador y de las
+            comunidades que dependen de ella.
+        </p>
     </div>
-</section>
-
-<div class="container seccion-inferior">
-    <section class="blog">
-        <h3>Nuestro Blog</h3>
-
-        <article class="entrada-blog">
-            <div class="imagen">
-                <picture>
-                    <source srcset="build/img/blog1.webp" type="image/webp">
-                    <source srcset="build/img/blog1.jpg" type="image/jpeg">
-                    <img loading="lazy" src="build/img/blog1.jpg" alt="Texto entrada blog1">
-                </picture>
+    <br>
+    <br>
+    <!-- <section class="container">
+        <h2>Curiosidades</h2>
+    
+        <div class="iconos-nosotros">
+    
+            <div class="icono">
+                <img src="../../img/presion.png" alt="Icono presión" loading="lazy">
+                <h3>Presión</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, itaque asperiores exercitationem eaque
+                    repellat sit dolores error, deserunt rerum esse, suscipit et neque molestiae iste nam reprehenderit
+                    cupiditate.
+                    Deserunt, maiores.</p>
             </div>
-            <div class="texto-entrada">
-                <a href="entrada.html">
-                    <h4>El comercio como oportunidad de negocio</h4>
-                    <p>Escrito el: <span>26/12/21</span> Por: <span>Erick Ochoa Tocachi</span>></p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde, voluptatem eius sequi in beatae 
-                        est delectus cumque.</p>
-                </a>
+            <div class="icono">
+                <img src="build/img/contaminacion.png" alt="Icono contaminación" loading="lazy">
+                <h3>Contaminación</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, itaque asperiores exercitationem eaque
+                    repellat sit dolores error, deserunt rerum esse, suscipit et neque molestiae iste nam reprehenderit
+                    cupiditate.
+                    Deserunt, maiores.</p>
             </div>
-        </article>
+            <div class="icono">
+                <img src="../../../build/img/temperatura.png" alt="Icono temperatura" loading="lazy">
+                <h3>Temperatura</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, itaque asperiores exercitationem eaque
+                    repellat sit dolores error, deserunt rerum esse, suscipit et neque molestiae iste nam reprehenderit
+                    cupiditate.
+                    Deserunt, maiores.</p>
+            </div>
+        </div>
+    </section> -->
 
-        <article class="entrada-blog">
-            <div class="imagen">
-                <picture>
-                    <source srcset="build/img/blog2.webp" type="image/webp">
-                    <source srcset="build/img/blog2.jpg" type="image/jpeg">
-                    <img loading="lazy" src="build/img/blog2.jpg" alt="Texto entrada blog2">
-                </picture>
-            </div>
-            <div class="texto-entrada">
-                <a href="entrada.html">
-                    <h4>El rincón del café</h4>
-                    <p>Escrito el: <span>26/12/21</span> Por: <span>Erick Ochoa Tocachi</span>></p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde, voluptatem eius sequi in beatae 
-                        est delectus cumque.</p>
-                </a>
-            </div>
-        </article>
+    <!-- SOBRE NOSOTROS -->
+    <section class="nosotros">
+        <h2>QUE HACEMOS</h2>
+        <br>
+        <div class="container about-us">
 
-        <article class="entrada-blog">
-            <div class="imagen">
-                <picture>
-                    <source srcset="build/img/blog3.webp" type="image/webp">
-                    <source srcset="build/img/blog3.jpg" type="image/jpeg">
-                    <img loading="lazy" src="build/img/blog3.jpg" alt="Texto entrada blog3">
-                </picture>
+            <div class="mision">
+                <h3>MISIÓN</h3>
+                <p>Proteger la biodiversidad del Ecuador y a las comunidades que dependen de ella.
+                    Para eso, trabajamos en conjunto con las y los pobladores locales de los ecosistemas
+                    más importantes para la vida en Ecuador en la búsqueda de medios de vida dignos y
+                    sustentables para sus familias. Su desarrollo integral y sustentable es nuestra prioridad.
+                    Perseguimos fines sociales y no participamos, bajo ningún concepto, en asuntos de
+                    política partidista o religiosa, coordinamos nuestras actividades con otras personas
+                    naturales o jurídicas, nacionales y extranjeras, bajo los principios de libre asociación y
+                    autodeterminación.</p>
             </div>
-
-            <div class="texto-entrada">
-                <a href="entrada.html">
-                    <h4>Importancia de las rosas ecuatorianas</h4>
-                    <p>Escrito el: <span>26/12/21</span> Por: <span>Erick Ochoa Tocachi</span>></p>
-
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde, voluptatem eius sequi in beatae 
-                        est delectus cumque.</p>
-                </a>
+            <div class="vision">
+                <h3>VISIÓN</h3>
+                <p>Proteger, conservar y restaurar ecosistemas y servicios ecosistémicos clave
+                    para las poblaciones que dependen de ellos, mediante la canalización de recursos
+                    monetarios y no monetarios a través de alianzas con empresas privadas, donantes
+                    particulares, agencias de cooperación y gobiernos nacionales y locales.</p>
             </div>
-        </article>
+            <div class="nosotros">
+                <h3>NOSOTROS</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, itaque asperiores exercitationem
+                    eaque
+                    repellat sit dolores error, deserunt rerum esse, suscipit et neque molestiae iste nam reprehenderit
+                    cupiditate.
+                    Deserunt, maiores.</p>
+            </div>
+        </div>
     </section>
-</div>
 
-<section class="sabias container">
-    <h3>Sabías que...?</h3>
-    <div class="sabias">
-        <blockquote>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi dicta reiciendis maxime maiores officia enim
-             at dolores praesentium voluptatum. consectetur, adipisicing elit. Quasi dicta reiciendis maxime maiores officia enim
-             at dolores praesentium voluptatum. </blockquote>
-             <p>- Autor desconocido</p>
+    <div class="container seccion-inferior">
+        <div class="blog">
+            <h3>Nuestro Blog</h3>
+
+            <article class="entrada-blog">
+                <div class="imagen">
+                    <picture>
+                        <source srcset="build/img/blog1.webp" type="image/webp">
+                        <source srcset="build/img/blog1.jpg" type="image/jpeg">
+                        <img loading="lazy" src="build/img/blog1.jpg" alt="Texto entrada blog1">
+                    </picture>
+                </div>
+                <div class="texto-entrada">
+                    <a href="entrada.html">
+                        <h4>El comercio como oportunidad de negocio</h4>
+                        <p>Escrito el: <span>26/12/21</span> Por: <span>Erick Ochoa Tocachi</span>></p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde, voluptatem eius
+                            sequi
+                            in beatae
+                            est delectus cumque.</p>
+                    </a>
+                </div>
+            </article>
+
+            <article class="entrada-blog">
+                <div class="imagen">
+                    <picture>
+                        <source srcset="build/img/blog2.webp" type="image/webp">
+                        <source srcset="build/img/blog2.jpg" type="image/jpeg">
+                        <img loading="lazy" src="build/img/blog2.jpg" alt="Texto entrada blog2">
+                    </picture>
+                </div>
+                <div class="texto-entrada">
+                    <a href="entrada.html">
+                        <h4>El rincón del café</h4>
+                        <p>Escrito el: <span>26/12/21</span> Por: <span>Erick Ochoa Tocachi</span>></p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde, voluptatem eius
+                            sequi
+                            in beatae
+                            est delectus cumque.</p>
+                    </a>
+                </div>
+            </article>
+
+            <article class="entrada-blog">
+                <div class="imagen">
+                    <picture>
+                        <source srcset="build/img/blog3.webp" type="image/webp">
+                        <source srcset="build/img/blog3.jpg" type="image/jpeg">
+                        <img loading="lazy" src="build/img/blog3.jpg" alt="Texto entrada blog3">
+                    </picture>
+                </div>
+
+                <div class="texto-entrada">
+                    <a href="entrada.html">
+                        <h4>Importancia de las rosas ecuatorianas</h4>
+                        <p>Escrito el: <span>26/12/21</span> Por: <span>Erick Ochoa Tocachi</span>></p>
+
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde, voluptatem eius
+                            sequi
+                            in beatae
+                            est delectus cumque.</p>
+                    </a>
+                </div>
+            </article>
+        </div>
     </div>
-</section>
+
+    <!-- SABIAS -->
+    <div class="sabias container">
+        <h3>Sabías que...?</h3>
+        <div class="sabias">
+            <blockquote>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi dicta reiciendis maxime maiores
+                officia enim
+                at dolores praesentium voluptatum. consectetur, adipisicing elit. Quasi dicta reiciendis maxime maiores
+                officia enim
+                at dolores praesentium voluptatum. </blockquote>
+            <p>- Autor desconocido</p>
+        </div>
+    </div>
+
+</body>

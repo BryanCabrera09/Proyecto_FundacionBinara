@@ -1,70 +1,34 @@
 <body>
-    <span class="background">
+    <div class="background">
         <span class="centering">
-            <section class="articles">
-                <article class="article-container">
+            <section class="articles"> 
+                <article *ngFor="let project of projects" class="article-container">
                     <div class="image-container">
                         <figure>
-                            <img src="https://img.freepik.com/free-photo/pathway-middle-green-leafed-trees-with-
-                                    sun-shining-through-branches_181624-4539.jpg?w=900&t=st=1687123477~exp=1687124077~hmac=
-                                    6e8b1735a2cb25be79f248b6a3307a37a15b080dee114565d01704b97d432a80"
-                                alt="Preview" title="Preview" />
-
-                        </figure>                       
-
+                            <img [src]="project.portada" alt="Portada de {{project.titulo}}" title="Portada de {{project.titulo}}" />
+                        </figure>
                     </div>
                     <div class="article-preview">
-                        <h1>Proyecto 1</h1>
-                        <h2>Cuidado del bosque tropical</h2>
-                        <p>
-
-                            "Nuestra misión es proteger la biodiversidad del Ecuador y a las 
-                            comunidades que dependen de ella. Para eso, trabajamos en conjunto 
-                            con las y los pobladores locales de los ecosistemas más importantes 
-                            para la vida en Ecuador en la búsqueda de medios de vida dignos y 
-                            sustentables para sus familias. Su desarrollo integral y sustentable 
-                            es nuestra prioridad. Perseguimos fines sociales y no participamos, 
-                            bajo ningún concepto, en asuntos de política partidista o religiosa, 
-                            coordinamos nuestras actividades con otras personas naturales o jurídicas, 
-                            nacionales y extranjeras, bajo los principios de libre asociación y 
-                            autodeterminación."
-                            <a href="#" class="read-more">
-                                Leer mas
-                            </a>
-                            
+                        <h2>{{ project.titulo }}</h2>
+                        <p *ngIf="project.mapas && project.mapas.length > 0">{{ getProvincia(project.mapas[0].lugar) }}</p>
+                        <p class="tamañoParrafo">{{ project.parrafoUno }}</p>
+                        <a (click)="detailsProject(project._id)" class="read-more negrita">
+                            leer más
+                        </a>                        
                         <div class="action-buttons">
                             <button class="edit-button" title="Editar">
                                 ✎
                             </button>
                             <button class="delete-button" title="Eliminar">
                                 🗑
-                                
                             </button>
                         </div>
                     </div>
                 </article>
-
-                <article *ngFor="let project of projects" class="article-container">
-                    <div class="image-container">
-                        <figure>
-                            <img [src]="project.portada" alt="Preview" title="Preview" />
-
-                        </figure>
-                    </div>
-                    <div class="article-preview">
-                        <h2>{{ project.titulo }}</h2>
-                        <p>
-                            {{ project.parrafoUno }}
-                            <a (click)="goToArticle(project.id)" class="read-more negrita">
-                                leer mas
-                            </a>
-                        </p>
-                        <!-- Más contenido y acciones según tus necesidades -->
-                    </div>
-                </article>
+                
             </section>
         </span>
-    </span>
+    </div>
     <span class="add-button">
         <button class="add-project-button" (click)="abrirSheet()">Añadir Proyecto</button>
     </span>

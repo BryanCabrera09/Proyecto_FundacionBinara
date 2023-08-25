@@ -4,7 +4,7 @@ import { VerProyectoComponent } from './pages/ver-proyecto/ver-proyecto.componen
 
 const routes: Routes = [
   {
-    path: 'proyecto',
+    path: 'proyecto/:id',
     component: VerProyectoComponent
   }
 ];

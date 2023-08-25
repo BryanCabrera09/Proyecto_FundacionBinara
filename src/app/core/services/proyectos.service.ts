@@ -29,7 +29,7 @@ export class ProyectosService {
     return this.http.get<Proyectos[]>(`${this.projectsUrl}/visibles`);
   }
 
-  searchProject(id: number) {   /* Buscar proyectos en base al id */
+  searchProject(id: String) {   /* Buscar proyectos en base al id */
     return this.http.get(`${this.projectsUrl}/${id}`);
   }
 

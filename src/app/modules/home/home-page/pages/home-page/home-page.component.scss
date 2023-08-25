@@ -26,6 +26,68 @@ p {
   margin-bottom: calc($separacion / 2);
 }
 
+.nosotros {
+
+  h2 {
+    font-size: 3.1rem;
+    font-weight: bolder;
+  }
+
+  .about-us {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .mision,
+    .vision,
+    .nosotros {
+
+      flex: 1;
+      padding: 20px;
+      border-radius: 1rem;
+      box-shadow: 0 2px 4px #009A63;
+      margin: 10px;
+
+      h3 {
+        font-size: 2.5rem;
+        font-weight: 300;
+      }
+
+      p {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 870px) {
+  .about-us {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mision,
+  .vision,
+  .nosotros {
+    width: 100%;
+    min-width: auto;
+
+    h3 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+.quienes-somos {
+  background-color: blueviolet;
+}
+
 a {
   text-decoration: none;
 }
@@ -51,6 +113,7 @@ h1 {
 
 h2 {
   font-size: 3.4rem;
+  font-weight: bold;
 }
 
 h3 {
@@ -234,4 +297,138 @@ h4 {
   h3 {
     text-transform: uppercase;
   }
+}
+
+/* PROYECTOS ACTIVOS */
+
+.article-container {
+  position: relative;
+  border-radius: 1rem;
+  box-shadow: 0 5px 6px #030405;
+  margin: 10px;
+}
+
+.image-container {
+  position: relative;
+}
+
+.background {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 32px;
+}
+
+.articles {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  justify-content: center;
+  max-width: 1200px;
+  gap: 24px;
+}
+
+.articles article {
+  max-width: 320px;
+  cursor: pointer;
+  position: relative;
+  display: block;
+  transition: all 0.4s ease-in-out;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.articles article a {
+  display: inline-flex;
+  color: var(#DD946F);
+  text-decoration: none;
+}
+
+
+.articles article h2 {
+  margin: 0 0 18px 0;
+  font-size: 1.6rem;
+  color: var(#261E5A);
+  transition: color 0.3s ease-out;
+}
+
+
+.articles article img {
+  max-width: 100%;
+  transform-origin: center;
+  transition: transform 0.4s ease-in-out;
+}
+
+.article-preview {
+  padding: 24px;
+  background: white;
+}
+
+.articles figure {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.articles figure img {
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.articles article:hover img {
+  transform: scale(1.5);
+}
+
+.add-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.add-project-button {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.negrita {
+  font-weight: bold;
+}
+
+.btn {
+  width: 9em;
+  height: 3em;
+  border-radius: 30em;
+  font-size: 15px;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 6px 6px 12px #c5c5c5 -6px -6px 12px #ffffff;
+}
+
+.btn::before {
+  content: '';
+  width: 0;
+  height: 3em;
+  border-radius: 30em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+  transition: .5s ease;
+  display: block;
+  z-index: -1;
+}
+
+.btn:hover::before {
+  width: 9em;
 }

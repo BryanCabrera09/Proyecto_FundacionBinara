@@ -1,0 +1,66 @@
+@import '../../../../../core/styles/global-styles';
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.content {
+  max-width: 99%;
+  margin: 0 auto;
+  margin-top: 2rem;
+
+  .card {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.144);
+    padding: 2rem;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 2rem;
+
+    .card-design {
+      width: 100%;
+      padding: 2rem;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 1rem;
+
+      
+    }
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 100%;
+    gap: 24px;
+  }
+}
+
+@media screen and (max-width: 1450px) {
+  .content {
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 10px;
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-width: 100%;
+      gap: 24px;
+    }
+  }
+}
+
+body {
+  font-family: $fuente_principal;
+  font-weight: normal;
+  font-size: 1.6rem;
+  color: white;
+  padding: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
