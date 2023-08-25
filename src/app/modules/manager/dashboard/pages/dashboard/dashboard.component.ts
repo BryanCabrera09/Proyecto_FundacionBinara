@@ -39,19 +39,19 @@ export class DashboardComponent implements OnInit {
       datasets: [
         {
           type: 'bar',
-          label: 'Dataset 1',
+          label: 'Login',
           backgroundColor: documentStyle.getPropertyValue('--blue-500'),
           data: [50, 25, 12, 48, 90, 76, 42]
         },
         {
           type: 'bar',
-          label: 'Dataset 2',
+          label: 'Donantes',
           backgroundColor: documentStyle.getPropertyValue('--green-500'),
           data: [21, 84, 24, 75, 37, 65, 34]
         },
         {
           type: 'bar',
-          label: 'Dataset 3',
+          label: 'Proyectos',
           backgroundColor: documentStyle.getPropertyValue('--yellow-500'),
           data: [41, 52, 24, 74, 23, 21, 32]
         }
@@ -102,7 +102,7 @@ export class DashboardComponent implements OnInit {
     const textColor = documentStyle.getPropertyValue('--text-color');
 
     this.data = {
-      labels: ['A', 'B', 'C'],
+      labels: ['Login', 'Donantes', 'Proyectos'],
       datasets: [
         {
           data: [540, 325, 702],
@@ -134,14 +134,14 @@ export class DashboardComponent implements OnInit {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
         {
-          label: 'First Dataset',
+          label: 'Login',
           data: [65, 59, 80, 81, 56, 55, 40],
           fill: false,
           tension: 0.4,
           borderColor: documentStyle.getPropertyValue('--blue-500')
         },
         {
-          label: 'Second Dataset',
+          label: 'Donantes',
           data: [28, 48, 40, 19, 86, 27, 90],
           fill: false,
           borderDash: [5, 5],
@@ -149,7 +149,7 @@ export class DashboardComponent implements OnInit {
           borderColor: documentStyle.getPropertyValue('--teal-500')
         },
         {
-          label: 'Third Dataset',
+          label: 'Proyectos',
           data: [12, 51, 62, 33, 21, 62, 45],
           fill: true,
           borderColor: documentStyle.getPropertyValue('--orange-500'),
@@ -200,13 +200,13 @@ export class DashboardComponent implements OnInit {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
         {
-          label: 'My First dataset',
+          label: 'Login',
           backgroundColor: documentStyle.getPropertyValue('--blue-500'),
           borderColor: documentStyle.getPropertyValue('--blue-500'),
           data: [65, 59, 80, 81, 56, 55, 40]
         },
         {
-          label: 'My Second dataset',
+          label: 'Donantes',
           backgroundColor: documentStyle.getPropertyValue('--pink-500'),
           borderColor: documentStyle.getPropertyValue('--pink-500'),
           data: [28, 48, 40, 19, 86, 27, 90]
@@ -262,7 +262,7 @@ export class DashboardComponent implements OnInit {
       datasets: [
         {
           type: 'line',
-          label: 'Dataset 1',
+          label: 'Proyectos',
           borderColor: documentStyle.getPropertyValue('--blue-500'),
           borderWidth: 2,
           fill: false,
@@ -271,7 +271,7 @@ export class DashboardComponent implements OnInit {
         },
         {
           type: 'bar',
-          label: 'Dataset 2',
+          label: 'Login',
           backgroundColor: documentStyle.getPropertyValue('--green-500'),
           data: [21, 84, 24, 75, 37, 65, 34],
           borderColor: 'white',
@@ -279,7 +279,7 @@ export class DashboardComponent implements OnInit {
         },
         {
           type: 'bar',
-          label: 'Dataset 3',
+          label: 'Donantes ',
           backgroundColor: documentStyle.getPropertyValue('--orange-500'),
           data: [41, 52, 24, 74, 23, 21, 32]
         }
