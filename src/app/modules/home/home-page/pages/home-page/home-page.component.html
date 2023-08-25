@@ -1,114 +1,130 @@
-<main class="container seccion">
-    <h1>Fundación<span class="logo__bold">Binara</span></h1>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat molestiae omnis corporis similique suscipit
-        maxime beatae recusandae hic et doloribus, nemo in voluptate magnam quo placeat ipsum dolor. Dicta, repellendus!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nesciunt nam voluptatem velit dignissimos eius
-        corporis,
-        dolor minus? Beatae illo assumenda odit eaque quaerat dolorum iure harum provident hic officia?
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat molestiae omnis corporis similique suscipit
-        maxime beatae recusandae hic et doloribus, nemo in voluptate magnam quo placeat ipsum dolor. Dicta, repellendus!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nesciunt nam voluptatem velit dignissimos eius
-        corporis,
-        dolor minus? Beatae illo assumenda odit eaque quaerat dolorum iure harum provident hic officia?</p>
-</main>
-
 <body>
 
-    <div class="seccion container">
-        <h2> Proyectos en Marcha</h2>
+    <div class="seccion">
+        <div class="card">
+            <h1>Fundación<span class="logo__bold">Binara</span></h1>
+            <span>Sembrando esperanza y vida en cada árbol que crece, para un mundo más verde y sostenible.</span>
+        </div>
+    </div>
 
-        <span class="background">
-            <span class="centering">
-                <section class="articles">
-                    <article class="article-container">
-                        <div class="image-container">
-                            <figure>
-                                <img src="https://img.freepik.com/free-photo/pathway-middle-green-leafed-trees-with-sun-shining-through-branches_181624-4539.jpg?w=900&t=st=1687123477~exp=1687124077~hmac=6e8b1735a2cb25be79f248b6a3307a37a15b080dee114565d01704b97d432a80"
-                                    alt="Preview" title="Preview" />
-                            </figure>
-                        </div>
-                        <div class="article-preview">
-                            <h2>Proyecto 1</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                                Praesent in mauris eu tortor porttitor accumsan.
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                                Praesent in mauris eu tortor porttitor accumsan.
-                            </p>
+    <div class="nota">
+        <h2> Proyectos en Marcha</h2>
+        <span>Sembrando esperanza y vida en cada árbol que crece, para un mundo más verde y sostenible!</span>
+    </div>
+
+    <div class="background" [style.background-image]="selectedLink">
+        <span class="centering">
+            <section class="articles">
+                <article class="article-container">
+                    <div class="image-container">
+                        <figure>
+                            <img src="https://img.freepik.com/free-photo/pathway-middle-green-leafed-trees-with-sun-shining-through-branches_181624-4539.jpg?w=900&t=st=1687123477~exp=1687124077~hmac=6e8b1735a2cb25be79f248b6a3307a37a15b080dee114565d01704b97d432a80"
+                                alt="Preview" title="Preview" />
+                        </figure>
+                    </div>
+                    <div class="article-preview">
+                        <h2>Proyecto 1</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                            Praesent in mauris eu tortor porttitor accumsan.
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                            Praesent in mauris eu tortor porttitor accumsan.
+                        </p>
+                        <div class="boton">
                             <button class="btn">
                                 Leer Mas
                             </button>
                         </div>
-                    </article>
+                    </div>
+                </article>
 
-                    <article *ngFor="let project of projects" class="article-container">
-                        <div class="image-container">
-                            <figure>
-                                <img [src]="project.portada" alt="Preview" title="Preview" />
-                            </figure>
+                <article class="article-container">
+                    <div class="image-container">
+                        <figure>
+                            <img src="https://img.freepik.com/free-photo/pathway-middle-green-leafed-trees-with-sun-shining-through-branches_181624-4539.jpg?w=900&t=st=1687123477~exp=1687124077~hmac=6e8b1735a2cb25be79f248b6a3307a37a15b080dee114565d01704b97d432a80"
+                                alt="Preview" title="Preview" />
+                        </figure>
+                    </div>
+                    <div class="article-preview">
+                        <h2>Proyecto 1</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                            Praesent in mauris eu tortor porttitor accumsan.
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                            Praesent in mauris eu tortor porttitor accumsan.
+                        </p>
+                        <div class="boton">
+                            <button class="btn">
+                                Leer Mas
+                            </button>
                         </div>
-                        <div class="article-preview">
-                            <h2>{{ project.titulo }}</h2>
-                            <p>
-                                {{ project.parrafoUno }}
-                                <a (click)="goToArticle(project.id)" class="read-more negrita">
-                                    leer mas
-                                </a>
-                            </p>
+                    </div>
+                </article>
+
+                <article class="article-container">
+                    <div class="image-container">
+                        <figure>
+                            <img src="https://img.freepik.com/free-photo/pathway-middle-green-leafed-trees-with-sun-shining-through-branches_181624-4539.jpg?w=900&t=st=1687123477~exp=1687124077~hmac=6e8b1735a2cb25be79f248b6a3307a37a15b080dee114565d01704b97d432a80"
+                                alt="Preview" title="Preview" />
+                        </figure>
+                    </div>
+                    <div class="article-preview">
+                        <h2>Proyecto 1</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                            Praesent in mauris eu tortor porttitor accumsan.
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                            Praesent in mauris eu tortor porttitor accumsan.
+                        </p>
+                        <div class="boton">
+                            <button class="btn">
+                                Leer Mas
+                            </button>
                         </div>
-                    </article>
-                </section>
-            </span>
+                    </div>
+                </article>
+
+                <article *ngFor="let project of projects" class="article-container">
+                    <div class="image-container">
+                        <figure>
+                            <img [src]="project.portada" alt="Preview" title="Preview" />
+                        </figure>
+                    </div>
+                    <div class="article-preview">
+                        <h2>{{ project.titulo }}</h2>
+                        <p>
+                            {{ project.parrafoUno }}
+                            <a (click)="goToArticle(project.id)" class="read-more negrita">
+                                leer mas
+                            </a>
+                        </p>
+                    </div>
+                </article>
+            </section>
         </span>
-
     </div>
+    <br>
 
     <!-- QUIENES SOMOS -->
     <div class="container quienes-somos">
         <h2>QUIENES SOMOS</h2>
-        <p>Fundación BINARA una organización sin fines de lucro constituida en 2021 ante el Ministerio de Ambiente, Agua
-            y Transición Ecológica, MAATE, cuya misión es la protección de la biodiversidad del Ecuador y de las
-            comunidades que dependen de ella.
+        <p>Fundación BINARA es una persona jurídica de derecho privado, sin fines de lucro, con
+            patrimonio propio, administración autónoma, constituida en 2022 ante el Ministerio
+            de Agua, Ambiente y Transición Ecológica del Ecuador. <br>
+            En alianza con empresas privadas, donantes particulares, agencias de cooperación y
+            gobiernos nacionales y locales potenciamos el trabajo de organizaciones sin fines de
+            lucro; micro, pequeñas y medianas empresas; fondos de agua; redes, asociaciones y
+            cooperativas de la economía popular y solidaria; pequeños y medianos productores
+            agrícolas; organizaciones indígenas; y, colectivos urbanos mediante la canalización de
+            recursos monetarios y no monetarios para proteger, conservar y restaurar ecosistemas
+            y servicios ecosistémicos clave para las poblaciones que dependen de ellos.
         </p>
     </div>
     <br>
-    <br>
-    <!-- <section class="container">
-        <h2>Curiosidades</h2>
-    
-        <div class="iconos-nosotros">
-    
-            <div class="icono">
-                <img src="../../img/presion.png" alt="Icono presión" loading="lazy">
-                <h3>Presión</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, itaque asperiores exercitationem eaque
-                    repellat sit dolores error, deserunt rerum esse, suscipit et neque molestiae iste nam reprehenderit
-                    cupiditate.
-                    Deserunt, maiores.</p>
-            </div>
-            <div class="icono">
-                <img src="build/img/contaminacion.png" alt="Icono contaminación" loading="lazy">
-                <h3>Contaminación</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, itaque asperiores exercitationem eaque
-                    repellat sit dolores error, deserunt rerum esse, suscipit et neque molestiae iste nam reprehenderit
-                    cupiditate.
-                    Deserunt, maiores.</p>
-            </div>
-            <div class="icono">
-                <img src="../../../build/img/temperatura.png" alt="Icono temperatura" loading="lazy">
-                <h3>Temperatura</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, itaque asperiores exercitationem eaque
-                    repellat sit dolores error, deserunt rerum esse, suscipit et neque molestiae iste nam reprehenderit
-                    cupiditate.
-                    Deserunt, maiores.</p>
-            </div>
-        </div>
-    </section> -->
 
     <!-- SOBRE NOSOTROS -->
     <section class="nosotros">
         <h2>QUE HACEMOS</h2>
-        <br>
         <div class="container about-us">
 
             <div class="mision">
@@ -131,11 +147,10 @@
             </div>
             <div class="nosotros">
                 <h3>NOSOTROS</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, itaque asperiores exercitationem
-                    eaque
-                    repellat sit dolores error, deserunt rerum esse, suscipit et neque molestiae iste nam reprehenderit
-                    cupiditate.
-                    Deserunt, maiores.</p>
+                <p>Trabajamos incansablemente para promover la sostenibilidad ambiental y el bienestar de
+                    las comunidades que interactúan con el entorno natural.<br>Nuestra labor abarca diversas
+                    iniciativas, desde proyectos de reforestación hasta la implementación de prácticas agrícolas
+                    sostenibles y la conservación de ecosistemas acuáticos.</p>
             </div>
         </div>
     </section>

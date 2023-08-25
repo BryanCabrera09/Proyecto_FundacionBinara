@@ -41,16 +41,8 @@ header {
   position: relative;
 }
 
-button {
-  border: 0;
-  outline: none;
-  font-family: inherit;
-  font-size: inherit;
-  cursor: pointer;
-}
-
 .navbar {
-  height: 550px;
+  height: 450px;
   background-repeat: no-repeat;
   background-position: center right;
   background-size: cover;
@@ -58,6 +50,14 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+button {
+  border: 0;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
 }
 
 .navbar .logo {
@@ -104,7 +104,7 @@ button {
   display: none;
   position: absolute;
   right: 2rem;
-  top: 60px;
+  top: 100px;
   height: 0;
   width: 300px;
   align-items: center;
@@ -152,6 +152,7 @@ button {
 }
 
 @media (max-width: 1180px) {
+
   .navbar .links,
   .navbar .log-in {
     display: none;

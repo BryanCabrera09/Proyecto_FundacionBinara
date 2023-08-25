@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoadScriptService } from 'src/app/core/services/load-script.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,11 @@ export class HeaderComponent implements OnInit {
   isMenuOpen: boolean = false;
   selectedLink: string = '';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private loadScriptService: LoadScriptService) {
+
+    /* Damos el nombre del Script que queremos cargar */
+    loadScriptService.loadScript(['menu-toggle'])
+  }
 
   ngOnInit() { }
 
@@ -30,32 +35,12 @@ export class HeaderComponent implements OnInit {
     this.selectedLink = link;
   }
 
-  toggleMenu() {
-    const toggleBtn = document.querySelector('.toggle_btn');
-    const toggleBtnIcon = document.querySelector('.toggle_btn i');
-    const dropDownMenu = document.querySelector('.dropdown_menu');
-
-    toggleBtn?.addEventListener('click', () => {
-      dropDownMenu?.classList.toggle('open');
-
-      const isOpen = dropDownMenu?.classList.contains('open');
-
-      if (toggleBtnIcon) {
-        if (isOpen) {
-          toggleBtnIcon.classList.remove('bx-menu');
-          toggleBtnIcon.classList.add('bx-x');
-        } else {
-          toggleBtnIcon.classList.remove('bx-x');
-          toggleBtnIcon.classList.add('bx-menu');
-        }
-      }
-    });
-  }
-
   goToProjects() {
     this.router.navigate(['user/projects']);
   }
-  goToEstadisticas(){
+
+  goToAnalytics() {
     this.router.navigate(['manager/dashboard'])
   }
+
 }
