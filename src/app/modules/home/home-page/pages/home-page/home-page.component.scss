@@ -57,7 +57,7 @@ p {
       flex: 1;
       padding: 20px;
       border-radius: 1rem;
-      box-shadow: 0 2px 4px #009A63;
+      box-shadow: 0 2px 4px 2px #009A63;
       margin: 10px;
 
       h3 {
@@ -73,7 +73,90 @@ p {
 }
 
 .quienes-somos {
-  background-color: blueviolet;
+  /* background-image: url('/assets/img/portada_binara.png'); */
+  //background-image: url(https://www.biodisol.com/wp-content/uploads/2016/07/rsz_famosos-que-protegen-el-medio-ambiente-005751a58c8902e-1-678x381.jpg);
+  background-color: $negro;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .somos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    gap: 10rem;
+
+    .info-nosotros {
+
+      h2 {
+        color: #ffffff;
+        font-size: 2.6rem;
+
+        &::after {
+          content: '';
+          display: block;
+          width: 20rem;
+          height: .6rem;
+          align-self: flex-end;
+          background-color: $gris;
+          margin-top: 2rem;
+        }
+      }
+
+      p {
+        color: #ffffff;
+        font-size: 1.5rem;
+      }
+    }
+
+    .nosotros-img {
+      align-items: center;
+
+      img {
+        width: 100%;
+        margin: 0 auto;
+        height: auto;
+      }
+    }
+  }
+}
+
+/* Blog Styles */
+.entrada-blog {
+
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+
+  margin-bottom: 4rem;
+  padding: 20px;
+  border-radius: 1rem;
+  box-shadow: 4px 4px 4px 4px #979695;
+
+  .imagen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img,
+    picture {
+      max-width: 80%;
+      margin: 0 auto;
+      height: auto;
+    }
+  }
+
+  .texto-entrada {
+
+    h4 {
+      font-size: 2rem;
+      font-style: italic;
+    }
+
+    p,
+    span {
+      font-size: 1.8rem;
+    }
+  }
 }
 
 a {
@@ -137,7 +220,7 @@ h4 {
 .sabias {
   background-color: $verde;
   font-size: 2.4rem;
-  padding: 1rem;
+  padding: 3rem;
   color: $blanco;
   border-radius: 2rem;
 
@@ -147,7 +230,7 @@ h4 {
 
     &::before {
       content: '';
-      background-image: url("../../../../../../assets/img/comilla.svg");
+      background-image: url("/assets/img/comilla.svg");
       background-repeat: no-repeat;
       width: 4rem;
       height: 6rem;
@@ -160,6 +243,7 @@ h4 {
   p {
     text-align: right;
     color: $blanco;
+    font-style: italic;
   }
 
   h3 {
@@ -225,20 +309,6 @@ h4 {
   }
 }
 
-.entrada-blog {
-  margin-bottom: 2rem;
-
-  @include tablet {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    column-gap: 2rem;
-  }
-
-  &:last-of-type {
-    margin-bottom: 0;
-  }
-}
-
 .texto-entrada {
   a {
     color: $negro;
@@ -288,7 +358,6 @@ h4 {
 }
 
 /* PROYECTOS ACTIVOS */
-
 .article-container {
   position: relative;
   border-radius: 1rem;
@@ -384,6 +453,7 @@ h4 {
 
     .btn {
       margin: auto;
+      font-weight: bold;
     }
   }
 
@@ -493,9 +563,29 @@ h4 {
     height: 2.6em;
     font-size: 1.3rem;
   }
+
+  .entrada-blog .texto-entrada {
+
+    h4 {
+      font-size: 1.7rem;
+    }
+
+    p,
+    span {
+      font-size: 1.5rem;
+    }
+  }
 }
 
 @media (max-width: 990px) {
+
+  .entrada-blog .imagen img,
+  picture {
+    max-width: 90%;
+    margin: 0 auto;
+    height: auto;
+  }
+
   .slider-box {
     width: 100%;
 
@@ -510,7 +600,6 @@ h4 {
 
       p {
         font-size: 15px;
-
       }
     }
   }
@@ -531,27 +620,117 @@ h4 {
 
 @media (max-width: 820px) {
 
-  .nosotros .about-us {
+  .sabias {
+    background-color: $verde;
+    font-size: 2.4rem;
+    padding: 3rem;
+    color: $blanco;
+    border-radius: 2rem;
+
+    blockquote {
+      font-size: 1.9rem;
+    }
+
+  }
+
+  .quienes-somos .somos {
     flex-direction: column;
-    align-items: center;
+    height: auto;
+    padding: 20px;
+    gap: 2rem;
 
-    .mision,
-    .vision,
-    .nosotros {
-
-      h3 {
-        font-size: 2.2rem;
-      }
+    .info-nosotros {
 
       p {
         font-size: 1.3rem;
       }
     }
+
+    .nosotros-img {
+      img {
+        max-width: 50%;
+        margin: 0 auto;
+        height: auto;
+      }
+    }
   }
 
+  .entrada-blog .imagen img,
+  picture {
+    max-width: 100%;
+    margin: 0 auto;
+    height: auto;
+  }
+
+  .nosotros {
+    .about-us {
+      flex-direction: column;
+      align-items: center;
+
+      .mision,
+      .vision,
+      .nosotros {
+
+        h3 {
+          font-size: 2.2rem;
+        }
+
+        p {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
 }
 
 @media (max-width: 715px) {
+
+  .nosotros {
+    h2 {
+      font-size: 3.1rem;
+    }
+  }
+
+  .nota {
+    h2 {
+      font-size: 3.1rem;
+    }
+
+    span {
+      font-size: 1.7rem;
+    }
+  }
+
+  .quienes-somos .somos {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+    gap: 2rem;
+
+    .info-nosotros {
+      h2 {
+        font-size: 3.1rem;
+      }
+    }
+  }
+
+  .blog {
+    h2 {
+      font-size: 3.1rem;
+    }
+
+    .entrada-blog {
+      display: flex;
+      flex-direction: column;
+
+      .imagen img,
+      picture {
+        max-width: 60%;
+        margin: 0 auto;
+        height: auto;
+      }
+    }
+  }
 
   .articles article h2 {
     font-size: 1.3rem;
@@ -569,6 +748,90 @@ h4 {
 }
 
 @media (max-width: 500px) {
+
+  .sabias {
+
+    blockquote {
+      font-size: 1.6rem;
+    }
+
+    p {
+      font-size: 1.7rem;
+    }
+
+    h3 {
+      font-size: 2rem;
+    }
+  }
+
+  .quienes-somos .somos {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+    gap: 2rem;
+
+    .info-nosotros {
+      h2 {
+        font-size: 2.8rem;
+      }
+
+      p {
+        font-size: 1.1rem;
+      }
+    }
+
+    .nosotros-img {
+      img {
+        max-width: 50%;
+        margin: 0 auto;
+        height: auto;
+      }
+    }
+  }
+
+  .nosotros {
+    h2 {
+      font-size: 2.8rem;
+    }
+  }
+
+  .blog {
+    h2 {
+      font-size: 2.8rem;
+    }
+
+    .entrada-blog {
+
+      .imagen img,
+      picture {
+        max-width: 80%;
+        margin: 0 auto;
+        height: auto;
+      }
+
+      .texto-entrada {
+
+        h4 {
+          font-size: 1.6rem;
+        }
+
+        p,
+        span {
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
+
+  .nota {
+    h2 {
+      font-size: 2.8rem;
+    }
+
+    span {
+      font-size: 1.5rem;
+    }
+  }
 
   .articles article {
     max-width: 260px;
@@ -595,6 +858,28 @@ h4 {
 }
 
 @media (max-width: 350px) {
+
+  .entrada-blog {
+
+    .imagen img,
+    picture {
+      max-width: 100%;
+      margin: 0 auto;
+      height: auto;
+    }
+
+    .texto-entrada {
+
+      h4 {
+        font-size: 1.5rem;
+      }
+
+      p,
+      span {
+        font-size: 1.3rem;
+      }
+    }
+  }
 
   .article-preview p {
     font-size: 1rem;

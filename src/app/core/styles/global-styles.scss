@@ -9,12 +9,15 @@ $tablet: 1000px;
 $desktop: 1024px;
 
 // Colores
-$negro: #000000;
-$amarillo: #E08709;
-$verde: #71B100;
+$negro: #030405;
+$amarillo: #FFCE37;
+$verde: #009A63;
+$verde2: #00A899;
 $blanco: #FFFFFF;
-$gris: #e1e1e1;
+$gris: #979695;
 $grisOscuro: #333333;
+$azul: #4272b7;
+$tomate: #F7A85D;
 
 $separacion: 5rem;
 
@@ -23,24 +26,3 @@ $delgada: 300;
 $regular : 400;
 $bold: 700;
 $black: 900;
-
-/* CARDS ANALYTICS */
-$card-black-background: #27293d;
-$box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
-$white: #ffffff;
-$font-weight-light: 300;
-$dark-gray: #9A9A9A;
-$border-radius-sm: 0.2857rem;
-$black-states: #1d253b;
-$primary: #e14eca;
-$default: #344675;
-$opacity-gray-3: rgba(222, 222, 222, .3);
-$opacity-gray-5: rgba(222, 222, 222, .5);
-$transparent-bg: transparent;
-$light-gray: #E3E3E3;
-$font-size-dash: .875rem;
-$font-size-base: $font-size-dash ;
-$font-size-sm: (
-    $font-size-base * .85714286
-);
-$card-spacer-y: 1.25rem;

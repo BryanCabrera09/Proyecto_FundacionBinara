@@ -9,7 +9,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #010101;
+  background-color: #01010100;
   font-family: $fuente_principal;
 }
 
@@ -19,11 +19,12 @@ a {
 }
 
 .navbar .links a:hover {
-  color: rgb(85, 35, 35);
+  //color: $azul;
+  font-weight: bold;
 }
 
 .log-in {
-  font-weight: 500;
+  font-weight: bold;
   padding: 12px 22px;
   background-color: #0aa5ff7e;
   color: #ffffff;
@@ -34,7 +35,6 @@ a {
 
 .navbar li {
   list-style: none;
-  margin-top: 1.9rem;
 }
 
 header {
@@ -42,9 +42,9 @@ header {
 }
 
 .navbar {
-  height: 450px;
+  height: 350px;
   background-repeat: no-repeat;
-  background-position: center right;
+  background-position: left right;
   background-size: cover;
   padding: 40px 40px;
   display: flex;
@@ -71,8 +71,13 @@ button {
 }
 
 .navbar .links {
+  padding: 0;
+  list-style: none;
   display: flex;
+  justify-content: center;
   align-items: center;
+  height: 50%;
+  flex-wrap: wrap;
   gap: 32px;
 }
 
@@ -113,10 +118,11 @@ button {
   border-radius: 10px;
   overflow: hidden;
   transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1;
 }
 
 .dropdown_menu.open {
-  height: 400px;
+  height: 500px;
   top: 100px;
 }
 
@@ -139,9 +145,33 @@ button {
 }
 
 /* RESPONSIVE DESIGN */
-@media (max-width: 1310px) {
-  .navbar .links a {
-    font-size: 1.2rem;
+@media (max-width: 1530px) {
+  .navbar {
+    .links {
+      font-size: 1.4rem;
+    }
+
+    .logo {
+      width: 200px;
+    }
+  }
+
+  .log-in {
+    font-size: 1.4rem;
+    padding: 10px 20px;
+    margin-top: 1.2rem;
+  }
+}
+
+@media (max-width: 1320px) {
+  .navbar {
+    .links {
+      font-size: 1.2rem;
+    }
+
+    .logo {
+      width: 180px;
+    }
   }
 
   .log-in {
@@ -167,7 +197,7 @@ button {
   }
 
   .dropdown_menu li a:hover {
-    color: rgb(85, 35, 35);
+    font-weight: bold;
   }
 }
 

@@ -1,7 +1,7 @@
 @import '../../../../app/core/styles/global-styles.scss';
 
 footer {
-  background: #0e1219;
+  background: $negro;
   color: white;
   overflow: hidden;
   display: flex;
@@ -94,7 +94,7 @@ menu li {
 }
 
 .background {
-  background-color: #2C2C2C;
+  background-color: $negro;
   display: grid;
   place-items: center;
   height: 100vh;
