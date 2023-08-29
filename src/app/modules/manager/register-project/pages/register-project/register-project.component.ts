@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Proyectos } from 'src/app/core/models/proyectos';
 import { ProyectosService } from 'src/app/core/services/proyectos.service';
 import { Mapas } from 'src/app/core/models/mapas';
+import { Proyectospost } from 'src/app/core/models/proyectospost';
 
 declare var google: any;
 
@@ -13,29 +14,29 @@ declare var google: any;
 })
 export class RegisterProjectComponent {
 
-  titulo: string = '';
-  objetivoPrincipal: string = '';
-  objetivosSecundarios: string[] = [];
-  parrafoUno: string = '';
-  parrafoDos: string = '';
-  parrafoTres: string = '';
+  titulo: string = 'titulo';
+  objetivoPrincipal: string = 'objetivo';
+  objetivosSecundarios: string[] = ["hola", "hola2"];
+  parrafoUno: string = 'para  ';
+  parrafoDos: string = 'para2';
+  parrafoTres: string = 'para3';
   portada: any = "URL_de_la_portada_del_nuevo_proyecto";
-  presupuesto: number = 0;
-  recolectado: number = 0;
-  mapa = [
+  presupuesto: number = 12;
+  recolectado: number = 129;
+  mapasArray: Mapas[] = [
     {
-        "_id": "64e60735c73694d14eb2388e",
-        "lugar": "AZUAY;SANTA ISABEWL;CUENCA",
-        "coorX": "-30.232545",
-        "coorY": "-179.78456"
+      _id: '64decbe0ef58a830d657cbb7',
+      lugar: 'Lugar 1',
+      coorX: '12.345',
+      coorY: '67.890'
     }
-]
+  ];
   fechaInicio: Date = new Date("2023-09-01T00:00:00.000Z");
   fechaFin: Date = new Date("2023-09-11T00:00:00.000Z");
 
   visible: boolean = true;
 
-  proyecto: Proyectos = new Proyectos();
+  proyecto: Proyectospost = new Proyectospost();
 
   constructor(private dialogRef: MatDialogRef<RegisterProjectComponent>, private proyectoService: ProyectosService) { }
 
@@ -189,6 +190,8 @@ export class RegisterProjectComponent {
   }
 
   Register() {
+    const mapasIds = this.mapasArray.map(mapa => mapa._id!);
+
     this.proyecto.titulo = this.titulo;
     this.proyecto.objetivoPrincipal = this.objetivoPrincipal;
     this.proyecto.objetivosSecundarios = this.objetivosSecundarios;
@@ -197,11 +200,12 @@ export class RegisterProjectComponent {
     this.proyecto.parrafoTres = this.parrafoTres;
     this.proyecto.presupuesto = this.presupuesto;
     this.proyecto.recolectado = this.recolectado;
-    this.proyecto.mapas = this.mapa;
+    this.proyecto.mapas = mapasIds;
     this.proyecto.portada = this.portada;
     this.proyecto.visible = this.visible;
     this.proyecto.fechaInicio = this.fechaInicio;
-    this.proyecto.fechaFin = this.fechaFin
+    this.proyecto.fechaFin = this.fechaFin;
+
     this.proyectoService.createProject(this.proyecto).subscribe(
       (response) => {
         console.log('Proyecto registrado con éxito', response);
@@ -210,20 +214,9 @@ export class RegisterProjectComponent {
       },
       (error) => {
         console.error('Error al registrar el proyecto', error);
-        console.log(this.proyecto.titulo)
-        console.log(this.proyecto.objetivoPrincipal)
-        console.log(this.proyecto.objetivosSecundarios)
-        console.log(this.proyecto.parrafoUno)
-        console.log(this.proyecto.parrafoDos)
-        console.log(this.proyecto.parrafoTres)
-        console.log(this.proyecto.presupuesto)
-        console.log(this.proyecto.recolectado)
-        console.log(this.proyecto.mapas)
-        console.log(this.proyecto.fechaInicio)
-        console.log(this.proyecto.fechaFin)
-        console.log(this.proyecto.portada)
-        // Manejar el error aquí si es necesario
+        // (Aquí puedes seguir mostrando el resto de logs si los necesitas)
       }
     );
-  }
+}
+
 }

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import baserUrl from '../helpers/helperUrl';
 import { Proyectos } from '../models/proyectos';
 import { Observable } from 'rxjs';
+import { Proyectospost } from '../models/proyectospost';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class ProyectosService {
 
   constructor(private http: HttpClient) { }
 
-  createProject(proyecto: Proyectos) {  /* Registrar Proyectos */
-    return this.http.post(this.projectsUrl + '/', proyecto);
+  createProject(proyecto: Proyectospost) {  /* Registrar Proyectos */
+    return this.http.post(this.projectsUrl , proyecto);
   }
 
   editProject(id: number, proyecto: Proyectos): Observable<any> {   /* Editar Proyectos */
