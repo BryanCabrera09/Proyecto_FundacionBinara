@@ -24,11 +24,7 @@
     justify-content: flex-end;
     margin-top: 10px;
     z-index: 1;
-    gap: 10px;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    z-index: 1;
+
 }
 
 .edit-button,
@@ -42,8 +38,7 @@
     padding: 5px;
     border: 2px solid white;
     background-color: white;
-    border-radius: 50%;
-    transition: all 0.3s ease-in-out;
+
 }
 
 .edit-button:hover,
@@ -78,7 +73,7 @@
     display: block;
     transition: all 0.4s ease-in-out;
     overflow: hidden;
-    border-radius: 16px;
+    border-radius: 6px;
     background: var(--background-gradient);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
     padding-bottom: 50px;
@@ -142,8 +137,8 @@
 
 .add-button {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 10px;
+    right: 10px;
     z-index: 1000;
 }
 
@@ -158,4 +153,13 @@
 
 .negrita {
     font-weight: bold;
+}
+/* styles.css */
+.tamañoParrafo {
+    font-size: 16px; /* Tamaño de fuente fijo que desees */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* Número de líneas visibles antes de los puntos suspensivos */
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

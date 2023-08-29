@@ -1,5 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Proyectos } from 'src/app/core/models/proyectos';
+import { ProyectosService } from 'src/app/core/services/proyectos.service';
+import { Mapas } from 'src/app/core/models/mapas';
+import { Proyectospost } from 'src/app/core/models/proyectospost';
 
 declare var google: any;
 
@@ -9,8 +13,33 @@ declare var google: any;
   styleUrls: ['./register-project.component.css']
 })
 export class RegisterProjectComponent {
-  
-  constructor(private dialogRef: MatDialogRef<RegisterProjectComponent>) { }
+
+  titulo: string = 'titulo';
+  objetivoPrincipal: string = 'objetivo';
+  objetivosSecundarios: string[] = ["hola", "hola2"];
+  parrafoUno: string = 'para  ';
+  parrafoDos: string = 'para2';
+  parrafoTres: string = 'para3';
+  portada: any = "URL_de_la_portada_del_nuevo_proyecto";
+  presupuesto: number = 12;
+  recolectado: number = 129;
+  mapasArray: Mapas[] = [
+    {
+      _id: '64e60735c73694d14eb2388e',
+      lugar: 'Lugar 1',
+      coorX: '-30.232545',
+      coorY: '-179.78456'
+    }
+  ];
+  fechaInicio: Date = new Date("2023-09-01T00:00:00.000Z");
+  fechaFin: Date = new Date("2023-09-11T00:00:00.000Z");
+
+  visible: boolean = true;
+
+  proyecto: Proyectospost = new Proyectospost();
+
+  constructor(private dialogRef: MatDialogRef<RegisterProjectComponent>, private proyectoService: ProyectosService) { }
+
   Solonumero(event: any) {
     const input = event.target as HTMLInputElement;
     let value = input.value;
@@ -35,6 +64,8 @@ export class RegisterProjectComponent {
 
       reader.onload = (e: any) => {
         this.imagePreviewSrc = e.target.result;
+        console.log(e.target.result)
+        this.portada = e.target.result;
       };
 
       reader.readAsDataURL(input.files[0]);
@@ -159,5 +190,34 @@ export class RegisterProjectComponent {
 
 
   }
+
+  Register() {
+    const mapasIds = this.mapasArray.map(mapa => mapa._id!);
+
+    this.proyecto.titulo = this.titulo;
+    this.proyecto.objetivoPrincipal = this.objetivoPrincipal;
+    this.proyecto.objetivosSecundarios = this.objetivosSecundarios;
+    this.proyecto.parrafoUno = this.parrafoUno;
+    this.proyecto.parrafoDos = this.parrafoDos;
+    this.proyecto.parrafoTres = this.parrafoTres;
+    this.proyecto.presupuesto = this.presupuesto;
+    this.proyecto.recolectado = this.recolectado;
+    this.proyecto.mapas = mapasIds;
+    this.proyecto.portada = this.portada;
+    this.proyecto.visible = this.visible;
+    this.proyecto.fechaInicio = this.fechaInicio;
+    this.proyecto.fechaFin = this.fechaFin;
+
+    this.proyectoService.createProject(this.proyecto).subscribe(
+      (response) => {
+        console.log('Proyecto registrado con éxito', response);
+        this.onClose();
+      },
+      (error) => {
+        console.error('Error al registrar el proyecto', error);
+        console.log(this.proyecto.portada)
+      }
+    );
+}
 
 }

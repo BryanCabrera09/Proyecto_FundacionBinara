@@ -18,17 +18,16 @@ export class ProyectosComponent implements OnInit {
   constructor(private dialog: MatDialog, private router: Router, private projectService: ProyectosService) { }
 
   ngOnInit() {
-    
-    this.getActiveProjectsList();
-    
-    
-   }
 
-   getActiveProjectsList(): void {
+    this.getActiveProjectsList();
+
+
+  }
+
+  getActiveProjectsList(): void {
     this.projectService.getActiveProjects().subscribe(
       proyectos => {
         this.projects = proyectos;
-        console.log(this.projects?.[1].mapas?.[0].lugar);
       },
       error => {
         console.error('Error obteniendo proyectos:', error);
@@ -40,7 +39,7 @@ export class ProyectosComponent implements OnInit {
     console.log("this.projects")
     this.projectService.getProjects().subscribe(data => {
       this.projects = data;
-      
+
     });
   }
 
@@ -54,13 +53,20 @@ export class ProyectosComponent implements OnInit {
   }
 
 
-  goToArticle(e: any) {
-    this.router.navigate(['usuario/ver/proyecto']);
-  }
+  detailsProject(projectId: number | undefined) {
+
+    if (projectId !== undefined) {
+        this.router.navigate(['user/ver/proyecto', projectId]);
+    } else {
+    }
+    
+}
+
+
 
   getProvincia(lugar: any): string {
-    return lugar.split(';')[0]; 
+    return lugar.split(';')[0];
   }
-  
+
 }
 

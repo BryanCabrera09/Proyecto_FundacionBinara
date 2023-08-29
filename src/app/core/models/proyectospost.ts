@@ -1,12 +1,8 @@
-import { Mapas } from "./mapas";
-
-export class Proyectos {
-
-    _id?: number;
+export class Proyectospost {
     titulo?: string;
     objetivoPrincipal?: string;
     objetivosSecundarios?: string[];
-    mapas?: Mapas[];
+    mapas?: string[];
     parrafoUno?: string;
     parrafoDos?: string;
     parrafoTres?: string;

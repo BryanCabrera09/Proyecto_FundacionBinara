@@ -1,5 +1,5 @@
 export class Mapas{
-    id?: number;
+    _id?: string;
     lugar?: string;
     coorX?: string;
     coorY?: string;
