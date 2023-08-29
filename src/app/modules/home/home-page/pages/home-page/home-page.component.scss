@@ -13,11 +13,6 @@ body {
   line-height: 1.8;
 }
 
-p {
-  color: $negro;
-  font-size: 2rem;
-}
-
 .container {
   width: 95%;
   max-width: 120rem;
@@ -26,16 +21,93 @@ p {
   margin-bottom: calc($separacion / 2);
 }
 
-.seccion {
-  background-color: #009A63;
-  max-width: 100%;
+/* SABIAS QUE */
+.sabias {
+  background-color: $verde;
+  font-size: 2.4rem;
+  padding: 3rem;
+  color: $blanco;
+  border-radius: 2rem;
 
-  .card {
-    background-color: #009A63;
-    max-width: 100%;
+  blockquote {
+    padding-left: 5rem;
+    position: relative;
+
+    &::before {
+      content: '';
+      background-image: url("/assets/img/comilla.svg");
+      background-repeat: no-repeat;
+      width: 4rem;
+      height: 6rem;
+      display: block;
+      position: absolute;
+      left: -2%;
+    }
+  }
+
+  p {
+    text-align: right;
+    color: $blanco;
+    font-style: italic;
+  }
+
+  h3 {
+    font-weight: $bold;
+    margin: 0;
   }
 }
 
+/* QUIENES SOMOS */
+.quienes-somos {
+  /* background-image: url('/assets/img/portada_binara.png'); */
+  //background-image: url(https://www.biodisol.com/wp-content/uploads/2016/07/rsz_famosos-que-protegen-el-medio-ambiente-005751a58c8902e-1-678x381.jpg);
+  background-color: $negro;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .somos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    gap: 10rem;
+
+    .info-nosotros {
+
+      h2 {
+        color: #ffffff;
+        font-size: 2.6rem;
+
+        &::after {
+          content: '';
+          display: block;
+          width: 20rem;
+          height: .6rem;
+          align-self: flex-end;
+          background-color: $azul;
+          margin-top: 2rem;
+        }
+      }
+
+      p {
+        color: #ffffff;
+        font-size: 1.5rem;
+      }
+    }
+
+    .nosotros-img {
+      align-items: center;
+
+      img {
+        width: 100%;
+        margin: 0 auto;
+        height: auto;
+      }
+    }
+  }
+}
+
+/* MISION, VISION, NOSOTROS */
 .nosotros {
 
   h2 {
@@ -72,58 +144,8 @@ p {
   }
 }
 
-.quienes-somos {
-  /* background-image: url('/assets/img/portada_binara.png'); */
-  //background-image: url(https://www.biodisol.com/wp-content/uploads/2016/07/rsz_famosos-que-protegen-el-medio-ambiente-005751a58c8902e-1-678x381.jpg);
-  background-color: $negro;
-  background-size: cover;
-  background-repeat: no-repeat;
-
-  .somos {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 40px;
-    gap: 10rem;
-
-    .info-nosotros {
-
-      h2 {
-        color: #ffffff;
-        font-size: 2.6rem;
-
-        &::after {
-          content: '';
-          display: block;
-          width: 20rem;
-          height: .6rem;
-          align-self: flex-end;
-          background-color: $gris;
-          margin-top: 2rem;
-        }
-      }
-
-      p {
-        color: #ffffff;
-        font-size: 1.5rem;
-      }
-    }
-
-    .nosotros-img {
-      align-items: center;
-
-      img {
-        width: 100%;
-        margin: 0 auto;
-        height: auto;
-      }
-    }
-  }
-}
-
-/* Blog Styles */
+/* BLOG Styles */
 .entrada-blog {
-
   display: grid;
   grid-template-columns: 1fr 2fr;
 
@@ -159,9 +181,6 @@ p {
   }
 }
 
-a {
-  text-decoration: none;
-}
 
 img,
 picture {
@@ -193,112 +212,6 @@ h3 {
 
 h4 {
   font-size: 2.6rem;
-}
-
-.contenido-centrado {
-  max-width: 80rem;
-}
-
-.alinear-derecha {
-  margin-top: 3rem;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.boton-amarillo {
-  @include boton($grisOscuro, inline-block);
-}
-
-.boton-amarillo-block {
-  @include boton($grisOscuro, block);
-}
-
-.boton-verde {
-  @include boton($verde, inline-block);
-}
-
-.sabias {
-  background-color: $verde;
-  font-size: 2.4rem;
-  padding: 3rem;
-  color: $blanco;
-  border-radius: 2rem;
-
-  blockquote {
-    padding-left: 5rem;
-    position: relative;
-
-    &::before {
-      content: '';
-      background-image: url("/assets/img/comilla.svg");
-      background-repeat: no-repeat;
-      width: 4rem;
-      height: 6rem;
-      display: block;
-      position: absolute;
-      left: -2%;
-    }
-  }
-
-  p {
-    text-align: right;
-    color: $blanco;
-    font-style: italic;
-  }
-
-  h3 {
-    font-weight: $bold;
-    margin: 0;
-  }
-
-}
-
-@include tablet {
-  .contenedor-proyectosmarcha {
-    @include grid(3, 2rem);
-  }
-}
-
-.proyectomarcha {
-  background-color: lighten($color: $gris, $amount: 5);
-  border: 1px solid darken($color: $gris, $amount: 10);
-  margin-top: 2rem;
-
-  .contenido-proyecto {
-    padding: 2rem;
-  }
-
-  h3,
-  p {
-    margin: 0;
-  }
-}
-
-.inversion {
-  color: $verde;
-  font-weight: $bold;
-  font-size: 3rem;
-}
-
-.iconos-caracteristicas {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  max-width: 40rem;
-
-  li {
-    flex: 1;
-    display: flex;
-
-    img {
-      flex: 0 0 3rem;
-      margin-right: 1rem;
-    }
-
-    p {
-      font-weight: $black;
-    }
-  }
 }
 
 /* BLOG */
@@ -336,24 +249,6 @@ h4 {
 
   span {
     color: $amarillo;
-  }
-}
-
-@include tablet {
-  .iconos-nosotros {
-    @include grid(3, 2rem);
-  }
-}
-
-.icono {
-  text-align: center;
-
-  img {
-    height: 10rem;
-  }
-
-  h3 {
-    text-transform: uppercase;
   }
 }
 
@@ -518,32 +413,8 @@ h4 {
 }
 
 /* SLIDER IMAGES */
-
 .projects {
   max-width: 100%;
-}
-
-.slider-box {
-  width: 1280px;
-  height: auto;
-  margin: 50px auto 0;
-  display: flex;
-  position: relative;
-  align-items: center;
-
-  #sliderImage {
-    width: 100%;
-    background-size: cover;
-  }
-
-  .cards {
-    position: absolute;
-    text-align: center;
-    left: 0;
-    right: 0;
-    padding: 0 250px;
-    color: #ffffff;
-  }
 }
 
 /* MEDIA RESPONSIVE */

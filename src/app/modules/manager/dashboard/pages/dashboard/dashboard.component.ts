@@ -229,12 +229,12 @@ export class DashboardComponent implements OnInit {
           ticks: {
             color: textColorSecondary,
             font: {
-              weight: 500
+              weight: 600
             }
           },
           grid: {
-            color: surfaceBorder,
-            drawBorder: false
+            borderColor: "rgba(0, 0, 0, 0)",
+            padding: { left: 10, right: 0, top: -16, bottom: -8 },
           }
         },
         y: {
@@ -242,8 +242,8 @@ export class DashboardComponent implements OnInit {
             color: textColorSecondary
           },
           grid: {
-            color: surfaceBorder,
-            drawBorder: false
+            borderColor: "rgba(0, 0, 0, 0)",
+            padding: { left: 10, right: 0, top: -16, bottom: -8 },
           }
         }
 
