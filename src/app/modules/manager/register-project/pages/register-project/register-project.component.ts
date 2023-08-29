@@ -25,10 +25,10 @@ export class RegisterProjectComponent {
   recolectado: number = 129;
   mapasArray: Mapas[] = [
     {
-      _id: '64decbe0ef58a830d657cbb7',
+      _id: '64e60735c73694d14eb2388e',
       lugar: 'Lugar 1',
-      coorX: '12.345',
-      coorY: '67.890'
+      coorX: '-30.232545',
+      coorY: '-179.78456'
     }
   ];
   fechaInicio: Date = new Date("2023-09-01T00:00:00.000Z");
@@ -64,6 +64,8 @@ export class RegisterProjectComponent {
 
       reader.onload = (e: any) => {
         this.imagePreviewSrc = e.target.result;
+        console.log(e.target.result)
+        this.portada = e.target.result;
       };
 
       reader.readAsDataURL(input.files[0]);
@@ -209,12 +211,11 @@ export class RegisterProjectComponent {
     this.proyectoService.createProject(this.proyecto).subscribe(
       (response) => {
         console.log('Proyecto registrado con éxito', response);
-        // Puedes cerrar el diálogo aquí si lo deseas
         this.onClose();
       },
       (error) => {
         console.error('Error al registrar el proyecto', error);
-        // (Aquí puedes seguir mostrando el resto de logs si los necesitas)
+        console.log(this.proyecto.portada)
       }
     );
 }
