@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule } from '@angular/forms'; 
 import { RegisterProjectRoutingModule } from './register-project-routing.module';
 import { RegisterProjectComponent } from './pages/register-project/register-project.component';
 
@@ -11,6 +11,7 @@ import { RegisterProjectComponent } from './pages/register-project/register-proj
   ],
   imports: [
     CommonModule,
+    FormsModule,
     RegisterProjectRoutingModule
   ]
 })

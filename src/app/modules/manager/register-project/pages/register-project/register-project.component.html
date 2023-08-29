@@ -2,19 +2,19 @@
   <button class="close-button" (click)="onClose()">X</button>
   <h2 class="centrar">Registro de Proyecto</h2>
   <hr>
-  <form>
+  <form (ngSubmit)="Register()">
    
     <div class="form-group">
       <label for="projectName">Título del Proyecto</label>
-      <input type="text" id="projectName" name="projectName" required>
+      <input type="text"  name="projectName" required [(ngModel)]="titulo">
     </div>
     <div class="form-group">
       <label for="projectName">Objetivo Principal</label>
-      <textarea id="projectDescription" name="projectDescription" required></textarea>
+      <textarea id="projectDescription" name="projectDescription" required [(ngModel)]="objetivoPrincipal"></textarea>
     </div>
     <div class="form-group">
       <label for="projectName">Objetivos Específicos </label>
-      <textarea id="projectDescription" name="projectDescription" required></textarea>
+      <textarea id="projectDescription" name="projectDescription" required [(ngModel)]="objetivosSecundarios"></textarea>
     </div>
     <div class="form-group">
       <label for="projectName">Mapa</label>
@@ -41,15 +41,15 @@
   
     <div class="form-group">
       <label for="projectName">Párrafo Uno</label>
-      <textarea id="projectDescription" name="projectDescription" required></textarea>
+      <textarea id="projectDescription" name="projectDescription" required [(ngModel)]="parrafoUno"></textarea>
     </div>
     <div class="form-group">
       <label for="projectName">Párrafo dos</label>
-      <textarea id="projectDescription" name="projectDescription" required></textarea>
+      <textarea id="projectDescription" name="projectDescription" required [(ngModel)]="parrafoDos"></textarea>
     </div>
     <div class="form-group">
       <label for="projectName">Párrafo Tres</label>
-      <textarea id="projectDescription" name="projectDescription" required></textarea>
+      <textarea id="projectDescription" name="projectDescription" requirrequired [(ngModel)]="parrafoTres"></textarea>
     </div>
     <div class="form-group">
       <label for="projectImage">Portada</label>
@@ -62,19 +62,19 @@
        <br>
     <div class="form-group">
       <label for="projectName">Presupuesto</label>
-      <input type="text" id="projectName" name="projectName" required (input)="Solonumero($event)">
+      <input type="text" id="projectName" name="projectName" required [(ngModel)]="presupuesto" (input)="Solonumero($event) " >
     </div>
     <div class="form-group">
       <label for="projectName">Recolectado</label>
-      <input type="text" id="projectName" name="projectName" required>
+      <input type="text" id="projectName" name="projectName" required [(ngModel)]="recolectado" (input)="Solonumero($event)" >
     </div>
     <div class="form-group">
       <label for="projectDueDate">Fecha de Inicio</label>
-      <input type="date" id="projectDueDate" name="projectDueDate" required>
+      <input type="date" id="projectDueDate" name="projectDueDate" required [(ngModel)]="fechaInicio">
     </div>
     <div class="form-group">
       <label for="projectDueDate">Fecha de Fin</label>
-      <input type="date" id="projectDueDate" name="projectDueDate" required>
+      <input type="date" id="projectDueDate" name="projectDueDate" required [(ngModel)]="fechaFin">
     </div>
     
     

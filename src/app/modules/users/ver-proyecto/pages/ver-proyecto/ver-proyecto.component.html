@@ -20,14 +20,15 @@
     </div>
 
     <div class="objetivos">
+      
+    </div>
+
+    <div class="text-container">
         <p><strong>Objetivo principal:</strong> {{ proyecto.objetivoPrincipal }}</p>
         <p><strong>Objetivos Secundarios:</strong></p>
         <ul>
             <li *ngFor="let objetivo of proyecto.objetivosSecundarios">{{ objetivo }}</li>
         </ul>
-    </div>
-
-    <div class="text-container">
         <p>{{ proyecto.parrafoUno }}</p>
         <p>{{ proyecto.parrafoDos }}</p>
         <p>{{ proyecto.parrafoTres }}</p>

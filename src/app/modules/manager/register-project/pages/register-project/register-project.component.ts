@@ -1,5 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Proyectos } from 'src/app/core/models/proyectos';
+import { ProyectosService } from 'src/app/core/services/proyectos.service';
+import { Mapas } from 'src/app/core/models/mapas';
 
 declare var google: any;
 
@@ -9,8 +12,33 @@ declare var google: any;
   styleUrls: ['./register-project.component.css']
 })
 export class RegisterProjectComponent {
-  
-  constructor(private dialogRef: MatDialogRef<RegisterProjectComponent>) { }
+
+  titulo: string = '';
+  objetivoPrincipal: string = '';
+  objetivosSecundarios: string[] = [];
+  parrafoUno: string = '';
+  parrafoDos: string = '';
+  parrafoTres: string = '';
+  portada: any = "URL_de_la_portada_del_nuevo_proyecto";
+  presupuesto: number = 0;
+  recolectado: number = 0;
+  mapa = [
+    {
+        "_id": "64e60735c73694d14eb2388e",
+        "lugar": "AZUAY;SANTA ISABEWL;CUENCA",
+        "coorX": "-30.232545",
+        "coorY": "-179.78456"
+    }
+]
+  fechaInicio: Date = new Date("2023-09-01T00:00:00.000Z");
+  fechaFin: Date = new Date("2023-09-11T00:00:00.000Z");
+
+  visible: boolean = true;
+
+  proyecto: Proyectos = new Proyectos();
+
+  constructor(private dialogRef: MatDialogRef<RegisterProjectComponent>, private proyectoService: ProyectosService) { }
+
   Solonumero(event: any) {
     const input = event.target as HTMLInputElement;
     let value = input.value;
@@ -160,4 +188,42 @@ export class RegisterProjectComponent {
 
   }
 
+  Register() {
+    this.proyecto.titulo = this.titulo;
+    this.proyecto.objetivoPrincipal = this.objetivoPrincipal;
+    this.proyecto.objetivosSecundarios = this.objetivosSecundarios;
+    this.proyecto.parrafoUno = this.parrafoUno;
+    this.proyecto.parrafoDos = this.parrafoDos;
+    this.proyecto.parrafoTres = this.parrafoTres;
+    this.proyecto.presupuesto = this.presupuesto;
+    this.proyecto.recolectado = this.recolectado;
+    this.proyecto.mapas = this.mapa;
+    this.proyecto.portada = this.portada;
+    this.proyecto.visible = this.visible;
+    this.proyecto.fechaInicio = this.fechaInicio;
+    this.proyecto.fechaFin = this.fechaFin
+    this.proyectoService.createProject(this.proyecto).subscribe(
+      (response) => {
+        console.log('Proyecto registrado con éxito', response);
+        // Puedes cerrar el diálogo aquí si lo deseas
+        this.onClose();
+      },
+      (error) => {
+        console.error('Error al registrar el proyecto', error);
+        console.log(this.proyecto.titulo)
+        console.log(this.proyecto.objetivoPrincipal)
+        console.log(this.proyecto.objetivosSecundarios)
+        console.log(this.proyecto.parrafoUno)
+        console.log(this.proyecto.parrafoDos)
+        console.log(this.proyecto.parrafoTres)
+        console.log(this.proyecto.presupuesto)
+        console.log(this.proyecto.recolectado)
+        console.log(this.proyecto.mapas)
+        console.log(this.proyecto.fechaInicio)
+        console.log(this.proyecto.fechaFin)
+        console.log(this.proyecto.portada)
+        // Manejar el error aquí si es necesario
+      }
+    );
+  }
 }
