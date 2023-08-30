@@ -9,6 +9,10 @@ const routes: Routes = [
   {
     path: 'ver',
     loadChildren: () => import('./ver-proyecto/ver-proyecto.module').then(m => m.VerProyectoModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('./blog-user/blog-user.module').then(m => m.BlogUserModule)
   }
 ];
 

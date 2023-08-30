@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { UsersRoutingModule } from './users-routing.module';
 import { WelcomeUserComponent } from './welcome-user/welcome-user.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     UsersRoutingModule,
-    SharedModule
+    SharedModule,
+    RouterModule
   ]
 })
 export class UsersModule { }
