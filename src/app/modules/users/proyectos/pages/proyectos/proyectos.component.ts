@@ -68,5 +68,40 @@ export class ProyectosComponent implements OnInit {
     return lugar.split(';')[0];
   }
 
+  confirmMessage: string = '';
+  isConfirmVisible: boolean = false;
+  projectToDelete: Proyectos | null = null;
+  
+  confirmDeleteProject(project: Proyectos): void {
+    this.confirmMessage = `¿Estás seguro de que deseas desactivar el proyecto "${project.titulo}"?`;
+    this.projectToDelete = project;
+    this.isConfirmVisible = true;
+  }
+
+  confirm(): void {
+    if (this.projectToDelete) {
+      this.deleteProject(this.projectToDelete);
+    }
+    this.isConfirmVisible = false;
+    this.projectToDelete = null;
+  }
+
+  cancel(): void {
+    this.isConfirmVisible = false;
+    this.projectToDelete = null;
+  }
+
+  deleteProject(project: Proyectos): void {
+    this.projectService.deleteProject(project._id!).subscribe(
+      response => {
+        console.log('Proyecto eliminado con éxito', response);
+        // Actualizar la lista de proyectos después de eliminar
+        this.getActiveProjectsList();
+      },
+      error => {
+        console.error('Error al eliminar el proyecto', error);
+      }
+    );
+  }
 }
 

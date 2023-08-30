@@ -1,36 +1,49 @@
 <body>
     <div class="background">
         <span class="centering">
-            <section class="articles"> 
+            <section class="articles">
                 <article *ngFor="let project of projects" class="article-container">
                     <div class="image-container">
                         <figure>
-                            <img [src]="project.portada" alt="Portada de {{project.titulo}}" title="Portada de {{project.titulo}}" />
+                            <img [src]="project.portada" alt="Portada de {{project.titulo}}"
+                                title="Portada de {{project.titulo}}" />
                         </figure>
                     </div>
                     <div class="article-preview">
                         <h2>{{ project.titulo }}</h2>
-                        <p *ngIf="project.mapas && project.mapas.length > 0">{{ getProvincia(project.mapas[0].lugar) }}</p>
+                        <p *ngIf="project.mapas && project.mapas.length > 0">{{ getProvincia(project.mapas[0].lugar) }}
+                        </p>
                         <p class="tamañoParrafo">{{ project.parrafoUno }}</p>
                         <a (click)="detailsProject(project._id)" class="read-more negrita">
                             leer más
-                        </a>                        
+                        </a>
                         <div class="action-buttons">
                             <button class="edit-button" title="Editar">
                                 ✎
                             </button>
-                            <button class="delete-button" title="Eliminar">
+                            <button class="delete-button" title="Eliminar" (click)="confirmDeleteProject(project)">
                                 🗑
                             </button>
+                            <!-- ... tu contenido HTML existente ... -->
+
+                            <div *ngIf="isConfirmVisible" class="custom-confirm">
+                                <div class="confirm-content">
+                                    <p>{{ confirmMessage }}</p>
+                                    <button (click)="confirm()">Confirmar</button>
+                                    <button (click)="cancel()">Cancelar</button>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </article>
-                
+
             </section>
         </span>
     </div>
     <span class="add-button">
         <button class="add-project-button" (click)="abrirSheet()">Añadir Proyecto</button>
     </span>
-    
+
 </body>
