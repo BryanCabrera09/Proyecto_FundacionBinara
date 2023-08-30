@@ -4,6 +4,7 @@ import { Proyectos } from 'src/app/core/models/proyectos';
 import { ProyectosService } from 'src/app/core/services/proyectos.service';
 import { Mapas } from 'src/app/core/models/mapas';
 import { Proyectospost } from 'src/app/core/models/proyectospost';
+import { MapasService } from 'src/app/core/services/mapas.service';
 
 declare var google: any;
 
@@ -23,22 +24,24 @@ export class RegisterProjectComponent {
   portada: any = "URL_de_la_portada_del_nuevo_proyecto";
   presupuesto: number = 12;
   recolectado: number = 129;
+  fechaInicio: Date = new Date("2023-09-01T00:00:00.000Z");
+  fechaFin: Date = new Date("2023-09-11T00:00:00.000Z");
+
   mapasArray: Mapas[] = [
     {
-      _id: '64e60735c73694d14eb2388e',
+      _id: 'id invalido',
       lugar: 'Lugar 1',
       coorX: '-30.232545',
       coorY: '-179.78456'
     }
   ];
-  fechaInicio: Date = new Date("2023-09-01T00:00:00.000Z");
-  fechaFin: Date = new Date("2023-09-11T00:00:00.000Z");
 
   visible: boolean = true;
 
   proyecto: Proyectospost = new Proyectospost();
+  mapapost: Mapas = new Mapas();
 
-  constructor(private dialogRef: MatDialogRef<RegisterProjectComponent>, private proyectoService: ProyectosService) { }
+  constructor(private dialogRef: MatDialogRef<RegisterProjectComponent>, private proyectoService: ProyectosService,private mapaService:MapasService) { }
 
   Solonumero(event: any) {
     const input = event.target as HTMLInputElement;
@@ -191,9 +194,12 @@ export class RegisterProjectComponent {
 
   }
 
-  Register() {
-    const mapasIds = this.mapasArray.map(mapa => mapa._id!);
+  Register(id: Mapas[]) {
 
+    this.mapasArray=id;
+    const mapasIds = this.mapasArray.map(mapa => mapa._id!);
+    console.log(id);
+    
     this.proyecto.titulo = this.titulo;
     this.proyecto.objetivoPrincipal = this.objetivoPrincipal;
     this.proyecto.objetivosSecundarios = this.objetivosSecundarios;
@@ -202,11 +208,12 @@ export class RegisterProjectComponent {
     this.proyecto.parrafoTres = this.parrafoTres;
     this.proyecto.presupuesto = this.presupuesto;
     this.proyecto.recolectado = this.recolectado;
-    this.proyecto.mapas = mapasIds;
     this.proyecto.portada = this.portada;
     this.proyecto.visible = this.visible;
     this.proyecto.fechaInicio = this.fechaInicio;
     this.proyecto.fechaFin = this.fechaFin;
+    this.proyecto.mapas = mapasIds;
+    console.log(this.proyecto)
 
     this.proyectoService.createProject(this.proyecto).subscribe(
       (response) => {
@@ -219,5 +226,27 @@ export class RegisterProjectComponent {
       }
     );
 }
+
+ GuardarMapa(){
+  
+this.mapapost.lugar =this.provincia+";"+this.canton+";"+this.parroquia;
+this.mapapost.coorX = this.lat+"";
+this.mapapost.coorY = this.lng+"";
+
+  
+    this.mapaService.createMap(this.mapapost).subscribe(
+      (response: any) => {
+        console.log('Mapa registrado con éxito', response.mapa);
+        let m: Mapas[]=[response.mapa];
+        this.Register(m);
+      
+        
+      },
+      (error) => {
+        console.error('Error al registrar el mapa', error);
+      }
+    );
+  
+ }
 
 }
