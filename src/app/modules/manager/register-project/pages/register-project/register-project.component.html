@@ -12,10 +12,16 @@
       <label for="projectName">Objetivo Principal</label>
       <textarea id="objetivoPrincipal" name="objetivoPrincipal" required [(ngModel)]="objetivoPrincipal"></textarea>
     </div>
-    <div class="form-group">
-      <label for="projectName">Objetivos Específicos </label>
-      <textarea id="objetivosSecundarios" name="objetivosSecundarios" required [(ngModel)]="objetivosSecundarios"></textarea>
-    </div>
+    <div class="form-obj"*ngFor="let objetivo of objetivosSecundarios; let i = index; trackBy: trackByIndex">
+
+      <label for="objetivo-{{i}}">Objetivo Secundario {{i + 1}}</label>
+      <textarea id="objetivo-{{i}}" name="objetivo-{{i}}" [(ngModel)]="objetivosSecundarios[i]"></textarea>
+      <button type="button" class="btn-eliminarobj" (click)="eliminarObjetivo(i)">−</button>
+
+ </div>
+ 
+    <button type="button" class="btn-addobj" (click)="agregarObjetivo()">Añadir otro objetivo</button>
+    
     <div class="form-group">
       <label for="projectName">Mapa</label>
     </div>

@@ -15,15 +15,15 @@ declare var google: any;
 })
 export class RegisterProjectComponent {
 
-  titulo: string = 'titulo';
-  objetivoPrincipal: string = 'objetivo';
-  objetivosSecundarios: string[] = ["hola", "hola2"];
-  parrafoUno: string = 'para  ';
-  parrafoDos: string = 'para2';
-  parrafoTres: string = 'para3';
+  titulo: string = '';
+  objetivoPrincipal: string = '';
+  objetivosSecundarios: string[] = [''];
+  parrafoUno: string = '';
+  parrafoDos: string = '';
+  parrafoTres: string = '';
   portada: any = "URL_de_la_portada_del_nuevo_proyecto";
-  presupuesto: number = 12;
-  recolectado: number = 129;
+  presupuesto: number = 0;
+  recolectado: number = 0;
   fechaInicio: Date = new Date("2023-09-01T00:00:00.000Z");
   fechaFin: Date = new Date("2023-09-11T00:00:00.000Z");
 
@@ -219,6 +219,8 @@ export class RegisterProjectComponent {
       (response) => {
         console.log('Proyecto registrado con éxito', response);
         this.onClose();
+        window.location.reload();
+
       },
       (error) => {
         console.error('Error al registrar el proyecto', error);
@@ -248,5 +250,20 @@ this.mapapost.coorY = this.lng+"";
     );
   
  }
+
+ agregarObjetivo() {
+  this.objetivosSecundarios.push('');
+}
+
+eliminarObjetivo(index: number) {
+  if (this.objetivosSecundarios.length > 1) {
+    this.objetivosSecundarios.splice(index, 1);
+  }
+}
+trackByIndex(index: number, item: any): number {
+  return index;
+}
+
+
 
 }
