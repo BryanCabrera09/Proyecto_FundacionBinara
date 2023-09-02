@@ -48,7 +48,8 @@ export class ProyectosComponent implements OnInit {
     this.dialog.open(RegisterProjectComponent, {
       width: '800px',
       hasBackdrop: false,
-      height: '600px'
+      height: '600px',
+      data: { proyecto: null, editing:false } 
     });
   }
 
@@ -103,5 +104,15 @@ export class ProyectosComponent implements OnInit {
       }
     );
   }
+
+  editarproyecto(project: Proyectos) {
+    this.dialog.open(RegisterProjectComponent, {
+      width: '800px',
+      hasBackdrop: false,
+      height: '600px',
+      data: { proyecto: project, editing:true }  
+    });
+  }
+  
 }
 

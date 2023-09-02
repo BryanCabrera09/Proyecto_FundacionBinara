@@ -1,8 +1,10 @@
 <div class="form-container">
   <button class="close-button" (click)="onClose()">X</button>
-  <h2 class="centrar">Registro de Proyecto</h2>
+  <h2 class="centrar">{{ edit ? 'Edicion de Proyecto' : 'Registro de Proyecto' }}</h2>
+
+
   <hr>
-  <form (ngSubmit)="GuardarMapa()">
+  <form >
    
     <div class="form-group">
       <label for="projectName">Título del Proyecto</label>
@@ -86,7 +88,10 @@
     
     <div class="button-container">
       <button  class="submit-button cancelar"  (click)="onClose()" >Cancelar</button>
-      <button  class="submit-button" (click)="onClose()" type="submit">Registrar Proyecto</button>
+      <button class="submit-button" (click)="GuardarMapa()" type="submit">
+        {{ edit ? 'Editar Proyecto' : 'Registrar Proyecto' }}
+      </button>
+      
     
   </div>
 

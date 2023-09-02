@@ -18,7 +18,7 @@ export class ProyectosService {
     return this.http.post(this.projectsUrl , proyecto);
   }
 
-  editProject(id: number, proyecto: Proyectos): Observable<any> {   /* Editar Proyectos */
+  editProject(id: string, proyecto: Proyectospost): Observable<any> {   /* Editar Proyectos */
     return this.http.put(`${this.projectsUrl}/${id}`, proyecto);
   }
 

@@ -1,5 +1,5 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, ElementRef, ViewChild , Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Proyectos } from 'src/app/core/models/proyectos';
 import { ProyectosService } from 'src/app/core/services/proyectos.service';
 import { Mapas } from 'src/app/core/models/mapas';
@@ -15,6 +15,8 @@ declare var google: any;
 })
 export class RegisterProjectComponent {
 
+
+  
   titulo: string = '';
   objetivoPrincipal: string = '';
   objetivosSecundarios: string[] = [''];
@@ -41,7 +43,78 @@ export class RegisterProjectComponent {
   proyecto: Proyectospost = new Proyectospost();
   mapapost: Mapas = new Mapas();
 
-  constructor(private dialogRef: MatDialogRef<RegisterProjectComponent>, private proyectoService: ProyectosService,private mapaService:MapasService) { }
+  proyectoedit: any;
+  edit: boolean=false;
+
+  
+
+  constructor(private dialogRef: MatDialogRef<RegisterProjectComponent>, private proyectoService: ProyectosService,private mapaService:MapasService,@Inject(MAT_DIALOG_DATA) public data: any) { 
+    if(data.proyecto!=null){
+      this.proyectoedit = data.proyecto;
+      this.edit= data.editing;
+      this.titulo= data.proyecto.titulo;
+      this.objetivoPrincipal=data.proyecto.objetivoPrincipal;
+      this.objetivosSecundarios=data.proyecto.objetivosSecundarios;
+      this.lat=data.proyecto.mapas[0].coorX;
+      this.lng=data.proyecto.mapas[0].coorY;
+      this.provincia=data.proyecto.mapas[0].lugar.split(';')[0];
+      this.canton=data.proyecto.mapas[0].lugar.split(';')[1];
+      this.parroquia=data.proyecto.mapas[0].lugar.split(';')[2];
+      this.parrafoUno=data.proyecto.parrafoUno;
+      this.parrafoDos=data.proyecto.parrafoDos;
+      this.parrafoTres=data.proyecto.parrafoTres;
+      this.portada=data.proyecto.portada;
+      this.imagePreviewSrc=data.proyecto.portada;
+      this.presupuesto=data.proyecto.presupuesto;
+      this.recolectado=data.proyecto.recolectado;
+      this.fechaInicio=data.proyecto.fechaInicio;
+      this.fechaFin=data.proyecto.fechaFin;
+      
+    }
+    
+  }
+
+
+
+  
+
+  Editar(mapa:Mapas[]) {
+    console.log("editar "+ mapa[0].lugar);
+
+    this.mapasArray=mapa;
+    const mapasIds = this.mapasArray.map(mapa => mapa._id!);
+    
+    this.proyecto.titulo = this.titulo;
+    this.proyecto.objetivoPrincipal = this.objetivoPrincipal;
+    this.proyecto.objetivosSecundarios = this.objetivosSecundarios;
+    this.proyecto.parrafoUno = this.parrafoUno;
+    this.proyecto.parrafoDos = this.parrafoDos;
+    this.proyecto.parrafoTres = this.parrafoTres;
+    this.proyecto.presupuesto = this.presupuesto;
+    this.proyecto.recolectado = this.recolectado;
+    this.proyecto.portada = this.portada;
+    this.proyecto.visible = this.visible;
+    this.proyecto.fechaInicio = this.fechaInicio;
+    this.proyecto.fechaFin = this.fechaFin;
+    this.proyecto.mapas = mapasIds;
+    console.log(this.proyectoedit._id)
+
+    this.proyectoService.editProject(this.proyectoedit._id, this.proyecto).subscribe({
+      next: response => {
+        console.log('Proyecto actualizado con éxito!', response);
+        window.location.reload();
+        // Manejar la respuesta
+      },
+      error: error => {
+        console.error('Error al actualizar el proyecto:', error);
+        // Manejar el error
+      },
+      complete: () => {
+        console.log('La operación ha completado');
+        // Código a ejecutar cuando se complete el Observable (si es necesario)
+      }
+   });
+  }
 
   Solonumero(event: any) {
     const input = event.target as HTMLInputElement;
@@ -240,7 +313,12 @@ this.mapapost.coorY = this.lng+"";
       (response: any) => {
         console.log('Mapa registrado con éxito', response.mapa);
         let m: Mapas[]=[response.mapa];
-        this.Register(m);
+        if(this.edit){
+          this,this.Editar(m);
+        }else{
+          this.Register(m);
+        }
+        
       
         
       },
