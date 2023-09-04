@@ -22,10 +22,9 @@
                                 ✎
                             </button>
                             <button class="delete-button" title="Eliminar" (click)="confirmDeleteProject(project)">
-                                🗑
+                                <span *ngIf="project.visible">🗑</span>
+                                <span *ngIf="!project.visible">✓</span>
                             </button>
-                            <!-- ... tu contenido HTML existente ... -->
-
                             <div *ngIf="isConfirmVisible" class="custom-confirm">
                                 <div class="confirm-content">
                                     <p>{{ confirmMessage }}</p>
@@ -33,8 +32,6 @@
                                     <button (click)="cancel()">Cancelar</button>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </article>

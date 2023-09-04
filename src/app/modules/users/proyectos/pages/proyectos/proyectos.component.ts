@@ -25,7 +25,7 @@ export class ProyectosComponent implements OnInit {
   }
 
   getActiveProjectsList(): void {
-    this.projectService.getActiveProjects().subscribe(
+    this.projectService.getProjects().subscribe(
       proyectos => {
         this.projects = proyectos;
       },
@@ -74,29 +74,38 @@ export class ProyectosComponent implements OnInit {
   projectToDelete: Proyectos | null = null;
   
   confirmDeleteProject(project: Proyectos): void {
-    this.confirmMessage = `¿Estás seguro de que deseas desactivar el proyecto "${project.titulo}"?`;
+    if (project.visible) {
+        this.confirmMessage = `¿Estás seguro de que deseas DESACTIVAR el proyecto "${project.titulo}"?`;
+    } else {
+        this.confirmMessage = `¿Estás seguro de que deseas ACTIVAR el proyecto "${project.titulo}"?`;
+    }
     this.projectToDelete = project;
     this.isConfirmVisible = true;
   }
 
   confirm(): void {
     if (this.projectToDelete) {
-      this.deleteProject(this.projectToDelete);
+      if (this.projectToDelete.visible) {
+        this.desactivarProject(this.projectToDelete);
+      } else {
+        this.activarProject(this.projectToDelete);
+      }
     }
     this.isConfirmVisible = false;
     this.projectToDelete = null;
   }
+
 
   cancel(): void {
     this.isConfirmVisible = false;
     this.projectToDelete = null;
   }
 
-  deleteProject(project: Proyectos): void {
+
+  desactivarProject(project: Proyectos): void {
     this.projectService.deleteProject(project._id!).subscribe(
       response => {
-        console.log('Proyecto eliminado con éxito', response);
-        // Actualizar la lista de proyectos después de eliminar
+        console.log('Proyecto Desactivado con éxito', response);
         this.getActiveProjectsList();
       },
       error => {
@@ -104,6 +113,19 @@ export class ProyectosComponent implements OnInit {
       }
     );
   }
+
+  activarProject(project: Proyectos): void {
+    this.projectService.activarProyecto(project._id!).subscribe(
+      response => {
+        console.log('Proyecto Activado con éxito', response);
+        this.getActiveProjectsList();
+      },
+      error => {
+        console.error('Error al eliminar el proyecto', error);
+      }
+    );
+  }
+  
 
   editarproyecto(project: Proyectos) {
     this.dialog.open(RegisterProjectComponent, {

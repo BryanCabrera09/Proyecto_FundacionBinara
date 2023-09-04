@@ -37,5 +37,10 @@ export class ProyectosService {
   deleteProject(id: number) {   /* Eliminar proyectos*/
     return this.http.delete(`${this.projectsUrl}/${id}`)
   }
+  
+  activarProyecto(id: number): Observable<any> {
+    // Realiza la solicitud PUT para activar el proyecto
+    return this.http.put(`${this.projectsUrl}/${id}/activar`, {});
+  }
 
 }
