@@ -13,3 +13,155 @@ body {
   line-height: 1.8;
   margin: 0;
 }
+.form-container1 {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  
+  background-color: #e74c3c;
+  color: white;            
+  
+  width: 30px;            
+  height: 30px;
+  border-radius: 50%;  
+  
+  border: none; 
+  font-weight: bold;
+  font-size: 1.5rem;        
+
+  display: flex;           
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;          
+  transition: background-color 0.3s; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.centrar{
+  text-align: center;
+  color: rgb(36, 36, 106);
+}
+.label1 {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="date"],
+.textarea1 {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.map-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.search-location {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  z-index: 5;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.map-container {
+  height: 400px;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  /* para que el mapa respete el borde redondeado */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  /* sombra suave */
+}
+
+.coordinates-display {
+  margin-top: 20px;
+  font-size: 16px;
+  text-align: center;
+  background-color: #f7f7f7;
+  /* fondo claro */
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.location-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  /* Alinea horizontalmente */
+  gap: 1rem;
+  /* Espaciado entre los botones, ajusta según lo necesites */
+}
+
+.submit-button {
+  background-color: blue;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.cancel-button {
+  background-color: transparent;
+  border: 2px solid red;
+  color: red;
+  padding: 10px 15px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+.cancelar {
+  background-color: #c0392b;
+}
+
+.submit-button:hover {
+  background-color: rgb(153, 79, 52);
+}
+.cancel-button:hover {
+  background-color: red;
+  color: white;
+}
+
+.close-button:hover {
+  background-color: #c0392b;
+}
+.cancelar {
+  background-color: #c0392b;
+}
+

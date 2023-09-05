@@ -3,6 +3,8 @@ import { Proyectos } from 'src/app/core/models/proyectos';
 import { ProyectosService } from 'src/app/core/services/proyectos.service';
 import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { RegisterActivityComponent } from 'src/app/modules/manager/register-activity/pages/register-activity/register-activity.component';
+import { MatDialog } from '@angular/material/dialog';
 
 declare var google: any;
 
@@ -16,7 +18,7 @@ export class VerProyectoComponent {
   proyecto!: Proyectos;
 
 
-  constructor(private route: ActivatedRoute,private proyectosService: ProyectosService){}
+  constructor(private dialog: MatDialog, private route: ActivatedRoute,private proyectosService: ProyectosService){}
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
    
@@ -76,6 +78,13 @@ export class VerProyectoComponent {
     } else {
         console.error("Datos del proyecto o mapas no disponibles o en formato incorrecto");
     }
+}
+abrirRegistro() {
+  this.dialog.open(RegisterActivityComponent, {
+    width: '800px',
+    hasBackdrop: false,
+    height: '600px',
+  });
 }
 
 
