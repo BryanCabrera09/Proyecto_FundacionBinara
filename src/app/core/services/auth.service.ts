@@ -8,7 +8,7 @@ import baserUrl from '../helpers/helperUrl';
 })
 export class AuthService {
 
-  URL_USER_PWD = "/psw";
+  URL_USER_PWD = "/auth/psw";
   URL_GOOGLE = "/google";
 
   constructor(private http: HttpClient) { }
