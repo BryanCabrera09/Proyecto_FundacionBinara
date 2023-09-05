@@ -1,1 +1,72 @@
-<p>auth works!</p>
+<body>
+    <div class="wrapper">
+        <form [formGroup]="formLogIn" (ngSubmit)="logIn()">
+            <h1>Login</h1>
+            <div class="form-group">
+                <label for="username">Email</label>
+                <input type="text" class="form-control" formControlName="username"
+                    placeholder="Correo" [class.is-invalid]="isInvalidForm('username')">
+                <i class='bx bxs-user'></i>
+                <small *ngIf="isInvalidForm('username')" class="text-danger">Ingresa un email</small>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="text" class="form-control" formControlName="password"
+                    placeholder="Contraseña" [class.is-invalid]="isInvalidForm('password')">
+                <i class='bx bxs-lock-alt' ></i>
+                <small *ngIf="isInvalidForm('password')" class="text-danger">Ingresa una contraseña</small>
+            </div>
+
+            <button type="submit" class="btn">Login</button>
+
+            <div class="register-link">
+                <p>no puedes ingresar a tu cuenta?
+                    <a href="#">registrate</a>
+                </p>
+            </div>
+
+            <br />
+
+            <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+            <div id="g_id_onload"
+                data-client_id="681130707428-cpeojla8gl63tfaq7dh9oto91tb4pq7a.apps.googleusercontent.com"
+                data-context="use" 
+                data-ux_mode="popup" 
+                data-itp_support="true"
+                data-callback="handleCredentialResponse">
+            </div>
+            <div class="g_id_signin" 
+                data-type="standard" 
+                data-shape="pill" 
+                data-theme="filled_blue"
+                data-text="signin_with" 
+                data-size="large" 
+                data-logo_alignment="left">
+            </div>
+
+            <script>
+                function handleCredentialResponse(response) {
+        
+                    const body = {id_token: response.credential}
+        
+                   //console.log('id_token',response.credential);
+                   fetch('http://localhost:10001/api/login/google',{
+                    method: 'POST',
+                    headers:{
+                        'Content-Type':'application/json',                
+                    },
+                    body: JSON.stringify(body),
+                   })
+                    .then(resp => resp.json())
+                    .then(resp => {
+                        console.log(resp)
+                    })
+                    .catch(console.warn);
+              
+                }
+              </script>
+        </form>
+
+    </div>
+</body>
