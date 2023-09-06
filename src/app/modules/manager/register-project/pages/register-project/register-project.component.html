@@ -1,21 +1,22 @@
-<div class="form-container">
+<div class="form-container1">
   <button class="close-button" (click)="onClose()">X</button>
-  <h2 class="centrar">Registro de Proyecto</h2>
+  <h2 class="centrar">{{ edit ? 'Edicion de Proyecto' : 'Registro de Proyecto' }}</h2>
   <hr>
-  <form (ngSubmit)="Register()">
-   
+  <form>
     <div class="form-group">
-      <label for="projectName">Título del Proyecto</label>
+      <label class="label1" for="projectName">Título del Proyecto</label>
       <input type="text" id="projectTitle" name="projectTitle" required [(ngModel)]="titulo">
-</div>
-    <div class="form-group">
-      <label for="projectName">Objetivo Principal</label>
-      <textarea id="objetivoPrincipal" name="objetivoPrincipal" required [(ngModel)]="objetivoPrincipal"></textarea>
     </div>
     <div class="form-group">
-      <label for="projectName">Objetivos Específicos </label>
-      <textarea id="objetivosSecundarios" name="objetivosSecundarios" required [(ngModel)]="objetivosSecundarios"></textarea>
+      <label class="label1" for="projectName">Objetivo Principal</label>
+      <textarea class="textarea1" id="objetivoPrincipal" name="objetivoPrincipal" required [(ngModel)]="objetivoPrincipal"></textarea>
     </div>
+    <div class="form-obj" *ngFor="let objetivo of objetivosSecundarios; let i = index; trackBy: trackByIndex">
+      <label for="objetivo-{{i}}">Objetivo Secundario {{i + 1}}</label>
+      <textarea class="textarea1" id="objetivo-{{i}}" name="objetivo-{{i}}" [(ngModel)]="objetivosSecundarios[i]"></textarea>
+      <button type="button" class="btn-eliminarobj" (click)="eliminarObjetivo(i)">−</button>
+    </div>
+    <button type="button" class="btn-addobj" (click)="agregarObjetivo()">Añadir otro objetivo</button>
     <div class="form-group">
       <label for="projectName">Mapa</label>
     </div>
@@ -23,50 +24,51 @@
       <input id="search" class="search-location" type="text" placeholder="Buscar ubicación...">
       <div #mapContainer class="map-container"></div>
       <div class="coordinates-display">Coordenadas Seleccionadas: {{ lat }} , {{ lng }}</div>
-  </div>
+    </div>
 
-  <div class="location-info">
-    <div>
-      Provincia: <input type="text" [value]="provincia">
+    <div class="location-info">
+      <div>
+        Provincia: <input type="text" [value]="provincia">
+      </div>
+      <div>
+        Cantón: <input type="text" [value]="canton">
+      </div>
+      <div>
+        Parroquia: <input type="text" [value]="parroquia">
+      </div>
     </div>
-    <div>
-      Cantón: <input type="text" [value]="canton" >
-    </div>
-    <div>
-      Parroquia: <input type="text" [value]="parroquia" >
-    </div>
-    
-</div>
-
-  
     <div class="form-group">
       <label for="projectName">Párrafo Uno</label>
-      <textarea id="parrafoUno" name="parrafoUno" required [(ngModel)]="parrafoUno"></textarea>
+      <textarea class="textarea1" id="parrafoUno" name="parrafoUno" required [(ngModel)]="parrafoUno"></textarea>
     </div>
     <div class="form-group">
       <label for="projectName">Párrafo dos</label>
-      <textarea id="parrafoDos" name="parrafoDos" required [(ngModel)]="parrafoDos"></textarea>
+      <textarea class="textarea1" id="parrafoDos" name="parrafoDos" required [(ngModel)]="parrafoDos"></textarea>
     </div>
     <div class="form-group">
       <label for="projectName">Párrafo Tres</label>
-      <textarea id="parrafoTres" name="parrafoTres" requirrequired [(ngModel)]="parrafoTres"></textarea>
+      <textarea class="textarea1" id="parrafoTres" name="parrafoTres" requirrequired [(ngModel)]="parrafoTres"></textarea>
     </div>
     <div class="form-group">
       <label for="projectImage">Portada</label>
+      <br>
       <input type="file" id="projectImage" name="projectImage" accept="image/*" (change)="showPreview($event)">
     </div>
-    
+     
     <div class="image-preview">
+      <br>
       <img id="imagePreview" [src]="imagePreviewSrc" alt="Vista previa de la imagen" *ngIf="imagePreviewSrc">
     </div>
-       <br>
+    <br>
     <div class="form-group">
       <label for="projectName">Presupuesto</label>
-      <input type="text" id="presupuesto" name="presupuesto" required [(ngModel)]="presupuesto" (input)="Solonumero($event) " >
+      <input type="text" id="presupuesto" name="presupuesto" required [(ngModel)]="presupuesto"
+        (input)="Solonumero($event) ">
     </div>
     <div class="form-group">
       <label for="projectName">Recolectado</label>
-      <input type="text" id="recolectado" name="recolectado" required [(ngModel)]="recolectado" (input)="Solonumero($event)" >
+      <input type="text" id="recolectado" name="recolectado" required [(ngModel)]="recolectado"
+        (input)="Solonumero($event)">
     </div>
     <div class="form-group">
       <label for="projectDueDate">Fecha de Inicio</label>
@@ -76,13 +78,11 @@
       <label for="projectDueDate">Fecha de Fin</label>
       <input type="date" id="fechaFin" name="fechaFin" required [(ngModel)]="fechaFin">
     </div>
-    
-    
     <div class="button-container">
-      <button  class="submit-button cancelar"  (click)="onClose()" >Cancelar</button>
-      <button  class="submit-button" (click)="onClose()" type="submit">Registrar Proyecto</button>
-    
-  </div>
-
+      <button class="submit-button cancelar" (click)="onClose()">Cancelar</button>
+      <button class="submit-button" (click)="GuardarMapa()" type="submit">
+        {{ edit ? 'Editar Proyecto' : 'Registrar Proyecto' }}
+      </button>
+    </div>
   </form>
 </div>

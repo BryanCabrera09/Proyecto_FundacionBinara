@@ -5,7 +5,11 @@ import { HomePageComponent } from './home-page/pages/home-page/home-page.compone
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./home-page/home-page.module').then(m => m.HomePageModule)
+    loadChildren: () => import('./home-page/home-page.module').then(m => m.HomePageModule),
+  },
+  {
+    path: '',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   }
 ];
 

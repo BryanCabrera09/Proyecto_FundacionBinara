@@ -1,7 +1,7 @@
 <body>
     <div class="background">
         <span class="centering">
-            <section class="articles"> 
+            <section class="articles">
                 <article *ngFor="let project of projects" class="article-container">
                     <div class="image-container">
                         <figure>
@@ -11,64 +11,27 @@
                     </div>
                     <div class="article-preview">
                         <h2>{{ project.titulo }}</h2>
-                        <p *ngIf="project.mapas && project.mapas.length > 0">{{ getProvincia(project.mapas[0].lugar) }}</p>
+                        <p *ngIf="project.mapas && project.mapas.length > 0">{{ getProvincia(project.mapas[0].lugar) }}
+                        </p>
                         <p class="tamañoParrafo">{{ project.parrafoUno }}</p>
                         <a (click)="detailsProject(project._id)" class="read-more negrita">
                             leer más
-                        </a>                        
+                        </a>
                         <div class="action-buttons">
-                            <button class="edit-button" title="Editar">
+                            <button class="edit-button" title="Editar" (click)="editarproyecto(project)">
                                 ✎
                             </button>
-                            <button class="delete-button" title="Eliminar">
-                                🗑
+                            <button class="delete-button" title="Eliminar" (click)="confirmDeleteProject(project)">
+                                <span *ngIf="project.visible">🗑</span>
+                                <span *ngIf="!project.visible">✓</span>
                             </button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="article-container">
-                    <div class="image-container">
-                        <figure>
-                            <img src="https://img.freepik.com/free-photo/pathway-middle-green-leafed-trees-with-sun-shining-through-branches_181624-4539.jpg?w=900&t=st=1687123477~exp=1687124077~hmac=6e8b1735a2cb25be79f248b6a3307a37a15b080dee114565d01704b97d432a80"
-                                alt="Preview" title="Preview" />
-                        </figure>
-                    </div>
-                    <div class="article-preview">
-                        <h2>{{'Proyecto 1' | translate | async}}</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            Praesent in mauris eu tortor porttitor accumsan.
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            Praesent in mauris eu tortor porttitor accumsan.
-                        </p>
-                        <div class="boton">
-                            <button class="btn">
-                                Leer Mas
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="article-container">
-                    <div class="image-container">
-                        <figure>
-                            <img src="https://img.freepik.com/free-photo/pathway-middle-green-leafed-trees-with-sun-shining-through-branches_181624-4539.jpg?w=900&t=st=1687123477~exp=1687124077~hmac=6e8b1735a2cb25be79f248b6a3307a37a15b080dee114565d01704b97d432a80"
-                                alt="Preview" title="Preview" />
-                        </figure>
-                    </div>
-                    <div class="article-preview">
-                        <h2>Proyecto 1</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            Praesent in mauris eu tortor porttitor accumsan.
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            Praesent in mauris eu tortor porttitor accumsan.
-                        </p>
-                        <div class="boton">
-                            <button class="btn">
-                                Leer Mas
-                            </button>
+                            <div *ngIf="isConfirmVisible" class="custom-confirm">
+                                <div class="confirm-content">
+                                    <p>{{ confirmMessage }}</p>
+                                    <button (click)="confirm()">Confirmar</button>
+                                    <button (click)="cancel()">Cancelar</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </article>

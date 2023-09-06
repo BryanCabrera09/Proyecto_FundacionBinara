@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthComponent } from './pages/auth/auth.component';
+import { RegisterActivityComponent } from './pages/register-activity/register-activity.component';
 
 const routes: Routes = [
   {
-    path: 'login',
-    component: AuthComponent
+    path:'activity',
+    component:RegisterActivityComponent
   }
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AuthRoutingModule { }
+export class RegisterActivityRoutingModule { }

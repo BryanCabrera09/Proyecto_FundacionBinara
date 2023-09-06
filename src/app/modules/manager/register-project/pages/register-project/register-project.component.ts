@@ -1,9 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { Proyectos } from 'src/app/core/models/proyectos';
+import { Component, ElementRef, ViewChild, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProyectosService } from 'src/app/core/services/proyectos.service';
 import { Mapas } from 'src/app/core/models/mapas';
 import { Proyectospost } from 'src/app/core/models/proyectospost';
+import { MapasService } from 'src/app/core/services/mapas.service';
 
 declare var google: any;
 
@@ -13,32 +13,58 @@ declare var google: any;
   styleUrls: ['./register-project.component.css']
 })
 export class RegisterProjectComponent {
-
-  titulo: string = 'titulo';
-  objetivoPrincipal: string = 'objetivo';
-  objetivosSecundarios: string[] = ["hola", "hola2"];
-  parrafoUno: string = 'para  ';
-  parrafoDos: string = 'para2';
-  parrafoTres: string = 'para3';
+  //Declaración de datos
+  titulo: string = '';
+  objetivoPrincipal: string = '';
+  objetivosSecundarios: string[] = [''];
+  parrafoUno: string = '';
+  parrafoDos: string = '';
+  parrafoTres: string = '';
   portada: any = "URL_de_la_portada_del_nuevo_proyecto";
-  presupuesto: number = 12;
-  recolectado: number = 129;
+  presupuesto: number = 0;
+  recolectado: number = 0;
+  fechaInicio: Date = new Date("2023-09-01");
+  fechaFin: Date = new Date("2023-09-11T00");
   mapasArray: Mapas[] = [
     {
-      _id: '64e60735c73694d14eb2388e',
+      _id: 'id invalido',
       lugar: 'Lugar 1',
       coorX: '-30.232545',
       coorY: '-179.78456'
     }
   ];
-  fechaInicio: Date = new Date("2023-09-01T00:00:00.000Z");
-  fechaFin: Date = new Date("2023-09-11T00:00:00.000Z");
-
   visible: boolean = true;
 
   proyecto: Proyectospost = new Proyectospost();
+  mapapost: Mapas = new Mapas();
+  proyectoedit: any;
+  edit: boolean = false;
 
-  constructor(private dialogRef: MatDialogRef<RegisterProjectComponent>, private proyectoService: ProyectosService) { }
+  constructor(private dialogRef: MatDialogRef<RegisterProjectComponent>, private proyectoService: ProyectosService, private mapaService: MapasService, @Inject(MAT_DIALOG_DATA) public data: any) {
+    if (data.proyecto != null) {
+      this.proyectoedit = data.proyecto;
+      this.edit = data.editing;
+      this.titulo = data.proyecto.titulo;
+      this.objetivoPrincipal = data.proyecto.objetivoPrincipal;
+      this.objetivosSecundarios = data.proyecto.objetivosSecundarios;
+      this.lat = data.proyecto.mapas[0].coorX;
+      this.lng = data.proyecto.mapas[0].coorY;
+      this.provincia = data.proyecto.mapas[0].lugar.split(';')[0];
+      this.canton = data.proyecto.mapas[0].lugar.split(';')[1];
+      this.parroquia = data.proyecto.mapas[0].lugar.split(';')[2];
+      this.parrafoUno = data.proyecto.parrafoUno;
+      this.parrafoDos = data.proyecto.parrafoDos;
+      this.parrafoTres = data.proyecto.parrafoTres;
+      this.portada = data.proyecto.portada;
+      this.imagePreviewSrc = data.proyecto.portada;
+      this.presupuesto = data.proyecto.presupuesto;
+      this.recolectado = data.proyecto.recolectado;
+      this.fechaInicio = data.proyecto.fechaInicio;
+      this.fechaFin = data.proyecto.fechaFin;
+
+    }
+
+  }
 
   Solonumero(event: any) {
     const input = event.target as HTMLInputElement;
@@ -54,40 +80,30 @@ export class RegisterProjectComponent {
   onClose(): void {
     this.dialogRef.close();
   }
-
+  //Visualizar img
   imagePreviewSrc: string | ArrayBuffer | null = null;
-
   showPreview(event: any): void {
     const input = event.target;
     if (input.files && input.files[0]) {
       const reader = new FileReader();
-
       reader.onload = (e: any) => {
         this.imagePreviewSrc = e.target.result;
-        console.log(e.target.result)
         this.portada = e.target.result;
       };
-
       reader.readAsDataURL(input.files[0]);
     }
   }
-
-
   //Mapa
   @ViewChild('mapContainer', { static: false }) gmap!: ElementRef;
   map: any;
-
   searchBox: any;
-
   lat!: number;
   lng!: number;
   currentMarker: any;
-
   geocoder: any;
   provincia: string = "";
   canton: string = "";
   parroquia: string = "";
-
   mapOptions: any = {
     center: { lat: -2.9007928, lng: -78.9999998 },
     zoom: 15
@@ -100,28 +116,18 @@ export class RegisterProjectComponent {
   mapInitializer() {
     this.map = new google.maps.Map(this.gmap.nativeElement, this.mapOptions);
     this.geocoder = new google.maps.Geocoder();
-
-
-
-    // Agrega un escucha para el evento 'click' del mapa
     this.map.addListener('click', (event: { latLng: { lat: () => number; lng: () => number; }; }) => {
       this.handleMapClick(event);
     });
-
-    // Inicializa el cuadro de búsqueda y lo asocia con el input de búsqueda
     const input = document.getElementById("search") as HTMLInputElement;
     this.searchBox = new google.maps.places.SearchBox(input);
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-    // Escucha el evento de selección del lugar
     this.searchBox.addListener("places_changed", () => {
       const places = this.searchBox.getPlaces();
       console.log(places);
-
       if (places.length == 0) {
         return;
       }
-
       // Para cada lugar, obtiene el icono, el nombre y la ubicación
       const bounds = new google.maps.LatLngBounds();
       places.forEach((place: { geometry: { location: any; viewport: any; }; }) => {
@@ -129,12 +135,10 @@ export class RegisterProjectComponent {
           console.log("Returned place contains no geometry");
           return;
         }
-
         // Captura las coordenadas y las almacena en las propiedades del componente
         const location = place.geometry.location;
         this.lat = location.lat();
         this.lng = location.lng();
-
         // Actualiza el mapa con la ubicación seleccionada
         if (place.geometry.viewport) {
           bounds.union(place.geometry.viewport);
@@ -151,49 +155,53 @@ export class RegisterProjectComponent {
     if (this.currentMarker) {
       this.currentMarker.setMap(null);
     }
-
     // Actualiza las coordenadas con la posición donde el usuario hizo clic
     this.lat = event.latLng.lat();
     this.lng = event.latLng.lng();
-
-    // Añade un nuevo marcador y guarda una referencia a él
     this.currentMarker = new google.maps.Marker({
       position: event.latLng,
       map: this.map
     });
-
     //provincia-canton-parroquia
     this.geocoder.geocode({ 'location': event.latLng }, (results: { address_components: any; }[], status: string) => {
       if (status === 'OK' && results[0]) {
-        // Procesa los resultados para obtener los detalles deseados
-        for (let component of results[0].address_components) {
+        for (let component of results[0].address_components) {// Procesa los resultados para obtener los detalles deseados
           const componentType = component.types;
-
           if (componentType.includes("administrative_area_level_1")) {
-            // Provincia
-            this.provincia = component.long_name;
+            this.provincia = component.long_name;// Provincia
           } else if (componentType.includes("administrative_area_level_2")) {
-            // Cantón
-            this.canton = component.long_name;
+            this.canton = component.long_name;// Cantón
           } else if (componentType.includes("sublocality_level_1")) {
-            // Parroquia (esto puede variar dependiendo del país y la forma en que Google Maps organiza los datos)
-            this.parroquia = component.long_name;
+            this.parroquia = component.long_name; // Parroquia (esto puede variar dependiendo del país y la forma en que Google Maps organiza los datos)
           }
         }
       } else {
         console.error('Error en geocodificación inversa', status);
       }
     });
-    //HASTA AQUI TODOS LOS METODOS ESTAN RELACIONADO CON EL MAPA
-
-
-
-
   }
 
-  Register() {
-    const mapasIds = this.mapasArray.map(mapa => mapa._id!);
-
+  GuardarMapa() {
+    this.mapapost.lugar = this.provincia + ";" + this.canton + ";" + this.parroquia;
+    this.mapapost.coorX = this.lat + "";
+    this.mapapost.coorY = this.lng + "";
+    this.mapaService.createMap(this.mapapost).subscribe(
+      (response: any) => {
+        console.log('Mapa registrado con éxito', response.mapa);
+        let m: Mapas[] = [response.mapa];
+        if (this.edit) {
+          this, this.Editar(m);
+        } else {
+          this.Register(m);
+        }
+      },
+      (error) => {
+        console.error('Error al registrar el mapa', error);
+      }
+    );
+  }
+  
+  Datos(): void {
     this.proyecto.titulo = this.titulo;
     this.proyecto.objetivoPrincipal = this.objetivoPrincipal;
     this.proyecto.objetivosSecundarios = this.objetivosSecundarios;
@@ -202,22 +210,61 @@ export class RegisterProjectComponent {
     this.proyecto.parrafoTres = this.parrafoTres;
     this.proyecto.presupuesto = this.presupuesto;
     this.proyecto.recolectado = this.recolectado;
-    this.proyecto.mapas = mapasIds;
     this.proyecto.portada = this.portada;
     this.proyecto.visible = this.visible;
     this.proyecto.fechaInicio = this.fechaInicio;
     this.proyecto.fechaFin = this.fechaFin;
+  }
 
+  Editar(mapa: Mapas[]) {
+    console.log("editar " + mapa[0].lugar);
+    this.mapasArray = mapa;
+    const mapasIds = this.mapasArray.map(mapa => mapa._id!);
+    this.Datos();
+    this.proyecto.mapas = mapasIds;
+    this.proyectoService.editProject(this.proyectoedit._id, this.proyecto).subscribe({
+      next: response => {
+        console.log('Proyecto actualizado con éxito!', response);
+        window.location.reload();
+      },
+      error: error => {
+        console.error('Error al actualizar el proyecto:', error);
+      },
+      complete: () => {
+        console.log('La operación ha completado');
+      }
+    });
+  }
+
+  Register(id: Mapas[]) {
+    this.mapasArray = id;
+    const mapasIds = this.mapasArray.map(mapa => mapa._id!);
+    console.log(id);
+    this.Datos();
+    this.proyecto.mapas = mapasIds;
     this.proyectoService.createProject(this.proyecto).subscribe(
       (response) => {
         console.log('Proyecto registrado con éxito', response);
         this.onClose();
+        window.location.reload();
       },
       (error) => {
         console.error('Error al registrar el proyecto', error);
         console.log(this.proyecto.portada)
       }
     );
-}
+  }
 
+  agregarObjetivo() {
+    this.objetivosSecundarios.push('');
+  }
+
+  eliminarObjetivo(index: number) {
+    if (this.objetivosSecundarios.length > 1) {
+      this.objetivosSecundarios.splice(index, 1);
+    }
+  }
+  trackByIndex(index: number): number {
+    return index;
+  }
 }

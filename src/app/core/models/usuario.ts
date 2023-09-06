@@ -6,4 +6,6 @@ export class Usuario {
     rol?: string;
     estado?: boolean;
     google?: boolean;
+    authStatus? : string;
+    
 }

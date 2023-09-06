@@ -1,0 +1,72 @@
+<div class="form-container1">
+    <button class="close-button" (click)="onClose()">X</button>
+    <h2 class="centrar">Registro de Actividad</h2>
+    <hr>
+    <form>
+        <div class="form-group">
+            <label class="label1" for="projectName">Título de la actividad</label>
+            <input type="text" id="Title" name="Title" required>
+        </div>
+        <div class="form-group">
+            <label class="label1" for="projectName">Descripción</label>
+            <textarea class="textarea1" id="Descripcion" name="Descripcion" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="projectName">Mapa</label>
+        </div>
+        <div class="map-wrapper">
+            <input id="search" class="search-location" type="text" placeholder="Buscar ubicación...">
+            <div #mapContainer class="map-container"></div>
+            <div class="coordinates-display">Coordenadas Seleccionadas: {{ lat }} , {{ lng }}</div>
+        </div>
+
+        <div class="location-info">
+            <div>
+                Provincia: <input type="text" [value]="provincia">
+            </div>
+            <div>
+                Cantón: <input type="text" [value]="canton">
+            </div>
+            <div>
+                Parroquia: <input type="text" [value]="parroquia">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="projectName">Numero de área</label>
+            <input type="text" id="recolectado" name="recolectado" required 
+              (input)="Solonumero($event)">
+          </div>
+          <div class="form-group">
+            <label for="projectName">Numero de personas beneficiarias</label>
+            <input type="text" id="recolectado" name="recolectado" required 
+              (input)="Solonumero($event)">
+          </div>
+          <div class="form-group">
+            <label for="projectName">Numero de mujeres beneficiarias</label>
+            <input type="text" id="recolectado" name="recolectado" required 
+              (input)="Solonumero($event)">
+          </div>
+          <div class="form-group">
+            <label for="projectName">Numero de niños y niñas beneficiarias</label>
+            <input type="text" id="recolectado" name="recolectado" required 
+              (input)="Solonumero($event)">
+          </div>
+          <div class="form-group">
+            <label for="projectName">Numero de adolecentes beneficiarias</label>
+            <input type="text" id="recolectado" name="recolectado" required 
+              (input)="Solonumero($event)">
+          </div>
+          <div class="form-group">
+            <label for="projectName">Numero de adultos beneficiarias</label>
+            <input type="text" id="recolectado" name="recolectado" required 
+              (input)="Solonumero($event)">
+          </div>
+          <br>
+          <div class="button-container">
+            <button  class="submit-button cancelar"  (click)="onClose()" >Cancelar</button>
+            <button  class="submit-button" (click)="onClose()" type="submit">Registrar Proyecto</button>
+          
+        </div>
+    </form>
+
+</div>

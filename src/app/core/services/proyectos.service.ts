@@ -18,7 +18,7 @@ export class ProyectosService {
     return this.http.post(this.projectsUrl , proyecto);
   }
 
-  editProject(id: number, proyecto: Proyectos): Observable<any> {   /* Editar Proyectos */
+  editProject(id: string, proyecto: Proyectospost): Observable<any> {   /* Editar Proyectos */
     return this.http.put(`${this.projectsUrl}/${id}`, proyecto);
   }
 
@@ -36,6 +36,11 @@ export class ProyectosService {
 
   deleteProject(id: number) {   /* Eliminar proyectos*/
     return this.http.delete(`${this.projectsUrl}/${id}`)
+  }
+  
+  activarProyecto(id: number): Observable<any> {
+    // Realiza la solicitud PUT para activar el proyecto
+    return this.http.put(`${this.projectsUrl}/${id}/activar`, {});
   }
 
 }
