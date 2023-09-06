@@ -42,28 +42,25 @@ export class AuthComponent implements OnInit {
   }
 
   logIn() {
-    
     this.markAllFieldsAsTouched();
-  
     if (this.formLogIn.valid) {
-      // Access the form values and set them in the usuario object
-      this.usuario.correo = this.formLogIn.get('username')?.value;
-      this.usuario.password = this.formLogIn.get('password')?.value;
-      console.log(this.usuario)
-  
-      this.loginService.validateLoginDetails(this.usuario).subscribe(
-        responseData => {
-          const authorizationHeader = responseData.headers.get('x-token'); // to obtain JWT
-          if (authorizationHeader) {
-            window.sessionStorage.setItem('Authorization', authorizationHeader);
-            const decodedToken: any = jwt_decode(authorizationHeader); // Decode the JWT
-            const role = decodedToken.authorities; // Assuming the role is stored in the 'role' field of the JWT payload
-            localStorage.setItem("roles", role)
-            console.log(role)
+      this.loginService.login(this.formLogIn.get('username')?.value, this.formLogIn.get('password')?.value).subscribe(
+        (response) => {
+          console.log(response);
+          const xToken = response.headers.get('X-Token');
+          console.log("JWT: " + xToken);
+          if (xToken) {
+            window.sessionStorage.setItem('Authorization', xToken);
+            const decodedToken: any = jwt_decode(xToken); // Decode the JWT
+            const role = decodedToken.authorities; // Assuming the role is stored in the 'authorities' field of the JWT payload
+            localStorage.setItem("roles", role);
+            console.log(role);
           }
-        });
+        }
+      );
     }
   }
+  
   
 
 
