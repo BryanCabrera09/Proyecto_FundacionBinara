@@ -2,6 +2,13 @@ import { Component, ElementRef, ViewChild, Inject } from '@angular/core';
 import { Mapas } from 'src/app/core/models/mapas';
 import { MapasService } from 'src/app/core/services/mapas.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { Usuario } from 'src/app/core/models/usuario';
+import { Proyectos } from 'src/app/core/models/proyectos';
+import { Actividades } from 'src/app/core/models/actividades';
+import { ActividadesService } from 'src/app/core/services/actividades.service';
+import { Proyectospost } from 'src/app/core/models/proyectospost';
+import { ProyectosService } from 'src/app/core/services/proyectos.service';
 
 declare var google: any;
 
@@ -12,11 +19,62 @@ declare var google: any;
 })
 export class RegisterActivityComponent {
 
-  constructor(private dialogRef: MatDialogRef<RegisterActivityComponent>,private mapaService: MapasService) { }
+  titulo: string = 's';
+  descripcion: string = 's';
+  mapasArray: Mapas[] = [
+    {
+      _id: 'id invalido',
+      lugar: 'Lugar 1',
+      coorX: '-30.232545',
+      coorY: '-179.78456'
+    }
+  ];
+  proyectoArray: Proyectospost[] = [];
+  usuarioArray: Usuario[]=[
+    {
+    authStatus: "64f80835243be9174d1904a6"
+    }
+];
+    
+  num_areas: number = 0;
+  num_personas_beneficiarias: number = 0;
+  num_mujeres_beneficiarias: number = 0;
+  num_ninos_ninas_beneficiarias: number = 0;
+  num_adolescentes_beneficiarios: number = 0;
+  num_adultos_beneficiarios: number = 0;
+  visible: boolean = true;
+
+
+  actividad: Actividades = new Actividades();
+  mapapost: Mapas = new Mapas();
+  proyectoId: string;
+
+  constructor(private dialogRef: MatDialogRef<RegisterActivityComponent>, @Inject(MAT_DIALOG_DATA) private data: any, private route: ActivatedRoute, private proyectosService: ProyectosService, private mapaService: MapasService, private actividadesService: ActividadesService) { this.proyectoId = data.proyectoId;  }
   onClose(): void {
     this.dialogRef.close();
+
   }
-  mapapost: Mapas = new Mapas();
+  ngOnInit(): void {
+    if (this.proyectoId) {
+      this.obtenerDetallesDelProyecto(this.proyectoId);
+    }
+  }
+
+
+  obtenerDetallesDelProyecto(proyectoId: string) {
+    this.proyectosService.searchProject(proyectoId).subscribe({
+      next: (data: any) => {
+        console.log(data.proyecto)
+        let proyecto = new Proyectospost();
+        proyecto.id = data.proyecto._id;
+        this.proyectoArray[0] = proyecto;
+      },
+      error: error => {
+        console.error('Error obteniendo el proyecto:', error);
+      }
+    });
+  }
+
   //Mapa
   @ViewChild('mapContainer', { static: false }) gmap!: ElementRef;
   map: any;
@@ -113,7 +171,7 @@ export class RegisterActivityComponent {
       (response: any) => {
         console.log('Mapa registrado con éxito', response.mapa);
         let m: Mapas[] = [response.mapa];
-
+        this.Register(m);
       },
       (error) => {
         console.error('Error al registrar el mapa', error);
@@ -131,5 +189,34 @@ export class RegisterActivityComponent {
     input.value = value;
   }
 
+  Datos(): void {
+    this.actividad.titulo = this.titulo;
+    this.actividad.descripcion = this.descripcion;
+    this.actividad.num_personas_beneficiarias = this.num_personas_beneficiarias;
+    this.actividad.num_mujeres_beneficiarias = this.num_mujeres_beneficiarias;
+    this.actividad.num_niños_niñas_beneficiarias = this.num_ninos_ninas_beneficiarias;
+    this.actividad.num_adoloscentes_beneficiarios = this.num_adolescentes_beneficiarios;
+    this.actividad.num_adultos_beneficiarios = this.num_adultos_beneficiarios;
+    this.actividad.visible = this.visible;
+    this.actividad.proyecto = this.proyectoArray[0];
+    this.actividad.usuario = this.usuarioArray[0].authStatus; 
+  }
 
+  Register(id: Mapas[]) {
+    this.mapasArray = id;
+    const mapasIds = this.mapasArray.map(mapa => mapa._id!);
+    console.log(id);
+    this.Datos();
+    this.actividad.mapas = mapasIds;
+    this.actividadesService.createActivity(this.actividad).subscribe(
+      (response) => {
+        console.log('Actividad registrado con éxito', response);
+        this.onClose();
+        window.location.reload();
+      },
+      (error) => {
+        console.error('Error al registrar la Actividad', error);
+      }
+    );
+  }
 }

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { RegisterActivityComponent } from 'src/app/modules/manager/register-activity/pages/register-activity/register-activity.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Proyectospost } from 'src/app/core/models/proyectospost';
 
 declare var google: any;
 
@@ -79,11 +80,12 @@ export class VerProyectoComponent {
         console.error("Datos del proyecto o mapas no disponibles o en formato incorrecto");
     }
 }
-abrirRegistro() {
+abrirRegistrodeactividad(idProyecto: number) {
   this.dialog.open(RegisterActivityComponent, {
     width: '800px',
     hasBackdrop: false,
     height: '600px',
+    data: { proyectoId: idProyecto}
   });
 }
 
