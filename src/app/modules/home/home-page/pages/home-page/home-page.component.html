@@ -1,86 +1,25 @@
 <body>
 
+    <br>
     <!-- SABIAS -->
     <div class="sabias container">
-        <h3>Sabías que...?</h3>
+        <h3>{{'Sabías que...?' | translate | async}}</h3>
         <div class="sabias">
-            <blockquote>Aunque se conoce como “Tierra”, nuestro planeta es más de 70% agua y casi 30% tierra. Por eso
-                también recibe el nombre de “planeta azul”, ya que, desde el espacio, se ve como una gran masa de este
-                color. De toda esta agua, el 96'5% está en los océanos y el otro 3'5% en forma de agua dulce y hielo.
-            </blockquote>
-            <p>- Autor desconocido</p>
+            <blockquote>{{sabias | translate | async}}</blockquote>
+            <p>{{'- Autor desconocido' | translate | async}}</p>
         </div>
     </div>
-
-    <div class="seccion container">
-        <h2> Proyectos en Marcha</h2>
-
-        <span class="background">
-            <span class="centering">
-                <section class="articles">
-                    <article class="article-container">
-                        <div class="image-container">
-                            <figure>
-                                <img src="https://img.freepik.com/free-photo/pathway-middle-green-leafed-trees-with-sun-shining-through-branches_181624-4539.jpg?w=900&t=st=1687123477~exp=1687124077~hmac=6e8b1735a2cb25be79f248b6a3307a37a15b080dee114565d01704b97d432a80"
-                                    alt="Preview" title="Preview" />
-                            </figure>
-                        </div>
-                        <div class="article-preview">
-                            <h2>Proyecto 1</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                                Praesent in mauris eu tortor porttitor accumsan.
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                                Praesent in mauris eu tortor porttitor accumsan.
-                            </p>
-                            <button class="btn">
-                                Leer Mas
-                            </button>
-                        </div>
-                    </article>
-
-                    <article *ngFor="let project of projects" class="article-container">
-                        <div class="image-container">
-                            <figure>
-                                <img [src]="project.portada" alt="Preview" title="Preview" />
-                            </figure>
-                        </div>
-                        <div class="article-preview">
-                            <h2>{{ project.titulo }}</h2>
-                            <p>
-                                {{ project.parrafoUno }}
-                                <a (click)="goToArticle(project._id)" class="read-more negrita">
-                                    leer mas
-                                </a>
-                            </p>
-                        </div>
-                    </article>
-                </section>
-            </span>
-        </span>
-
-        >>>>>>> master
-    </div>
+    <br>
 
     <!-- QUIENES SOMOS -->
     <div class="quienes-somos">
         <div class="container somos">
             <div class="info-nosotros">
                 <a>
-                    <h2>QUIENES SOMOS</h2>
-                    <p>Fundación BINARA es una persona jurídica de derecho privado, sin fines de lucro, con
-                        patrimonio propio, administración autónoma, constituida en 2022 ante el Ministerio
-                        de Agua, Ambiente y Transición Ecológica del Ecuador. <br>
-                        En alianza con empresas privadas, donantes particulares, agencias de cooperación y
-                        gobiernos nacionales y locales potenciamos el trabajo de organizaciones sin fines de
-                        lucro; micro, pequeñas y medianas empresas; fondos de agua; redes, asociaciones y
-                        cooperativas de la economía popular y solidaria; pequeños y medianos productores
-                        agrícolas; organizaciones indígenas; y, colectivos urbanos mediante la canalización de
-                        recursos monetarios y no monetarios para proteger, conservar y restaurar ecosistemas
-                        y servicios ecosistémicos clave para las poblaciones que dependen de ellos.
-                    </p>
+                    <h2>{{'QUIENES SOMOS' | translate | async}}</h2>
+                    <p>{{quienes_somos_parrU | translate | async}} <br><br>{{quienes_somos_parrD | translate | async}}
+                        <p>
                 </a>
-
             </div>
             <div class="nosotros-img">
                 <img src="https://www.pngplay.com/wp-content/uploads/6/Save-Environment-PNG-Clipart-Background.png"
@@ -92,41 +31,29 @@
 
     <!-- SOBRE NOSOTROS -->
     <section class="nosotros">
-        <h2>QUE HACEMOS</h2>
+        <h2>{{'QUE HACEMOS' | translate | async}}</h2>
         <div class="container about-us">
 
             <div class="mision">
-                <h3>MISIÓN</h3>
-                <p>Proteger la biodiversidad del Ecuador y a las comunidades que dependen de ella.
-                    Para eso, trabajamos en conjunto con las y los pobladores locales de los ecosistemas
-                    más importantes para la vida en Ecuador en la búsqueda de medios de vida dignos y
-                    sustentables para sus familias. Su desarrollo integral y sustentable es nuestra prioridad.
-                    Perseguimos fines sociales y no participamos, bajo ningún concepto, en asuntos de
-                    política partidista o religiosa, coordinamos nuestras actividades con otras personas
-                    naturales o jurídicas, nacionales y extranjeras, bajo los principios de libre asociación y
-                    autodeterminación.</p>
+                <h3>{{'MISIÓN' | translate | async}}</h3>
+                <p>{{mision | translate | async}}</p>
             </div>
             <div class="vision">
-                <h3>VISIÓN</h3>
-                <p>Proteger, conservar y restaurar ecosistemas y servicios ecosistémicos clave
-                    para las poblaciones que dependen de ellos, mediante la canalización de recursos
-                    monetarios y no monetarios a través de alianzas con empresas privadas, donantes
-                    particulares, agencias de cooperación y gobiernos nacionales y locales.</p>
+                <h3>{{'VISIÓN' | translate | async}}</h3>
+                <p>{{vision | translate | async}}</p>
             </div>
             <div class="nosotros">
-                <h3>NOSOTROS</h3>
-                <p>Trabajamos incansablemente para promover la sostenibilidad ambiental y el bienestar de
-                    las comunidades que interactúan con el entorno natural.<br>Nuestra labor abarca diversas
-                    iniciativas, desde proyectos de reforestación hasta la implementación de prácticas agrícolas
-                    sostenibles y la conservación de ecosistemas acuáticos.</p>
+                <h3>{{'SOBRE NOSOTROS' | translate | async}}</h3>
+                <p>{{nosotros | translate | async}}</p>
             </div>
         </div>
     </section>
     <br>
 
     <div class="nota">
-        <h2> Proyectos en Marcha</h2>
-        <span>Sembrando esperanza y vida en cada árbol que crece, para un mundo más verde y sostenible!</span>
+        <h2>{{'Proyectos en Marcha' | translate | async}}</h2>
+        <span>{{'Sembrando esperanza y vida en cada árbol que crece, para un mundo más verde y sostenible!' | translate
+            | async}}</span>
     </div>
 
     <div class="background" [style.background-image]="selectedLink">
@@ -149,7 +76,7 @@
                         </p>
                         <div class="boton">
                             <button class="btn">
-                                Leer Mas
+                                {{'leer mas' | translate | async}}
                             </button>
                         </div>
                     </div>
@@ -172,7 +99,7 @@
                         </p>
                         <div class="boton">
                             <button class="btn">
-                                Leer Mas
+                                {{'leer mas' | translate | async}}
                             </button>
                         </div>
                     </div>
@@ -195,7 +122,7 @@
                         </p>
                         <div class="boton">
                             <button class="btn">
-                                Leer Mas
+                                {{'leer mas' | translate | async}}
                             </button>
                         </div>
                     </div>
@@ -208,11 +135,11 @@
                         </figure>
                     </div>
                     <div class="article-preview">
-                        <h2>{{ project.titulo }}</h2>
-                        <p>
-                            {{ project.parrafoUno }}
+                        <h2 *ngIf="project.titulo">{{ project.titulo | translate | async }}</h2>
+                        <p *ngIf="project.parrafoUno">
+                            {{ project.parrafoUno | translate | async}}
                             <a (click)="goToArticle(project._id)" class="read-more negrita">
-                                leer mas
+                                {{'leer mas' | translate | async}}
                             </a>
                         </p>
                     </div>
@@ -225,7 +152,7 @@
     <!-- BLOGS -->
     <div class="container seccion-inferior">
         <div class="blog">
-            <h2>BLOG</h2>
+            <h2>{{'BLOG' | translate | async}}</h2>
             <article class="entrada-blog">
                 <div class="imagen">
                     <picture>
@@ -236,8 +163,10 @@
                 </div>
                 <div class="texto-entrada">
                     <a>
-                        <h4>El comercio como oportunidad de negocio</h4>
-                        <p>Escrito el: <span>26/12/21</span> Por: <span>Erick Ochoa Tocachi</span></p>
+                        <h4>{{'El comercio como oportunidad de negocio' | translate | async}}</h4>
+                        <p>{{'Escrito el: ' | translate | async}}<span>26/12/21</span> {{'Por:' | translate | async}}
+                            <span>Erick Ochoa Tocachi</span>
+                        </p>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde, voluptatem eius
                             sequi
                             in beatae
@@ -256,8 +185,10 @@
                 </div>
                 <div class="texto-entrada">
                     <a>
-                        <h4>El rincón del café</h4>
-                        <p>Escrito el: <span>26/12/21</span> Por: <span>Erick Ochoa Tocachi</span></p>
+                        <h4>{{'El rincón del café' | translate | async}}</h4>
+                        <p>{{'Escrito el: ' | translate | async}}<span>26/12/21</span> {{'Por:' | translate | async}}
+                            <span>Erick Ochoa Tocachi</span>
+                        </p>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde, voluptatem eius
                             sequi
                             in beatae
@@ -277,9 +208,9 @@
 
                 <div class="texto-entrada">
                     <a>
-                        <h4>Importancia de las rosas ecuatorianas</h4>
-                        <p>Escrito el: <span>26/12/21</span> Por: <span>Erick Ochoa Tocachi</span></p>
-
+                        <h4>{{'Importancia de las rosas ecuatorianas' | translate | async}}</h4>
+                        <p>{{'Escrito el: ' | translate | async}}<span>26/12/21</span> {{'Por:' | translate | async}}
+                            <span>Erick Ochoa Tocachi</span></p>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde, voluptatem eius
                             sequi
                             in beatae

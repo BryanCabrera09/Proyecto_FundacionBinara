@@ -1,6 +1,16 @@
 <div class="container">
     <div class="content">
-        <div class="card card-chart">
+
+        <div>
+            <p-chart type="bar" [data]="chartData">
+              <!-- <p-legend position="top"></p-legend>
+              <p-tooltip shared="true"></p-tooltip>
+              <p-axis type="category" position="bottom"></p-axis>
+              <p-axis type="linear" position="left"></p-axis> -->
+            </p-chart>
+          </div>
+
+       <!-- <div class="card card-chart">
             <div class="card-header">
                 <h5 class="card-category">Total Shipments</h5>
                 <h2 class="card-title">Performance</h2>
@@ -64,7 +74,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- <div class=" row">
             <div class=" col-lg-6 col-md-12">
                 <div class=" card card-tasks">

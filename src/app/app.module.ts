@@ -11,6 +11,9 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
+/* GtagImport */
+import { GtagModule } from 'angular-gtag';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     FormsModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    GtagModule.forRoot({ trackingId: 'G-6PGZ63FVGS', trackPageviews: true, }),
   ],
   providers: [
     LoadScriptService

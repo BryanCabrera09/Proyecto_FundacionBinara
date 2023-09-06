@@ -8,16 +8,17 @@
 
             <ul class="links">
                 <li><a href="#" (click)="changeBackground('Home')">Home</a></li>
-                <li><a href="#" (click)="changeBackground('Nosotros')">Nosotros</a></li>
-                <li><a (click)="goToProjects(); changeBackground('Proyectos')">Proyectos</a></li>
-                <li><a href="#" (click)="changeBackground('Anuncios')">Anuncios</a></li>
-                <li><a href="#" (click)="changeBackground('Blog')">Blog</a></li>
-                <li><a href="#" (click)="changeBackground('Contactanos')">Contactanos</a></li>
-                <li><a href="#" (click)="changeBackground('Involúcrate')">Involúcrate</a></li>
-                <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">Estadisticas</a></li>
+                <li><a href="#" (click)="changeBackground('Nosotros')">{{'Sobre Nosotros' | translate | async}}</a></li>
+                <li><a (click)="goToProjects(); changeBackground('Proyectos')">{{'Proyectos' | translate | async}}</a>
+                </li>
+                <li><a href="#" (click)="changeBackground('Anuncios')">{{'Anuncios' | translate | async}}</a></li>
+                <li><a href="#" (click)="changeBackground('Blog')">{{'Blog' | translate | async}}</a></li>
+                <li><a href="#" (click)="changeBackground('Contactanos')">{{'Contactanos' | translate | async}}</a></li>
+                <li><a href="#" (click)="changeBackground('Involúcrate')">{{'Involúcrate' | translate | async}}</a></li>
+                <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">{{'Estadisticas' | translate | async}}</a></li>
             </ul>
 
-            <button class="log-in">Log In</button>
+            <button class="log-in">{{'Log In' | translate | async}}</button>
 
             <div class="toggle_btn">
                 <i class='bx bx-menu' id="menu-icon"></i>
@@ -27,15 +28,15 @@
 
         <div class="dropdown_menu">
             <li><a href="#" (click)="changeBackground('Home')">Home</a></li>
-            <li><a href="#" (click)="changeBackground('Nosotros')">Nosotros</a></li>
-            <li><a href="#" (click)="changeBackground('Proyectos')">Proyectos</a></li>
-            <li><a (click)="goToProjects(); changeBackground('Proyectos')">Proyectos</a></li>
-            <li><a href="#" (click)="changeBackground('Anuncios')">Anuncios</a></li>
-            <li><a href="#" (click)="changeBackground('Blog')">Blog</a></li>
-            <li><a href="#" (click)="changeBackground('Contactanos')">Contactanos</a></li>
-            <li><a href="#" (click)="changeBackground('Involúcrate')">Involúcrate</a></li>
-            <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">Estadisticas</a></li>
-            <li><button class="log-in">Log In</button></li>
+            <li><a href="#" (click)="changeBackground('Nosotros')">{{'Sobre Nosotros' | translate | async}}</a></li>
+            <li><a (click)="goToProjects(); changeBackground('Proyectos')">{{'Proyectos' | translate | async}}</a>
+            </li>
+            <li><a href="#" (click)="changeBackground('Anuncios')">{{'Anuncios' | translate | async}}</a></li>
+            <li><a href="#" (click)="changeBackground('Blog')">{{'Blog' | translate | async}}</a></li>
+            <li><a href="#" (click)="changeBackground('Contactanos')">{{'Contactanos' | translate | async}}</a></li>
+            <li><a href="#" (click)="changeBackground('Involúcrate')">{{'Involúcrate' | translate | async}}</a></li>
+            <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">{{'Estadisticas' | translate | async}}</a></li>
+            <li><button class="log-in">{{'Log In' | translate | async}}</button></li>
         </div>
 
     </header>

@@ -2,7 +2,7 @@
     <section class="footer-top-wrapper">
         <img class="logo" src="assets/img/logo_footer.png" title='Fundacion Binara' alt='Logo' />
         <section class='footer-top'>
-            <h2>Social</h2>
+            <h2>{{'Social' | translate | async}}</h2>
             <div class="backgroud">
                 <ul class="social-media-buttons">
                     <li>
@@ -41,7 +41,7 @@
         </section>
         <section>
             <menu>
-                <h2>Contacto</h2>
+                <h2>{{'Contacto' | translate | async}}</h2>
                 <li>
                     <i class="fa-solid fa-location-dot"></i>
                     <a> Luis Pasteur 2-30 y Copérnico.<br>Cuenca, Ecuador</a>
@@ -60,34 +60,71 @@
         </section>
         <section>
             <menu>
-                <h2>Accciones</h2>
+                <h2>{{'Accciones' | translate | async}}</h2>
                 <li>
-                    <a>Contáctanos</a>
+                    <a>{{'Contáctanos' | translate | async}}</a>
                 </li>
                 <li>
-                    <a>Suscríbete</a>
+                    <a>{{'Suscríbete' | translate | async}}</a>
                 </li>
                 <li>
-                    <a>Donaciones</a>
+                    <a>{{'Donaciones' | translate | async}}</a>
                 </li>
             </menu>
         </section>
         <section>
             <menu>
-                <h2>Menu Rapido</h2>
+                <h2>{{'Menu Rapido' | translate | async}}</h2>
                 <li>
-                    <a>Blog</a>
+                    <a>{{'Blog' | translate | async}}</a>
                 </li>
                 <li>
-                    <a>About Us</a>
+                    <a>{{'About Us' | translate | async}}</a>
                 </li>
                 <li>
-                    <a>Contact</a>
+                    <a> {{'Contact' | translate | async}}</a>
                 </li>
             </menu>
         </section>
+        <section>
+            <!-- <div class="menu">
+                <div class="menu-language">
+                    <button class="menu-language-btn ripple" [cdkMenuTriggerFor]="LanguageOverlay">
+                        <img [src]="'assets/flags/' + selectedLanguage.flag + '.png'" alt="flag" class="flag">
+                    </button>
+                </div>
+            </div> -->
+
+            <mat-form-field appearance="fill">
+                <mat-label>{{'Idioma' | translate | async}}</mat-label>
+                <mat-select [(ngModel)]="translator.lang" name="language" (selectionChange)="onChange()">
+                    <mat-option *ngFor="let language of languages" [value]="language.flag">
+                        {{language.language | translate | async}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </section>
     </section>
     <section class="footer-bottom">
-        <small>©2023 Fundación Binara. Todos los derechos reservados. </small>
+        <small>{{'©2023 Fundación Binara. Todos los derechos reservados. ' | translate | async}}</small>
     </section>
 </footer>
+
+<ng-template #LanguageOverlay>
+    <div class="overlay overlay-language overlay-fall" cdkMenu>
+        <!-- <ul>
+            <li *ngFor="let lang of languages" [value]="lang.flag" cdkMenuItem>
+                <img [src]="'assets/flags/' + lang.flag + '.png'" alt="flag">
+                <span>{{lang.language}}</span>
+            </li>
+        </ul> -->
+        <mat-form-field appearance="fill">
+            <mat-label>Favorite food</mat-label>
+            <mat-select [(ngModel)]="translator.lang" name="language" (selectionChange)="onChange()">
+                <mat-option *ngFor="let language of languages" [value]="language.flag">
+                    {{language.language}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</ng-template>
