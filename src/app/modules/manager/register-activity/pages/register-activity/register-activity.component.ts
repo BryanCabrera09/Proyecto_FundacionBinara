@@ -4,7 +4,6 @@ import { MapasService } from 'src/app/core/services/mapas.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Usuario } from 'src/app/core/models/usuario';
-import { Proyectos } from 'src/app/core/models/proyectos';
 import { Actividades } from 'src/app/core/models/actividades';
 import { ActividadesService } from 'src/app/core/services/actividades.service';
 import { Proyectospost } from 'src/app/core/models/proyectospost';
@@ -23,19 +22,23 @@ export class RegisterActivityComponent {
   descripcion: string = 's';
   mapasArray: Mapas[] = [
     {
-      _id: 'id invalido',
-      lugar: 'Lugar 1',
+      _id: '64e60735c73694d14eb2388e',
+      lugar: 'AZUAY;SANTA ISABEWL;CUENCA',
       coorX: '-30.232545',
       coorY: '-179.78456'
     }
   ];
-  proyectoArray: Proyectospost[] = [];
-  usuarioArray: Usuario[]=[
+  proyectoArray: Proyectospost[] = [
     {
-    authStatus: "64f80835243be9174d1904a6"
+      id: 'id invalido',
     }
-];
-    
+  ];
+  usuarioArray: Usuario[] = [
+    {
+      authStatus: "64f80835243be9174d1904a6"
+    }
+  ];
+
   num_areas: number = 0;
   num_personas_beneficiarias: number = 0;
   num_mujeres_beneficiarias: number = 0;
@@ -49,7 +52,7 @@ export class RegisterActivityComponent {
   mapapost: Mapas = new Mapas();
   proyectoId: string;
 
-  constructor(private dialogRef: MatDialogRef<RegisterActivityComponent>, @Inject(MAT_DIALOG_DATA) private data: any, private route: ActivatedRoute, private proyectosService: ProyectosService, private mapaService: MapasService, private actividadesService: ActividadesService) { this.proyectoId = data.proyectoId;  }
+  constructor(private dialogRef: MatDialogRef<RegisterActivityComponent>, @Inject(MAT_DIALOG_DATA) private data: any, private route: ActivatedRoute, private proyectosService: ProyectosService, private mapaService: MapasService, private actividadesService: ActividadesService) { this.proyectoId = data.proyectoId; }
   onClose(): void {
     this.dialogRef.close();
 
@@ -64,16 +67,23 @@ export class RegisterActivityComponent {
   obtenerDetallesDelProyecto(proyectoId: string) {
     this.proyectosService.searchProject(proyectoId).subscribe({
       next: (data: any) => {
-        console.log(data.proyecto)
+        console.log(data.proyecto);
         let proyecto = new Proyectospost();
         proyecto.id = data.proyecto._id;
-        this.proyectoArray[0] = proyecto;
+        if (proyecto.id !== undefined) {
+          this.proyectoArray[0] = proyecto;
+          this.actividad.proyecto = [proyecto.id];
+          console.log([proyecto.id])
+        } else {
+          console.error('El ID del proyecto es undefined.');
+        }
       },
       error: error => {
         console.error('Error obteniendo el proyecto:', error);
       }
     });
   }
+
 
   //Mapa
   @ViewChild('mapContainer', { static: false }) gmap!: ElementRef;
@@ -198,8 +208,10 @@ export class RegisterActivityComponent {
     this.actividad.num_adoloscentes_beneficiarios = this.num_adolescentes_beneficiarios;
     this.actividad.num_adultos_beneficiarios = this.num_adultos_beneficiarios;
     this.actividad.visible = this.visible;
-    this.actividad.proyecto = this.proyectoArray[0];
-    this.actividad.usuario = this.usuarioArray[0].authStatus; 
+    if (this.usuarioArray[0].authStatus !== undefined) {
+
+      this.actividad.usuario = [this.usuarioArray[0].authStatus]
+    }
   }
 
   Register(id: Mapas[]) {

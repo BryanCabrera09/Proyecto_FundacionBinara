@@ -72,12 +72,12 @@
     </div>
     <div class="form-group">
       <label for="projectDueDate">Fecha de Inicio</label>
-      <input type="date" id="fechaInicio" name="fechaInicio" required [(ngModel)]="fechaInicio">
-    </div>
+      <input type="date" id="fechaInicio" name="fechaInicio" required [ngModel]="fechaInicio | date:'yyyy-MM-dd'" (ngModelChange)="fechaInicio=$event">
+    </div> 
     <div class="form-group">
       <label for="projectDueDate">Fecha de Fin</label>
-      <input type="date" id="fechaFin" name="fechaFin" required [(ngModel)]="fechaFin">
-    </div>
+      <input type="date" id="fechaFin" name="fechaFin" required [ngModel]="fechaFin | date:'yyyy-MM-dd'" (ngModelChange)="fechaFin=$event">
+    </div>    
     <div class="button-container">
       <button class="submit-button cancelar" (click)="onClose()">Cancelar</button>
       <button class="submit-button" (click)="GuardarMapa()" type="submit">

@@ -4,6 +4,8 @@ import { ProyectosService } from 'src/app/core/services/proyectos.service';
 import { Mapas } from 'src/app/core/models/mapas';
 import { Proyectospost } from 'src/app/core/models/proyectospost';
 import { MapasService } from 'src/app/core/services/mapas.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 declare var google: any;
 
@@ -23,7 +25,7 @@ export class RegisterProjectComponent {
   portada: any = "URL_de_la_portada_del_nuevo_proyecto";
   presupuesto: number = 0;
   recolectado: number = 0;
-  fechaInicio: Date = new Date("2023-09-01");
+  fechaInicio: Date = new Date("2023-09-11T00");
   fechaFin: Date = new Date("2023-09-11T00");
   mapasArray: Mapas[] = [
     {
@@ -40,7 +42,7 @@ export class RegisterProjectComponent {
   proyectoedit: any;
   edit: boolean = false;
 
-  constructor(private dialogRef: MatDialogRef<RegisterProjectComponent>, private proyectoService: ProyectosService, private mapaService: MapasService, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(private dialogRef: MatDialogRef<RegisterProjectComponent>,private snackBar: MatSnackBar , private proyectoService: ProyectosService, private mapaService: MapasService, @Inject(MAT_DIALOG_DATA) public data: any) {
     if (data.proyecto != null) {
       this.proyectoedit = data.proyecto;
       this.edit = data.editing;
@@ -61,7 +63,6 @@ export class RegisterProjectComponent {
       this.recolectado = data.proyecto.recolectado;
       this.fechaInicio = data.proyecto.fechaInicio;
       this.fechaFin = data.proyecto.fechaFin;
-
     }
 
   }
@@ -254,6 +255,14 @@ export class RegisterProjectComponent {
       }
     );
   }
+openSuccessSnackBar() {
+  this.snackBar.open('Proyecto registrado con éxito', 'Cerrar', {
+    duration: 3000, // Duración en milisegundos (ajusta según tus preferencias)
+    horizontalPosition: 'center', // Posición horizontal del Snackbar
+    verticalPosition: 'top', // Posición vertical del Snackbar
+    panelClass: ['success-snackbar'], // Clases de CSS personalizadas (ajusta los estilos según tus preferencias)
+  });
+}
 
   agregarObjetivo() {
     this.objetivosSecundarios.push('');
