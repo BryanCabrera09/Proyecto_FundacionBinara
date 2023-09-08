@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 /* GtagImport */
 import { GtagModule } from 'angular-gtag';
+import { GoogleAnalyticsService, NGX_GOOGLE_ANALYTICS_SETTINGS_TOKEN, NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
 
 @NgModule({
   declarations: [
@@ -25,10 +26,14 @@ import { GtagModule } from 'angular-gtag';
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    GtagModule.forRoot({ trackingId: 'G-6PGZ63FVGS', trackPageviews: true, }),
+    /* NgxGoogleAnalyticsModule.forRoot('G-6PGZ63FVGS'), */
+    NgxGoogleAnalyticsRouterModule
+    /* GtagModule.forRoot({ trackingId: 'G-6PGZ63FVGS', trackPageviews: true, }), */
   ],
   providers: [
-    LoadScriptService
+    LoadScriptService,
+    { provide: NGX_GOOGLE_ANALYTICS_SETTINGS_TOKEN, useValue: 'G-6PGZ63FVGS' }, // Reemplaza con tu UA-ID
+    GoogleAnalyticsService,
   ],
   bootstrap: [AppComponent]
 })
