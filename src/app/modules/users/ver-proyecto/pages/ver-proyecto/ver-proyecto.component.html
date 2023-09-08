@@ -33,11 +33,37 @@
         <p>{{ proyecto.parrafoDos }}</p>
         <p>{{ proyecto.parrafoTres }}</p>
     </div>
-    <h4 class="map-label">UBICACIÓN</h4>
-    <div class="map-wrapper">
-        <div #mapContainer class="map-container"></div>
+
+    
+    <div class="map-section">
+        <h4 class="map-label">UBICACIÓN</h4>
+        <div class="map-wrapper">
+            <div #mapContainer class="map-container"></div>
+        </div>
     </div>
-    <span class="add-button">
+
+
+      <div class="text-container">
+        <h4 class="section-header">Actividades</h4>
+        <div *ngFor="let actividad of actividades" class="activity-card">
+          <h5 (click)="toggleDetalle(actividad._id)" class="activity-title">
+            <span class="toggle-icon" [ngClass]="{'expanded': detallesVisibles.has(actividad._id)}">+</span>
+            {{ actividad.titulo }}
+          </h5>
+          
+          <div *ngIf="detallesVisibles.has(actividad._id)" class="activity-details">
+            <p><strong><i class="fas fa-align-left"></i> Descripción:</strong> {{ actividad.descripcion }}</p>
+            <p><strong><i class="fas fa-layer-group"></i> Número de Áreas:</strong> {{ actividad.num_areas }}</p>
+            <p><strong><i class="fas fa-hands-helping"></i> Número de Personas Beneficiarias:</strong> {{ actividad.num_personas_beneficiarias }}</p>
+            <p><strong><i class="fas fa-female"></i> Número de Mujeres Beneficiarias:</strong> {{ actividad.num_mujeres_beneficiarias}}</p>
+            <p><strong><i class="fas fa-baby"></i> Número de Niños y Niñas Beneficiarias:</strong> {{ actividad.num_ninos_ninas_beneficiarias}}</p>
+            <p><strong><i class="fas fa-user-graduate"></i>Número de Adolescentes Beneficiarios:</strong> {{ actividad.num_adoloscentes_beneficiarios}}</p>
+            <p><strong><i class="fas fa-user-tie"></i> Número de Adultos Beneficiarios:</strong> {{ actividad.num_adoloscentes_beneficiarios}}</p>
+            
+          </div>
+        </div>
+    </div>
+    <div class="button-container">
         <button class="add-project-button" (click)="proyecto._id && abrirRegistrodeactividad(proyecto._id)">Añadir Actividad</button>
-    </span>
+    </div>
 </div>
