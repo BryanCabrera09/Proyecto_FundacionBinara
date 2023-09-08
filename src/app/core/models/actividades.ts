@@ -1,14 +1,15 @@
 import { Proyectos } from "./proyectos";
 import { Mapas } from "./mapas";
 import { Usuario } from "./usuario";
+import { Proyectospost } from "./proyectospost";
 
 export class Actividades {
     _id?: number;
     titulo?: string;
     descripcion?: string;
-    mapa?: Mapas[];
-    usuario?: Usuario;
-    proyecto?: Proyectos;
+    mapas?: string[];
+    usuario?: string[];
+    proyecto?: string[];
     num_areas?: number;
     num_personas_beneficiarias?: number;
     num_mujeres_beneficiarias?: number;

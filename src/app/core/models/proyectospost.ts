@@ -1,4 +1,5 @@
 export class Proyectospost {
+    id?: string;
     titulo?: string;
     objetivoPrincipal?: string;
     objetivosSecundarios?: string[];

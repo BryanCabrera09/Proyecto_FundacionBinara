@@ -75,3 +75,8 @@ textarea:focus {
   background-color: black;
 
 }
+/* Estilos de ejemplo para el Snackbar de éxito */
+.success-snackbar {
+  background-color: #4caf50; /* Color de fondo verde (ajusta según tus preferencias) */
+  color: white; /* Color del texto (ajusta según tus preferencias) */
+}
