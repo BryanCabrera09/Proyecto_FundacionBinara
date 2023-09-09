@@ -3,7 +3,6 @@ import { Mapas } from 'src/app/core/models/mapas';
 import { MapasService } from 'src/app/core/services/mapas.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Usuario } from 'src/app/core/models/usuario';
 import { Actividades } from 'src/app/core/models/actividades';
 import { ActividadesService } from 'src/app/core/services/actividades.service';
 import { Proyectospost } from 'src/app/core/models/proyectospost';
@@ -22,22 +21,14 @@ export class RegisterActivityComponent {
   descripcion: string = 's';
   mapasArray: Mapas[] = [
     {
-      _id: '64e60735c73694d14eb2388e',
+      _id: '64fcb359b8344e8a47b3620d',
       lugar: 'AZUAY;SANTA ISABEWL;CUENCA',
       coorX: '-30.232545',
       coorY: '-179.78456'
     }
   ];
-  proyectoArray: Proyectospost[] = [
-    {
-      id: 'id invalido',
-    }
-  ];
-  usuarioArray: Usuario[] = [
-    {
-      authStatus: "64f80835243be9174d1904a6"
-    }
-  ];
+  usuarioArray: string='64f80835243be9174d1904a6'
+
 
   num_areas: number = 0;
   num_personas_beneficiarias: number = 0;
@@ -70,13 +61,9 @@ export class RegisterActivityComponent {
         console.log(data.proyecto);
         let proyecto = new Proyectospost();
         proyecto.id = data.proyecto._id;
-        if (proyecto.id !== undefined) {
-          this.proyectoArray[0] = proyecto;
-          this.actividad.proyecto = [proyecto.id];
-          console.log([proyecto.id])
-        } else {
-          console.error('El ID del proyecto es undefined.');
-        }
+
+          this.actividad.proyecto = proyectoId;
+          console.log(this.proyectoId)
       },
       error: error => {
         console.error('Error obteniendo el proyecto:', error);
@@ -208,10 +195,7 @@ export class RegisterActivityComponent {
     this.actividad.num_adoloscentes_beneficiarios = this.num_adolescentes_beneficiarios;
     this.actividad.num_adultos_beneficiarios = this.num_adultos_beneficiarios;
     this.actividad.visible = this.visible;
-    if (this.usuarioArray[0].authStatus !== undefined) {
-
-      this.actividad.usuario = [this.usuarioArray[0].authStatus]
-    }
+    this.actividad.usuario = this.usuarioArray;
   }
 
   Register(id: Mapas[]) {

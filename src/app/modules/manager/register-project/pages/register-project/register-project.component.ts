@@ -227,6 +227,7 @@ export class RegisterProjectComponent {
       next: response => {
         console.log('Proyecto actualizado con éxito!', response);
         window.location.reload();
+        this.openSuccessSnackBar("Se ha Actualizado el proyecto Correctamente");
       },
       error: error => {
         console.error('Error al actualizar el proyecto:', error);
@@ -248,6 +249,7 @@ export class RegisterProjectComponent {
         console.log('Proyecto registrado con éxito', response);
         this.onClose();
         window.location.reload();
+        this.openSuccessSnackBar("Se ha registrado el proyecto Correctamente");
       },
       (error) => {
         console.error('Error al registrar el proyecto', error);
@@ -255,9 +257,9 @@ export class RegisterProjectComponent {
       }
     );
   }
-openSuccessSnackBar() {
-  this.snackBar.open('Proyecto registrado con éxito', 'Cerrar', {
-    duration: 3000, // Duración en milisegundos (ajusta según tus preferencias)
+openSuccessSnackBar(mensaje: string) {
+  this.snackBar.open(mensaje, 'Cerrar', {
+   
     horizontalPosition: 'center', // Posición horizontal del Snackbar
     verticalPosition: 'top', // Posición vertical del Snackbar
     panelClass: ['success-snackbar'], // Clases de CSS personalizadas (ajusta los estilos según tus preferencias)
