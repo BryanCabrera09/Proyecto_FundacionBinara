@@ -27,7 +27,7 @@ export class RegisterActivityComponent {
       coorY: '-179.78456'
     }
   ];
-  usuarioArray: string='64f80835243be9174d1904a6'
+  usuarioArray: string='64fd2cf429a074e5943b4ed5'
 
 
   num_areas: number = 0;
@@ -199,11 +199,11 @@ export class RegisterActivityComponent {
   }
 
   Register(id: Mapas[]) {
-    this.mapasArray = id;
-    const mapasIds = this.mapasArray.map(mapa => mapa._id!);
-    console.log(id);
+    
+    
+    console.log(id[0]._id);
     this.Datos();
-    this.actividad.mapas = mapasIds;
+    this.actividad.mapa = id[0]._id;
     this.actividadesService.createActivity(this.actividad).subscribe(
       (response) => {
         console.log('Actividad registrado con éxito', response);
@@ -212,6 +212,7 @@ export class RegisterActivityComponent {
       },
       (error) => {
         console.error('Error al registrar la Actividad', error);
+        console.log(this.actividad)
       }
     );
   }

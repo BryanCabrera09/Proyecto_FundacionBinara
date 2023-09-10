@@ -7,7 +7,7 @@ export class Actividades {
     _id?: number;
     titulo?: string;
     descripcion?: string;
-    mapas?: string[];
+    mapa?: string;
     usuario?: string;
     proyecto?: string;
     num_areas?: number;

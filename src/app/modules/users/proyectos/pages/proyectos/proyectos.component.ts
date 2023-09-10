@@ -59,6 +59,7 @@ export class ProyectosComponent implements OnInit {
     if (projectId !== undefined) {
         this.router.navigate(['user/ver/proyecto', projectId]);
     } else {
+      console.log(projectId);
     }
     
 }
@@ -103,7 +104,7 @@ export class ProyectosComponent implements OnInit {
 
 
   desactivarProject(project: Proyectos): void {
-    this.projectService.deleteProject(project._id!).subscribe(
+    this.projectService.deleteProject(project.uid!).subscribe(
       response => {
         console.log('Proyecto Desactivado con éxito', response);
         this.getActiveProjectsList();
@@ -115,7 +116,7 @@ export class ProyectosComponent implements OnInit {
   }
 
   activarProject(project: Proyectos): void {
-    this.projectService.activarProyecto(project._id!).subscribe(
+    this.projectService.activarProyecto(project.uid!).subscribe(
       response => {
         console.log('Proyecto Activado con éxito', response);
         this.getActiveProjectsList();
