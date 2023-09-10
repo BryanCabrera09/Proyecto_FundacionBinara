@@ -17,8 +17,8 @@ declare var google: any;
 })
 export class RegisterActivityComponent {
 
-  titulo: string = 's';
-  descripcion: string = 's';
+  titulo: string = '';
+  descripcion: string = '';
   mapasArray: Mapas[] = [
     {
       _id: '64fcb359b8344e8a47b3620d',
@@ -27,7 +27,7 @@ export class RegisterActivityComponent {
       coorY: '-179.78456'
     }
   ];
-  usuarioArray: string='64fd2cf429a074e5943b4ed5'
+  usuario: string='64f80835243be9174d1904a6'
 
 
   num_areas: number = 0;
@@ -189,13 +189,14 @@ export class RegisterActivityComponent {
   Datos(): void {
     this.actividad.titulo = this.titulo;
     this.actividad.descripcion = this.descripcion;
+    this.actividad.num_areas=this.num_areas;
     this.actividad.num_personas_beneficiarias = this.num_personas_beneficiarias;
     this.actividad.num_mujeres_beneficiarias = this.num_mujeres_beneficiarias;
     this.actividad.num_niños_niñas_beneficiarias = this.num_ninos_ninas_beneficiarias;
     this.actividad.num_adoloscentes_beneficiarios = this.num_adolescentes_beneficiarios;
     this.actividad.num_adultos_beneficiarios = this.num_adultos_beneficiarios;
     this.actividad.visible = this.visible;
-    this.actividad.usuario = this.usuarioArray;
+    this.actividad.usuario = this.usuario;
   }
 
   Register(id: Mapas[]) {

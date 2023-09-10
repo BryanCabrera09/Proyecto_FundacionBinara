@@ -9,7 +9,39 @@
         </div>
         <div class="form-group">
             <label class="label1" for="projectName">Descripción</label>
-            <textarea class="textarea1" id="Descripcion" name="Descripcion" required [(ngModel)]="descripcion"></textarea>
+            <textarea class="textarea1" id="Descripcion" name="Descripcion" required
+                [(ngModel)]="descripcion"></textarea>
+        </div>
+       
+        <div class="form-group">
+            <label for="projectName">Número de área</label>
+            <input type="text" id="num_areas" name="num_areas" required [(ngModel)]="num_areas"
+                (input)="Solonumero($event)">
+        </div>
+        <div class="form-group">
+            <label for="projectName">Número de personas beneficiarias</label>
+            <input type="text" id="num_personas_beneficiarias" name="num_personas_beneficiarias" required
+                [(ngModel)]="num_personas_beneficiarias" (input)="Solonumero($event)">
+        </div>
+        <div class="form-group">
+            <label for="projectName">Número de mujeres beneficiarias</label>
+            <input type="text" id="num_mujeres_beneficiarias" name="num_mujeres_beneficiarias" required
+                [(ngModel)]="num_mujeres_beneficiarias" (input)="Solonumero($event)">
+        </div>
+        <div class="form-group">
+            <label for="projectName">Número de niños y niñas beneficiarias</label>
+            <input type="text" id="num_ninos_ninas_beneficiarias" name="num_ninos_ninas_beneficiarias" required
+                [(ngModel)]="num_ninos_ninas_beneficiarias" (input)="Solonumero($event)">
+        </div>
+        <div class="form-group">
+            <label for="projectName">Número de adolescentes beneficiarias</label>
+            <input type="text" id="num_adolescentes_beneficiarios" name="num_adolescentes_beneficiarios" required
+                [(ngModel)]="num_adolescentes_beneficiarios" (input)="Solonumero($event)">
+        </div>
+        <div class="form-group">
+            <label for="projectName">Número de adultos beneficiarios</label>
+            <input type="text" id="num_adultos_beneficiarios" name="num_adultos_beneficiarios" required
+                [(ngModel)]="num_adultos_beneficiarios" (input)="Solonumero($event)">
         </div>
         <div class="form-group">
             <label for="projectName">Mapa</label>
@@ -22,50 +54,20 @@
 
         <div class="location-info">
             <div>
-                Provincia: <input type="text" [value]="provincia">
+                Provincia: <input type="text" [value]="provincia" readonly>
             </div>
             <div>
-                Cantón: <input type="text" [value]="canton">
+                Cantón: <input type="text" [value]="canton" readonly>
             </div>
             <div>
-                Parroquia: <input type="text" [value]="parroquia">
+                Parroquia: <input type="text" [value]="parroquia" readonly>
             </div>
         </div>
-        <div class="form-group">
-            <label for="projectName">Numero de área</label>
-            <input type="text" id="recolectado" name="recolectado" required [(ngModel)]="num_areas"
-              (input)="Solonumero($event)">
-          </div>
-          <div class="form-group">
-            <label for="projectName">Numero de personas beneficiarias</label>
-            <input type="text" id="recolectado" name="recolectado" required [(ngModel)]="num_personas_beneficiarias"
-              (input)="Solonumero($event)">
-          </div>
-          <div class="form-group">
-            <label for="projectName">Numero de mujeres beneficiarias</label>
-            <input type="text" id="recolectado" name="recolectado" required [(ngModel)]="num_mujeres_beneficiarias"
-              (input)="Solonumero($event)">
-          </div>
-          <div class="form-group">
-            <label for="projectName">Numero de niños y niñas beneficiarias</label>
-            <input type="text" id="recolectado" name="recolectado" required [(ngModel)]="num_ninos_ninas_beneficiarias"
-              (input)="Solonumero($event)">
-          </div>
-          <div class="form-group">
-            <label for="projectName">Numero de adolecentes beneficiarias</label>
-            <input type="text" id="recolectado" name="recolectado" required [(ngModel)]="num_adolescentes_beneficiarios"
-              (input)="Solonumero($event)">
-          </div>
-          <div class="form-group">
-            <label for="projectName">Numero de adultos beneficiarias</label>
-            <input type="text" id="recolectado" name="recolectado" required [(ngModel)]="num_adultos_beneficiarios"
-              (input)="Solonumero($event)">
-          </div>
-          <br>
-          <div class="button-container">
-            <button  class="submit-button cancelar"  (click)="onClose()" >Cancelar</button>
-            <button  class="submit-button" (click)="GuardarMapa()" type="submit">Registrar Actividad</button>
-          
+        <br>
+        <div class="button-container">
+            <button class="submit-button cancelar" (click)="onClose()">Cancelar</button>
+            <button class="submit-button" (click)="GuardarMapa()" type="submit">Registrar Actividad</button>
+
         </div>
     </form>
 
