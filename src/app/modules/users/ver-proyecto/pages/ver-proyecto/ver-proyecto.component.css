@@ -29,7 +29,12 @@
     display: grid;
     grid-template-columns: 2fr 3fr;
     gap: 30px;
-    width: 100%;
+    width: 70%;
+}
+.image-container {
+    margin-top: 25px;
+    max-height: 300px; /* Cambia 300px al valor que desees */
+    overflow: hidden;
 }
 
 .image-container img {
@@ -98,6 +103,7 @@
     max-width: 900px;
     margin: 20px auto;
 }
+
 .add-project-button {
     padding: 10px 20px;
     background-color: #3498db;
@@ -105,4 +111,82 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+
+.add-project-button:hover {
+    background-color: #2980b9;
+}
+
+.map-section {
+    width: 90%;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.map-label {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.map-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 30.25%;
+    margin: 0 auto;
+}
+
+.map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.text-container {
+    font-family: 'Arial, sans-serif';
+}
+
+.section-header {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 18px;
+}
+
+.activity-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.activity-title {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+.activity-details {
+    margin-left: 30px;
+    padding: 10px;
+    border-left: 3px solid #00f;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.mapa {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }

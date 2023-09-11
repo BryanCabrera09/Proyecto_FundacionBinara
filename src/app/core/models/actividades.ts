@@ -7,9 +7,9 @@ export class Actividades {
     _id?: number;
     titulo?: string;
     descripcion?: string;
-    mapas?: string[];
-    usuario?: string[];
-    proyecto?: string[];
+    mapa?: string;
+    usuario?: string;
+    proyecto?: string;
     num_areas?: number;
     num_personas_beneficiarias?: number;
     num_mujeres_beneficiarias?: number;

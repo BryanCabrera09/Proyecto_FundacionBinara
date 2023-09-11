@@ -29,6 +29,10 @@ export class ActividadesService {
     return this.http.get<Actividades[]>(`${this.activitytsUrl}/visibles`);
   }
 
+  getActivityxProyecto(id: String): Observable<Actividades[]> {    /* Obtener listado de Actividades x proyecto */
+    return this.http.get<Actividades[]>(`${this.activitytsUrl}/xproyecto/${id}`);
+  }
+
   searchActivity(id: String) {   /* Buscar Actividades en base al id */
   return this.http.get(`${this.activitytsUrl}/${id}`);
 }

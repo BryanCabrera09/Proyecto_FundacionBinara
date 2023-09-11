@@ -12,13 +12,14 @@
       <textarea class="textarea1" id="objetivoPrincipal" name="objetivoPrincipal" required [(ngModel)]="objetivoPrincipal"></textarea>
     </div>
     <div class="form-obj" *ngFor="let objetivo of objetivosSecundarios; let i = index; trackBy: trackByIndex">
-      <label for="objetivo-{{i}}">Objetivo Secundario {{i + 1}}</label>
+      <label class="label1" for="objetivo-{{i}}">Objetivo Secundario {{i + 1}}</label>
       <textarea class="textarea1" id="objetivo-{{i}}" name="objetivo-{{i}}" [(ngModel)]="objetivosSecundarios[i]"></textarea>
       <button type="button" class="btn-eliminarobj" (click)="eliminarObjetivo(i)">−</button>
     </div>
     <button type="button" class="btn-addobj" (click)="agregarObjetivo()">Añadir otro objetivo</button>
+    <br>
     <div class="form-group">
-      <label for="projectName">Mapa</label>
+      <label class="label1" for="projectName">Mapa</label>
     </div>
     <div class="map-wrapper">
       <input id="search" class="search-location" type="text" placeholder="Buscar ubicación...">
@@ -28,54 +29,54 @@
 
     <div class="location-info">
       <div>
-        Provincia: <input type="text" [value]="provincia">
+        Provincia: <input type="text" [value]="provincia" readonly>
       </div>
       <div>
-        Cantón: <input type="text" [value]="canton">
+        Cantón: <input type="text" [value]="canton" readonly>
       </div>
       <div>
-        Parroquia: <input type="text" [value]="parroquia">
+        Parroquia: <input type="text" [value]="parroquia" readonly>
       </div>
     </div>
     <div class="form-group">
-      <label for="projectName">Párrafo Uno</label>
+      <label class="label1" for="projectName">Párrafo Uno</label>
       <textarea class="textarea1" id="parrafoUno" name="parrafoUno" required [(ngModel)]="parrafoUno"></textarea>
     </div>
     <div class="form-group">
-      <label for="projectName">Párrafo dos</label>
+      <label class="label1" for="projectName">Párrafo dos</label>
       <textarea class="textarea1" id="parrafoDos" name="parrafoDos" required [(ngModel)]="parrafoDos"></textarea>
     </div>
     <div class="form-group">
-      <label for="projectName">Párrafo Tres</label>
+      <label class="label1" for="projectName">Párrafo Tres</label>
       <textarea class="textarea1" id="parrafoTres" name="parrafoTres" requirrequired [(ngModel)]="parrafoTres"></textarea>
     </div>
     <div class="form-group">
-      <label for="projectImage">Portada</label>
+      <label class="label1" for="projectImage">Portada</label>
       <br>
       <input type="file" id="projectImage" name="projectImage" accept="image/*" (change)="showPreview($event)">
     </div>
-     
+     <br>
     <div class="image-preview">
       <br>
       <img id="imagePreview" [src]="imagePreviewSrc" alt="Vista previa de la imagen" *ngIf="imagePreviewSrc">
     </div>
     <br>
     <div class="form-group">
-      <label for="projectName">Presupuesto</label>
+      <label class="label1" for="projectName">Presupuesto</label>
       <input type="text" id="presupuesto" name="presupuesto" required [(ngModel)]="presupuesto"
         (input)="Solonumero($event) ">
     </div>
     <div class="form-group">
-      <label for="projectName">Recolectado</label>
+      <label class="label1" for="projectName">Recolectado</label>
       <input type="text" id="recolectado" name="recolectado" required [(ngModel)]="recolectado"
         (input)="Solonumero($event)">
     </div>
     <div class="form-group">
-      <label for="projectDueDate">Fecha de Inicio</label>
+      <label class="label1" for="projectDueDate">Fecha de Inicio</label>
       <input type="date" id="fechaInicio" name="fechaInicio" required [ngModel]="fechaInicio | date:'yyyy-MM-dd'" (ngModelChange)="fechaInicio=$event">
     </div> 
     <div class="form-group">
-      <label for="projectDueDate">Fecha de Fin</label>
+      <label class="label1" for="projectDueDate">Fecha de Fin</label>
       <input type="date" id="fechaFin" name="fechaFin" required [ngModel]="fechaFin | date:'yyyy-MM-dd'" (ngModelChange)="fechaFin=$event">
     </div>    
     <div class="button-container">
