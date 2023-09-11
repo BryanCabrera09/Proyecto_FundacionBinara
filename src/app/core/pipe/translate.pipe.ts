@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TranslatorService } from '../../services/translator.service';
+import { TranslatorService } from 'src/app/shared/services/translator.service';
 
 @Pipe({
   name: 'translate'

@@ -7,11 +7,11 @@ import { CdkMenuModule } from '@angular/cdk/menu';
 import { RouterModule } from '@angular/router';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { FormsModule } from '@angular/forms';
-import { TranslatePipe } from './components/footer/translate.pipe';
 
 /* Angular Material */
 import {MatSelectModule} from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
+import { TranslatePipe } from '../core/pipe/translate.pipe';
 
 @NgModule({
   declarations: [
