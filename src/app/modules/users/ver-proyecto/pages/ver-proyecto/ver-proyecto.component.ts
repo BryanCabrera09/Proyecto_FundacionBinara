@@ -90,10 +90,17 @@ export class VerProyectoComponent {
       width: '800px',
       hasBackdrop: false,
       height: '600px',
-      data: { proyectoId: idProyecto }
+      data: { proyectoId: idProyecto, editing:false }
     });
   }
-
+  editarproyecto(activity: Actividades) {
+    this.dialog.open(RegisterActivityComponent, {
+      width: '800px',
+      hasBackdrop: false,
+      height: '600px',
+      data: { actividad: activity, editing: true }
+    });
+  }
 
   mapasArray: Mapas[] = [
     {
@@ -126,4 +133,59 @@ export class VerProyectoComponent {
       }
     );
   }
+
+  confirmMessage: string = '';
+  isConfirmVisible: boolean = false;
+  projectToDelete: Actividades | null = null;
+
+  confirmDeleteProject(activity: Actividades): void {
+    if (activity.visible) {
+        this.confirmMessage = `¿Estás seguro de que deseas DESACTIVAR el proyecto "${activity.titulo}"?`;
+    } else {
+        this.confirmMessage = `¿Estás seguro de que deseas ACTIVAR el proyecto "${activity.titulo}"?`;
+    }
+    this.projectToDelete = activity;
+    this.isConfirmVisible = true;
+  }
+
+  confirm(): void {
+    if (this.projectToDelete) {
+      if (this.projectToDelete.visible) {
+        this.desactivarProject(this.projectToDelete);
+      } else {
+        this.activarProject(this.projectToDelete);
+      }
+    }
+    this.isConfirmVisible = false;
+    this.projectToDelete = null;
+  }
+  cancel(): void {
+    this.isConfirmVisible = false;
+    this.projectToDelete = null;
+  }
+
+  desactivarProject(activity: Actividades): void {
+    this.acticidadesService.deleteActivity(activity._id!).subscribe(
+      response => {
+        console.log('Actividad Desactivado con éxito', response);
+        //this.getActividadesxProyecto(id!);
+      },
+      error => {
+        console.error('Error al eliminar la actividad', error);
+      }
+    );
+  }
+
+  activarProject(activity: Actividades): void {
+    this.acticidadesService.activarActividad(activity._id!).subscribe(
+      response => {
+        console.log('Actividad activado con éxito', response);
+        //this.getActividadesxProyecto(id!);
+      },
+      error => {
+        console.error('Error al eliminar la Actividad', error);
+      }
+    );
+  }
+  
 }

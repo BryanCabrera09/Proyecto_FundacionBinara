@@ -4,7 +4,7 @@ import { ProyectosService } from 'src/app/core/services/proyectos.service';
 import { Mapas } from 'src/app/core/models/mapas';
 import { Proyectospost } from 'src/app/core/models/proyectospost';
 import { MapasService } from 'src/app/core/services/mapas.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import Swal from 'sweetalert2';
 
 
 declare var google: any;
@@ -42,7 +42,7 @@ export class RegisterProjectComponent {
   proyectoedit: any;
   edit: boolean = false;
 
-  constructor(private dialogRef: MatDialogRef<RegisterProjectComponent>,private snackBar: MatSnackBar , private proyectoService: ProyectosService, private mapaService: MapasService, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(private dialogRef: MatDialogRef<RegisterProjectComponent>, private proyectoService: ProyectosService, private mapaService: MapasService, @Inject(MAT_DIALOG_DATA) public data: any) {
     if (data.proyecto != null) {
       this.proyectoedit = data.proyecto;
       this.edit = data.editing;
@@ -201,7 +201,7 @@ export class RegisterProjectComponent {
       }
     );
   }
-  
+
   Datos(): void {
     this.proyecto.titulo = this.titulo;
     this.proyecto.objetivoPrincipal = this.objetivoPrincipal;
@@ -226,11 +226,24 @@ export class RegisterProjectComponent {
     this.proyectoService.editProject(this.proyectoedit._id, this.proyecto).subscribe({
       next: response => {
         console.log('Proyecto actualizado con éxito!', response);
-        window.location.reload();
-        this.openSuccessSnackBar("Se ha Actualizado el proyecto Correctamente");
+        this.onClose();
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: '<strong>Proyecto actualizado con éxito!</strong>',
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       error: error => {
         console.error('Error al actualizar el proyecto:', error);
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: '<strong>Error al actualizar el proyecto</strong>'+error,
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       complete: () => {
         console.log('La operación ha completado');
@@ -248,23 +261,27 @@ export class RegisterProjectComponent {
       (response) => {
         console.log('Proyecto registrado con éxito', response);
         this.onClose();
-        window.location.reload();
-        this.openSuccessSnackBar("Se ha registrado el proyecto Correctamente");
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: '<strong>Proyecto registrado con éxito</strong>',
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       (error) => {
         console.error('Error al registrar el proyecto', error);
         console.log(this.proyecto.portada)
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: '<strong>Error al registrar proyecto</strong>',
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     );
   }
-openSuccessSnackBar(mensaje: string) {
-  this.snackBar.open(mensaje, 'Cerrar', {
-   
-    horizontalPosition: 'center', // Posición horizontal del Snackbar
-    verticalPosition: 'top', // Posición vertical del Snackbar
-    panelClass: ['success-snackbar'], // Clases de CSS personalizadas (ajusta los estilos según tus preferencias)
-  });
-}
 
   agregarObjetivo() {
     this.objetivosSecundarios.push('');
