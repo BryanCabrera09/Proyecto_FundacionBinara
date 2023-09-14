@@ -33,8 +33,8 @@ import { GoogleAnalyticsService, NGX_GOOGLE_ANALYTICS_SETTINGS_TOKEN, NgxGoogleA
   ],
   providers: [
     LoadScriptService,
-    { provide: NGX_GOOGLE_ANALYTICS_SETTINGS_TOKEN, useValue: 'G-6PGZ63FVGS' }, // Reemplaza con tu UA-ID
-    GoogleAnalyticsService,
+    /* { provide: NGX_GOOGLE_ANALYTICS_SETTINGS_TOKEN, useValue: 'G-6PGZ63FVGS' },
+    GoogleAnalyticsService, */
   ],
   bootstrap: [AppComponent]
 })

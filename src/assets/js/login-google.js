@@ -9,7 +9,7 @@ function loadGoogleSignInScript() {
 // Llama a la función para cargar el script
 loadGoogleSignInScript();
 
-function decodeJWTToken(token) {
+/* function decodeJWTToken(token) {
   return JSON.parse(atob(token.split(".")[1]));
 }
 function handleCredentialResponse(response) {
@@ -20,4 +20,23 @@ function handleCredentialResponse(response) {
 }
 function handleSignout() {
   google.accounts.id.disableAutoSelect();
+} */
+
+function handleCredentialResponse(response) {
+  const body = { id_token: response.credential };
+
+  fetch("http://localhost:10001/api/login/google", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+    .then((resp) => resp.json())
+    .then((resp) => {
+      console.log(resp);
+      sessionStorage.setItem("token", resp.token);
+    })
+    .catch(console.warn);
+  window.location.href = "/";
 }

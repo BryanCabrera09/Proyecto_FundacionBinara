@@ -15,13 +15,12 @@ export class FooterComponent implements OnInit {
   languages = languages;
 
   constructor(private translatorService: TranslatorService) {
-    
+
     this.translator = translatorService;
     /* translatorService.translateText("Hello World How are you").subscribe((data: any) => console.log(data)); */
   }
 
   ngOnInit() {
-    this.selectedLanguage = this.languages[0];
   }
 
   onChange() {

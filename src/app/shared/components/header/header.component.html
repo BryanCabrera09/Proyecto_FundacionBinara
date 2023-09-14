@@ -15,10 +15,11 @@
                 <li><a href="#" (click)="changeBackground('Blog')">{{'Blog' | translate | async}}</a></li>
                 <li><a href="#" (click)="changeBackground('Contactanos')">{{'Contactanos' | translate | async}}</a></li>
                 <li><a href="#" (click)="changeBackground('Involúcrate')">{{'Involúcrate' | translate | async}}</a></li>
-                <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">{{'Estadisticas' | translate | async}}</a></li>
+                <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">{{'Estadisticas' | translate |
+                        async}}</a></li>
             </ul>
 
-            <button class="log-in">{{'Log In' | translate | async}}</button>
+            <button class="log-in" (click)="goToLogin()">{{'Log In' | translate | async}}</button>
 
             <div class="toggle_btn">
                 <i class='bx bx-menu' id="menu-icon"></i>
@@ -35,7 +36,8 @@
             <li><a href="#" (click)="changeBackground('Blog')">{{'Blog' | translate | async}}</a></li>
             <li><a href="#" (click)="changeBackground('Contactanos')">{{'Contactanos' | translate | async}}</a></li>
             <li><a href="#" (click)="changeBackground('Involúcrate')">{{'Involúcrate' | translate | async}}</a></li>
-            <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">{{'Estadisticas' | translate | async}}</a></li>
+            <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">{{'Estadisticas' | translate |
+                    async}}</a></li>
             <li><button class="log-in">{{'Log In' | translate | async}}</button></li>
         </div>
 

@@ -138,7 +138,7 @@
                         <h2 *ngIf="project.titulo">{{ project.titulo | translate | async }}</h2>
                         <p *ngIf="project.parrafoUno">
                             {{ project.parrafoUno | translate | async}}
-                            <a (click)="goToArticle(project._id)" class="read-more negrita">
+                            <a (click)="goToArticle(project.uid)" class="read-more negrita">
                                 {{'leer mas' | translate | async}}
                             </a>
                         </p>
