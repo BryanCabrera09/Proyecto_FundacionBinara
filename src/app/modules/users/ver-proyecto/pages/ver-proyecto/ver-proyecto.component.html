@@ -54,9 +54,9 @@
                     <button class="edit-button" title="Editar" (click)="editarproyecto(actividad)">
                         ✎
                     </button>
-                    <button class="delete-button" title="Eliminar" (click)="confirmDeleteProject(actividad)">
-                        <span *ngIf="actividad.visible">🗑</span>
-                        <span *ngIf="!actividad.visible">✓</span>
+                    <button class="delete-button" (click)="confirmDeleteProject(actividad)">
+                        <span *ngIf="actividad.visible" title="Desactivar" >✘</span>
+                        <span *ngIf="!actividad.visible" title="Activar" >✓</span>
                     </button>
                     <div *ngIf="isConfirmVisible" class="custom-confirm">
                         <div class="confirm-content">

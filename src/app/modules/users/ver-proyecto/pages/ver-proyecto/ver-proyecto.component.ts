@@ -149,9 +149,9 @@ export class VerProyectoComponent {
 
   confirmDeleteProject(activity: Actividades): void {
     if (activity.visible) {
-        this.confirmMessage = `¿Estás seguro de que deseas DESACTIVAR el proyecto "${activity.titulo}"?`;
+        this.confirmMessage = `¿Está seguro de que desea DESACTIVAR el proyecto "${activity.titulo}"?`;
     } else {
-        this.confirmMessage = `¿Estás seguro de que deseas ACTIVAR el proyecto "${activity.titulo}"?`;
+        this.confirmMessage = `¿Está seguro de que desea ACTIVAR el proyecto "${activity.titulo}"?`;
     }
     this.projectToDelete = activity;
     this.isConfirmVisible = true;
@@ -177,7 +177,9 @@ export class VerProyectoComponent {
     this.acticidadesService.deleteActivity(activity._id!).subscribe(
       response => {
         console.log('Actividad Desactivado con éxito', response);
-        //this.getActividadesxProyecto(id!);
+        setTimeout(() => {
+          location.reload();
+        }, 200);
       },
       error => {
         console.error('Error al eliminar la actividad', error);
@@ -189,7 +191,9 @@ export class VerProyectoComponent {
     this.acticidadesService.activarActividad(activity._id!).subscribe(
       response => {
         console.log('Actividad activado con éxito', response);
-        //this.getActividadesxProyecto(id!);
+        setTimeout(() => {
+          location.reload();
+        }, 200);
       },
       error => {
         console.error('Error al eliminar la Actividad', error);
