@@ -74,23 +74,28 @@
             Actividad</button>
     </div>
     <br>
-    <div class="map-section">
-        <h4 class="map-label text-container">UBICACIÓN</h4>
 
-        <div class="map-wrapper">
-            <div #mapContainer class="map-container"></div>
-            <div class="coordinates-display"> {{ lat }} , {{ lng }}</div>
-        </div>
-        <div class="location-info mapa text-container">
-            <div>
-                Provincia: <input type="text" [value]="provincia" readonly>
-            </div>
-            <div>
-                Cantón: <input type="text" [value]="canton" readonly>
-            </div>
-            <div>
-                Parroquia: <input type="text" [value]="parroquia" readonly>
+    <div class="map-sections-container">
+        <div *ngFor="let mapa of proyecto?.mapas; let i = index" class="map-section">
+            <h4 class="map-label text-container">UBICACIÓN</h4>
+            <div class="map-wrapper">
+                <div #mapContainer class="map-container" id="mapContainer{{i}}"></div>
+                <div class="coordinates-display"> {{ mapa?.coorX }} , {{ lng }}</div>
+              </div>
+            <div class="location-info mapa text-container">
+                <div>
+                    Provincia: <input type="text" [value]="mapa.lugar!.split(';')[0]" readonly>
+                </div>
+                <div>
+                    Cantón: <input type="text" [value]="mapa.lugar!.split(';')[1]" readonly>
+                </div>
+                <div>
+                    Parroquia: <input type="text" [value]="mapa.lugar!.split(';')[2]" readonly>
+                </div>
             </div>
         </div>
     </div>
+    
+    
+    
 </div>

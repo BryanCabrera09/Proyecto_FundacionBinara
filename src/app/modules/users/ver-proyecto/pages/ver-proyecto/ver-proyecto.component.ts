@@ -67,24 +67,33 @@ export class VerProyectoComponent {
   }
 
   mapInitializer() {
-    // Aseguramos que 'proyecto' y 'mapas' están definidos y obtenemos las coordenadas
-    if (this.proyecto && this.proyecto.mapas && this.proyecto.mapas[0] &&
-      typeof this.proyecto.mapas[0].coorX === 'string' &&
-      typeof this.proyecto.mapas[0].coorY === 'string') {
-
-      const coorX = parseFloat(this.proyecto.mapas[0].coorX);
-      const coorY = parseFloat(this.proyecto.mapas[0].coorY);
-
-      this.mapOptions = {
-        center: { lat: coorX, lng: coorY },
-        zoom: 20
-      };
-
-      this.map = new google.maps.Map(this.gmap.nativeElement, this.mapOptions);
+    if (this.proyecto && this.proyecto.mapas) {
+      this.proyecto.mapas.forEach((mapa, index) => {
+        if (mapa && typeof mapa.coorX === 'string' && typeof mapa.coorY === 'string') {
+          
+          const coorX = parseFloat(mapa.coorX);
+          const coorY = parseFloat(mapa.coorY);
+  
+          const mapOptions = {
+            center: { lat: coorX, lng: coorY },
+            zoom: 15
+          };
+  
+          const mapContainer = document.getElementById(`mapContainer${index}`) as HTMLElement;
+          if (mapContainer) {
+            const map = new google.maps.Map(mapContainer, mapOptions);
+          } else {
+            console.error(`Elemento mapContainer${index} no encontrado`);
+          }
+        } else {
+          console.error("Datos del proyecto o mapas no disponibles o en formato incorrecto");
+        }
+      });
     } else {
-      console.error("Datos del proyecto o mapas no disponibles o en formato incorrecto");
+      console.error("Datos del proyecto no disponibles");
     }
   }
+  
   abrirRegistrodeactividad(idProyecto: number) {
     this.dialog.open(RegisterActivityComponent, {
       width: '800px',
