@@ -9,19 +9,6 @@ function loadGoogleSignInScript() {
 // Llama a la función para cargar el script
 loadGoogleSignInScript();
 
-/* function decodeJWTToken(token) {
-  return JSON.parse(atob(token.split(".")[1]));
-}
-function handleCredentialResponse(response) {
-  // to decode the credential response.
-  const responsePayload = decodeJWTToken(response.credential);
-  sessionStorage.setItem("loggedInUser", JSON.stringify(responsePayload));
-  window.location.href = "/";
-}
-function handleSignout() {
-  google.accounts.id.disableAutoSelect();
-} */
-
 function handleCredentialResponse(response) {
   const body = { id_token: response.credential };
 
@@ -36,7 +23,12 @@ function handleCredentialResponse(response) {
     .then((resp) => {
       console.log(resp);
       sessionStorage.setItem("token", resp.token);
+      window.location.href = "/";
     })
-    .catch(console.warn);
-  window.location.href = "/";
+    .catch((err) => {
+      console.warn;
+      /* Mensaje de Error de Logueo */
+      toastr.error("Error al iniciar sesión con Google", "Error");
+      //window.location.href = "/login";
+    });
 }

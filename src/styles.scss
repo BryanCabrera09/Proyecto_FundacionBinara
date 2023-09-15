@@ -7,12 +7,17 @@ html {
   box-sizing: border-box;
 }
 
+.toast-error {
+  font-size: 100%;
+}
+
 body {
   font-family: $fuente_principal;
   font-size: 1.6rem;
   line-height: 1.8;
   margin: 0;
 }
+
 .form-container1 {
   max-width: 800px;
   margin: 0 auto;
@@ -23,34 +28,37 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
 }
+
 .close-button {
   position: absolute;
   top: 10px;
   right: 10px;
-  
-  background-color: #e74c3c;
-  color: white;            
-  
-  width: 30px;            
-  height: 30px;
-  border-radius: 50%;  
-  
-  border: none; 
-  font-weight: bold;
-  font-size: 1.5rem;        
 
-  display: flex;           
+  background-color: #e74c3c;
+  color: white;
+
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+
+  border: none;
+  font-weight: bold;
+  font-size: 1.5rem;
+
+  display: flex;
   align-items: center;
   justify-content: center;
 
-  cursor: pointer;          
-  transition: background-color 0.3s; 
+  cursor: pointer;
+  transition: background-color 0.3s;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-.centrar{
+
+.centrar {
   text-align: center;
   color: rgb(36, 36, 106);
 }
+
 .label1 {
   display: block;
   font-weight: bold;
@@ -66,6 +74,7 @@ input[type="date"],
   border-radius: 5px;
   font-size: 14px;
 }
+
 .map-wrapper {
   position: relative;
   width: 100%;
@@ -107,6 +116,7 @@ input[type="date"],
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
+
 .button-container {
   display: flex;
   justify-content: center;
@@ -121,6 +131,7 @@ input[type="date"],
   cursor: pointer;
   transition: background-color 0.3s;
 }
+
 button[type="submit"] {
   background-color: #007bff;
   color: #fff;
@@ -144,6 +155,7 @@ button[type="submit"]:hover {
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
+
 .cancelar {
   background-color: #c0392b;
 }
@@ -151,6 +163,7 @@ button[type="submit"]:hover {
 .submit-button:hover {
   background-color: rgb(153, 79, 52);
 }
+
 .cancel-button:hover {
   background-color: red;
   color: white;
@@ -159,7 +172,7 @@ button[type="submit"]:hover {
 .close-button:hover {
   background-color: #c0392b;
 }
+
 .cancelar {
   background-color: #c0392b;
 }
-

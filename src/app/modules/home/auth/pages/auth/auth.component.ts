@@ -20,7 +20,7 @@ export class AuthComponent implements OnInit {
   constructor(private loginService: AuthService, private router: Router,
     private fb: FormBuilder, private loadScriptService: LoadScriptService) {
 
-    loadScriptService.loadScript(['login-google'])
+    loadScriptService.loadScript(['login-google']);
   }
 
   ngOnInit(): void {
