@@ -41,5 +41,10 @@ deleteActivity(id: number) {   /* Eliminar Actividades*/
   return this.http.delete(`${this.activitytsUrl}/${id}`)
 }
 
+activarActividad(id: number): Observable<any> {
+  // Realiza la solicitud PUT para activar el proyecto
+  return this.http.put(`${this.activitytsUrl}/${id}/activar`, {});
+}
+
 
 }

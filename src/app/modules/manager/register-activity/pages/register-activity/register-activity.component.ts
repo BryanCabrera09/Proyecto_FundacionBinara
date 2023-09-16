@@ -7,6 +7,7 @@ import { Actividades } from 'src/app/core/models/actividades';
 import { ActividadesService } from 'src/app/core/services/actividades.service';
 import { Proyectospost } from 'src/app/core/models/proyectospost';
 import { ProyectosService } from 'src/app/core/services/proyectos.service';
+import Swal from 'sweetalert2';
 
 declare var google: any;
 
@@ -27,7 +28,7 @@ export class RegisterActivityComponent {
       coorY: '-179.78456'
     }
   ];
-  usuario: string='64f80835243be9174d1904a6'
+  usuario: string = '64f80835243be9174d1904a6'
 
 
   num_areas: number = 0;
@@ -37,13 +38,33 @@ export class RegisterActivityComponent {
   num_adolescentes_beneficiarios: number = 0;
   num_adultos_beneficiarios: number = 0;
   visible: boolean = true;
-
+  proyectoedit: any;
 
   actividad: Actividades = new Actividades();
   mapapost: Mapas = new Mapas();
   proyectoId: string;
+  edit: boolean = false;
 
-  constructor(private dialogRef: MatDialogRef<RegisterActivityComponent>, @Inject(MAT_DIALOG_DATA) private data: any, private route: ActivatedRoute, private proyectosService: ProyectosService, private mapaService: MapasService, private actividadesService: ActividadesService) { this.proyectoId = data.proyectoId; }
+  constructor(private dialogRef: MatDialogRef<RegisterActivityComponent>, @Inject(MAT_DIALOG_DATA) private data: any, private route: ActivatedRoute, private proyectosService: ProyectosService, private mapaService: MapasService, private actividadesService: ActividadesService) {
+    this.proyectoId = data.proyectoId;
+    if(data.actividad != null){
+      this.proyectoedit = data.actividad;
+      this.edit = data.editing;
+      this.titulo = data.actividad.titulo;
+      this.descripcion = data.actividad.descripcion;
+      this.lat = data.actividad.coorX;
+      this.lng = data.actividad.coorY;
+      this.num_areas=data.actividad.num_areas;
+      this.num_personas_beneficiarias=data.actividad.num_personas_beneficiarias;
+      this.num_mujeres_beneficiarias=data.actividad.num_mujeres_beneficiarias;
+      this.num_ninos_ninas_beneficiarias=data.actividad.num_niños_niñas_beneficiarias;
+      this.num_adolescentes_beneficiarios=data.actividad.num_adoloscentes_beneficiarios;
+      this.num_adultos_beneficiarios=data.actividad.num_adultos_beneficiarios;
+
+      
+      console.log(data.actividad)
+    }
+  }
   onClose(): void {
     this.dialogRef.close();
 
@@ -51,6 +72,7 @@ export class RegisterActivityComponent {
   ngOnInit(): void {
     if (this.proyectoId) {
       this.obtenerDetallesDelProyecto(this.proyectoId);
+      
     }
   }
 
@@ -62,8 +84,8 @@ export class RegisterActivityComponent {
         let proyecto = new Proyectospost();
         proyecto.id = data.proyecto._id;
 
-          this.actividad.proyecto = proyectoId;
-          console.log(this.proyectoId)
+        this.actividad.proyecto = proyectoId;
+        console.log(this.proyectoId)
       },
       error: error => {
         console.error('Error obteniendo el proyecto:', error);
@@ -168,7 +190,11 @@ export class RegisterActivityComponent {
       (response: any) => {
         console.log('Mapa registrado con éxito', response.mapa);
         let m: Mapas[] = [response.mapa];
-        this.Register(m);
+        if (this.edit) {
+          this, this.Editar(m);
+        } else {
+          this.Register(m);
+        }
       },
       (error) => {
         console.error('Error al registrar el mapa', error);
@@ -189,7 +215,7 @@ export class RegisterActivityComponent {
   Datos(): void {
     this.actividad.titulo = this.titulo;
     this.actividad.descripcion = this.descripcion;
-    this.actividad.num_areas=this.num_areas;
+    this.actividad.num_areas = this.num_areas;
     this.actividad.num_personas_beneficiarias = this.num_personas_beneficiarias;
     this.actividad.num_mujeres_beneficiarias = this.num_mujeres_beneficiarias;
     this.actividad.num_niños_niñas_beneficiarias = this.num_ninos_ninas_beneficiarias;
@@ -200,8 +226,7 @@ export class RegisterActivityComponent {
   }
 
   Register(id: Mapas[]) {
-    
-    
+
     console.log(id[0]._id);
     this.Datos();
     this.actividad.mapa = id[0]._id;
@@ -209,12 +234,60 @@ export class RegisterActivityComponent {
       (response) => {
         console.log('Actividad registrado con éxito', response);
         this.onClose();
-        window.location.reload();
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: '<strong>Actividad registrado exitosamente</strong>',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        setTimeout(() => {
+          location.reload();
+        }, 1000);
       },
       (error) => {
         console.error('Error al registrar la Actividad', error);
         console.log(this.actividad)
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: '<strong>Error al registrar Actividad</strong>',
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     );
+  }
+  Editar(id: Mapas[]) {
+    console.log("editar " + id[0].lugar);
+    this.Datos();
+    this.actividad.mapa = id[0]._id;
+    this.actividadesService.editActivity(this.proyectoedit._id, this.actividad).subscribe({
+      next: response => {
+        console.log('Actividad actualizado con éxito!', response);
+        this.onClose();
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: '<strong>Actividad actualizado con éxito!</strong>',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      },
+      error: error => {
+        console.error('Error al actualizar la actividad:', error);
+        console.log(this.proyectoedit._id+"idddddd")
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: '<strong>Error al actualizar la actividad</strong>'+error,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      },
+      complete: () => {
+        console.log('La operación ha completado');
+      }
+    });
   }
 }

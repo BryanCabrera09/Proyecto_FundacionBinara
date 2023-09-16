@@ -1,6 +1,7 @@
 <div class="project-details">
     <h1 class="titulo">{{ proyecto.titulo }}</h1>
-    <h5 *ngIf="proyecto.mapas && proyecto.mapas.length > 0" class="subtitulo">{{ getProvincia(proyecto.mapas[0].lugar)}}</h5>
+    <h5 *ngIf="proyecto.mapas && proyecto.mapas.length > 0" class="subtitulo">{{ getProvincia(proyecto.mapas[0].lugar)}}
+    </h5>
     <div class="details-grid">
         <div class="image-container">
             <img [src]="proyecto.portada" alt="Imagen del proyecto">
@@ -28,7 +29,7 @@
         <p>{{ proyecto.parrafoDos }}</p>
         <p>{{ proyecto.parrafoTres }}</p>
     </div>
-    
+
     <div class="text-container">
         <h4 class="section-header">Actividades</h4>
         <div *ngFor="let actividad of actividades" class="activity-card">
@@ -49,7 +50,22 @@
                     actividad.num_adoloscentes_beneficiarios}}</p>
                 <p><strong><i class="fas fa-user-tie"></i> Número de Adultos Beneficiarios:</strong> {{
                     actividad.num_adultos_beneficiarios}}</p>
-
+                <div class="action-buttons">
+                    <button class="edit-button" title="Editar" (click)="editarproyecto(actividad)">
+                        ✎
+                    </button>
+                    <button class="delete-button" (click)="confirmDeleteProject(actividad)">
+                        <span *ngIf="actividad.visible" title="Desactivar" >✘</span>
+                        <span *ngIf="!actividad.visible" title="Activar" >✓</span>
+                    </button>
+                    <div *ngIf="isConfirmVisible" class="custom-confirm">
+                        <div class="confirm-content">
+                            <p>{{ confirmMessage }}</p>
+                            <button (click)="confirm()">Confirmar</button>
+                            <button (click)="cancel()">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -58,23 +74,28 @@
             Actividad</button>
     </div>
     <br>
-    <div class="map-section">
-        <h4 class="map-label text-container">UBICACIÓN</h4>
-       
-        <div class="map-wrapper">
-            <div #mapContainer class="map-container"></div>
-            <div class="coordinates-display"> {{ lat }} , {{ lng }}</div>
-          </div>
-        <div class="location-info mapa text-container">
-            <div>
-                Provincia: <input type="text" [value]="provincia" readonly>
-            </div>
-            <div>
-                Cantón: <input type="text" [value]="canton" readonly>
-            </div>
-            <div>
-                Parroquia: <input type="text" [value]="parroquia" readonly>
+
+    <div class="map-sections-container">
+        <div *ngFor="let mapa of proyecto?.mapas; let i = index" class="map-section">
+            <h4 class="map-label text-container">UBICACIÓN</h4>
+            <div class="map-wrapper">
+                <div #mapContainer class="map-container" id="mapContainer{{i}}"></div>
+                <div class="coordinates-display"> {{ mapa?.coorX }} , {{ lng }}</div>
+              </div>
+            <div class="location-info mapa text-container">
+                <div>
+                    Provincia: <input type="text" [value]="mapa.lugar!.split(';')[0]" readonly>
+                </div>
+                <div>
+                    Cantón: <input type="text" [value]="mapa.lugar!.split(';')[1]" readonly>
+                </div>
+                <div>
+                    Parroquia: <input type="text" [value]="mapa.lugar!.split(';')[2]" readonly>
+                </div>
             </div>
         </div>
     </div>
+    
+    
+    
 </div>

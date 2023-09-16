@@ -67,33 +67,49 @@ export class VerProyectoComponent {
   }
 
   mapInitializer() {
-    // Aseguramos que 'proyecto' y 'mapas' están definidos y obtenemos las coordenadas
-    if (this.proyecto && this.proyecto.mapas && this.proyecto.mapas[0] &&
-      typeof this.proyecto.mapas[0].coorX === 'string' &&
-      typeof this.proyecto.mapas[0].coorY === 'string') {
-
-      const coorX = parseFloat(this.proyecto.mapas[0].coorX);
-      const coorY = parseFloat(this.proyecto.mapas[0].coorY);
-
-      this.mapOptions = {
-        center: { lat: coorX, lng: coorY },
-        zoom: 20
-      };
-
-      this.map = new google.maps.Map(this.gmap.nativeElement, this.mapOptions);
+    if (this.proyecto && this.proyecto.mapas) {
+      this.proyecto.mapas.forEach((mapa, index) => {
+        if (mapa && typeof mapa.coorX === 'string' && typeof mapa.coorY === 'string') {
+          
+          const coorX = parseFloat(mapa.coorX);
+          const coorY = parseFloat(mapa.coorY);
+  
+          const mapOptions = {
+            center: { lat: coorX, lng: coorY },
+            zoom: 15
+          };
+  
+          const mapContainer = document.getElementById(`mapContainer${index}`) as HTMLElement;
+          if (mapContainer) {
+            const map = new google.maps.Map(mapContainer, mapOptions);
+          } else {
+            console.error(`Elemento mapContainer${index} no encontrado`);
+          }
+        } else {
+          console.error("Datos del proyecto o mapas no disponibles o en formato incorrecto");
+        }
+      });
     } else {
-      console.error("Datos del proyecto o mapas no disponibles o en formato incorrecto");
+      console.error("Datos del proyecto no disponibles");
     }
   }
+  
   abrirRegistrodeactividad(idProyecto: number) {
     this.dialog.open(RegisterActivityComponent, {
       width: '800px',
       hasBackdrop: false,
       height: '600px',
-      data: { proyectoId: idProyecto }
+      data: { proyectoId: idProyecto, editing:false }
     });
   }
-
+  editarproyecto(activity: Actividades) {
+    this.dialog.open(RegisterActivityComponent, {
+      width: '800px',
+      hasBackdrop: false,
+      height: '600px',
+      data: { actividad: activity, editing: true }
+    });
+  }
 
   mapasArray: Mapas[] = [
     {
@@ -126,4 +142,63 @@ export class VerProyectoComponent {
       }
     );
   }
+
+  confirmMessage: string = '';
+  isConfirmVisible: boolean = false;
+  projectToDelete: Actividades | null = null;
+
+  confirmDeleteProject(activity: Actividades): void {
+    if (activity.visible) {
+        this.confirmMessage = `¿Está seguro de que desea DESACTIVAR el proyecto "${activity.titulo}"?`;
+    } else {
+        this.confirmMessage = `¿Está seguro de que desea ACTIVAR el proyecto "${activity.titulo}"?`;
+    }
+    this.projectToDelete = activity;
+    this.isConfirmVisible = true;
+  }
+
+  confirm(): void {
+    if (this.projectToDelete) {
+      if (this.projectToDelete.visible) {
+        this.desactivarProject(this.projectToDelete);
+      } else {
+        this.activarProject(this.projectToDelete);
+      }
+    }
+    this.isConfirmVisible = false;
+    this.projectToDelete = null;
+  }
+  cancel(): void {
+    this.isConfirmVisible = false;
+    this.projectToDelete = null;
+  }
+
+  desactivarProject(activity: Actividades): void {
+    this.acticidadesService.deleteActivity(activity._id!).subscribe(
+      response => {
+        console.log('Actividad Desactivado con éxito', response);
+        setTimeout(() => {
+          location.reload();
+        }, 200);
+      },
+      error => {
+        console.error('Error al eliminar la actividad', error);
+      }
+    );
+  }
+
+  activarProject(activity: Actividades): void {
+    this.acticidadesService.activarActividad(activity._id!).subscribe(
+      response => {
+        console.log('Actividad activado con éxito', response);
+        setTimeout(() => {
+          location.reload();
+        }, 200);
+      },
+      error => {
+        console.error('Error al eliminar la Actividad', error);
+      }
+    );
+  }
+  
 }
