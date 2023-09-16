@@ -7,7 +7,7 @@ import { Actividades } from 'src/app/core/models/actividades';
 import { ActividadesService } from 'src/app/core/services/actividades.service';
 import { Proyectospost } from 'src/app/core/models/proyectospost';
 import { ProyectosService } from 'src/app/core/services/proyectos.service';
-import Swal from 'sweetalert2';
+import swal from 'sweetalert2';
 
 declare var google: any;
 
@@ -234,7 +234,7 @@ export class RegisterActivityComponent {
       (response) => {
         console.log('Actividad registrado con éxito', response);
         this.onClose();
-        Swal.fire({
+        swal.fire({
           position: 'center',
           icon: 'success',
           title: '<strong>Actividad registrado exitosamente</strong>',
@@ -248,7 +248,7 @@ export class RegisterActivityComponent {
       (error) => {
         console.error('Error al registrar la Actividad', error);
         console.log(this.actividad)
-        Swal.fire({
+        swal.fire({
           position: 'center',
           icon: 'error',
           title: '<strong>Error al registrar Actividad</strong>',
@@ -266,7 +266,7 @@ export class RegisterActivityComponent {
       next: response => {
         console.log('Actividad actualizado con éxito!', response);
         this.onClose();
-        Swal.fire({
+        swal.fire({
           position: 'center',
           icon: 'success',
           title: '<strong>Actividad actualizado con éxito!</strong>',
@@ -277,7 +277,7 @@ export class RegisterActivityComponent {
       error: error => {
         console.error('Error al actualizar la actividad:', error);
         console.log(this.proyectoedit._id+"idddddd")
-        Swal.fire({
+        swal.fire({
           position: 'center',
           icon: 'error',
           title: '<strong>Error al actualizar la actividad</strong>'+error,

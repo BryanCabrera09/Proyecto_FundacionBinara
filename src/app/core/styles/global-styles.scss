@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
 
 // Fuentes
-$fuente_principal: 'Lora', serif;
+//$fuente_principal: 'Lora', serif;
+$fuente_principal: 'Lora', italic;
 
 // Tamaño de Media Queries
 $telefono: 480px;
@@ -9,12 +10,19 @@ $tablet: 1000px;
 $desktop: 1024px;
 
 // Colores
-$negro: #000000;
-$amarillo: #E08709;
-$verde: #71B100;
+$negro: #030405;
+$amarillo: #FFCE37;
+$verde: #009A63;
 $blanco: #FFFFFF;
 $gris: #e1e1e1;
 $grisOscuro: #333333;
+$rojo: #E9486C;
+$azul: #4272b7;
+
+// Colores Secundarios
+$verde2: #00A899;
+$tomate: #F7A85D;
+$gris2: #979695;
 
 $separacion: 5rem;
 

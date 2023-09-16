@@ -60,7 +60,7 @@ export class BlogsComponent implements OnInit{
   //Click en div para abrir blog
  onDivClick(blogId: number | undefined){
    if (blogId !== undefined) {
-     this.router.navigate(['user/ver-blog', blogId]);
+     this.router.navigate(['user/ver-blogs', blogId]);
    }
   }
 

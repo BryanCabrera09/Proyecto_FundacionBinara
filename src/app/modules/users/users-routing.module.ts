@@ -9,7 +9,15 @@ const routes: Routes = [
   {
     path: 'ver',
     loadChildren: () => import('./ver-proyecto/ver-proyecto.module').then(m => m.VerProyectoModule)
-  }
+  },
+  {
+    path: '',
+    loadChildren: () => import('./blogs/blogs.module').then(m => m.BlogsModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('./ver-blogs/ver-blogs.module').then(m => m.VerBlogsModule)
+  },
 ];
 
 @NgModule({
