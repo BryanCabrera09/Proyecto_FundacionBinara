@@ -1,0 +1,147 @@
+<body>
+    <div class="seccion container">
+
+        <div class="titulo">
+            <h2> Nuestro Blog <span>Binara</span></h2>
+            <input id="btn-abrir-popup" type="submit" value="Crear Nuevo Blog" (click)="getForm()">
+        </div>
+
+        <div class="background centering articles">
+        
+    
+            <article *ngFor="let blog of blogs" id="abrir-blog"  class="article-container" (click)="onDivClick(blog._id)">
+                <div class="image-container">
+                    <figure >
+                        <img [src]="blog.imagen" alt="Portada de {{blog.titulo}}"
+                        title="Portada de {{blog.titulo}}" />
+                    </figure>
+                </div>
+
+                <ul class="iconos">
+                    <li>
+                        <img src="../../../../../../assets/img/like.png" alt="img">
+                        <p>283</p>
+                    </li>
+                    <li>
+                        <img src="../../../../../../assets/img/dislike.png" alt="img">
+                        <p>283</p>
+                    </li>
+                    <li>
+                        <img src="../../../../../../assets/img/comentarios.png" alt="img">
+                        <p>283</p>
+                    </li>
+                </ul>
+
+                <div class="article-preview">
+                    <h2 class="titulo-blog">{{ blog.titulo }}</h2>
+
+                    <ul class="iconos detalle">
+                        <li>
+                            <h4>{{ blog.nombre_autor }}, {{ blog.apellido_autor }}</h4>
+                        </li>
+                        <li>
+                            <h4>{{ blog.fecha }}</h4>
+                        </li>
+                    </ul>
+                    <p class="limitarparrafo"> {{ blog.parrafo1 }}</p>
+                </div>
+            </article>
+         
+
+
+ <!--
+        <article id="abrir-blog"  class="article-container">
+            <div class="image-container">
+                <figure >
+                    <img src="https://img.freepik.com/free-photo/pathway-middle-green-leafed-trees-with-sun-shining-through-branches_181624-4539.jpg?w=900&t=st=1687123477~exp=1687124077~hmac=6e8b1735a2cb25be79f248b6a3307a37a15b080dee114565d01704b97d432a80"
+                        alt="Preview" title="Preview" />
+                </figure>
+            </div>
+
+            <ul class="iconos">
+                <li>
+                    <img src="../../../../../../assets/img/like.png" alt="img">
+                    <p>283</p>
+                </li>
+                <li>
+                    <img src="../../../../../../assets/img/dislike.png" alt="img">
+                    <p>283</p>
+                </li>
+                <li>
+                    <img src="../../../../../../assets/img/comentarios.png" alt="img">
+                    <p>283</p>
+                </li>
+            </ul>
+
+            <div class="article-preview">
+                <h2 class="titulo-blog">Titulo del Blog</h2>
+
+                <ul class="iconos detalle">
+                    <li>
+                        <h4>Nombre de autor</h4>
+                    </li>
+                    <li>
+                        <h4>19-08-2023</h4>
+                    </li>
+                </ul>
+                <p class="limitarparrafo">
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                    Praesent in mauris eu tortor porttitor accumsan.
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                    Praesent in mauris eu tortor porttitor accumsan. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                    Praesent in mauris eu tortor porttitor accumsan.
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                    Praesent in mauris eu tortor porttitor accumsan.
+                </p>
+            </div>
+        </article>
+    
+-->
+
+
+        </div>
+
+    </div>
+
+    <div class="overlay" id="overlay">
+        <form class="formulario" id="popup" action="procesar_comentario.php" method="post">
+            <div class="header-form">
+                <h1>Crea tu Blog</h1>
+                <a id="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+            </div>
+            <div id="fecha"></div>
+
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" placeholder="Título del blog" [(ngModel)]="titulo" required>
+
+            <label for="titulo">Imagen:</label>
+            <input type="file" (change)="onFileSelected($event)" accept="image/*">
+            <img [src]="imageSrc" *ngIf="imageSrc" alt="imageUpload">
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre del Autor" [(ngModel)]="nombre_autor" required>
+
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="nombre" placeholder="Apellido del Autor" [(ngModel)]="apellido_autor" required>
+    
+            <label for="e-mail">Email:</label>
+            <input type="email" id="e-mail" name="e-mail" placeholder="Email del Autor" [(ngModel)]="email_autor" required>
+
+            <label for="parrafo1-blog">Primer párrafo:</label>
+            <textarea class="textarea-auto" id="parrafo1-blog" name="parrafo1-blog" placeholder="Escriba el primer párrafo del Blog" [(ngModel)]="parrafo1" required></textarea>
+
+            <label for="parrafo2-blog">Segundo párrafo:</label>
+            <textarea class="textarea-auto" id="parrafo2-blog" name="parrafo2-blog" placeholder="Escriba el segundo párrafo del Blog" [(ngModel)]="parrafo2" required></textarea>
+
+            <label for="parrafo3-blog">Tercer párrafo 3:</label>
+            <textarea class="textarea-auto" id="parrafo3-blog" name="parrafo3-blog" placeholder="Escriba el tercer párrafo del Blog" [(ngModel)]="parrafo3"></textarea>
+
+
+            <div class="botones-form-blog">
+                <input id="publicar" type="submit" value="Publicar" (click)="publicarBlog()">
+                <input type="submit" value="Guardar">
+            </div>
+        </form>
+    </div>
+
+</body>
