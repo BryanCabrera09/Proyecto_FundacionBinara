@@ -31,4 +31,5 @@ function handleCredentialResponse(response) {
       toastr.error("Error al iniciar sesión con Google", "Error");
       //window.location.href = "/login";
     });
+    sessionStorage.setItem('token-session', body.id_token)
 }

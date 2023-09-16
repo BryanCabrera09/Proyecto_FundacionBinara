@@ -8,3 +8,15 @@ export const languages = [
         flag: 'es'
     }
 ];
+
+export const userItems = [
+
+    {
+        icon: 'far fa-user',
+        label: 'Perfil'
+    },
+    {
+        icon: 'fa-solid fa-power-off',
+        label: 'Cerrar Sesión'
+    },
+]

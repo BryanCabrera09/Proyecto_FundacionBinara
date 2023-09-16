@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { userItems } from 'src/app/core/models/dummy-data';
 import { LoadScriptService } from 'src/app/core/services/load-script.service';
 
 @Component({
@@ -11,6 +12,11 @@ export class HeaderComponent implements OnInit {
 
   isMenuOpen: boolean = false;
   selectedLink: string = '';
+  logueado: boolean = false;
+
+  bodyAuthGoogle: any = {};
+
+  userItems = userItems;
 
   constructor(private router: Router, private loadScriptService: LoadScriptService) {
 
@@ -18,7 +24,14 @@ export class HeaderComponent implements OnInit {
     loadScriptService.loadScript(['menu-toggle'])
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+    let token = sessionStorage.getItem('token-session') as string;
+    this.bodyAuthGoogle = this.decodeToken(token);
+    console.log(this.bodyAuthGoogle);
+
+    this.isLogged();
+  }
 
   backgroundImages: { [key: string]: string } = {
     '': 'url("assets/img/portada_binara.png")',
@@ -47,4 +60,31 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['../login']);
   }
 
+  isLogged() {
+
+    if (sessionStorage.getItem('token-session')) {
+      this.logueado = true;
+    } else {
+      this.logueado = false;
+    }
+  }
+
+  logOut() {
+    sessionStorage.clear();
+    this.router.navigate(['/']);
+    window.location.reload();
+  }
+
+  decodeToken(token: string): any {
+
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(
+      function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }
+    ).join(''));
+
+    return JSON.parse(jsonPayload);
+  }
 }

@@ -21,6 +21,7 @@ export class FooterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.selectedLanguage = this.languages[0];
   }
 
   onChange() {
