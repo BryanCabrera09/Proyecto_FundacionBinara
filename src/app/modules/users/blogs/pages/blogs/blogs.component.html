@@ -43,7 +43,7 @@
                             <h4>{{ blog.fecha }}</h4>
                         </li>
                     </ul>
-                    <p class="limitarparrafo"> {{ blog.parrafo1 }}</p>
+                    <p class="limitarparrafo"> {{ blog.parrafo }}</p>
                 </div>
             </article>
          
@@ -127,14 +127,14 @@
             <label for="e-mail">Email:</label>
             <input type="email" id="e-mail" name="e-mail" placeholder="Email del Autor" [(ngModel)]="email_autor" required>
 
-            <label for="parrafo1-blog">Primer párrafo:</label>
-            <textarea class="textarea-auto" id="parrafo1-blog" name="parrafo1-blog" placeholder="Escriba el primer párrafo del Blog" [(ngModel)]="parrafo1" required></textarea>
+            <label for="parrafo1-blog">Contenido del Blog:</label>
+            <textarea class="textarea-auto" id="parrafo1-blog" name="parrafo1-blog" placeholder="Escriba el contenido del Blog" [(ngModel)]="parrafo" required></textarea>
 
-            <label for="parrafo2-blog">Segundo párrafo:</label>
-            <textarea class="textarea-auto" id="parrafo2-blog" name="parrafo2-blog" placeholder="Escriba el segundo párrafo del Blog" [(ngModel)]="parrafo2" required></textarea>
+            <!-- <label for="parrafo2-blog">Segundo párrafo:</label>
+            <textarea class="textarea-auto" id="parrafo2-blog" name="parrafo2-blog" placeholder="Escriba el segundo párrafo del Blog" [(ngModel)]="parrafo2" required></textarea> -->
 
-            <label for="parrafo3-blog">Tercer párrafo 3:</label>
-            <textarea class="textarea-auto" id="parrafo3-blog" name="parrafo3-blog" placeholder="Escriba el tercer párrafo del Blog" [(ngModel)]="parrafo3"></textarea>
+            <label for="parrafo3-blog">Bibliografia:</label>
+            <textarea class="textarea-auto" id="parrafo3-blog" name="parrafo3-blog" placeholder="Escriba la Bibliografia del Blog" [(ngModel)]="bibliografia"></textarea>
 
 
             <div class="botones-form-blog">

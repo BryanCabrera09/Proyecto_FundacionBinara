@@ -7,7 +7,7 @@ export class Blogpost {
     apellido_autor?: string;
     email_autor?: string;
     fecha?: Date;
-    parrafo1?: string;
-    parrafo2?: string;
-    parrafo3?: string;
+    parrafo?: string;
+    //parrafo2?: string;
+    bibliografia?: string;
 }

@@ -112,6 +112,8 @@ h4 {
 
 .parrafos{
   margin: 4rem 0;
+  word-wrap: break-word;
+  white-space: pre-line;
 }
 
 .formulario {
@@ -192,6 +194,10 @@ input[type="submit"]:hover {
   }
 }
 
+.comentarios{
+  background-color: $gris;
+  max-width: 20rem;
+}
 
 .header-form a:hover{
   color: $negro;

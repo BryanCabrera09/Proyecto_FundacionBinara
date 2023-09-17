@@ -1,9 +1,9 @@
 <main class="container">
     <div>
-        <h1>{{ blogs.titulo }}</h1>
+        <h1> {{ blogs.titulo }}</h1>
     
         <div class="portada">
-            <!-- <img  [src]="blog.imagen" alt="Imagen de Blog" /> -->
+            <img  [src]="blogs.imagen" alt="Imagen de Blog" />
             </div>
     
         <ul class="iconos">
@@ -27,17 +27,22 @@
         <ul class="iconos user">
             <li>
                 <img src="../../../../../../assets/img/user.png" alt="img">
-                <!-- <h1>{{ blog.nombre_autor }} {{ blog.apellido_autor }}</h1> -->
+                <h1>{{ blogs.nombre_autor }} {{ blogs.apellido_autor }}</h1>
             </li>
         </ul>
         
         <div class="parrafos">
-            <!-- <p>{{ blog.parrafo1 }}</p>
-            <p>{{ blog.parrafo2 }}</p>
-            <p>{{ blog.parrafo3 }}</p> -->
+            {{ blogs.parrafo }}
+
+            <h3><br>Bibliografia</h3>
+            {{ blogs.bibliografia }}
         </div>
+            
     
         <input id="btn-abrir-popup-comentario" type="submit" value="Deja tu comentario">
+
+        <div class="comentarios" id="comentarios">
+        </div>
     
     </div>
     
@@ -50,13 +55,10 @@
                 <label for="nombre-comentario">Tu Nombre y Apellido:</label>
                 <input type="text" id="nombre-comentario" name="nombre" placeholder="Eg: Pedro Campoverde" [(ngModel)]="nombre" required>
         
-                <label for="email-comentario">Email:</label>
-                <input type="email" id="email-comentario" name="e-mail" autocomplete="on" placeholder="ejemplo123@gmail.com" [(ngModel)]="email" required>
-        
                 <label for="comentario">Comentario:</label>
                 <textarea id="comentario" name="comentario" rows="5" [(ngModel)]="comentario" required></textarea>
         
-                <input type="submit" value="Enviar Comentario" (click)="guardarComentario()">
+                <input id="publicar" type="submit" value="Enviar Comentario" (click)="guardarComentario()">
             </form>
         </div>
     

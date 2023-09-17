@@ -22,9 +22,9 @@ export class BlogsComponent implements OnInit{
   nombre_autor: string = '';
   apellido_autor: string = '';
   email_autor: string = '';
-  parrafo1: string = '';
-  parrafo2: string = '';
-  parrafo3: string = '';
+  parrafo: string = '';
+  //parrafo2: string = '';
+  bibliografia: string = '';
 
 
   visible: boolean = true;
@@ -44,9 +44,9 @@ export class BlogsComponent implements OnInit{
       this.nombre_autor = data.blog.nombre_autor;
       this.apellido_autor = data.blog.apellido_autor;
       this.email_autor = data.blog.email_autor;
-      this.parrafo1 = data.blog.parrafo1;
-      this.parrafo2 = data.blog.parrafo2;
-      this.parrafo3 = data.blog.parrafo3;
+      this.parrafo = data.blog.parrafo;
+      //this.parrafo2 = data.blog.parrafo2;
+      this.bibliografia = data.blog.bibliografia;
     }
   }
 
@@ -113,20 +113,7 @@ imageSrc: string | ArrayBuffer | null = null;
       };
       reader.readAsDataURL(input.files[0]);
     }
-
-
-
-    // const file = event.target.files[0];
-
-    // if (file) {
-    //   const reader = new FileReader();
-    //   reader.onload = (e: any) => {
-    //     this.imageSrc = e.target.result;
-    //   };
-    //   reader.readAsDataURL(file);
-    // }
   }
-
 
   //Listar blogs
   getActiveBlogsList(): void {
@@ -161,9 +148,9 @@ imageSrc: string | ArrayBuffer | null = null;
     this.blog.nombre_autor = this.nombre_autor;
     this.blog.apellido_autor = this.apellido_autor;
     this.blog.email_autor = this.email_autor;
-    this.blog.parrafo1 = this.parrafo1;
-    this.blog.parrafo2 = this.parrafo2;
-    this.blog.parrafo3 = this.parrafo3;
+    this.blog.parrafo = this.parrafo;
+    //this.blog.parrafo2 = this.parrafo2;
+    this.blog.bibliografia = this.bibliografia;
   }
 
   publicarBlog(){

@@ -10,7 +10,7 @@ import { Blogscomentariospost } from "../models/blogcomentariospost";
 })
 export class ComentariosService {
 
-    comentariosUrl = `${baserUrl}/comentarios`;
+    comentariosUrl = `${baserUrl}/ver-blogs`;
 
     constructor(private http:HttpClient) {}
 

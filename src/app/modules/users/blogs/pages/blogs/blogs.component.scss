@@ -172,12 +172,12 @@ input[type="submit"]:hover {
 }
 
 .limitarparrafo{
-
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-align: justify;
+    word-wrap: break-word;
 }
 .articles figure {
   width: 100%;
@@ -230,6 +230,7 @@ textarea{
   overflow-y: hidden;
   resize: none;
   min-height: 5rem;
+  white-space: pre-line;
 }
 
 .overlay{

@@ -2,28 +2,27 @@ import { DatePipe } from '@angular/common';
 import { Component, ElementRef, ViewChild, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Route, Router } from '@angular/router';
 import { Blogscomentariospost } from 'src/app/core/models/blogcomentariospost';
 import { Blogcomentarios } from 'src/app/core/models/blogcommentarios';
 import { Blogs } from 'src/app/core/models/blogs';
 import { BlogsService } from 'src/app/core/services/blogs.service';
 import { ComentariosService } from 'src/app/core/services/comentarios.service';
+import { __param } from 'tslib';
 
 @Component({
   selector: 'app-ver-blogs',
   templateUrl: './ver-blogs.component.html',
   styleUrls: ['./ver-blogs.component.scss']
 })
-export class VerBlogsComponent {
+export class VerBlogsComponent implements OnInit {
 
   blogs!: Blogs;
-
-  //blogcomentario!: Blogcomentarios[];
+  comentarios!: Blogcomentarios[];
 
   //Declaracion de datos
   id_blog?: number;
   nombre?: string = '';
-  email?: string = '';
   fecha?: string = '';
   comentario?: string = '';
 
@@ -42,7 +41,6 @@ export class VerBlogsComponent {
     if(data.blogcomentario != null){
       this.id_blog = data.blogcomentario.id_blog;
       this.nombre = data.blogcomentario.nombre;
-      this.email = data.blogcomentario.email;
       this.fecha = data.blogcomentario.fecha;
       this.comentario = data.blogcomentario.comentario;
     }
@@ -51,58 +49,41 @@ export class VerBlogsComponent {
   ngOnInit(): void {
 
     const id = this.route.snapshot.paramMap.get('id');
-
     this.buscarBlogPorId(id!);
     this.getForm();
   }
 
+  // onClose(): void {
+  //   this.dialogRef.close();
+  // }
   onClose(): void {
-    this.dialogRef.close();
-  }
-
-  Datos(): void{
-    //this.blogcomentario._id = this.id_blog;
-    this.blogcomentario.nombre = this.nombre;
-    this.blogcomentario.email = this.email;
-    this.blogcomentario.comentario = this.comentario;
-  }
-
-  //publicarComentario
-  guardarComentario(){
-    this.comentariosService.createComentario(this.blogcomentario).subscribe(
-      (response) => {
-        console.log('Comentario publicado con éxito', response);
-        this.onClose();
-        window.location.reload();
-      },
-      (error) => {
-        console.error('Error de guardar comentario', error);
-      }
-    );
-  }
-
-  
-
-  //Buscar
-  buscarBlogPorId(id: String):void {
-    this.blogsService.searchBlogById(id).subscribe({
-      next: (data: any) => {
-        this.blogs = data;
-        console.log(this.blogs);
-      },
-      error: error => {
-        console.error('Error obteniendo el blog:', error);
-      }
+    var popup = document.getElementById("-comentario");
+    var botonGuardar = document.getElementById("publicar");
+    botonGuardar?.addEventListener("click", function () {
+      window.close;
     });
   }
 
-  // ngAfterViewInit() {
-  //   const id = this.route.snapshot.paramMap.get('id');
-  //   this.buscarBlogPorId(id!);
-  // }
-
+  //Buscar Blog por Id para mostrar en pantalla
+  buscarBlogPorId(id: String): void {
+    this.blogsService.searchBlogById(id).subscribe({
+      next: (data: any) => {
+        const blogs = data;
+        console.log(blogs);
+        this.blogs = blogs.blogs;
+        console.log(this.blogs.titulo);
+        
+      },
+      error: (error: any) => {
+        console.error('Error obteniendo el blog:', error);
+      },
+      complete:() => {
+        console.log('Busqueda de blog por ID completada')
+      },
+    });
+  }
   
-  //LLama a popup para enviar comentarios
+  //LLama a popup para crear comentarios
   getForm(): void{
     var btnAbrirPopup = document.getElementById('btn-abrir-popup-comentario'),
     overlay = document.getElementById('overlay-comentario'),
@@ -111,19 +92,44 @@ export class VerBlogsComponent {
 
     btnAbrirPopup?.addEventListener('click', function(){
       overlay?.classList.add('active');
-
       popup?.classList.add('active');
     });
 
     btnCerrarPopup?.addEventListener('click', function(){
       overlay?.classList.remove('active');
-
       popup?.classList.remove('active');
     });
   }
 
+  //Datos
+  Datos(): void{
+    //this.blogcomentario._id = this.id_blog;
+    this.blogcomentario.nombre = this.nombre;
+    this.blogcomentario.comentario = this.comentario;
+  }
+    //Crear Comentario
+    guardarComentario(){
+      this.Datos();
+      this.comentariosService.createComentario(this.blogcomentario).subscribe(
+        (response) => {
+          console.log('Comentario publicado con éxito', response);
 
+          this.onClose();
+          window.location.reload();
+        },
+        (error) => {
+          console.error('Error de guardar comentario', error);
+        }
+      );
+    }
 
-  //Guardar comentarios
+    openSuccessSnackBar(){
+      this.snackBar.open('Comentario registrado con éxito', 'cerrar',{
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['success-snackbar']
+      });
+    }
 
 }
