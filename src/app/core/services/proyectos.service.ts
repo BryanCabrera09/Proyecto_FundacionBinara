@@ -43,4 +43,9 @@ export class ProyectosService {
     return this.http.put(`${this.projectsUrl}/${id}/activar`, {});
   }
 
+  editarmapa(mapas: string[],id:string): Observable<any> {
+    const body = { mapas };
+    return this.http.put<any>(this.projectsUrl + "/"+id, body);
+  }
+
 }
