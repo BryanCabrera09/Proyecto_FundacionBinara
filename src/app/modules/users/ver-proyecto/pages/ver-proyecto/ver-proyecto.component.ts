@@ -10,6 +10,7 @@ import { ActividadesService } from 'src/app/core/services/actividades.service';
 import { Actividades } from 'src/app/core/models/actividades';
 import { RegisterMapComponent } from 'src/app/modules/manager/register-map/pages/register-map/register-map.component';
 import Swal from 'sweetalert2';
+import baserUrl from "src/app/core/helpers/helperUrl";
 
 declare var google: any;
 
@@ -26,6 +27,7 @@ export class VerProyectoComponent {
   parroquia: string = "";
   lat: string = "";
   lng: string = "";
+  baseUrl: string = baserUrl;
 
   constructor(private dialog: MatDialog, private route: ActivatedRoute, private proyectosService: ProyectosService, private acticidadesService: ActividadesService) { }
   ngOnInit(): void {

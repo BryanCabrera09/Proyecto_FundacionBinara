@@ -4,6 +4,7 @@ import { RegisterProjectComponent } from 'src/app/modules/manager/register-proje
 import { Router } from '@angular/router';
 import { Proyectos } from 'src/app/core/models/proyectos';
 import { ProyectosService } from 'src/app/core/services/proyectos.service';
+import baserUrl from "src/app/core/helpers/helperUrl";
 
 @Component({
   selector: 'app-proyectos',
@@ -14,6 +15,7 @@ import { ProyectosService } from 'src/app/core/services/proyectos.service';
 export class ProyectosComponent implements OnInit {
 
   projects?: Proyectos[];
+baseUrl: string= baserUrl;
 
   constructor(private dialog: MatDialog, private router: Router, private projectService: ProyectosService) { }
 

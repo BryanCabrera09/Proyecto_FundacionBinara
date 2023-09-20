@@ -258,8 +258,9 @@ export class RegisterProjectComponent {
     this.Datos();
     this.proyecto.mapas = mapasIds;
     this.proyectoService.createProject(this.proyecto).subscribe(
-      (response) => {
+      (response: any) => {
         console.log('Proyecto registrado con éxito', response);
+        this.subirimagen(response.proyecto.uid)
         this.onClose();
         Swal.fire({
           position: 'center',
@@ -269,13 +270,13 @@ export class RegisterProjectComponent {
           timer: 1500
         });
       },
-      (error) => {
-        console.error('Error al registrar el proyecto', error);
+      (error: any) => {
+        console.error('Error al registrar el proyecto', error.error.msg);
         console.log(this.proyecto.portada)
         Swal.fire({
           position: 'center',
           icon: 'error',
-          title: '<strong>Error al registrar proyecto</strong>',
+          title: error.error.msg,
           showConfirmButton: false,
           timer: 1500
         });
@@ -295,4 +296,27 @@ export class RegisterProjectComponent {
   trackByIndex(index: number): number {
     return index;
   }
+  subirimagen(id:string) {
+    const base64String = this.proyecto.portada; // tu cadena base64 aquí
+    const byteCharacters = atob(base64String.split(',')[1]);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], {type: 'image/jpeg'});
+    const file = new File([blob], 'imagen.jpg', {type: 'image/jpeg'}); // Creando un objeto File
+    
+    this.proyectoService.uploadImage(id, file).subscribe({ // Usando el objeto File aquí
+      next: (response) => {
+        console.log('Imagen subida exitosamente', response);
+      },
+      error: (error) => {
+        console.error('Error al subir la imagen', error);
+      },
+    });
+  }
+  
+  
+  
 }
