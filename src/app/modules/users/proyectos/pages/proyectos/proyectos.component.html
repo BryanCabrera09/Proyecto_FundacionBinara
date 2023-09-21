@@ -5,7 +5,7 @@
                 <article *ngFor="let project of projects" class="article-container">
                     <div class="image-container">
                         <figure>
-                            <img [src]="project.portada" alt="Portada de {{project.titulo}}"
+                            <img [src]="baseUrl + '/imagen/proyecto/'+ project.portada" alt="Portada de {{project.titulo}}"
                                 title="Portada de {{project.titulo}}" />
                         </figure>
                     </div>

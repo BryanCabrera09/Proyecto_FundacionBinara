@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import baserUrl from '../helpers/helperUrl';
 import { Proyectos } from '../models/proyectos';
 import { Observable } from 'rxjs';
@@ -41,6 +41,22 @@ export class ProyectosService {
   activarProyecto(id: number): Observable<any> {
     // Realiza la solicitud PUT para activar el proyecto
     return this.http.put(`${this.projectsUrl}/${id}/activar`, {});
+  }
+
+  editarmapa(mapas: string[],id:string): Observable<any> {
+    const body = { mapas };
+    return this.http.put<any>(this.projectsUrl + "/"+id, body);
+  }
+
+  uploadImage(projectId: string, file: File) {
+    const formData = new FormData();
+    formData.append('archivo', file);
+
+    const headers = new HttpHeaders();
+
+    const url = `${baserUrl}/imagen/proyecto/${projectId}`;
+
+    return this.http.post(url, formData, { headers });
   }
 
 }

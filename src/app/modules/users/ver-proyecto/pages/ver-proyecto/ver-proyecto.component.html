@@ -4,7 +4,7 @@
     </h5>
     <div class="details-grid">
         <div class="image-container">
-            <img [src]="proyecto.portada" alt="Imagen del proyecto">
+            <img [src]="baseUrl + '/imagen/proyecto/'+ proyecto.portada" alt="Imagen del proyecto">
         </div>
         <div class="details-column">
             <h3 class="titulodetalle">Detalles del Proyecto</h3>
@@ -81,7 +81,7 @@
             <div class="map-wrapper">
                 <div #mapContainer class="map-container" id="mapContainer{{i}}"></div>
                 <div class="coordinates-display"> {{ mapa?.coorX }} , {{ lng }}</div>
-              </div>
+            </div>
             <div class="location-info mapa text-container">
                 <div>
                     Provincia: <input type="text" [value]="mapa.lugar!.split(';')[0]" readonly>
@@ -93,7 +93,14 @@
                     Parroquia: <input type="text" [value]="mapa.lugar!.split(';')[2]" readonly>
                 </div>
             </div>
+            <button (click)="eliminarmapa(i)" class="eliminarmapa-button">
+                <i class="fas fa-trash-alt"></i> Eliminar
+            </button>
         </div>
+    </div>
+    
+    <div class="button-container">
+        <button class="add-project-button" (click)="agregarmapa()">Añadir nueva ubicación</button>
     </div>
     
     

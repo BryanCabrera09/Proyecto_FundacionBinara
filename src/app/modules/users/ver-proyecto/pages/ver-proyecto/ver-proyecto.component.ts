@@ -8,6 +8,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Mapas } from 'src/app/core/models/mapas';
 import { ActividadesService } from 'src/app/core/services/actividades.service';
 import { Actividades } from 'src/app/core/models/actividades';
+import { RegisterMapComponent } from 'src/app/modules/manager/register-map/pages/register-map/register-map.component';
+import Swal from 'sweetalert2';
+import baserUrl from "src/app/core/helpers/helperUrl";
 
 declare var google: any;
 
@@ -24,6 +27,7 @@ export class VerProyectoComponent {
   parroquia: string = "";
   lat: string = "";
   lng: string = "";
+  baseUrl: string = baserUrl;
 
   constructor(private dialog: MatDialog, private route: ActivatedRoute, private proyectosService: ProyectosService, private acticidadesService: ActividadesService) { }
   ngOnInit(): void {
@@ -200,5 +204,64 @@ export class VerProyectoComponent {
       }
     );
   }
+  
+  agregarmapa():void{
+    this.dialog.open(RegisterMapComponent, {
+      width: '800px',
+      hasBackdrop: false,
+      height: '600px',
+      data: { proyecto: this.proyecto, editing:true }  
+    });
+  }
+
+  eliminarmapa(index: number) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, ¡bórralo!',
+      cancelButtonText: 'Cancelar'
+      
+    }).then((result) => {
+      if (result.isConfirmed) {
+         this.proyecto.mapas!.splice(index, 1);
+         
+         const ids: string[] = this.proyecto.mapas!.map(mapa => mapa._id as string);
+         console.log(ids)
+  
+         this.proyectosService.editarmapa(ids,this.proyecto.uid+"").subscribe({
+          next: response => {
+            console.log('Respuesta recibida', response);
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: '<strong>Ubicacion eliminado con éxito</strong>',
+              showConfirmButton: false,
+              timer: 2000
+            });
+            window.location.reload();
+      
+          },
+          error: error => {
+            console.error('Error enviando datos', error);
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: '<strong>Error al eliminar ubicación</strong>',
+              showConfirmButton: false,
+              timer: 1500
+            });
+          },
+          complete: () => {
+            console.log('Completado');
+          }
+        });
+      }
+    })
+  }
+  
   
 }

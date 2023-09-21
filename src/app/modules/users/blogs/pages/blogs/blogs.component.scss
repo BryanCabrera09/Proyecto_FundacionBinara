@@ -1,0 +1,287 @@
+@import '/src/app/core/styles/global-styles.scss';
+@import '/src/app/core/styles/mixins';
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: $fuente_principal;
+  font-size: 1.6rem;
+  line-height: 1.8;
+}
+
+img{
+  width: 100%;
+  display: block;
+}
+
+h1,
+h2,
+h3 {
+  font-family: $fuente_principal;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3.8rem;
+}
+
+h2 {
+  font-size: 3.4rem;
+}
+
+h3 {
+  font-size: 3rem;
+}
+
+h4 {
+  font-size: 1.2rem;
+  color: $tomate;
+  font-weight: $bold;
+}
+
+.container {
+  width: 95%;
+  max-width: 120rem;
+  margin: 0 auto;
+  margin-top: calc($separacion / 2);
+  margin-bottom: calc($separacion / 2);
+}
+
+.titulo{
+  margin: 4rem 2rem;
+  h2{
+    font-size: 6rem;
+    font-weight: $delgada;
+    margin-bottom: 3rem;
+  }
+  span{
+    text-transform: uppercase;
+    font-weight: $black;
+  }
+} 
+
+input[type="submit"] {
+  position: relative;
+  background-color: $azul;
+  width: 20rem;
+  color: $blanco;
+  font-weight: $bold;
+  padding: 1rem;
+  border: none;
+  border-radius: .5rem;
+  cursor: pointer;
+  box-shadow: 0 5px 6px $gris;
+  transition: .4s;
+  margin: 2rem;
+}
+
+input[type="submit"]:hover {
+  transform: scale(1.05);
+
+}
+
+.titulo-blog{
+  font-size: 2rem;
+  font-weight: $black;
+  margin: 2rem 1rem;
+}
+
+
+.iconos{
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 2rem;
+  margin: 0;
+  li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  p{
+    margin: 1rem;
+  }
+  img{
+    max-width: 1.5rem;
+  }
+
+  &.detalle{
+    margin: 1.5rem 0;
+    padding: 0;
+    font-weight: $bold;
+  }
+}
+
+.article-container {
+  position: relative;
+  border-radius: 1rem;
+  box-shadow: 0 5px 6px #030405;
+  max-height: 70rem;
+}
+
+.image-container {
+  position: relative;
+}
+
+.background {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.background article:hover{
+  transform: scale(1.07);
+  transition: .4s;
+}
+
+.articles {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  justify-content: center;
+  max-width: 100%;
+  gap: 24px;
+}
+
+.articles article {
+  max-width: 33rem;
+  cursor: pointer;
+  position: relative;
+  display: block;
+  transition: all 0.4s ease-in-out;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.articles article a {
+  display: inline-flex;
+  color: var(#DD946F);
+  text-decoration: none;
+}
+
+.article-preview {
+  padding: 0 2rem 2rem 2rem;
+  background: white;
+  //Limita el numero de lineas del parrafo antes de colocar ...
+}
+
+.limitarparrafo{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: justify;
+    word-wrap: break-word;
+}
+.articles figure {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.articles figure img {
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.formulario {
+  margin: 4rem auto;
+  max-width: 70rem;
+  padding: 3rem;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 70);
+  background-color: rgb(248, 244, 244, 1);
+  h1{
+    font-size: 2.5rem;
+    color: $negro;
+  }
+  //usado para animacion
+  opacity: 0;
+  transition: .3s ease;
+  transform: scale(0.7);
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 800;
+  color: $negro;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid $gris;
+  border-radius: 1rem;
+}
+
+textarea{
+  overflow-y: hidden;
+  resize: none;
+  min-height: 5rem;
+  white-space: pre-line;
+}
+
+.overlay{
+  color: $blanco;
+  background-color: rgba(0, 0, 0, .6);
+  position: fixed;
+  inset: 0;
+  visibility: hidden;
+  overflow-y: scroll;
+  img{
+    padding: 2rem;
+  }
+  input[type="file"]{
+    color: $negro;
+    margin-bottom: 2rem;
+  }
+}
+
+.overlay.active{
+  visibility: visible;
+}
+
+.header-form{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-height: 2rem;
+  margin-bottom: 4rem;
+  a{
+    font-size: 3rem;
+    line-height: 4rem;
+    display: block;
+    text-align: right;
+    color: $gris;
+    transition: .3s ease;
+    position: sticky;
+  }
+}
+
+.header-form a:hover{
+  color: $negro;
+}
+
+//animacion
+form.active{
+  opacity: 1;
+  transform: scale(1);
+}
+
+.botones-form-blog{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

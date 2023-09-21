@@ -1,0 +1,35 @@
+<div class="modal-window">
+  <button class="close-button" (click)="onClose()" aria-label="Cerrar ventana">X</button>
+
+  <div class="form-group">
+    <label class="label1" for="projectName">Registro de ubicación</label>
+  </div>
+
+  <div class="map-wrapper">
+    <input id="search" class="search-location" type="text" placeholder="Buscar ubicación..." aria-label="Buscar ubicación">
+    <div #mapContainer class="map-container" role="region" aria-label="Mapa"></div>
+    <div class="coordinates-display">Coordenadas Seleccionadas: {{ lat }} , {{ lng }}</div>
+  </div>
+
+  <div class="location-info">
+    <div class="location-info-item">
+      <label for="provincia">Provincia:</label>
+      <input id="provincia" type="text" [value]="provincia" readonly>
+    </div>
+    <div class="location-info-item">
+      <label for="canton">Cantón:</label>
+      <input id="canton" type="text" [value]="canton" readonly>
+    </div>
+    <div class="location-info-item">
+      <label for="parroquia">Parroquia:</label>
+      <input id="parroquia" type="text" [value]="parroquia" readonly>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button class="submit-button cancelar" (click)="onClose()">Cancelar</button>
+    <button class="submit-button" (click)="GuardarMapa()" type="submit">
+      Registrar ubicación
+    </button>
+  </div>
+</div>

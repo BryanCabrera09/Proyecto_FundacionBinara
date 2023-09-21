@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
     'Nosotros': 'url("https://di-sitebuilder-assets.s3.amazonaws.com/GMimages/gmMLP/chevrolet/Corvette/2023/Content-1.jpg")',
     'Proyectos': 'url("https://di-sitebuilder-assets.s3.amazonaws.com/GMimages/gmMLP/chevrolet/Corvette/2023/Content-1.jpg")',
     'Anuncios': 'url("../assets/images/anuncios-background.jpg")',
-    'Blog': 'url("../assets/images/blog-background.jpg")',
+    'Blog': 'url("../assets/img/blog-background.jpeg")',
     'Contactanos': 'url("../assets/images/contactanos-background.jpg")',
     'Involúcrate': 'url("../assets/images/involucrate-background.jpg")'
   };
@@ -52,8 +52,11 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['user/projects']);
   }
 
-  goToAnalytics() {
-    this.router.navigate(['manager/dashboard'])
+  goToAnalytics(){
+    this.router.navigate(['manager/dashboard']);
+  }
+  goToBlogs(){
+    this.router.navigate(['user/blogs']);
   }
 
   goToLogin() {
