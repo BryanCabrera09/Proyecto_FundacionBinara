@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { getCookie } from 'typescript-cookie';
 import jwt_decode from 'jwt-decode';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoadScriptService } from 'src/app/core/services/load-script.service';
 
 @Component({
   selector: 'app-auth',
@@ -17,7 +18,10 @@ export class AuthComponent implements OnInit {
   formLogIn!: FormGroup;
 
   constructor(private loginService: AuthService, private router: Router,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder, private loadScriptService: LoadScriptService) {
+
+    loadScriptService.loadScript(['login-google']);
+  }
 
   ngOnInit(): void {
     this.formLogIn = this.startForm();
@@ -34,7 +38,7 @@ export class AuthComponent implements OnInit {
     const control = this.formLogIn.get(controlName);
     return !!control && control.invalid && control.touched;
   }
-  
+
   markAllFieldsAsTouched() {
     Object.values(this.formLogIn.controls).forEach(control => {
       control.markAsTouched();
@@ -60,9 +64,5 @@ export class AuthComponent implements OnInit {
       );
     }
   }
-  
-  
-
-
 
 }

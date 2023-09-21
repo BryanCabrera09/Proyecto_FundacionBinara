@@ -1,7 +1,7 @@
 @import '../../../../app/core/styles/global-styles.scss';
 
 footer {
-  background: #0e1219;
+  background: $negro;
   color: white;
   overflow: hidden;
   display: flex;
@@ -52,18 +52,6 @@ menu li {
   height: 180px;
 }
 
-.social-links {
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-  width: 180px;
-}
-
-.social-links img {
-  width: 24px;
-  height: 24px;
-}
-
 .footer-top {
   max-width: 800px;
 }
@@ -94,7 +82,7 @@ menu li {
 }
 
 .background {
-  background-color: #2C2C2C;
+  background-color: $negro;
   display: grid;
   place-items: center;
   height: 100vh;
@@ -147,4 +135,110 @@ menu li {
   stroke: white;
   transform: rotateY(360deg);
   stroke-width: 1.75;
+}
+
+/* Change Languages */
+.menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 1.25rem;
+  width: 280px;
+
+  mat-label {
+    color: $negro;
+    font-weight: bold;
+
+    img {
+      margin-right: 0.6rem;
+      height: 12px;
+    }
+  }
+
+  mat-select {
+    color: $negro;
+  }
+}
+
+@media (max-width: 1180px) {
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  li {
+    font-size: 1.4rem;
+  }
+
+}
+
+@media (max-width: 950px) {
+
+  .social-media-buttons {
+    margin-left: -67px;
+  }
+
+  .social-media-buttons li {
+    width: 34px;
+    height: 34px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  li {
+    font-size: 1.3rem;
+  }
+
+}
+
+@media (max-width: 690px) {
+
+  .logo {
+    width: 140px;
+    height: 150px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  li {
+    font-size: 1.3rem;
+  }
+
+}
+
+@media (max-width: 490px) {
+
+  .footer-top-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+  }
+
+  .logo {
+    width: 240px;
+    height: 250px;
+    margin-bottom: -30px;
+  }
+
+  .social-media-buttons {
+    margin-left: -47px;
+  }
+
+  .social-media-buttons li {
+    width: 41px;
+    height: 41px;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  li {
+    font-size: 1.6rem;
+  }
+
 }

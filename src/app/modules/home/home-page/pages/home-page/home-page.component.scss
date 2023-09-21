@@ -13,11 +13,6 @@ body {
   line-height: 1.8;
 }
 
-p {
-  color: $negro;
-  font-size: 2rem;
-}
-
 .container {
   width: 95%;
   max-width: 120rem;
@@ -26,6 +21,93 @@ p {
   margin-bottom: calc($separacion / 2);
 }
 
+/* SABIAS QUE */
+.sabias {
+  background-color: $verde;
+  font-size: 2.4rem;
+  padding: 3rem;
+  color: $blanco;
+  border-radius: 2rem;
+
+  blockquote {
+    padding-left: 5rem;
+    position: relative;
+
+    &::before {
+      content: '';
+      background-image: url("/assets/img/comilla.svg");
+      background-repeat: no-repeat;
+      width: 4rem;
+      height: 6rem;
+      display: block;
+      position: absolute;
+      left: -2%;
+    }
+  }
+
+  p {
+    text-align: right;
+    color: $blanco;
+    font-style: italic;
+  }
+
+  h3 {
+    font-weight: $bold;
+    margin: 0;
+  }
+}
+
+/* QUIENES SOMOS */
+.quienes-somos {
+  /* background-image: url('/assets/img/portada_binara.png'); */
+  //background-image: url(https://www.biodisol.com/wp-content/uploads/2016/07/rsz_famosos-que-protegen-el-medio-ambiente-005751a58c8902e-1-678x381.jpg);
+  background-color: $negro;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .somos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    gap: 10rem;
+
+    .info-nosotros {
+
+      h2 {
+        color: #ffffff;
+        font-size: 2.6rem;
+
+        &::after {
+          content: '';
+          display: block;
+          width: 20rem;
+          height: .6rem;
+          align-self: flex-end;
+          background-color: $azul;
+          margin-top: 2rem;
+        }
+      }
+
+      p {
+        color: #ffffff;
+        font-size: 1.5rem;
+      }
+    }
+
+    .nosotros-img {
+      align-items: center;
+
+      img {
+        width: 100%;
+        margin: 0 auto;
+        height: auto;
+      }
+    }
+  }
+}
+
+/* MISION, VISION, NOSOTROS */
 .nosotros {
 
   h2 {
@@ -34,10 +116,10 @@ p {
   }
 
   .about-us {
-    font-size: 1.5rem;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    gap: 24px;
     align-items: flex-start;
 
     .mision,
@@ -47,7 +129,7 @@ p {
       flex: 1;
       padding: 20px;
       border-radius: 1rem;
-      box-shadow: 0 2px 4px #009A63;
+      box-shadow: 0 2px 4px 2px #009A63;
       margin: 10px;
 
       h3 {
@@ -62,35 +144,43 @@ p {
   }
 }
 
-@media screen and (max-width: 870px) {
-  .about-us {
-    flex-direction: column;
+/* BLOG Styles */
+.entrada-blog {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+
+  margin-bottom: 4rem;
+  padding: 20px;
+  border-radius: 1rem;
+  box-shadow: 4px 4px 4px 4px #979695;
+
+  .imagen {
+    display: flex;
+    justify-content: center;
     align-items: center;
+
+    img,
+    picture {
+      max-width: 80%;
+      margin: 0 auto;
+      height: auto;
+    }
   }
 
-  .mision,
-  .vision,
-  .nosotros {
-    width: 100%;
-    min-width: auto;
+  .texto-entrada {
 
-    h3 {
+    h4 {
       font-size: 2rem;
+      font-style: italic;
     }
 
-    p {
-      font-size: 1.3rem;
+    p,
+    span {
+      font-size: 1.8rem;
     }
   }
 }
 
-.quienes-somos {
-  background-color: blueviolet;
-}
-
-a {
-  text-decoration: none;
-}
 
 img,
 picture {
@@ -124,130 +214,11 @@ h4 {
   font-size: 2.6rem;
 }
 
-.contenido-centrado {
-  max-width: 80rem;
-}
-
-.alinear-derecha {
-  margin-top: 3rem;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.boton-amarillo {
-  @include boton($grisOscuro, inline-block);
-}
-
-.boton-amarillo-block {
-  @include boton($grisOscuro, block);
-}
-
-.boton-verde {
-  @include boton($verde, inline-block);
-}
-
-.sabias {
-  background-color: $verde;
-  font-size: 2.4rem;
-  padding: 1rem;
-  color: $blanco;
-  border-radius: 2rem;
-
-  blockquote {
-    padding-left: 5rem;
-    position: relative;
-
-    &::before {
-      content: '';
-      background-image: url("../../../../../../assets/img/comilla.svg");
-      background-repeat: no-repeat;
-      width: 4rem;
-      height: 6rem;
-      display: block;
-      position: absolute;
-      left: -2%;
-    }
-  }
-
-  p {
-    text-align: right;
-    color: $blanco;
-  }
-
-  h3 {
-    font-weight: $bold;
-    margin: 0;
-  }
-
-}
-
-@include tablet {
-  .contenedor-proyectosmarcha {
-    @include grid(3, 2rem);
-  }
-}
-
-.proyectomarcha {
-  background-color: lighten($color: $gris, $amount: 5);
-  border: 1px solid darken($color: $gris, $amount: 10);
-  margin-top: 2rem;
-
-  .contenido-proyecto {
-    padding: 2rem;
-  }
-
-  h3,
-  p {
-    margin: 0;
-  }
-}
-
-.inversion {
-  color: $verde;
-  font-weight: $bold;
-  font-size: 3rem;
-}
-
-.iconos-caracteristicas {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  max-width: 40rem;
-
-  li {
-    flex: 1;
-    display: flex;
-
-    img {
-      flex: 0 0 3rem;
-      margin-right: 1rem;
-    }
-
-    p {
-      font-weight: $black;
-    }
-  }
-}
-
 /* BLOG */
 @include tablet {
   .seccion-inferior {
     display: grid;
     column-gap: 2rem;
-  }
-}
-
-.entrada-blog {
-  margin-bottom: 2rem;
-
-  @include tablet {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    column-gap: 2rem;
-  }
-
-  &:last-of-type {
-    margin-bottom: 0;
   }
 }
 
@@ -281,26 +252,7 @@ h4 {
   }
 }
 
-@include tablet {
-  .iconos-nosotros {
-    @include grid(3, 2rem);
-  }
-}
-
-.icono {
-  text-align: center;
-
-  img {
-    height: 10rem;
-  }
-
-  h3 {
-    text-transform: uppercase;
-  }
-}
-
 /* PROYECTOS ACTIVOS */
-
 .article-container {
   position: relative;
   border-radius: 1rem;
@@ -312,12 +264,26 @@ h4 {
   position: relative;
 }
 
+.nota {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
 .background {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 30px 32px;
+  /* Imagenes Slider */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  transition: background-image 0.5s ease-in-out;
 }
 
 .articles {
@@ -327,55 +293,68 @@ h4 {
   justify-content: center;
   max-width: 1200px;
   gap: 24px;
-}
 
-.articles article {
-  max-width: 320px;
-  cursor: pointer;
-  position: relative;
-  display: block;
-  transition: all 0.4s ease-in-out;
-  overflow: hidden;
-  border-radius: 16px;
-}
+  article {
+    max-width: 310px;
+    max-height: 530px;
+    cursor: pointer;
+    position: relative;
+    display: block;
+    transition: all 0.4s ease-in-out;
+    overflow: hidden;
+    border-radius: 16px;
 
-.articles article a {
-  display: inline-flex;
-  color: var(#DD946F);
-  text-decoration: none;
-}
+    a {
+      display: inline-flex;
+      color: var(#DD946F);
+      text-decoration: none;
+    }
 
+    h2 {
+      margin: 0 0 18px 0;
+      font-size: 1.6rem;
+      color: var(#261E5A);
+      transition: color 0.3s ease-out;
+    }
 
-.articles article h2 {
-  margin: 0 0 18px 0;
-  font-size: 1.6rem;
-  color: var(#261E5A);
-  transition: color 0.3s ease-out;
-}
+    img {
+      max-width: 100%;
+      transform-origin: center;
+      transition: transform 0.4s ease-in-out;
+    }
+  }
 
+  figure {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
 
-.articles article img {
-  max-width: 100%;
-  transform-origin: center;
-  transition: transform 0.4s ease-in-out;
+    img {
+      height: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      object-fit: cover;
+    }
+  }
 }
 
 .article-preview {
   padding: 24px;
   background: white;
-}
 
-.articles figure {
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-}
+  .boton {
+    display: flex;
+    align-items: center;
 
-.articles figure img {
-  height: 100%;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  object-fit: cover;
+    .btn {
+      margin: auto;
+      font-weight: bold;
+    }
+  }
+
+  p {
+    font-size: 1.5rem;
+  }
 }
 
 .articles article:hover img {
@@ -431,4 +410,360 @@ h4 {
 
 .btn:hover::before {
   width: 9em;
+}
+
+/* SLIDER IMAGES */
+.projects {
+  max-width: 100%;
+}
+
+/* MEDIA RESPONSIVE */
+@media (max-width: 1130px) {
+
+  .articles article {
+    max-width: 280px;
+    max-height: 530px;
+  }
+
+  .article-preview p {
+    font-size: 1.3rem;
+  }
+
+  .btn {
+    width: 7em;
+    height: 2.6em;
+    font-size: 1.3rem;
+  }
+
+  .entrada-blog .texto-entrada {
+
+    h4 {
+      font-size: 1.7rem;
+    }
+
+    p,
+    span {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 990px) {
+
+  .entrada-blog .imagen img,
+  picture {
+    max-width: 90%;
+    margin: 0 auto;
+    height: auto;
+  }
+
+  .slider-box {
+    width: 100%;
+
+    .texto {
+      top: 50px;
+      padding: 0 25px;
+
+      h2 {
+        font-size: 35px;
+        margin-bottom: 15px;
+      }
+
+      p {
+        font-size: 15px;
+      }
+    }
+  }
+
+  .nosotros .about-us .mision,
+  .vision,
+  .nosotros {
+
+    h3 {
+      font-size: 2.2rem;
+    }
+
+    p {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+@media (max-width: 820px) {
+
+  .sabias {
+    background-color: $verde;
+    font-size: 2.4rem;
+    padding: 3rem;
+    color: $blanco;
+    border-radius: 2rem;
+
+    blockquote {
+      font-size: 1.9rem;
+    }
+
+  }
+
+  .quienes-somos .somos {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+    gap: 2rem;
+
+    .info-nosotros {
+
+      p {
+        font-size: 1.3rem;
+      }
+    }
+
+    .nosotros-img {
+      img {
+        max-width: 50%;
+        margin: 0 auto;
+        height: auto;
+      }
+    }
+  }
+
+  .entrada-blog .imagen img,
+  picture {
+    max-width: 100%;
+    margin: 0 auto;
+    height: auto;
+  }
+
+  .nosotros {
+    .about-us {
+      flex-direction: column;
+      align-items: center;
+
+      .mision,
+      .vision,
+      .nosotros {
+
+        h3 {
+          font-size: 2.2rem;
+        }
+
+        p {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 715px) {
+
+  .nosotros {
+    h2 {
+      font-size: 3.1rem;
+    }
+  }
+
+  .nota {
+    h2 {
+      font-size: 3.1rem;
+    }
+
+    span {
+      font-size: 1.7rem;
+    }
+  }
+
+  .quienes-somos .somos {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+    gap: 2rem;
+
+    .info-nosotros {
+      h2 {
+        font-size: 3.1rem;
+      }
+    }
+  }
+
+  .blog {
+    h2 {
+      font-size: 3.1rem;
+    }
+
+    .entrada-blog {
+      display: flex;
+      flex-direction: column;
+
+      .imagen img,
+      picture {
+        max-width: 60%;
+        margin: 0 auto;
+        height: auto;
+      }
+    }
+  }
+
+  .btn {
+    width: 7em;
+    height: 2.6em;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 500px) {
+
+  .sabias {
+
+    blockquote {
+      font-size: 1.6rem;
+    }
+
+    p {
+      font-size: 1.7rem;
+    }
+
+    h3 {
+      font-size: 2rem;
+    }
+  }
+
+  .quienes-somos .somos {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+    gap: 2rem;
+
+    .info-nosotros {
+      h2 {
+        font-size: 2.8rem;
+      }
+
+      p {
+        font-size: 1.1rem;
+      }
+    }
+
+    .nosotros-img {
+      img {
+        max-width: 50%;
+        margin: 0 auto;
+        height: auto;
+      }
+    }
+  }
+
+  .nosotros {
+    h2 {
+      font-size: 2.8rem;
+    }
+  }
+
+  .blog {
+    h2 {
+      font-size: 2.8rem;
+    }
+
+    .entrada-blog {
+
+      .imagen img,
+      picture {
+        max-width: 80%;
+        margin: 0 auto;
+        height: auto;
+      }
+
+      .texto-entrada {
+
+        h4 {
+          font-size: 1.6rem;
+        }
+
+        p,
+        span {
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
+
+  .nota {
+    h2 {
+      font-size: 2.8rem;
+    }
+
+    span {
+      font-size: 1.5rem;
+    }
+  }
+
+  .articles article {
+    max-width: 260px;
+    max-height: 475px;
+  }
+
+  .nosotros .about-us {
+    flex-direction: column;
+    align-items: center;
+
+    .mision,
+    .vision,
+    .nosotros {
+
+      h3 {
+        font-size: 1.8rem;
+      }
+
+      p {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 350px) {
+
+  .entrada-blog {
+
+    .imagen img,
+    picture {
+      max-width: 100%;
+      margin: 0 auto;
+      height: auto;
+    }
+
+    .texto-entrada {
+
+      h4 {
+        font-size: 1.5rem;
+      }
+
+      p,
+      span {
+        font-size: 1.3rem;
+      }
+    }
+  }
+
+  .article-preview p {
+    font-size: 1rem;
+  }
+
+  .nosotros .about-us {
+    flex-direction: column;
+    align-items: center;
+
+    .mision,
+    .vision,
+    .nosotros {
+
+      h3 {
+        font-size: 1.8rem;
+      }
+
+      p {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
 }

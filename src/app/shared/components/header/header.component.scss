@@ -9,7 +9,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #010101;
+  background-color: #01010100;
   font-family: $fuente_principal;
 }
 
@@ -19,11 +19,12 @@ a {
 }
 
 .navbar .links a:hover {
-  color: rgb(85, 35, 35);
+  //color: $azul;
+  font-weight: bold;
 }
 
 .log-in {
-  font-weight: 500;
+  font-weight: bold;
   padding: 12px 22px;
   background-color: #0aa5ff7e;
   color: #ffffff;
@@ -34,11 +35,21 @@ a {
 
 .navbar li {
   list-style: none;
-  margin-top: 1.9rem;
 }
 
 header {
   position: relative;
+}
+
+.navbar {
+  height: 350px;
+  background-repeat: no-repeat;
+  background-position: left right;
+  background-size: cover;
+  padding: 40px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 button {
@@ -47,17 +58,6 @@ button {
   font-family: inherit;
   font-size: inherit;
   cursor: pointer;
-}
-
-.navbar {
-  height: 550px;
-  background-repeat: no-repeat;
-  background-position: center right;
-  background-size: cover;
-  padding: 40px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
 }
 
 .navbar .logo {
@@ -71,8 +71,13 @@ button {
 }
 
 .navbar .links {
+  padding: 0;
+  list-style: none;
   display: flex;
+  justify-content: center;
   align-items: center;
+  height: 50%;
+  flex-wrap: wrap;
   gap: 32px;
 }
 
@@ -104,7 +109,7 @@ button {
   display: none;
   position: absolute;
   right: 2rem;
-  top: 60px;
+  top: 100px;
   height: 0;
   width: 300px;
   align-items: center;
@@ -113,10 +118,11 @@ button {
   border-radius: 10px;
   overflow: hidden;
   transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1;
 }
 
 .dropdown_menu.open {
-  height: 400px;
+  height: 500px;
   top: 100px;
 }
 
@@ -138,10 +144,138 @@ button {
   justify-content: center;
 }
 
+/*  */
+.head-content-right {
+  display: flex;
+  align-items: center;
+
+  .head-user-avatar-container {
+
+    margin-right: 50px;
+
+    .head-user-avatar {
+
+      position: relative;
+
+      .user-avatar {
+        margin-bottom: -4px;
+        width: 65px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgb(35 35 35 / 10%);
+        cursor: pointer;
+      }
+    }
+
+    .circle-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      position: absolute;
+      top: -2px;
+      right: -3px;
+      background: #669dfa;
+
+      &.pulse {
+        animation: pulse-animation 1.2s infinite;
+      }
+    }
+  }
+}
+
+@keyframes pulse-animation {
+
+  0% {
+    box-shadow: 0 0 0 0 rgba(26, 104, 206, 0.6);
+  }
+
+  100% {
+    box-shadow: 0 0 0 13px rgba(17, 64, 126, 0);
+  }
+}
+
+@keyframes fall {
+
+  0% {
+    transform: scaleY(0);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+.overlay {
+  background: #fff;
+  margin-top: 10px;
+  box-shadow: 0 1rem 3rem rgb(0 0 0 / 18%);
+  border-radius: 0.25rem;
+}
+
+.overlay-fall {
+  animation: fall 300ms ease-in-out forwards;
+  transform-origin: top-center;
+}
+
+.overlay-user {
+
+  ul {
+    padding: 0.5rem 0;
+    list-style: none;
+    width: 17rem;
+
+    li {
+      padding: 0.35rem 1.5rem;
+      font-size: 16px;
+      font-weight: 400;
+      color: #495057;
+      cursor: pointer;
+
+      a {
+        color: rgb(0, 0, 0);
+      }
+
+      .icon {
+        margin-right: 0.6rem;
+      }
+    }
+
+    li:hover {
+      background: #eff2f3;
+      font-weight: bold;
+    }
+  }
+}
+
+/*  */
+
 /* RESPONSIVE DESIGN */
-@media (max-width: 1310px) {
-  .navbar .links a {
-    font-size: 1.2rem;
+@media (max-width: 1530px) {
+  .navbar {
+    .links {
+      font-size: 1.4rem;
+    }
+
+    .logo {
+      width: 200px;
+    }
+  }
+
+  .log-in {
+    font-size: 1.4rem;
+    padding: 10px 20px;
+    margin-top: 1.2rem;
+  }
+}
+
+@media (max-width: 1320px) {
+  .navbar {
+    .links {
+      font-size: 1.2rem;
+    }
+
+    .logo {
+      width: 180px;
+    }
   }
 
   .log-in {
@@ -152,8 +286,10 @@ button {
 }
 
 @media (max-width: 1180px) {
+
   .navbar .links,
-  .navbar .log-in {
+  .navbar .log-in/* ,
+  .navbar .head-content-right */ {
     display: none;
   }
 
@@ -166,7 +302,39 @@ button {
   }
 
   .dropdown_menu li a:hover {
-    color: rgb(85, 35, 35);
+    font-weight: bold;
+  }
+
+  .dropdown_menu .head-content-right .head-user-avatar-container {
+
+    margin-right: 0%;
+
+    .head-user-avatar .user-avatar {
+      width: 55px;
+    }
+  }
+
+  .overlay-user ul {
+    width: 13rem;
+
+    li {
+      font-size: 12px;
+    }
+  }
+}
+
+@media (max-width: 750px) {
+
+  .dropdown_menu.open {
+    height: 470px;
+    top: 100px;
+  }
+
+  .dropdown_menu {
+
+    li {
+      font-size: 1.5rem;
+    }
   }
 }
 
