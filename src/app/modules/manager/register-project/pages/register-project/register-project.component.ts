@@ -41,10 +41,12 @@ export class RegisterProjectComponent {
   mapapost: Mapas = new Mapas();
   proyectoedit: any;
   edit: boolean = false;
+  ideditar: string="";
 
   constructor(private dialogRef: MatDialogRef<RegisterProjectComponent>, private proyectoService: ProyectosService, private mapaService: MapasService, @Inject(MAT_DIALOG_DATA) public data: any) {
     if (data.proyecto != null) {
       this.proyectoedit = data.proyecto;
+      this.ideditar=data.proyecto.uid;
       this.edit = data.editing;
       this.titulo = data.proyecto.titulo;
       this.objetivoPrincipal = data.proyecto.objetivoPrincipal;
@@ -223,9 +225,10 @@ export class RegisterProjectComponent {
     const mapasIds = this.mapasArray.map(mapa => mapa._id!);
     this.Datos();
     this.proyecto.mapas = mapasIds;
-    this.proyectoService.editProject(this.proyectoedit._id, this.proyecto).subscribe({
+    this.proyectoService.editProject(this.ideditar, this.proyecto).subscribe({
       next: response => {
         console.log('Proyecto actualizado con éxito!', response);
+        this.subirimagen(response.proyecto.uid)
         this.onClose();
         Swal.fire({
           position: 'center',
