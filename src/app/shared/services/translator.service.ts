@@ -10,7 +10,7 @@ export class TranslatorService {
   public lang: any = 'es';
 
   private headers = new HttpHeaders().set('Content-Type', 'application/json')
-    .set('Ocp-Apim-Subscription-Key', '95967bc89cc0413e99850e47d60d51bd')
+    .set('Ocp-Apim-Subscription-Key', '7b4f3485c3fe401ea71a2679e71494f3')
     .set('Ocp-Apim-Subscription-Region', 'eastus');
 
   private URL = 'https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=';

@@ -288,9 +288,8 @@ button {
 @media (max-width: 1180px) {
 
   .navbar .links,
-  .navbar .log-in,
-  .navbar .head-content-right {
-    display: none;
+  .navbar .log-in/* ,
+  .navbar .head-content-right */ {
     display: none;
   }
 

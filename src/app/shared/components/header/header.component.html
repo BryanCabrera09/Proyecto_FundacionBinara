@@ -15,17 +15,19 @@
                 <li><a href="#" (click)="changeBackground('Blog')">{{'Blog' | translate | async}}</a></li>
                 <li><a href="#" (click)="changeBackground('Contactanos')">{{'Contactanos' | translate | async}}</a></li>
                 <li><a href="#" (click)="changeBackground('Involúcrate')">{{'Involúcrate' | translate | async}}</a></li>
-                <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">{{'Estadisticas' | translate |
-                        async}}</a></li>
+                <!-- <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">{{'Estadisticas' | translate |
+                        async}}</a></li> -->
             </ul>
 
             <button *ngIf="!logueado" class="log-in" (click)="goToLogin()">{{'Log In' | translate | async}}</button>
 
+            <div class="toggle_btn">
+                <i class='bx bx-menu' id="menu-icon"></i>
+            </div>
+
             <div *ngIf="logueado" class="head-content-right">
                 <div class="head-user-avatar-container">
                     <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
-                        <!-- <img src="https://cdn-icons-png.flaticon.com/512/16/16363.png" alt="" alt="user"
-                            class="user-avatar"> -->
                         <img *ngIf="bodyAuthGoogle.picture"
                             src="{{(bodyAuthGoogle.picture) ? bodyAuthGoogle.picture : 'https://cdn-icons-png.flaticon.com/512/16/16363.png'}}"
                             alt="user" class="user-avatar" srcset="">
@@ -33,10 +35,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="toggle_btn">
-                <i class='bx bx-menu' id="menu-icon"></i>
             </div>
 
         </div>
@@ -50,15 +48,13 @@
             <li><a href="#" (click)="changeBackground('Blog')">{{'Blog' | translate | async}}</a></li>
             <li><a href="#" (click)="changeBackground('Contactanos')">{{'Contactanos' | translate | async}}</a></li>
             <li><a href="#" (click)="changeBackground('Involúcrate')">{{'Involúcrate' | translate | async}}</a></li>
-            <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">{{'Estadisticas' | translate |
-                    async}}</a></li>
+            <!-- <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">{{'Estadisticas' | translate |
+                    async}}</a></li> -->
             <li><button *ngIf="!logueado" class="log-in">{{'Log In' | translate | async}}</button></li>
             <li>
                 <div *ngIf="logueado" class="head-content-right">
                     <div class="head-user-avatar-container">
                         <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
-                            <!-- <img src="https://cdn-icons-png.flaticon.com/512/16/16363.png" alt="" alt="user"
-                            class="user-avatar"> -->
                             <img *ngIf="bodyAuthGoogle.picture"
                                 src="{{(bodyAuthGoogle.picture) ? bodyAuthGoogle.picture : 'https://cdn-icons-png.flaticon.com/512/16/16363.png'}}"
                                 alt="user" class="user-avatar" srcset="">
