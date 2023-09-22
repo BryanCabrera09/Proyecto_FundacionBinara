@@ -1,0 +1,37 @@
+<div class="container">
+    <h1>Registro de Usuario</h1>
+    <form [formGroup]="formSignUp" (ngSubmit)="guardarUsuario()" novalidate>
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" formControlName="nombre" class="form-control" placeholder="Nombre"
+                [class.is-invalid]="isInvalidForm('nombre')">
+            <small *ngIf="isInvalidForm('nombre')" class="text-danger">Nombre es requerido..</small>
+        </div>
+
+        <div class="form-group">
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" formControlName="apellido" class="form-control" placeholder="Apellido"
+                [class.is-invalid]="isInvalidForm('apellido')">
+            <small *ngIf="isInvalidForm('apellido')" class="text-danger">Apellido es requerido.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="correo">Correo Electrónico:</label>
+            <input type="email" id="correo" formControlName="correo" class="form-control" placeholder="Correo"
+                [class.is-invalid]="isInvalidForm('correo')">
+            <small *ngIf="isInvalidForm('correo')" class="text-danger">Correo electrónico es requerido y debe ser válido.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" formControlName="password" class="form-control" placeholder="Contraseña"
+                [class.is-invalid]="isInvalidForm('password')">
+            <small *ngIf="isInvalidForm('password')" class="text-danger">La contraseña debe tener al menos 6 caracteres, incluir al menos una letra mayúscula, un número y un carácter especial (@$!%*?&)</small>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+
+    </form>
+</div>
