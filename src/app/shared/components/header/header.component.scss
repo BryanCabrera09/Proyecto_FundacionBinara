@@ -122,7 +122,7 @@ button {
 }
 
 .dropdown_menu.open {
-  height: 500px;
+  height: 450px;
   top: 100px;
 }
 
@@ -144,7 +144,6 @@ button {
   justify-content: center;
 }
 
-/*  */
 .head-content-right {
   display: flex;
   align-items: center;
@@ -208,7 +207,7 @@ button {
   background: #fff;
   margin-top: 10px;
   box-shadow: 0 1rem 3rem rgb(0 0 0 / 18%);
-  border-radius: 0.25rem;
+  border-radius: 1.25rem;
 }
 
 .overlay-fall {
@@ -242,11 +241,40 @@ button {
     li:hover {
       background: #eff2f3;
       font-weight: bold;
+      border-radius: 1.25rem;
     }
   }
 }
 
-/*  */
+.modal .modal-dialog {
+
+  width: 380px;
+  transition: bottom .75s ease-in-out;
+
+  .modal-content .modal-body .signin-form .form-floating input {
+    height: 48px;
+    font-size: 1.5rem;
+    color: $negro
+  }
+
+  label {
+    font-size: 1.3rem;
+  }
+}
+
+span {
+  font-size: 1.2rem;
+  color: $negro;
+}
+
+.login-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
 
 /* RESPONSIVE DESIGN */
 @media (max-width: 1530px) {
@@ -288,8 +316,8 @@ button {
 @media (max-width: 1180px) {
 
   .navbar .links,
-  .navbar .log-in/* ,
-  .navbar .head-content-right */ {
+  .navbar .log-in,
+  .navbar .head-content-right {
     display: none;
   }
 
@@ -338,6 +366,20 @@ button {
   }
 }
 
+@media (max-width: 580px) {
+
+  .modal {
+
+    margin-left: 20%;
+
+    .modal-dialog {
+
+      width: 340px;
+      transition: bottom .75s ease-in-out;
+    }
+  }
+}
+
 @media (max-width: 520px) {
   .dropdown_menu {
     left: 2rem;
@@ -346,5 +388,28 @@ button {
 
   .log-in {
     color: #010101;
+  }
+
+  .modal {
+    margin-left: 9%;
+
+    .modal-dialog {
+
+      width: 300px;
+      transition: bottom .75s ease-in-out;
+
+      .modal-content .modal-body .signin-form .form-floating input {
+        font-size: 1.4rem;
+      }
+
+      label {
+        font-size: 1.1rem;
+      }
+    }
+
+    span {
+      font-size: 1rem;
+      color: $negro;
+    }
   }
 }

@@ -19,11 +19,9 @@
                         async}}</a></li> -->
             </ul>
 
-            <button *ngIf="!logueado" class="log-in" (click)="goToLogin()">{{'Log In' | translate | async}}</button>
-
-            <div class="toggle_btn">
-                <i class='bx bx-menu' id="menu-icon"></i>
-            </div>
+            <button *ngIf="!logueado" class="log-in" (click)="form.reset()" data-bs-toggle="modal"
+                data-bs-target="#modalSignin">{{'Log In' |
+                translate | async}}</button>
 
             <div *ngIf="logueado" class="head-content-right">
                 <div class="head-user-avatar-container">
@@ -35,6 +33,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="toggle_btn">
+                <i class='bx bx-menu' id="menu-icon"></i>
             </div>
 
         </div>
@@ -50,19 +52,10 @@
             <li><a href="#" (click)="changeBackground('Involúcrate')">{{'Involúcrate' | translate | async}}</a></li>
             <!-- <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">{{'Estadisticas' | translate |
                     async}}</a></li> -->
-            <li><button *ngIf="!logueado" class="log-in">{{'Log In' | translate | async}}</button></li>
-            <li>
-                <div *ngIf="logueado" class="head-content-right">
-                    <div class="head-user-avatar-container">
-                        <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
-                            <img *ngIf="bodyAuthGoogle.picture"
-                                src="{{(bodyAuthGoogle.picture) ? bodyAuthGoogle.picture : 'https://cdn-icons-png.flaticon.com/512/16/16363.png'}}"
-                                alt="user" class="user-avatar" srcset="">
-                            <div class="circle-indicator pulse">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <li><button *ngIf="!logueado" class="log-in" (click)="form.reset()" data-bs-toggle="modal"
+                    data-bs-target="#modalSignin">{{'Log In' | translate | async}}</button></li>
+            <li class="logged">
+                c
             </li>
         </div>
 
@@ -86,3 +79,54 @@
         </ul>
     </div>
 </ng-template>
+
+<div class="modal-dialog modal-sm">...</div>
+
+<!-- Modal Login - Register -->
+<div class="modal fade modal-signin py-5" tabindex="-1" role="dialog" id="modalSignin">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h1 class="fw-bold mb-0 fs-1">Sign In</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body p-5 pt-0">
+                <form class="signin-form" [formGroup]="formLogIn" (ngSubmit)="logIn()" #form>
+                    <div class="form-floating mb-4">
+                        <input type="email" class="form-control rounded-3" id="floatingInput" formControlName="username"
+                            placeholder="Correo Electrónico" [class.is-invalid]="isInvalidForm('username')">
+                        <label for="floatingInput">Dirección de Correo</label>
+                        <i class='bx bxs-user'></i>
+                        <small *ngIf="isInvalidForm('username')" class="text-danger">Ingresa un email</small>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <input type="password" class="form-control rounded-3" id="floatingPassword"
+                            formControlName="password" placeholder="Contraseña"
+                            [class.is-invalid]="isInvalidForm('password')">
+                        <label for="floatingPassword">Contraseña</label>
+                        <i class='bx bxs-lock-alt'></i>
+                        <small *ngIf="isInvalidForm('password')" class="text-danger">Ingresa una contraseña</small>
+                    </div>
+                    <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Iniciar Sesión</button>
+                    <span class="text-muted fs-5">¿No posees una cuenta?
+                        <a href="#">Registrate</a>
+                    </span>
+                    <hr class="my-4">
+                    <h2 class="fs-4 fw-bold mb-3">O usa tu cuenta de Google</h2>
+                    <div *ngIf="!logueado" class="login-google">
+                        <div id="g_id_onload"
+                            data-client_id="681130707428-cpeojla8gl63tfaq7dh9oto91tb4pq7a.apps.googleusercontent.com"
+                            data-context="use" data-ux_mode="popup" data-itp_support="true"
+                            data-callback="handleCredentialResponse">
+                        </div>
+
+                        <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_black"
+                            data-text="continue_with" data-size="large" data-logo_alignment="left">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

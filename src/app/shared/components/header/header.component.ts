@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { userItems } from 'src/app/core/models/dummy-data';
+import { Usuario } from 'src/app/core/models/usuario';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { LoadScriptService } from 'src/app/core/services/load-script.service';
+
+/* Decode Jwt */
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-header',
@@ -11,20 +17,31 @@ import { LoadScriptService } from 'src/app/core/services/load-script.service';
 export class HeaderComponent implements OnInit {
 
   isMenuOpen: boolean = false;
+  userOverlayMenu: HTMLElement | null = null;
+
   selectedLink: string = '';
   logueado: boolean = false;
+  openDialog: boolean = false;
+
+  @ViewChild('form') form: any;
+  usuario = new Usuario();
+  formLogIn!: FormGroup;
 
   bodyAuthGoogle: any = {};
 
   userItems = userItems;
 
-  constructor(private router: Router, private loadScriptService: LoadScriptService) {
+  constructor(private router: Router, private loadScriptService: LoadScriptService, private fb: FormBuilder,
+    private authService: AuthService) {
 
     /* Damos el nombre del Script que queremos cargar */
-    loadScriptService.loadScript(['menu-toggle'])
+    loadScriptService.loadScript(['menu-toggle']);
+    loadScriptService.loadScript(['login-google']);
   }
 
   ngOnInit() {
+
+    this.formLogIn = this.startForm();
 
     let token = sessionStorage.getItem('token-session') as string;
     this.bodyAuthGoogle = this.decodeToken(token);
@@ -52,15 +69,15 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['user/projects']);
   }
 
-  goToAnalytics(){
+  goToAnalytics() {
     this.router.navigate(['manager/dashboard']);
   }
-  goToBlogs(){
+  goToBlogs() {
     this.router.navigate(['user/blogs']);
   }
 
-  goToLogin() {
-    this.router.navigate(['../login']);
+  showDialog() {
+    this.openDialog = true;
   }
 
   isLogged() {
@@ -89,5 +106,43 @@ export class HeaderComponent implements OnInit {
     ).join(''));
 
     return JSON.parse(jsonPayload);
+  }
+
+  startForm(): FormGroup {
+    return this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+  }
+
+  isInvalidForm(controlName: string): boolean {
+    const control = this.formLogIn.get(controlName);
+    return !!control && control.invalid && control.touched;
+  }
+
+  markAllFieldsAsTouched() {
+    Object.values(this.formLogIn.controls).forEach(control => {
+      control.markAsTouched();
+    });
+  }
+
+  logIn() {
+    this.markAllFieldsAsTouched();
+    if (this.formLogIn.valid) {
+      this.authService.login(this.formLogIn.get('username')?.value, this.formLogIn.get('password')?.value).subscribe(
+        (response) => {
+          console.log(response);
+          const xToken = response.headers.get('X-Token');
+          console.log("JWT: " + xToken);
+          if (xToken) {
+            window.sessionStorage.setItem('Authorization', xToken);
+            const decodedToken: any = jwt_decode(xToken); // Decode the JWT
+            const role = decodedToken.authorities; // Assuming the role is stored in the 'authorities' field of the JWT payload
+            localStorage.setItem("roles", role);
+            console.log(role);
+          }
+        }
+      );
+    }
   }
 }

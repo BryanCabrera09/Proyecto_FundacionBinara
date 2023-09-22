@@ -11,9 +11,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
+import { DialogModule } from 'primeng/dialog'
+
 /* GtagImport */
 import { GtagModule } from 'angular-gtag';
 import { GoogleAnalyticsService, NGX_GOOGLE_ANALYTICS_SETTINGS_TOKEN, NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
+import { Dialog } from '@angular/cdk/dialog';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,7 @@ import { GoogleAnalyticsService, NGX_GOOGLE_ANALYTICS_SETTINGS_TOKEN, NgxGoogleA
     BrowserAnimationsModule,
     HttpClientModule,
     /* NgxGoogleAnalyticsModule.forRoot('G-6PGZ63FVGS'), */
-    NgxGoogleAnalyticsRouterModule
+    NgxGoogleAnalyticsRouterModule,
     /* GtagModule.forRoot({ trackingId: 'G-6PGZ63FVGS', trackPageviews: true, }), */
   ],
   providers: [

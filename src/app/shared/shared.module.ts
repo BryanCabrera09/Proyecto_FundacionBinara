@@ -6,12 +6,13 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { RouterModule } from '@angular/router';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /* Angular Material */
-import {MatSelectModule} from '@angular/material/select';
-import {MatCardModule} from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
 import { TranslatePipe } from '../core/pipe/translate.pipe';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,10 @@ import { TranslatePipe } from '../core/pipe/translate.pipe';
     OverlayModule,
     FormsModule,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    DialogModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     HeaderComponent,
