@@ -10,7 +10,6 @@ import { UsuarioService } from 'src/app/core/services/usuario.service';
 })
 export class RegisterComponent implements OnInit {
 
-
   user!: Usuario;
   formSignUp!: FormGroup;
 
@@ -70,6 +69,7 @@ export class RegisterComponent implements OnInit {
           }
         }
       )
+      console.log(this.user);
     } else {
       console.log(this.formSignUp.errors);
     }
