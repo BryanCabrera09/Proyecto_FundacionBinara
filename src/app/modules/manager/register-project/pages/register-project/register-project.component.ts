@@ -41,12 +41,14 @@ export class RegisterProjectComponent {
   mapapost: Mapas = new Mapas();
   proyectoedit: any;
   edit: boolean = false;
-  ideditar: string="";
+  ideditar: string = "";
+  camposFaltantes: string[] = [];
+
 
   constructor(private dialogRef: MatDialogRef<RegisterProjectComponent>, private proyectoService: ProyectosService, private mapaService: MapasService, @Inject(MAT_DIALOG_DATA) public data: any) {
     if (data.proyecto != null) {
       this.proyectoedit = data.proyecto;
-      this.ideditar=data.proyecto.uid;
+      this.ideditar = data.proyecto.uid;
       this.edit = data.editing;
       this.titulo = data.proyecto.titulo;
       this.objetivoPrincipal = data.proyecto.objetivoPrincipal;
@@ -185,6 +187,7 @@ export class RegisterProjectComponent {
   }
 
   GuardarMapa() {
+    this.validacion();
     this.mapapost.lugar = this.provincia + ";" + this.canton + ";" + this.parroquia;
     this.mapapost.coorX = this.lat + "";
     this.mapapost.coorY = this.lng + "";
@@ -219,6 +222,42 @@ export class RegisterProjectComponent {
     this.proyecto.fechaFin = this.fechaFin;
   }
 
+  validacion(): void {
+    this.camposFaltantes = [];
+    if (!this.titulo) {
+      this.camposFaltantes.push('Título');
+    }
+    if (!this.objetivoPrincipal) {
+      this.camposFaltantes.push('Objetivo Principal');
+    }
+    if (!this.presupuesto) {
+      this.camposFaltantes.push('Presupuesto');
+    }
+    if (!this.provincia) {
+      this.camposFaltantes.push('Seleccionar el Lugar');
+    }
+    if (this.camposFaltantes.length > 0) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Por favor, completa los siguientes campos obligatorios: ' + this.camposFaltantes.join(',\n '),
+        showConfirmButton: false,
+        timer: 4000
+      });
+      return; 
+    }
+    if (this.fechaInicio >= this.fechaFin) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'La fecha de inicio debe ser anterior a la fecha de fin.',
+        showConfirmButton: false,
+        timer: 3500
+      });
+      return;
+    }
+  }
+
   Editar(mapa: Mapas[]) {
     console.log("editar " + mapa[0].lugar);
     this.mapasArray = mapa;
@@ -243,7 +282,7 @@ export class RegisterProjectComponent {
         Swal.fire({
           position: 'center',
           icon: 'error',
-          title: '<strong>Error al actualizar el proyecto</strong>'+error,
+          title: '<strong>Error al actualizar el proyecto</strong>' + error,
           showConfirmButton: false,
           timer: 1500
         });
@@ -275,13 +314,12 @@ export class RegisterProjectComponent {
       },
       (error: any) => {
         console.error('Error al registrar el proyecto', error.error.msg);
-        console.log(this.proyecto.portada)
         Swal.fire({
           position: 'center',
           icon: 'error',
           title: error.error.msg,
           showConfirmButton: false,
-          timer: 1500
+          timer: 2500
         });
       }
     );
@@ -299,7 +337,7 @@ export class RegisterProjectComponent {
   trackByIndex(index: number): number {
     return index;
   }
-  subirimagen(id:string) {
+  subirimagen(id: string) {
     const base64String = this.proyecto.portada; // tu cadena base64 aquí
     const byteCharacters = atob(base64String.split(',')[1]);
     const byteNumbers = new Array(byteCharacters.length);
@@ -307,9 +345,9 @@ export class RegisterProjectComponent {
       byteNumbers[i] = byteCharacters.charCodeAt(i);
     }
     const byteArray = new Uint8Array(byteNumbers);
-    const blob = new Blob([byteArray], {type: 'image/jpeg'});
-    const file = new File([blob], 'imagen.jpg', {type: 'image/jpeg'}); // Creando un objeto File
-    
+    const blob = new Blob([byteArray], { type: 'image/jpeg' });
+    const file = new File([blob], 'imagen.jpg', { type: 'image/jpeg' }); // Creando un objeto File
+
     this.proyectoService.uploadImage(id, file).subscribe({ // Usando el objeto File aquí
       next: (response) => {
         console.log('Imagen subida exitosamente', response);
@@ -319,7 +357,7 @@ export class RegisterProjectComponent {
       },
     });
   }
-  
-  
-  
+
+
+
 }
