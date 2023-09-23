@@ -26,9 +26,16 @@
             <div *ngIf="logueado" class="head-content-right">
                 <div class="head-user-avatar-container">
                     <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
-                        <img *ngIf="bodyAuthGoogle.picture"
+                        <!--  <img *ngIf="bodyAuthGoogle.picture"
                             src="{{(bodyAuthGoogle.picture) ? bodyAuthGoogle.picture : 'https://cdn-icons-png.flaticon.com/512/16/16363.png'}}"
+                            alt="user" class="user-avatar" srcset=""> -->
+                        <img *ngIf="bodyAuthGoogle.picture; else defaultImage" src="{{ bodyAuthGoogle.picture }}"
                             alt="user" class="user-avatar" srcset="">
+
+                        <ng-template #defaultImage>
+                            <img src="https://cdn-icons-png.flaticon.com/512/16/16363.png" alt="user"
+                                class="user-avatar" srcset="">
+                        </ng-template>
                         <div class="circle-indicator pulse">
                         </div>
                     </div>
