@@ -251,14 +251,27 @@ button {
   width: 380px;
   transition: bottom .75s ease-in-out;
 
-  .modal-content .modal-body .signin-form .form-floating input {
-    height: 48px;
-    font-size: 1.5rem;
-    color: $negro
-  }
+  .modal-content .modal-body .signin-form,
+  .signup-form {
+    .form-floating {
 
-  label {
-    font-size: 1.3rem;
+      input {
+        height: 48px;
+        font-size: 1.4rem;
+        color: $negro
+      }
+
+      label {
+        font-size: 1.2rem;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
   }
 }
 
@@ -271,10 +284,7 @@ span {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
-
-
 
 /* RESPONSIVE DESIGN */
 @media (max-width: 1530px) {
@@ -398,8 +408,9 @@ span {
       width: 300px;
       transition: bottom .75s ease-in-out;
 
-      .modal-content .modal-body .signin-form .form-floating input {
-        font-size: 1.4rem;
+      .modal-content .modal-body .signin-form,
+      .signup-form .form-floating input {
+        font-size: 1.3rem;
       }
 
       label {

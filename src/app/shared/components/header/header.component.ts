@@ -8,6 +8,7 @@ import { LoadScriptService } from 'src/app/core/services/load-script.service';
 
 /* Decode Jwt */
 import jwt_decode from 'jwt-decode';
+import { UsuarioService } from 'src/app/core/services/usuario.service';
 
 @Component({
   selector: 'app-header',
@@ -26,13 +27,14 @@ export class HeaderComponent implements OnInit {
   @ViewChild('form') form: any;
   usuario = new Usuario();
   formLogIn!: FormGroup;
+  formSignUp!: FormGroup;
 
   bodyAuthGoogle: any = {};
 
   userItems = userItems;
 
   constructor(private router: Router, private loadScriptService: LoadScriptService, private fb: FormBuilder,
-    private authService: AuthService) {
+    private authService: AuthService, private userService: UsuarioService) {
 
     /* Damos el nombre del Script que queremos cargar */
     loadScriptService.loadScript(['menu-toggle']);
@@ -143,6 +145,35 @@ export class HeaderComponent implements OnInit {
           }
         }
       );
+    }
+  }
+
+  guardarUsuario() {
+    this.markAllFieldsAsTouched();
+    if (this.formSignUp.valid) {
+      this.usuario = new Usuario();
+      this.usuario.nombre = this.formSignUp.get('nombre')?.value + " " + this.formSignUp.get('apellido')?.value;;
+      this.usuario.correo = this.formSignUp.get('correo')?.value;
+      this.usuario.password = this.formSignUp.get('password')?.value;
+      this.usuario.rol = "USER_ROLE"
+      this.userService.createUser(this.usuario).subscribe(
+        (res) => {
+          console.log(res)
+        },
+        (error) => {
+          let status = error.status
+          switch (status) {
+            case 400:
+              console.log("Usuario exixstente")
+              break
+            default:
+              console.log("ERROR DEL SERVIDOR")
+          }
+        }
+      )
+      console.log(this.usuario);
+    } else {
+      console.log(this.formSignUp.errors);
     }
   }
 }

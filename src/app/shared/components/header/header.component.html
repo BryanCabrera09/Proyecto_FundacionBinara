@@ -20,7 +20,7 @@
             </ul>
 
             <button *ngIf="!logueado" class="log-in" (click)="form.reset()" data-bs-toggle="modal"
-                data-bs-target="#modalSignin">{{'Log In' |
+                data-bs-target="#modalSignIn">{{'Log In' |
                 translate | async}}</button>
 
             <div *ngIf="logueado" class="head-content-right">
@@ -53,7 +53,7 @@
             <!-- <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">{{'Estadisticas' | translate |
                     async}}</a></li> -->
             <li><button *ngIf="!logueado" class="log-in" (click)="form.reset()" data-bs-toggle="modal"
-                    data-bs-target="#modalSignin">{{'Log In' | translate | async}}</button></li>
+                    data-bs-target="#modalSignIn">{{'Log In' | translate | async}}</button></li>
             <li class="logged">
                 c
             </li>
@@ -80,14 +80,12 @@
     </div>
 </ng-template>
 
-<div class="modal-dialog modal-sm">...</div>
-
 <!-- Modal Login - Register -->
-<div class="modal fade modal-signin py-5" tabindex="-1" role="dialog" id="modalSignin">
+<div class="modal fade modal-signin py-5" tabindex="-1" role="dialog" id="modalSignIn">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-4 shadow">
             <div class="modal-header p-5 pb-4 border-bottom-0">
-                <h1 class="fw-bold mb-0 fs-1">Sign In</h1>
+                <h1 class="fw-bold mb-4 fs-1">Sign In</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -110,7 +108,7 @@
                     </div>
                     <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Iniciar Sesión</button>
                     <span class="text-muted fs-5">¿No posees una cuenta?
-                        <a href="#">Registrate</a>
+                        <a data-bs-toggle="modal" (click)="form.reset()" href="#modalSignUp">Registrate</a>
                     </span>
                     <hr class="my-4">
                     <h2 class="fs-4 fw-bold mb-3">O usa tu cuenta de Google</h2>
@@ -126,6 +124,82 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-signup py-5" tabindex="-1" role="dialog" id="modalSignUp">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h1 class="fw-bold mb-4 fs-1">Sign Up</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body p-5 pt-0">
+                <form class="signup-form" [formGroup]="formSignUp" (ngSubmit)="guardarUsuario()" novalidate>
+                    <div class="form-floating mb-4">
+                        <input type="text" id="nombre" formControlName="nombre" id="floatingInput"
+                            class="form-control rounded-3" placeholder="Nombre"
+                            [class.is-invalid]="isInvalidForm('nombre')">
+                        <label for="floatingInput">Nombre:</label>
+                        <small *ngIf="isInvalidForm('nombre')" class="text-danger">Nombre es requerido..</small>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input type="text" id="apellido" formControlName="apellido" id="floatingInput"
+                            class="form-control rounded-3" placeholder="Apellido"
+                            [class.is-invalid]="isInvalidForm('apellido')">
+                        <label for="floatingInput">Apellido:</label>
+                        <small *ngIf="isInvalidForm('apellido')" class="text-danger">Apellido es requerido.</small>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input type="email" id="correo" formControlName="correo" id="floatingEmail"
+                            class="form-control rounded-3" placeholder="Correo"
+                            [class.is-invalid]="isInvalidForm('correo')">
+                        <label for="floatingEmail">Correo Electrónico:</label>
+                        <small *ngIf="isInvalidForm('correo')" class="text-danger">Correo electrónico es requerido y
+                            debe ser válido.</small>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input type="password" id="password" formControlName="password" id="floatingPassword"
+                            class="form-control rounded-3" placeholder="Contraseña"
+                            [class.is-invalid]="isInvalidForm('password')">
+                        <label for="floatingPassword">Contraseña:</label>
+                        <small *ngIf="isInvalidForm('password')" class="text-danger">La contraseña debe tener al menos 6
+                            caracteres, incluir al menos una letra mayúscula, un número y un carácter especial
+                            (@$!%*?&)</small>
+                    </div>
+
+                    <div class="buttons">
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                        <button type="submit" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#modalSignIn">Sign In</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalToggle2" aria-labelledby="exampleModalToggleLabel2" tabindex="-1"
+    style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Hide this modal and show the first with the button below.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to
+                    first</button>
             </div>
         </div>
     </div>
