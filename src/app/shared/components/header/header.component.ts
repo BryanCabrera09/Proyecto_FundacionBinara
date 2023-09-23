@@ -162,6 +162,7 @@ export class HeaderComponent implements OnInit {
       this.authService.login(this.formLogIn.get('username')?.value, this.formLogIn.get('password')?.value).subscribe(
         (response) => {
           console.log(response);
+          this.formLogIn.reset();
           const xToken = response.headers.get('X-Token');
           console.log("JWT: " + xToken);
           if (xToken) {
@@ -186,6 +187,7 @@ export class HeaderComponent implements OnInit {
       this.usuario.rol = "USER_ROLE"
       this.userService.createUser(this.usuario).subscribe(
         (res) => {
+          this.formSignUp.reset();
           console.log(res)
         },
         (error) => {
