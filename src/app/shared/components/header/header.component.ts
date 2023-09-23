@@ -44,6 +44,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
 
     this.formLogIn = this.startForm();
+    this.formSignUp = this.startFormSignUp();
 
     let token = sessionStorage.getItem('token-session') as string;
     this.bodyAuthGoogle = this.decodeToken(token);
@@ -114,6 +115,22 @@ export class HeaderComponent implements OnInit {
     return this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
+    });
+  }
+
+  startFormSignUp(): FormGroup {
+    return this.fb.group({
+      nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
+      correo: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)
+        ],
+      ],
     });
   }
 

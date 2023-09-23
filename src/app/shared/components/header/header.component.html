@@ -26,9 +26,6 @@
             <div *ngIf="logueado" class="head-content-right">
                 <div class="head-user-avatar-container">
                     <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
-                        <!--  <img *ngIf="bodyAuthGoogle.picture"
-                            src="{{(bodyAuthGoogle.picture) ? bodyAuthGoogle.picture : 'https://cdn-icons-png.flaticon.com/512/16/16363.png'}}"
-                            alt="user" class="user-avatar" srcset=""> -->
                         <img *ngIf="bodyAuthGoogle.picture; else defaultImage" src="{{ bodyAuthGoogle.picture }}"
                             alt="user" class="user-avatar" srcset="">
 
@@ -59,10 +56,23 @@
             <li><a href="#" (click)="changeBackground('Involúcrate')">{{'Involúcrate' | translate | async}}</a></li>
             <!-- <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">{{'Estadisticas' | translate |
                     async}}</a></li> -->
-            <li><button *ngIf="!logueado" class="log-in" (click)="form.reset()" data-bs-toggle="modal"
+            <li><button *ngIf="!logueado" class="log-in" (click)="form.reset(); formUp.reset()" data-bs-toggle="modal"
                     data-bs-target="#modalSignIn">{{'Log In' | translate | async}}</button></li>
             <li class="logged">
-                c
+                <div *ngIf="logueado" class="head-content-right">
+                    <div class="head-user-avatar-container">
+                        <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
+                            <img *ngIf="bodyAuthGoogle.picture; else defaultImage" src="{{ bodyAuthGoogle.picture }}"
+                                alt="user" class="user-avatar" srcset="">
+                            <ng-template #defaultImage>
+                                <img src="https://cdn-icons-png.flaticon.com/512/16/16363.png" alt="user"
+                                    class="user-avatar" srcset="">
+                            </ng-template>
+                            <div class="circle-indicator pulse">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </li>
         </div>
 
@@ -115,7 +125,7 @@
                     </div>
                     <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Iniciar Sesión</button>
                     <span class="text-muted fs-5">¿No posees una cuenta?
-                        <a data-bs-toggle="modal" (click)="form.reset()" href="#modalSignUp">Registrate</a>
+                        <a (click)="formUp.reset()" data-bs-toggle="modal" href="#modalSignUp">Registrate</a>
                     </span>
                     <hr class="my-4">
                     <h2 class="fs-4 fw-bold mb-3">O usa tu cuenta de Google</h2>
@@ -145,7 +155,7 @@
             </div>
 
             <div class="modal-body p-5 pt-0">
-                <form class="signup-form" [formGroup]="formSignUp" (ngSubmit)="guardarUsuario()" novalidate>
+                <form class="signup-form" [formGroup]="formSignUp" (ngSubmit)="guardarUsuario()" #formUp>
                     <div class="form-floating mb-4">
                         <input type="text" id="nombre" formControlName="nombre" id="floatingInput"
                             class="form-control rounded-3" placeholder="Nombre"
@@ -183,7 +193,7 @@
 
                     <div class="buttons">
                         <button type="submit" class="btn btn-primary">Sign Up</button>
-                        <button type="submit" class="btn btn-primary" data-bs-toggle="modal"
+                        <button type="submit" class="btn btn-primary" (click)="form.reset()" data-bs-toggle="modal"
                             data-bs-target="#modalSignIn">Sign In</button>
                     </div>
 

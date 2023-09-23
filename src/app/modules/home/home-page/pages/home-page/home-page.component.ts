@@ -24,7 +24,7 @@ export class HomePageComponent implements OnInit {
   /* Sabias que */
   sabias = 'Aunque se conoce como “Tierra”, nuestro planeta es más de 70% agua y casi 30% tierra. Por eso'
     + 'también recibe el nombre de “planeta azul”, ya que, desde el espacio, se ve como una gran masa de este'
-    + 'color. De toda esta agua, el 96\'5% está en los océanos y el otro 3\'5% en forma de agua dulce y hielo.';
+    + 'color. De toda esta agua, el 96,5% está en los océanos y el otro 3,5% en forma de agua dulce y hielo.';
 
   /* Quienes Somos */
   quienes_somos_parrU = 'Fundación BINARA es una persona jurídica de derecho privado, sin fines de lucro, con'
