@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
 
   userItems = userItems;
 
-  constructor(private router: Router, private loadScriptService: LoadScriptService, private fb: FormBuilder,
+  constructor(private router: Router, private loadScriptService: LoadScriptService, private fbLog: FormBuilder, private fbSign: FormBuilder,
     private authService: AuthService, private userService: UsuarioService) {
 
     /* Damos el nombre del Script que queremos cargar */
@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
 
     this.formLogIn = this.startForm();
     this.formSignUp = this.startFormSignUp();
-
+    
     let token = sessionStorage.getItem('token-session') as string;
     this.bodyAuthGoogle = this.decodeToken(token);
     console.log(this.bodyAuthGoogle);
@@ -112,14 +112,14 @@ export class HeaderComponent implements OnInit {
   }
 
   startForm(): FormGroup {
-    return this.fb.group({
+    return this.fbLog.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
 
   startFormSignUp(): FormGroup {
-    return this.fb.group({
+    return this.fbSign.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
@@ -139,8 +139,19 @@ export class HeaderComponent implements OnInit {
     return !!control && control.invalid && control.touched;
   }
 
+  isInvalidFormS(controlName: string): boolean {
+    const control = this.formSignUp.get(controlName);
+    return !!control && control.invalid && control.touched;
+  }
+
   markAllFieldsAsTouched() {
     Object.values(this.formLogIn.controls).forEach(control => {
+      control.markAsTouched();
+    });
+  }
+
+  markAllFieldsAsTouchedS() {
+    Object.values(this.formSignUp.controls).forEach(control => {
       control.markAsTouched();
     });
   }
@@ -151,6 +162,7 @@ export class HeaderComponent implements OnInit {
       this.authService.login(this.formLogIn.get('username')?.value, this.formLogIn.get('password')?.value).subscribe(
         (response) => {
           console.log(response);
+          this.formLogIn.reset();
           const xToken = response.headers.get('X-Token');
           console.log("JWT: " + xToken);
           if (xToken) {
@@ -166,7 +178,7 @@ export class HeaderComponent implements OnInit {
   }
 
   guardarUsuario() {
-    this.markAllFieldsAsTouched();
+    this.markAllFieldsAsTouchedS();
     if (this.formSignUp.valid) {
       this.usuario = new Usuario();
       this.usuario.nombre = this.formSignUp.get('nombre')?.value + " " + this.formSignUp.get('apellido')?.value;;
@@ -175,6 +187,7 @@ export class HeaderComponent implements OnInit {
       this.usuario.rol = "USER_ROLE"
       this.userService.createUser(this.usuario).subscribe(
         (res) => {
+          this.formSignUp.reset();
           console.log(res)
         },
         (error) => {
