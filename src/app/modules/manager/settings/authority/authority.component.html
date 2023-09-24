@@ -1,0 +1,39 @@
+<div class="card">
+    <p-table #dt2 [value]="users" dataKey="id" [resizableColumns]="true" styleClass="p-datatable-gridlines" [rows]="10"
+        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [tableStyle]="{ 'min-width': '75rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th id="text">Nombre</th>
+                <th id="text">Correo</th>
+                <th id="text">Estado</th>
+                <th id="text">Rol</th>
+                <th id="text">Acción</th>
+            </tr>
+            <tr>
+                <th id="text">
+                    <p-columnFilter type="text" field="nombre"></p-columnFilter>
+                </th>
+                <th id="text">
+                    <p-columnFilter type="text" field="correo"></p-columnFilter>
+                </th>
+                <th colspan="3"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user>
+            <tr>
+                <td id="text">{{ user.nombre }}</td>
+                <td id="text">{{ user.correo }}</td>
+                <td id="text">{{ user.estado }}</td>
+                <td id="text">{{ user.rol }}</td>
+                <td id="text-btn">
+                    <button type="button" class="btn btn-info" (click)="openDialog(user)">
+                        <i class="far fa-edit"></i> Reasignar
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</div>
