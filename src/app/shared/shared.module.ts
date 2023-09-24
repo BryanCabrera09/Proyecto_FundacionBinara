@@ -12,12 +12,14 @@ import { FormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
 import { TranslatePipe } from '../core/pipe/translate.pipe';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     FooterComponent,
     HeaderComponent,
-    TranslatePipe
+    TranslatePipe,
+    SidebarComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { TranslatePipe } from '../core/pipe/translate.pipe';
   exports: [
     HeaderComponent,
     FooterComponent,
-    TranslatePipe
+    TranslatePipe,
+    SidebarComponent
   ]
 })
 export class SharedModule { }
