@@ -19,7 +19,7 @@
             </li>
             
             <li>
-                <img class="edit" src="../../../../../../assets/img/edit.png" alt="img">
+                <img id="btn-abrir-popup" class="edit" (click)="editar()" src="../../../../../../assets/img/edit.png" alt="img">
                 <img class="delete" src="../../../../../../assets/img/delete.png" alt="img">
             </li>
         </ul>
@@ -29,6 +29,9 @@
                 <img src="../../../../../../assets/img/user.png" alt="img">
                 <h1>{{ blogs.nombre_autor }} {{ blogs.apellido_autor }}</h1>
             </li>
+            <li>
+                {{ blogs.fecha | date: 'dd-MM-yyyy' }}
+            </li>
         </ul>
         
         <div class="parrafos">
@@ -37,117 +40,86 @@
             <h3><br>Bibliografia</h3>
             {{ blogs.bibliografia }}
         </div>
-            
-    
-        <input id="btn-abrir-popup-comentario" type="submit" value="Deja tu comentario">
 
-        <div class="comentarios" id="comentarios">
+        <div class="contenedor-comentarios">
+            <h2>Comentarios:</h2>
+            <div class="comentario">
+                <ul class="iconos user">
+                    <li>
+                        <img src="../../../../../../assets/img/user.png" alt="img">
+                        <h1>{{ blogs.nombre_autor }} {{ blogs.apellido_autor }}</h1>
+                    </li>
+                </ul>
+                date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'</div>
+            <div class="comentario">
+                <ul class="iconos user">
+                    <li>
+                        <img src="../../../../../../assets/img/user.png" alt="img">
+                        <h1>{{ blogs.nombre_autor }} {{ blogs.apellido_autor }}</h1>
+                    </li>
+                </ul>
+                date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'</div>
+
+            <input id="btn-abrir-popup-comentario" type="submit" value="Deja tu comentario">
         </div>
-    
     </div>
     
-        <div class="overlay" id="overlay-comentario">
-            <form class="formulario" id="popup-comentario" action="procesar_comentario.php" method="post">
-                <div class="header-form">
-                    <h1>Deja tu Comentario</h1>
-                    <a id="btn-cerrar-popup-comentario"><i class="fas fa-times"></i></a>
+
+    <!-- Comentar -->
+    <div class="overlay" id="overlay-comentario">
+        <form class="formulario" id="popup-comentario" method="post">
+            <div class="header-form">
+                <h1>Deja tu Comentario</h1>
+                <a id="btn-cerrar-popup-comentario"><i class="fas fa-times"></i></a>
                 </div>
-                <label for="nombre-comentario">Tu Nombre y Apellido:</label>
-                <input type="text" id="nombre-comentario" name="nombre" placeholder="Eg: Pedro Campoverde" [(ngModel)]="nombre" required>
+            <label for="nombre-comentario">Tu Nombre y Apellido:</label>
+            <input type="text" id="nombre-comentario" name="nombre" placeholder="Eg: Pedro Campoverde" [(ngModel)]="nombre"
+                required>
         
-                <label for="comentario">Comentario:</label>
-                <textarea id="comentario" name="comentario" rows="5" [(ngModel)]="comentario" required></textarea>
+            <label for="comentario">Comentario:</label>
+            <textarea id="comentario" name="comentario" rows="5" [(ngModel)]="comentario" required></textarea>
         
-                <input id="publicar" type="submit" value="Enviar Comentario" (click)="guardarComentario()">
-            </form>
-        </div>
-    
-    
-    <!--
-    
-        <h1>Blog de prueba</h1>
-    
-        <div class="portada">
-            <img  src="https://img.freepik.com/free-photo/pathway-middle-green-leafed-trees-with-sun-shining-through-branches_181624-4539.jpg?w=900&t=st=1687123477~exp=1687124077~hmac=6e8b1735a2cb25be79f248b6a3307a37a15b080dee114565d01704b97d432a80"
-                alt="Preview" title="Preview" />
+            <input id="publicar" type="submit" value="Enviar Comentario" (click)="guardarComentario()">
+        </form>
+    </div>
+
+    <!-- Editar -->
+
+    <div class="overlay" id="overlay">
+        <form class="formulario" id="popup" action="procesar_comentario.php" method="post">
+            <div class="header-form">
+                <h1>Editar tu Blog</h1>
+                <a id="btn-cerrar-popup"><i class="fas fa-times"></i></a>
             </div>
+            <div id="fecha"></div>
+
+            <label for="titulo">Título:</label>
+            <!-- <input type="text" id="titulo" name="titulo" placeholder="Título del blog" [(ngModel)]="titulo" required> -->
+
+            <label for="titulo">Imagen:</label>
+            <!-- <input type="file" (change)="onFileSelected($event)" accept="image/*">
+            <img [src]="imageSrc" *ngIf="imageSrc" alt="imageUpload"> -->
+
+            <label for="nombre">Nombre:</label>
+            <!-- <input type="text" id="nombre" name="nombre" placeholder="Nombre del Autor" [(ngModel)]="nombre_autor" required> -->
+
+            <label for="apellido">Apellido:</label>
+            <!-- <input type="text" id="apellido" name="nombre" placeholder="Apellido del Autor" [(ngModel)]="apellido_autor" required> -->
     
-        <ul class="iconos">
-            <li>
-                <img src="../../../../../../assets/img/like.png" alt="img">
-                <p>283</p>
-    
-                <img src="../../../../../../assets/img/dislike.png" alt="img">
-                <p>283</p>
-    
-                <img src="../../../../../../assets/img/comentarios.png" alt="img">
-                <p>283</p>
-            </li>
-            
-            <li>
-                <img class="edit" src="../../../../../../assets/img/edit.png" alt="img">
-                <img class="delete" src="../../../../../../assets/img/delete.png" alt="img">
-            </li>
-        </ul>
-    
-        <ul class="iconos user">
-            <li>
-                <img src="../../../../../../assets/img/user.png" alt="img">
-                <h1>Mario Tinoco Suarez</h1>
-            </li>
-            <li>
-                <h1>2023-08-27</h1>
-            </li>
-        </ul>
-        
-        <div class="parrafos">
-            <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat molestiae omnis corporis similique suscipit
-                maxime beatae recusandae hic et doloribus, nemo in voluptate magnam quo placeat ipsum dolor. Dicta, repellendus!
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nesciunt nam voluptatem velit dignissimos eius
-                corporis,
-                dolor minus? Beatae illo assumenda odit eaque quaerat dolorum iure harum provident hic officia?
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat molestiae omnis corporis similique suscipit
-                maxime beatae recusandae hic et doloribus, nemo in voluptate magnam quo placeat ipsum dolor. Dicta, repellendus!
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nesciunt nam voluptatem velit dignissimos eius
-                corporis,
-                dolor minus? Beatae illo assumenda odit eaque quaerat dolorum iure harum provident hic officia?...
-        
-    
-                dolor minus? Beatae illo assumenda odit eaque quaerat dolorum iure harum provident hic officia?
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat molestiae omnis corporis similique suscipit
-                maxime beatae recusandae hic et doloribus, nemo in voluptate magnam quo placeat ipsum dolor. Dicta, repellendus!
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nesciunt nam voluptatem velit dignissimos eius
-                corporis,dolor minus? Beatae illo assumenda odit eaque quaerat dolorum iure harum provident hic officia?dolor
-                illo assumenda odit eaque quaerat dolorum iure harum provident hic officia? corporis similique suscipit
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat molestiae omnis corporis similique suscipit
-                maxime beatae recusandae hic et doloribus, nemo in voluptate magnam quo placeat ipsum dolor. Dicta, repellendus!
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nesciunt nam voluptatem velit dignissimos eius
-                corporis,
-                dolor minus? Beatae illo assumenda odit eaque quaerat dolorum iure harum provident hic officia?
-        
-            </p>
-        </div>
-    
-        <input id="btn-abrir-popup-comentario" type="submit" value="Deja tu comentario">
-    
-        <div class="overlay" id="overlay-comentario">
-            <form class="formulario" id="popup-comentario" action="procesar_comentario.php" method="post">
-                <div class="header-form">
-                    <h1>Deja tu Comentario</h1>
-                    <a id="btn-cerrar-popup-comentario"><i class="fas fa-times"></i></a>
-                </div>
-                <label for="nombre-comentario">Nombre y Apellido:</label>
-                <input type="text" id="nombre-comentario" name="nombre" placeholder="Ej: Pedro Paredes" required>
-        
-                <label for="email-comentario">Email:</label>
-                <input type="email" id="email-comentario" name="e-mail" autocomplete="on" placeholder="ejemplo123@hotmail.com" required>
-        
-                <label for="comentario">Comentario:</label>
-                <textarea id="comentario" name="comentario" rows="4" required></textarea>
-        
-                <input type="submit" value="Enviar Comentario">
-            </form>
-        </div>
-    -->
-    
-    </main>
+            <label for="e-mail">Email:</label>
+            <!-- <input type="email" id="e-mail" name="e-mail" placeholder="Email del Autor" [(ngModel)]="email_autor" required> -->
+
+            <label for="parrafo1-blog">Contenido del Blog:</label>
+            <!-- <textarea class="textarea-auto" id="parrafo1-blog" name="parrafo1-blog" placeholder="Escriba el contenido del Blog" [(ngModel)]="parrafo" required></textarea> -->
+
+            <label for="parrafo3-blog">Bibliografia:</label>
+            <!-- <textarea class="textarea-auto" id="parrafo3-blog" name="parrafo3-blog" placeholder="Escriba la Bibliografia del Blog" [(ngModel)]="bibliografia"></textarea> -->
+
+            <div class="botones-form-blog">
+                <!-- <input id="publicar" type="submit" value="Publicar" (click)="publicarBlog()">
+                <input id="guardar" type="submit" value="Guardar sin publicar" [(ngModel)]="visible" (click)="guardarSinPublicarBlog()"> -->
+            </div>
+        </form>
+    </div>
+
+</main>
