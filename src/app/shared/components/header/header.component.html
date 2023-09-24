@@ -23,9 +23,22 @@
                 data-bs-target="#modalSignIn">{{'Log In' |
                 translate | async}}</button>
 
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                      Dropdown link
+                    </a>
+                  
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                  </div>
+
             <div *ngIf="logueado" class="head-content-right">
                 <div class="head-user-avatar-container">
-                    <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
+                    <!-- <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay"> -->
+                        <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
                         <img *ngIf="bodyAuthGoogle.picture; else defaultImage" src="{{ bodyAuthGoogle.picture }}"
                             alt="user" class="user-avatar" srcset="">
 
@@ -131,7 +144,7 @@
                     <h2 class="fs-4 fw-bold mb-3">O usa tu cuenta de Google</h2>
                     <div *ngIf="!logueado" class="login-google">
                         <div id="g_id_onload"
-                            data-client_id="681130707428-cpeojla8gl63tfaq7dh9oto91tb4pq7a.apps.googleusercontent.com"
+                            data-client_id="713010332294-6d3e25kg62qlkha8lcqne687un71dt6l.apps.googleusercontent.com"
                             data-context="use" data-ux_mode="popup" data-itp_support="true"
                             data-callback="handleCredentialResponse">
                         </div>
@@ -186,7 +199,8 @@
                             class="form-control rounded-3" placeholder="Contraseña"
                             [class.is-invalid]="isInvalidFormS('password')">
                         <label for="floatingPassword">Contraseña:</label>
-                        <small *ngIf="isInvalidFormS('password')" class="text-danger">La contraseña debe tener al menos 6
+                        <small *ngIf="isInvalidFormS('password')" class="text-danger">La contraseña debe tener al menos
+                            6
                             caracteres, incluir al menos una letra mayúscula, un número y un carácter especial
                             (@$!%*?&)</small>
                     </div>

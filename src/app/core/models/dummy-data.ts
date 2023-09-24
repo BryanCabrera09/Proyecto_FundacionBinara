@@ -16,6 +16,10 @@ export const userItems = [
         label: 'Perfil'
     },
     {
+        icon: 'fas fa-users',
+        label: 'Gestión Usuarios'
+    },
+    {
         icon: 'fa-solid fa-power-off',
         label: 'Cerrar Sesión'
     },
