@@ -150,10 +150,6 @@ export class VerBlogsComponent implements OnInit {
       popup?.classList.add('active');
     });
 
-    var titulo = document.getElementById('titulo');
-
-    titulo = this.blogs.titulo;
-
     btnCerrarPopup?.addEventListener('click', function () {
       overlay?.classList.remove('active');
       popup?.classList.remove('active');
