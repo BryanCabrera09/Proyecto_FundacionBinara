@@ -1,0 +1,38 @@
+.main-sidebar {
+    background-color: #1c2b36;
+}
+
+.brand-link .brand-text {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.user-panel .info a {
+    color: #ffffff;
+}
+
+.nav-sidebar .nav-item .nav-link {
+    color: #ffffff;
+}
+
+.nav-sidebar .nav-item .nav-link:hover {
+    background-color: #2c3e50;
+}
+
+.nav-treeview .nav-item .nav-link {
+    padding-left: 40px;
+    color: #ffffff;
+}
+
+.nav-treeview .nav-item .nav-link:hover {
+    background-color: #2c3e50;
+}
+
+.badge-warming {
+    background-color: #FF9800;
+    color: #ffffff;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #ffffff;
+}

@@ -14,6 +14,10 @@ const routes: Routes = [
     path: 'register1',
     loadChildren: () => import('./register-activity/register-activity.module').then(m => m.RegisterActivityModule)
   },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule)
+  },
 ];
 
 @NgModule({

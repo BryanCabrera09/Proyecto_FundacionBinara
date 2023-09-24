@@ -1,0 +1,53 @@
+<div class="popup-container">
+    <h2 class="popup-title">Información del Usuario</h2>
+    <div class="popup-content">
+        <p><strong>Nombre:</strong> {{ data.user.nombre }}</p>
+        <p><strong>Correo:</strong> {{ data.user.correo }}</p>
+        <p><strong>Rol:</strong> {{ data.user.rol }}</p>
+    </div>
+
+    <p-dropdown [options]="roles" [(ngModel)]="data.user.rol" optionLabel="label"></p-dropdown>
+
+
+    <div>
+        <button type="button" class="btn btn-info">
+            <i class="far fa-edit"></i> Reasignar
+        </button>
+    
+        <button type="button" class="btn btn-info">
+            <i class="far fa-edit"></i> Reasignar
+        </button>
+    </div>
+</div>
+
+<div class="popup-container">
+    <h2 class="popup-title">Información del Usuario</h2>
+    
+    <!-- Contenedor de las columnas -->
+    <div class="columns-container">
+        <!-- Columna de datos del usuario -->
+        <div class="user-data-column">
+            <div class="popup-content">
+                <p><strong>Nombre:</strong> {{ data.user.nombre }}</p>
+                <p><strong>Correo:</strong> {{ data.user.correo }}</p>
+                <p><strong>Rol:</strong> {{ data.user.rol }}</p>
+            </div>
+        </div>
+        
+        <!-- Columna del dropdown -->
+        <div class="dropdown-column">
+            <p-dropdown [options]="roles" [(ngModel)]="data.user.rol" optionLabel="label"></p-dropdown>
+        </div>
+    </div>
+    
+    <!-- Botones -->
+    <div class="button-container">
+        <button type="button" class="btn btn-info">
+            <i class="far fa-edit"></i> Reasignar
+        </button>
+    
+        <button type="button" class="btn btn-info">
+            <i class="far fa-edit"></i> Reasignar
+        </button>
+    </div>
+</div>
