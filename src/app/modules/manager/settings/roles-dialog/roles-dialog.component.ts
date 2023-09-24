@@ -43,15 +43,12 @@ export class RolesDialogComponent implements OnInit {
     });
   
     if (result.isConfirmed) {
-      console.log(this.data.user);
       let usuario = new Usuario();
       usuario.correo = this.data.user.correo;
       usuario.estado = this.estado;
       usuario.rol = this.selectedRole;
-      console.log(usuario);
       this.userServ.editUser(usuario, this.data.user.uid).subscribe(
         (res) => {
-          console.log(res);
           this.closeDialog();
           Swal.fire('Guardado', 'Los cambios han sido guardados.', 'success');
         },

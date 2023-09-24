@@ -18,11 +18,14 @@ export class AuthorityComponent implements OnInit {
   constructor(private userServ: UsuarioService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.listUsers();
+  }
+
+  listUsers() {
     this.userServ.getUser().subscribe(
       (res) => {
         this.users = res
         this.loading = false;
-        console.log(this.users)
       }
     )
   }
@@ -35,6 +38,7 @@ export class AuthorityComponent implements OnInit {
   
     dialogRef.afterClosed().subscribe(result => {
       console.log('El diálogo se cerró', result);
+      this.listUsers();
     });
   }
   
