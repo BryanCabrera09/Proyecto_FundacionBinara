@@ -50,7 +50,7 @@
                     actividad.num_adoloscentes_beneficiarios}}</p>
                 <p><strong><i class="fas fa-user-tie"></i> Número de Adultos Beneficiarios:</strong> {{
                     actividad.num_adultos_beneficiarios}}</p>
-                <div class="action-buttons">
+                <div class="action-buttons" *ngIf="roluser === 'ADMIN_ROLE'">
                     <button class="edit-button" title="Editar" (click)="editarproyecto(actividad)">
                         ✎
                     </button>
@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-    <div class="button-container">
+    <div class="button-container" *ngIf="roluser === 'ADMIN_ROLE'">
         <button class="add-project-button" (click)="proyecto.uid && abrirRegistrodeactividad(proyecto.uid)">Añadir
             Actividad</button>
     </div>
@@ -93,13 +93,13 @@
                     Parroquia: <input type="text" [value]="mapa.lugar!.split(';')[2]" readonly>
                 </div>
             </div>
-            <button (click)="eliminarmapa(i)" class="eliminarmapa-button">
+            <button (click)="eliminarmapa(i)" class="eliminarmapa-button" *ngIf="roluser === 'ADMIN_ROLE'">
                 <i class="fas fa-trash-alt"></i> Eliminar
             </button>
         </div>
     </div>
     
-    <div class="button-container">
+    <div class="button-container" *ngIf="roluser === 'ADMIN_ROLE'">
         <button class="add-project-button" (click)="agregarmapa()">Añadir nueva ubicación</button>
     </div>
     

@@ -276,6 +276,9 @@ export class RegisterProjectComponent {
           showConfirmButton: false,
           timer: 1500
         });
+        setTimeout(function() {
+          window.location.reload();
+        }, 2000);
       },
       error: error => {
         console.error('Error al actualizar el proyecto:', error);
@@ -311,6 +314,9 @@ export class RegisterProjectComponent {
           showConfirmButton: false,
           timer: 1500
         });
+        setTimeout(function() {
+          window.location.reload();
+        }, 2000);
       },
       (error: any) => {
         console.error('Error al registrar el proyecto', error.error.msg);

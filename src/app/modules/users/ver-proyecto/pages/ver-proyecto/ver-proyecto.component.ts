@@ -28,6 +28,7 @@ export class VerProyectoComponent {
   lat: string = "";
   lng: string = "";
   baseUrl: string = baserUrl;
+  roluser: string= "ADMIN_ROLE"
 
   constructor(private dialog: MatDialog, private route: ActivatedRoute, private proyectosService: ProyectosService, private acticidadesService: ActividadesService) { }
   ngOnInit(): void {

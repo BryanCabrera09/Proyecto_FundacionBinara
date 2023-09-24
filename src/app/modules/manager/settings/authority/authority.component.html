@@ -7,9 +7,9 @@
             <tr>
                 <th id="text">Nombre</th>
                 <th id="text">Correo</th>
-                <th id="text">Estado</th>
+                <th id="text">Activo</th>
                 <th id="text">Rol</th>
-                <th id="text">Acción</th>
+                <th colspan="2" id="text">Acción</th>
             </tr>
             <tr>
                 <th id="text">
@@ -18,18 +18,22 @@
                 <th id="text">
                     <p-columnFilter type="text" field="correo"></p-columnFilter>
                 </th>
-                <th colspan="3"></th>
+                <th colspan="4"></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-user>
             <tr>
                 <td id="text">{{ user.nombre }}</td>
                 <td id="text">{{ user.correo }}</td>
-                <td id="text">{{ user.estado }}</td>
-                <td id="text">{{ user.rol }}</td>
+                <td id="text">
+                    <i *ngIf="!user.estado" class="fa-solid fa-xmark icon-rojo"></i>
+                    <i *ngIf="user.estado" class="fa-solid fa-check-double icon-verde"></i>
+                </td>
+                <td id="text">{{ user.rol === 'ADMIN_ROLE' ? 'ADMIN' : user.rol === 'USER_ROLE' ? 'USER' : 'Otro' }}
+                </td>
                 <td id="text-btn">
                     <button type="button" class="btn btn-info" (click)="openDialog(user)">
-                        <i class="far fa-edit"></i> Reasignar
+                        <i class="far fa-edit"></i> Editar
                     </button>
                 </td>
             </tr>
