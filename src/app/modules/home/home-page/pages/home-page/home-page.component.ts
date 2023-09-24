@@ -68,7 +68,7 @@ export class HomePageComponent implements OnInit {
     //console.log('BodyAuth', this.bodyAuth);
 
     this.userRole = this.bodyAuth.usuario.rol;
-    console.log(this.userRole);
+    //console.log(this.userRole);
   }
 
   listProjects() {

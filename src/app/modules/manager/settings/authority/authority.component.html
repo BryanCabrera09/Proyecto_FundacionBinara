@@ -1,39 +1,50 @@
-<div class="card">
-    <p-table #dt2 [value]="users" dataKey="id" [resizableColumns]="true" styleClass="p-datatable-gridlines" [rows]="10"
-        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [tableStyle]="{ 'min-width': '75rem' }">
-        <ng-template pTemplate="header">
-            <tr>
-                <th id="text">Nombre</th>
-                <th id="text">Correo</th>
-                <th id="text">Estado</th>
-                <th id="text">Rol</th>
-                <th id="text">Acción</th>
-            </tr>
-            <tr>
-                <th id="text">
-                    <p-columnFilter type="text" field="nombre"></p-columnFilter>
-                </th>
-                <th id="text">
-                    <p-columnFilter type="text" field="correo"></p-columnFilter>
-                </th>
-                <th colspan="3"></th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-user>
-            <tr>
-                <td id="text">{{ user.nombre }}</td>
-                <td id="text">{{ user.correo }}</td>
-                <td id="text">{{ user.estado }}</td>
-                <td id="text">{{ user.rol }}</td>
-                <td id="text-btn">
-                    <button type="button" class="btn btn-info" (click)="openDialog(user)">
-                        <i class="far fa-edit"></i> Reasignar
-                    </button>
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
+<body>
+    <div class="container">
 
-</div>
+        <div class="card">
+            <p-table #dt2 id="table-data" [value]="users" dataKey="id" [resizableColumns]="true"
+                styleClass="p-datatable-gridlines" [rows]="10" [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[10, 25]" [loading]="loading" [paginator]="true"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                [globalFilterFields]="['nombre', 'correo']" [tableStyle]="{ 'min-width': '75rem' }">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th id="text">Nombre</th>
+                        <th id="text">Correo Electrónico</th>
+                        <th id="text">Estado</th>
+                        <th id="text">Rol</th>
+                        <th id="text">Acción</th>
+                    </tr>
+                    <tr>
+                        <th id="text" style="width:25%">
+                            <p-columnFilter type="text" field="nombre"></p-columnFilter>
+                        </th>
+                        <th id="text" style="width:25%">
+                            <p-columnFilter type="text" field="correo"></p-columnFilter>
+                        </th>
+                        <th colspan="3"></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-user>
+                    <tr>
+                        <td id="text">{{ user.nombre }}</td>
+                        <td id="text">{{ user.correo }}</td>
+                        <td id="text">{{ user.estado }}</td>
+                        <td id="text" style="font-style: italic;">{{ user.rol }}</td>
+                        <td id="text-btn">
+                            <button type="button" class="btn btn-info" (click)="openDialog(user)">
+                                <i class="fas fa-edit"></i>&nbsp;&nbsp;Reasignar
+                            </button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="5">Sin Usuarios Registrados...</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+        </div>
+    </div>
+</body>
