@@ -12,13 +12,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { TranslatePipe } from '../core/pipe/translate.pipe';
+
 import { DialogModule } from 'primeng/dialog';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     FooterComponent,
     HeaderComponent,
-    TranslatePipe
+    TranslatePipe,
+    SidebarComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +38,8 @@ import { DialogModule } from 'primeng/dialog';
   exports: [
     HeaderComponent,
     FooterComponent,
-    TranslatePipe
+    TranslatePipe,
+    SidebarComponent
   ]
 })
 export class SharedModule { }
