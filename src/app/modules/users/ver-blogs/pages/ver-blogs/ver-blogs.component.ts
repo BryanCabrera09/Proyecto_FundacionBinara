@@ -6,7 +6,9 @@ import { ActivatedRoute, ParamMap, Route, Router } from '@angular/router';
 import { Blogscomentariospost } from 'src/app/core/models/blogcomentariospost';
 import { Blogcomentarios } from 'src/app/core/models/blogcommentarios';
 import { Blogs } from 'src/app/core/models/blogs';
+import { Blogpost } from 'src/app/core/models/blogpost';
 import { BlogsService } from 'src/app/core/services/blogs.service';
+import { BlogsComponent } from '../../../blogs/pages/blogs/blogs.component';
 import { ComentariosService } from 'src/app/core/services/comentarios.service';
 import { __param } from 'tslib';
 
@@ -20,6 +22,8 @@ export class VerBlogsComponent implements OnInit {
   blogs!: Blogs;
   comentarios!: Blogcomentarios[];
 
+  editarBlog!: BlogsComponent;
+
   //Declaracion de datos
   id_blog?: number;
   nombre?: string = '';
@@ -27,6 +31,10 @@ export class VerBlogsComponent implements OnInit {
   comentario?: string = '';
 
   visible: boolean = true;
+
+  blogpost: Blogpost = new Blogpost();
+  blogedit: any;
+  edit: boolean = false;
 
   blogcomentario: Blogscomentariospost = new Blogscomentariospost();
 
@@ -51,11 +59,9 @@ export class VerBlogsComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.buscarBlogPorId(id!);
     this.getForm();
+  
   }
 
-  // onClose(): void {
-  //   this.dialogRef.close();
-  // }
   onClose(): void {
     var popup = document.getElementById("-comentario");
     var botonGuardar = document.getElementById("publicar");
@@ -132,4 +138,21 @@ export class VerBlogsComponent implements OnInit {
       });
     }
 
+    //Abrir formulario para crear nuevo blog
+  editar(): void {
+    var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
+      overlay = document.getElementById('overlay'),
+      popup = document.getElementById('popup'),
+      btnCerrarPopup = document.getElementById('btn-cerrar-popup');
+
+    btnAbrirPopup?.addEventListener('click', function () {
+      overlay?.classList.add('active');
+      popup?.classList.add('active');
+    });
+
+    btnCerrarPopup?.addEventListener('click', function () {
+      overlay?.classList.remove('active');
+      popup?.classList.remove('active');
+    });
+  }
 }

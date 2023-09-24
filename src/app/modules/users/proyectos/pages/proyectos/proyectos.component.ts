@@ -16,6 +16,7 @@ export class ProyectosComponent implements OnInit {
 
   projects?: Proyectos[];
 baseUrl: string= baserUrl;
+  roluser: string= "ADMIN_ROLE"
 
   constructor(private dialog: MatDialog, private router: Router, private projectService: ProyectosService) { }
 

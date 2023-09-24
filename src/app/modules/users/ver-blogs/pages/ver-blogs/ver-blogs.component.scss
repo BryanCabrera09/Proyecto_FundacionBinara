@@ -33,10 +33,11 @@ h1 {
 
 h2 {
   font-size: 1.6rem;
+  font-weight: $bold;
 }
 
 h3 {
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 
 h4 {
@@ -90,6 +91,7 @@ h4 {
   img{
     max-width: 1.7rem;
     margin-left: 3rem;
+    margin-right: 1rem;
   }
 
   &.user{
@@ -151,6 +153,7 @@ textarea {
 }
 
 input[type="submit"] {
+  margin-top: 3rem;
   background-color: $verde2;
   width: 100%;
   color: $blanco;
@@ -194,9 +197,25 @@ input[type="submit"]:hover {
   }
 }
 
-.comentarios{
+.contenedor-comentarios{
   background-color: $gris;
-  max-width: 20rem;
+  max-width: 100%;
+  border-radius: .5rem;
+  padding: 2.5rem;
+  margin-top: 2rem;
+  box-shadow: 0 5px 6px #030405;
+}
+
+.comentario{
+  margin-top: 2rem;
+  background-color: $blanco;
+  padding: 2rem;
+  border-radius: 1rem;
+  font-size: 1.3rem;
+  img{
+    margin-left: 0rem;
+    max-width: 1.5rem;
+  }
 }
 
 .header-form a:hover{

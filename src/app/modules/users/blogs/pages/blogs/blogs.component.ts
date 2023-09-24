@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Blogpost } from 'src/app/core/models/blogpost';
 import { Blogs } from 'src/app/core/models/blogs';
 import { BlogsService } from 'src/app/core/services/blogs.service';
+import { VerBlogsComponent } from '../../../ver-blogs/pages/ver-blogs/ver-blogs.component';
 
 @Component({
   selector: 'app-blogs',
@@ -23,11 +24,10 @@ export class BlogsComponent implements OnInit{
   apellido_autor: string = '';
   email_autor: string = '';
   parrafo: string = '';
-  //parrafo2: string = '';
   bibliografia: string = '';
 
-
   visible: boolean = true;
+  novisible: boolean = false;
 
   blog: Blogpost = new Blogpost();
 
@@ -45,7 +45,6 @@ export class BlogsComponent implements OnInit{
       this.apellido_autor = data.blog.apellido_autor;
       this.email_autor = data.blog.email_autor;
       this.parrafo = data.blog.parrafo;
-      //this.parrafo2 = data.blog.parrafo2;
       this.bibliografia = data.blog.bibliografia;
     }
   }
@@ -149,12 +148,29 @@ imageSrc: string | ArrayBuffer | null = null;
     this.blog.apellido_autor = this.apellido_autor;
     this.blog.email_autor = this.email_autor;
     this.blog.parrafo = this.parrafo;
-    //this.blog.parrafo2 = this.parrafo2;
     this.blog.bibliografia = this.bibliografia;
+    this.blog.visible = this.visible;
   }
 
   publicarBlog(){
     this.Datos();
+    this.blogsService.createBlog(this.blog).subscribe(
+      (response) => {
+        console.log('Blog registrado con exito', response);
+
+        this.onClose();
+        window.location.reload();
+      },
+      (error) => {
+        console.error('Error al registrar blog', error);
+        console.log(this.blog.imagen)
+      }
+    );
+  }
+
+  guardarSinPublicarBlog(){
+    this.Datos();
+    this.blog.visible = this.novisible;
     this.blogsService.createBlog(this.blog).subscribe(
       (response) => {
         console.log('Blog registrado con exito', response);

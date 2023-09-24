@@ -8,6 +8,6 @@ export class Blogs {
     email_autor?: string;
     fecha?: Date;
     parrafo?: string;
-    //parrafo2?: string;
     bibliografia?: string;
+    visible?: boolean;
 }

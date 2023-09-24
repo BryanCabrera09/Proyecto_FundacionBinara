@@ -18,6 +18,10 @@ export class AuthorityComponent implements OnInit {
   constructor(private userServ: UsuarioService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.listUsers();
+  }
+
+  listUsers() {
     this.userServ.getUser().subscribe(
       (res) => {
         this.users = res
@@ -28,12 +32,13 @@ export class AuthorityComponent implements OnInit {
 
   openDialog(user: any): void {
     const dialogRef = this.dialog.open(RolesDialogComponent, {
-      width: '400px', // Configura el ancho según tus necesidades
+      width: '500px', // Configura el ancho según tus necesidades
       data: { user } // Pasa el objeto user al diálogo
     });
   
     dialogRef.afterClosed().subscribe(result => {
       console.log('El diálogo se cerró', result);
+      this.listUsers();
     });
   }
   
