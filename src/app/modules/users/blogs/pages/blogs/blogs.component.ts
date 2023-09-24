@@ -6,6 +6,7 @@ import { Blogpost } from 'src/app/core/models/blogpost';
 import { Blogs } from 'src/app/core/models/blogs';
 import { BlogsService } from 'src/app/core/services/blogs.service';
 import { VerBlogsComponent } from '../../../ver-blogs/pages/ver-blogs/ver-blogs.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-blogs',
@@ -156,7 +157,13 @@ imageSrc: string | ArrayBuffer | null = null;
     this.Datos();
     this.blogsService.createBlog(this.blog).subscribe(
       (response) => {
-        console.log('Blog registrado con exito', response);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: '<success>Blog creado con éxito!</strong>',
+          showConfirmButton: false,
+          timer: 3000
+        });
 
         this.onClose();
         window.location.reload();

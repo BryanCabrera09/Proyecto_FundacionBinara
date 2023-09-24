@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, ElementRef, ViewChild, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, Inject, OnInit, Input } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Route, Router } from '@angular/router';
@@ -11,6 +11,8 @@ import { BlogsService } from 'src/app/core/services/blogs.service';
 import { BlogsComponent } from '../../../blogs/pages/blogs/blogs.component';
 import { ComentariosService } from 'src/app/core/services/comentarios.service';
 import { __param } from 'tslib';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-ver-blogs',
@@ -21,6 +23,7 @@ export class VerBlogsComponent implements OnInit {
 
   blogs!: Blogs;
   comentarios!: Blogcomentarios[];
+  blog: Blogpost = new Blogpost();
 
   editarBlog!: BlogsComponent;
 
@@ -29,22 +32,28 @@ export class VerBlogsComponent implements OnInit {
   nombre?: string = '';
   fecha?: string = '';
   comentario?: string = '';
+  idEditar?: string = '';
 
   visible: boolean = true;
 
   blogpost: Blogpost = new Blogpost();
-  blogedit: any;
+  blogedit: string = '';
   edit: boolean = false;
 
   blogcomentario: Blogscomentariospost = new Blogscomentariospost();
 
-  constructor(private dialogRef: MatDialogRef<VerBlogsComponent>, 
-    private router: Router, private snackBar: MatSnackBar, 
+  constructor(private dialogRef: MatDialogRef<VerBlogsComponent, BlogsComponent>, 
+    private router: Router, 
+    private snackBar: MatSnackBar, 
     private comentariosService: ComentariosService, 
     private dialog:MatDialog, 
     private route: ActivatedRoute, 
     private blogsService: BlogsService, 
     @Inject(MAT_DIALOG_DATA) public data: any){
+
+      if(data.blog != null){
+        this.blogedit = data.blog._id;
+      }
 
     if(data.blogcomentario != null){
       this.id_blog = data.blogcomentario.id_blog;
@@ -59,7 +68,6 @@ export class VerBlogsComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.buscarBlogPorId(id!);
     this.getForm();
-  
   }
 
   onClose(): void {
@@ -70,7 +78,7 @@ export class VerBlogsComponent implements OnInit {
     });
   }
 
-  //Buscar Blog por Id para mostrar en pantalla
+  //Buscar Blog por Id para mostrar informacion detallada
   buscarBlogPorId(id: String): void {
     this.blogsService.searchBlogById(id).subscribe({
       next: (data: any) => {
@@ -138,8 +146,8 @@ export class VerBlogsComponent implements OnInit {
       });
     }
 
-    //Abrir formulario para crear nuevo blog
-  editar(): void {
+    //Abrir formulario para editar blog
+  formularioEditar(): void {
     var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
       overlay = document.getElementById('overlay'),
       popup = document.getElementById('popup'),
@@ -153,6 +161,113 @@ export class VerBlogsComponent implements OnInit {
     btnCerrarPopup?.addEventListener('click', function () {
       overlay?.classList.remove('active');
       popup?.classList.remove('active');
+
+      window.location.reload();
     });
+  }
+
+  imageSrc: string | ArrayBuffer | null = null;
+  onFileSelected(event: any): void {
+    const input = event.target;
+    if(input.files && input.files[0]){
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.imageSrc = e.target.result;
+        this.blogs.imagen = e.target.result;
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+
+  DatosBlog(): void{
+    this.blog.titulo = this.blogs.titulo;
+    this.blog.imagen = this.blogs.imagen; 
+    this.blog.nombre_autor = this.blogs.nombre_autor;
+    this.blog.apellido_autor = this.blogs.apellido_autor;
+    this.blog.email_autor = this.blogs.email_autor;
+    this.blog.parrafo = this.blogs.parrafo;
+    this.blog.bibliografia = this.blogs.bibliografia;
+    this.blog.visible = this.visible;
+  }
+
+  subirimagen(id: string) {
+    const base64String = this.blog.imagen; // tu cadena base64 aquí
+    const byteCharacters = atob(base64String.split(',')[1]);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: 'image/jpeg' });
+    const file = new File([blob], 'imagen.jpg', { type: 'image/jpeg' }); // Creando un objeto File
+
+    this.blogsService.uploadImage(id, file).subscribe({ // Usando el objeto File aquí
+      next: (response) => {
+        console.log('Imagen subida exitosamente', response);
+      },
+      error: (error) => {
+        console.error('Error al subir la imagen', error);
+      },
+    });
+  }
+
+  actualizarBlog() {
+    this.DatosBlog();
+    
+    this.blogsService.editBlog(this.blogs._id+'', this.blog).subscribe({
+      next: response => {
+        console.log('Blog actualizado con éxito!', response);
+        this.subirimagen(response.blog.uid)
+        this.onClose();
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: '<strong>Blog actualizado con éxito!</strong>',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        this.onClose();
+        window.location.reload();
+      },
+      error: error => {
+        console.error('Error al actualizar el blog:', error);
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: '<strong>Error al actualizar el blog</strong>' + error,
+          showConfirmButton: false,
+          timer: 2000
+        });
+      },
+      complete: () => {
+        console.log('La operación ha completado');
+      }
+    });
+  }
+
+  delete(blog: Blogs): void {
+    this.blogsService.deleteBlog(blog._id!).subscribe(
+    response => {
+      console.log('Blog desactivado con exito', response);
+    },
+    error => {
+      console.log('Error al eliminar el blog', error);
+    }  
+    );
+  }
+
+
+  confirmMessage: string = '';
+  isConfirmVisible: boolean = false;
+  blogDelete: Blogs | null = null;
+  confirmDeleteBlog(blog: Blogs): void {
+    if (blog.visible) {
+        this.confirmMessage = `¿Estás seguro de que deseas DESACTIVAR el blog "${blog.titulo}"?`;
+    } else {
+        this.confirmMessage = `¿Estás seguro de que deseas ACTIVAR el proyecto "${blog.titulo}"?`;
+    }
+    this.blogDelete = blog;
+    this.isConfirmVisible = true;
   }
 }

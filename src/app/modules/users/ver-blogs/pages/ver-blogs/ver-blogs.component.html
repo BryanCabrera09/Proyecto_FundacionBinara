@@ -19,8 +19,8 @@
             </li>
             
             <li>
-                <img id="btn-abrir-popup" class="edit" (click)="editar()" src="../../../../../../assets/img/edit.png" alt="img">
-                <img class="delete" src="../../../../../../assets/img/delete.png" alt="img">
+                <img id="btn-abrir-popup" class="edit" (click)="formularioEditar()" src="../../../../../../assets/img/edit.png" alt="img edit">
+                <img class="delete" (click)="confirmDeleteBlog(blog)" src="../../../../../../assets/img/delete.png" alt="img delete">
             </li>
         </ul>
     
@@ -50,7 +50,7 @@
                         <h1>{{ blogs.nombre_autor }} {{ blogs.apellido_autor }}</h1>
                     </li>
                 </ul>
-                date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'</div>
+                date: 'dd-MM-yyyy'</div>
             <div class="comentario">
                 <ul class="iconos user">
                     <li>
@@ -58,7 +58,7 @@
                         <h1>{{ blogs.nombre_autor }} {{ blogs.apellido_autor }}</h1>
                     </li>
                 </ul>
-                date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'date: 'dd-MM-yyyy'</div>
+                date: 'dd-MM-yyyy'</div>
 
             <input id="btn-abrir-popup-comentario" type="submit" value="Deja tu comentario">
         </div>
@@ -88,36 +88,36 @@
     <div class="overlay" id="overlay">
         <form class="formulario" id="popup" action="procesar_comentario.php" method="post">
             <div class="header-form">
-                <h1>Editar tu Blog</h1>
+                <h1>Edita tu Blog</h1>
                 <a id="btn-cerrar-popup"><i class="fas fa-times"></i></a>
             </div>
             <div id="fecha"></div>
 
             <label for="titulo">Título:</label>
-            <!-- <input type="text" id="titulo" name="titulo" placeholder="Título del blog" [(ngModel)]="titulo" required> -->
+            <input type="text" id="titulo" name="titulo" placeholder="Título del blog" [(ngModel)]='blogs.titulo' required>
 
             <label for="titulo">Imagen:</label>
-            <!-- <input type="file" (change)="onFileSelected($event)" accept="image/*">
-            <img [src]="imageSrc" *ngIf="imageSrc" alt="imageUpload"> -->
+            <input type="file" (change)="onFileSelected($event)" accept="image/*">
+            <img [src]="blogs.imagen"  alt="imageUpload">
 
             <label for="nombre">Nombre:</label>
-            <!-- <input type="text" id="nombre" name="nombre" placeholder="Nombre del Autor" [(ngModel)]="nombre_autor" required> -->
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre del Autor" [(ngModel)]="blogs.nombre_autor" required>
 
             <label for="apellido">Apellido:</label>
-            <!-- <input type="text" id="apellido" name="nombre" placeholder="Apellido del Autor" [(ngModel)]="apellido_autor" required> -->
+            <input type="text" id="apellido" name="apellido" placeholder="Apellido del Autor" [(ngModel)]="blogs.apellido_autor" required>
     
             <label for="e-mail">Email:</label>
-            <!-- <input type="email" id="e-mail" name="e-mail" placeholder="Email del Autor" [(ngModel)]="email_autor" required> -->
+            <input type="email" id="e-mail" name="e-mail" placeholder="Email del Autor" [(ngModel)]="blogs.email_autor" required>
 
-            <label for="parrafo1-blog">Contenido del Blog:</label>
-            <!-- <textarea class="textarea-auto" id="parrafo1-blog" name="parrafo1-blog" placeholder="Escriba el contenido del Blog" [(ngModel)]="parrafo" required></textarea> -->
+            <label for="contenido">Contenido del Blog:</label>
+            <textarea class="textarea-auto" id="contenido" name="contenido" placeholder="Escriba el contenido del Blog" [(ngModel)]="blogs.parrafo" required></textarea>
 
-            <label for="parrafo3-blog">Bibliografia:</label>
-            <!-- <textarea class="textarea-auto" id="parrafo3-blog" name="parrafo3-blog" placeholder="Escriba la Bibliografia del Blog" [(ngModel)]="bibliografia"></textarea> -->
+            <label for="bibliografia">Bibliografia:</label>
+            <textarea class="textarea-auto" id="bibliografia" name="bibliografia" placeholder="Escriba la Bibliografia del Blog" [(ngModel)]="blogs.bibliografia"></textarea>
 
             <div class="botones-form-blog">
-                <!-- <input id="publicar" type="submit" value="Publicar" (click)="publicarBlog()">
-                <input id="guardar" type="submit" value="Guardar sin publicar" [(ngModel)]="visible" (click)="guardarSinPublicarBlog()"> -->
+                <input id="editar" type="submit" value="Editar" (click)="actualizarBlog()">
+                <!-- <input id="guardar" type="submit" value="Guardar sin publicar" [(ngModel)]="visible" (click)="guardarSinPublicarBlog()">  -->
             </div>
         </form>
     </div>
