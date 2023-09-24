@@ -9,6 +9,12 @@ import { LoadScriptService } from 'src/app/core/services/load-script.service';
 /* Decode Jwt */
 import jwt_decode from 'jwt-decode';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
+import { StorageService } from 'src/app/core/services/storage.service';
+
+interface ResponseBody {
+  token: string;
+  // Otras propiedades si las hay
+}
 
 @Component({
   selector: 'app-header',
@@ -34,7 +40,7 @@ export class HeaderComponent implements OnInit {
   userItems = userItems;
 
   constructor(private router: Router, private loadScriptService: LoadScriptService, private fbLog: FormBuilder, private fbSign: FormBuilder,
-    private authService: AuthService, private userService: UsuarioService) {
+    private authService: AuthService, private userService: UsuarioService, private storageServ: StorageService) {
 
     /* Damos el nombre del Script que queremos cargar */
     loadScriptService.loadScript(['menu-toggle']);
@@ -45,7 +51,7 @@ export class HeaderComponent implements OnInit {
 
     this.formLogIn = this.startForm();
     this.formSignUp = this.startFormSignUp();
-    
+
     let token = sessionStorage.getItem('token-session') as string;
     this.bodyAuthGoogle = this.decodeToken(token);
     console.log(this.bodyAuthGoogle);
@@ -161,16 +167,25 @@ export class HeaderComponent implements OnInit {
     if (this.formLogIn.valid) {
       this.authService.login(this.formLogIn.get('username')?.value, this.formLogIn.get('password')?.value).subscribe(
         (response) => {
-          console.log(response);
           this.formLogIn.reset();
-          const xToken = response.headers.get('X-Token');
-          console.log("JWT: " + xToken);
-          if (xToken) {
-            window.sessionStorage.setItem('Authorization', xToken);
-            const decodedToken: any = jwt_decode(xToken); // Decode the JWT
-            const role = decodedToken.authorities; // Assuming the role is stored in the 'authorities' field of the JWT payload
-            localStorage.setItem("roles", role);
-            console.log(role);
+          const xTokenHeader = response.headers.get('X-Token');
+          const body: any = response.body;
+          if (body && typeof body === 'object' && 'token' in body) {
+            console.log("hola")
+            const xTokenBody = body.token;
+            const decodedToken: any = jwt_decode(xTokenBody);
+            const role = decodedToken.usuario;
+            localStorage.setItem("roles", role.rol);
+            switch (role.rol) {
+              case "ADMIN_ROLE":
+                this.router.navigate(['user/projects']);
+                break;
+              case "USER_ROLE":
+                this.goToBlogs();
+                break; 
+              default:
+            }
+            
           }
         }
       );
