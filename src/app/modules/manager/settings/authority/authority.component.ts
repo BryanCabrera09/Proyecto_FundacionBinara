@@ -22,13 +22,14 @@ export class AuthorityComponent implements OnInit {
       (res) => {
         this.users = res
         this.loading = false;
+        console.log(this.users)
       }
     )
   }
 
   openDialog(user: any): void {
     const dialogRef = this.dialog.open(RolesDialogComponent, {
-      width: '400px', // Configura el ancho según tus necesidades
+      width: '500px', // Configura el ancho según tus necesidades
       data: { user } // Pasa el objeto user al diálogo
     });
   

@@ -10,6 +10,8 @@ import { RolesDialogComponent } from './roles-dialog/roles-dialog.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule, NgModel } from '@angular/forms';
 
+import { ToggleButtonModule } from 'primeng/togglebutton';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { FormsModule, NgModel } from '@angular/forms';
     TableModule,
     MatDialogModule,
     DropdownModule,
-    FormsModule
+    FormsModule,
+    ToggleButtonModule
   ]
 })
 export class SettingsModule { }
