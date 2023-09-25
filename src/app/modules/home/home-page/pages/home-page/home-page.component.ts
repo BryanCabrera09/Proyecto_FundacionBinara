@@ -82,7 +82,7 @@ export class HomePageComponent implements OnInit {
       });
   }
 
-  changeImage() {
+ /*  changeImage() {
     const background = document.querySelector('.background') as HTMLElement;
     background.style.backgroundImage = `url('assets/slider/${this.sliderImages[this.currentIndex]}')`;
     this.currentIndex = (this.currentIndex + 1) % this.sliderImages.length;
@@ -92,7 +92,7 @@ export class HomePageComponent implements OnInit {
     setInterval(() => {
       this.changeImage();
     }, 2000);
-  }
+  } */
 
   decodeJwt(token: string): any {
 
