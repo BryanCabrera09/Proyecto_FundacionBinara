@@ -168,15 +168,18 @@ export class HeaderComponent implements OnInit {
       this.authService.login(this.formLogIn.get('username')?.value, this.formLogIn.get('password')?.value).subscribe(
         (response) => {
           this.formLogIn.reset();
-          const xTokenHeader = response.headers.get('X-Token');
+          console.log(response)
           const body: any = response.body;
           if (body && typeof body === 'object' && 'token' in body) {
-            console.log("hola")
             const xTokenBody = body.token;
+            window.sessionStorage.setItem("X-Token", body.token); // to save the JWT in the sessionStorage
             const decodedToken: any = jwt_decode(xTokenBody);
-            const role = decodedToken.usuario;
-            localStorage.setItem("roles", role.rol);
-            switch (role.rol) {
+            const userLoged = decodedToken.usuario;
+            let usr: Usuario = userLoged;
+            usr.authStatus = "AUTH"
+            window.sessionStorage.setItem("userdetails",JSON.stringify(usr));
+            console.log(window.sessionStorage.getItem("userdetails"))
+            switch (userLoged.rol) {
               case "ADMIN_ROLE":
                 this.router.navigate(['user/projects']);
                 break;
