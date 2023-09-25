@@ -10,6 +10,7 @@ import { LoadScriptService } from 'src/app/core/services/load-script.service';
 import jwt_decode from 'jwt-decode';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -35,7 +36,7 @@ export class HeaderComponent implements OnInit {
   userItems = userItems;
 
   constructor(private router: Router, private loadScriptService: LoadScriptService, private fbLog: FormBuilder, private fbSign: FormBuilder,
-    private authService: AuthService, private userService: UsuarioService, private storageServ: StorageService) {
+    private authService: AuthService, private userService: UsuarioService, private toastr: ToastrService) {
 
     /* Damos el nombre del Script que queremos cargar */
     loadScriptService.loadScript(['menu-toggle']);
@@ -172,15 +173,20 @@ export class HeaderComponent implements OnInit {
       this.authService.login(this.formLogIn.get('username')?.value, this.formLogIn.get('password')?.value).subscribe(
         (response) => {
           this.formLogIn.reset();
-          const xTokenHeader = response.headers.get('X-Token');
+          console.log(response)
           const body: any = response.body;
           if (body && typeof body === 'object' && 'token' in body) {
-            console.log("hola")
             const xTokenBody = body.token;
+            window.sessionStorage.setItem("X-Token", body.token); // to save the JWT in the sessionStorage
             const decodedToken: any = jwt_decode(xTokenBody);
-            const role = decodedToken.usuario;
-            localStorage.setItem("roles", role.rol);
-            switch (role.rol) {
+            const userLoged = decodedToken.usuario;
+            let usr: Usuario = userLoged;
+            usr.authStatus = "AUTH"
+            window.sessionStorage.setItem("userdetails",JSON.stringify(usr));
+            localStorage.setItem("roles", userLoged.rol)
+            console.log(window.sessionStorage.getItem("userdetails"))
+            console.log(window.localStorage.getItem("roles"))
+            switch (userLoged.rol) {
               case "ADMIN_ROLE":
                 this.router.navigate(['user/projects']);
                 break;
@@ -213,14 +219,13 @@ export class HeaderComponent implements OnInit {
           let status = error.status
           switch (status) {
             case 400:
-              console.log("Usuario exixstente")
+              this.toastr.error("El usuario " + this.usuario.correo + " ya existe", 'Info');
               break
             default:
-              console.log("ERROR DEL SERVIDOR")
+              this.toastr.error("Server error", 'Error');
           }
         }
       )
-      console.log(this.usuario);
     } else {
       console.log(this.formSignUp.errors);
     }

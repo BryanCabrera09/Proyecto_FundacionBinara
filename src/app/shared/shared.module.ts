@@ -16,6 +16,8 @@ import { TranslatePipe } from '../core/pipe/translate.pipe';
 import { DialogModule } from 'primeng/dialog';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     FooterComponent,
@@ -33,7 +35,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     MatCardModule,
     DialogModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot()
   ],
   exports: [
     HeaderComponent,
