@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import baserUrl from 'src/app/core/helpers/helperUrl';
 import { Proyectos } from 'src/app/core/models/proyectos';
 import { ProyectosService } from 'src/app/core/services/proyectos.service';
 
@@ -11,6 +12,8 @@ import { ProyectosService } from 'src/app/core/services/proyectos.service';
 export class HomePageComponent implements OnInit {
 
   projects?: Proyectos[];
+  baseUrl: string = baserUrl;
+  roluser: string = "ADMIN_ROLE"
 
   bodyAuth: any = {};
   userRole?: string;
@@ -61,7 +64,8 @@ export class HomePageComponent implements OnInit {
   constructor(private router: Router, private projectService: ProyectosService) { }
 
   ngOnInit() {
-    this.startSlider();
+
+    this.listProjects();
 
     let token = sessionStorage.getItem('token') as string;
     this.bodyAuth = this.decodeJwt(token);
@@ -72,13 +76,10 @@ export class HomePageComponent implements OnInit {
   }
 
   listProjects() {
-    this.projectService.getActiveProjects().subscribe(data => {
-      this.projects = data;
-    });
-  }
-
-  goToArticle(e: any) {
-    this.router.navigate(['usuario/ver/proyecto']);
+    this.projectService.getProjects().subscribe(
+      data => {
+        this.projects = data;
+      });
   }
 
   changeImage() {
@@ -102,6 +103,18 @@ export class HomePageComponent implements OnInit {
     }).join(''));
 
     return JSON.parse(jsonPayload);
+  }
+
+  getProvincia(lugar: any): string {
+    return lugar.split(';')[0];
+  }
+
+  goToArticle(projectId: any) {
+    if (projectId !== undefined) {
+      this.router.navigate(['user/ver/proyecto', projectId]);
+    } else {
+      console.log(projectId);
+    }
   }
 
 }

@@ -18,6 +18,10 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./ver-blogs/ver-blogs.module').then(m => m.VerBlogsModule)
   },
+  {
+    path: '',
+    loadChildren: () => import('./contact-us/contact-us.module').then(m => m.ContactUsModule)
+  }
 ];
 
 @NgModule({

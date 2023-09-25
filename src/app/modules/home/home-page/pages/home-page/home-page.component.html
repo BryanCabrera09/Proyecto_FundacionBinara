@@ -59,91 +59,27 @@
     <div class="background" [style.background-image]="selectedLink">
         <span class="centering">
             <section class="articles">
-                <article class="article-container">
-                    <div class="image-container">
-                        <figure>
-                            <img src="https://img.freepik.com/free-photo/pathway-middle-green-leafed-trees-with-sun-shining-through-branches_181624-4539.jpg?w=900&t=st=1687123477~exp=1687124077~hmac=6e8b1735a2cb25be79f248b6a3307a37a15b080dee114565d01704b97d432a80"
-                                alt="Preview" title="Preview" />
-                        </figure>
-                    </div>
-                    <div class="article-preview">
-                        <h2>Proyecto 1</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            Praesent in mauris eu tortor porttitor accumsan.
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            Praesent in mauris eu tortor porttitor accumsan.
-                        </p>
-                        <div class="boton">
-                            <button class="btn">
-                                {{'leer mas' | translate | async}}
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="article-container">
-                    <div class="image-container">
-                        <figure>
-                            <img src="https://img.freepik.com/free-photo/pathway-middle-green-leafed-trees-with-sun-shining-through-branches_181624-4539.jpg?w=900&t=st=1687123477~exp=1687124077~hmac=6e8b1735a2cb25be79f248b6a3307a37a15b080dee114565d01704b97d432a80"
-                                alt="Preview" title="Preview" />
-                        </figure>
-                    </div>
-                    <div class="article-preview">
-                        <h2>Proyecto 1</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            Praesent in mauris eu tortor porttitor accumsan.
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            Praesent in mauris eu tortor porttitor accumsan.
-                        </p>
-                        <div class="boton">
-                            <button class="btn">
-                                {{'leer mas' | translate | async}}
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="article-container">
-                    <div class="image-container">
-                        <figure>
-                            <img src="https://img.freepik.com/free-photo/pathway-middle-green-leafed-trees-with-sun-shining-through-branches_181624-4539.jpg?w=900&t=st=1687123477~exp=1687124077~hmac=6e8b1735a2cb25be79f248b6a3307a37a15b080dee114565d01704b97d432a80"
-                                alt="Preview" title="Preview" />
-                        </figure>
-                    </div>
-                    <div class="article-preview">
-                        <h2>Proyecto 1</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            Praesent in mauris eu tortor porttitor accumsan.
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            Praesent in mauris eu tortor porttitor accumsan.
-                        </p>
-                        <div class="boton">
-                            <button class="btn">
-                                {{'leer mas' | translate | async}}
-                            </button>
-                        </div>
-                    </div>
-                </article>
 
                 <article *ngFor="let project of projects" class="article-container">
                     <div class="image-container">
                         <figure>
-                            <img [src]="project.portada" alt="Preview" title="Preview" />
+                            <img [src]="baseUrl + '/imagen/proyecto/'+ project.portada"
+                                alt="Portada de {{project.titulo}}" title="Portada de {{project.titulo}}" />
                         </figure>
                     </div>
                     <div class="article-preview">
-                        <h2 *ngIf="project.titulo">{{ project.titulo | translate | async }}</h2>
-                        <p *ngIf="project.parrafoUno">
-                            {{ project.parrafoUno | translate | async}}
-                            <a (click)="goToArticle(project.uid)" class="read-more negrita">
-                                {{'leer mas' | translate | async}}
-                            </a>
+                        <h2>{{ project.titulo }}</h2>
+                        <p class="location" *ngIf="project.mapas && project.mapas.length > 0">{{ getProvincia(project.mapas[0].lugar) }}
                         </p>
+                        <p class="tamañoParrafo">{{ project.parrafoUno }}</p>
+                        <div class="boton">
+                            <button (click)="goToArticle(project.uid)" class="btn">
+                                {{'leer mas' | translate | async}}
+                            </button>
+                        </div>
                     </div>
                 </article>
+
             </section>
         </span>
     </div>
@@ -210,7 +146,8 @@
                     <a>
                         <h4>{{'Importancia de las rosas ecuatorianas' | translate | async}}</h4>
                         <p>{{'Escrito el: ' | translate | async}}<span>26/12/21</span> {{'Por:' | translate | async}}
-                            <span>Erick Ochoa Tocachi</span></p>
+                            <span>Erick Ochoa Tocachi</span>
+                        </p>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde, voluptatem eius
                             sequi
                             in beatae

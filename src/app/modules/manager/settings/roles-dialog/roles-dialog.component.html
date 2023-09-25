@@ -1,44 +1,56 @@
-<div class="popup-container">
-    <h2 class="popup-title">Información del Usuario</h2>
+<body>
+    <div class="popup-container">
 
-    <!-- Contenedor de las columnas -->
-    <div class="columns-container">
-        <!-- Columna de datos del usuario -->
-        <div class="user-data-column">
-            <div class="popup-content">
-                <label>Nombre</label>
-                <p>{{ data.user.nombre }}</p>
-                <label>Correo</label>
-                <p>{{ data.user.correo }}</p>
-                <label>Activo</label>
-                <p>
-                    <p-toggleButton [(ngModel)]="estado" onLabel="Yes" offLabel="No"></p-toggleButton>
-                </p>
+        <h2 class="popup-title">Información del Usuario</h2>
+
+        <!-- Contenedor de las columnas -->
+        <div class="columns-container">
+            <!-- Columna de datos del usuario -->
+            <div class="user-data-column">
+                <div class="popup-content">
+                    <div class="data">
+                        <label>Nombre</label>
+                        <span>{{ data.user.nombre }}</span>
+                    </div>
+                    <div class="data">
+                        <label>Rol actual</label>
+                        <span>{{ data.user.rol === 'ADMIN_ROLE' ? 'ADMIN' : data.user.rol === 'USER_ROLE' ? 'USER' :
+                            'Otro'
+                            }}</span>
+                    </div>
+                    <div class="data">
+                        <label>Activo</label>
+                        <span>
+                            <p-toggleButton [(ngModel)]="estado" onLabel="Yes" offLabel="No"></p-toggleButton>
+                        </span>
+                    </div>
+                </div>
+                <div class="popup-content">
+                    <div class="data">
+                        <label>Correo</label>
+                        <span>{{ data.user.correo }}</span>
+                    </div>
+                    <div class="data">
+                        <label>Nuevo rol</label>
+                        <div>
+                            <p-dropdown [options]="authorities" optionLabel="label" optionValue="value"
+                                [(ngModel)]="selectedRole" placeholder="Cambiar rol"></p-dropdown>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Columna del dropdown -->
-        <div class="dropdown-column">
-            <label>Rol actua</label>
-            <p>{{ data.user.rol === 'ADMIN_ROLE' ? 'ADMIN' : data.user.rol === 'USER_ROLE' ? 'USER' : 'Otro' }}</p>
-            <label>Nuevo rol</label>
-            <div>
-                <p-dropdown [options]="authorities" optionLabel="label" optionValue="value" [(ngModel)]="selectedRole"
-                    placeholder="Cambiar rol"></p-dropdown>
-            </div>
+        <!-- Botones -->
+        <div class="button-container">
+            <button type="button" class="btn btn-info" (click)="editar()"
+                [disabled]="data.user.rol === selectedRole && data.user.estado === estado">
+                <i class="fas fa-edit"></i> Guardar
+            </button>
 
+            <button type="button" class="btn btn-danger" (click)="closeDialog()">
+                <i class="fas fa-times"></i> Cancelar
+            </button>
         </div>
-
     </div>
-
-    <!-- Botones -->
-    <div class="button-container">
-        <button type="button" class="btn btn-info" (click)="editar()" [disabled]="data.user.rol === selectedRole && data.user.estado === estado">
-            <i class="far fa-edit"></i> Guardar
-        </button>
-
-        <button type="button" class="btn btn-info" (click)="closeDialog()">
-            <i class="far fa-edit"></i> Cancelar
-        </button>
-    </div>
-</div>
+</body>

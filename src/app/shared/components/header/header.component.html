@@ -12,9 +12,10 @@
                 <li><a (click)="goToProjects(); changeBackground('Proyectos')">{{'Proyectos' | translate | async}}</a>
                 </li>
                 <li><a href="#" (click)="changeBackground('Anuncios')">{{'Anuncios' | translate | async}}</a></li>
-                <li><a href="#" (click)="goToBlogs(); changeBackground('Blog')">{{'Blog' | translate | async}}</a></li>
-                <li><a href="#" (click)="changeBackground('Contactanos')">{{'Contactanos' | translate | async}}</a></li>
-                <li><a href="#" (click)="changeBackground('Involúcrate')">{{'Involúcrate' | translate | async}}</a></li>
+                <li><a (click)="goToBlogs(); changeBackground('Blog')">{{'Blog' | translate | async}}</a></li>
+                <li><a (click)="goToContact(); changeBackground('Contactanos')">{{'Contactanos' | translate |
+                        async}}</a></li>
+                <!-- <li><a href="#" (click)="changeBackground('Involúcrate')">{{'Involúcrate' | translate | async}}</a></li> -->
                 <!-- <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">{{'Estadisticas' | translate |
                         async}}</a></li> -->
             </ul>
@@ -25,7 +26,7 @@
 
             <div *ngIf="logueado" class="head-content-right">
                 <div class="head-user-avatar-container">
-                        <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
+                    <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
                         <img *ngIf="bodyAuthGoogle.picture; else defaultImage" src="{{ bodyAuthGoogle.picture }}"
                             alt="user" class="user-avatar" srcset="">
 
@@ -51,9 +52,10 @@
             <li><a (click)="goToProjects(); changeBackground('Proyectos')">{{'Proyectos' | translate | async}}</a>
             </li>
             <li><a href="#" (click)="changeBackground('Anuncios')">{{'Anuncios' | translate | async}}</a></li>
-            <li><a href="#" (click)="changeBackground('Blog')">{{'Blog' | translate | async}}</a></li>
-            <li><a href="#" (click)="changeBackground('Contactanos')">{{'Contactanos' | translate | async}}</a></li>
-            <li><a href="#" (click)="changeBackground('Involúcrate')">{{'Involúcrate' | translate | async}}</a></li>
+            <li><a (click)="goToBlogs(); changeBackground('Blog')">{{'Blog' | translate | async}}</a></li>
+            <li><a (click)="goToContact(); changeBackground('Contactanos')">{{'Contactanos' | translate |
+                    async}}</a></li>
+            <!-- <li><a href="#" (click)="changeBackground('Involúcrate')">{{'Involúcrate' | translate | async}}</a></li> -->
             <!-- <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">{{'Estadisticas' | translate |
                     async}}</a></li> -->
             <li><button *ngIf="!logueado" class="log-in" (click)="form.reset(); formUp.reset()" data-bs-toggle="modal"
@@ -84,11 +86,12 @@
     <div class="overlay overlay-user overlay-fall">
         <ul>
             <li *ngFor="let item of userItems" cdkMenuItem>
-                <a *ngIf="item.label === 'Cerrar Sesión'" (click)="logOut()">
+                <a *ngIf="item.label !== 'Cerrar Sesión'" [routerLink]="[item.routeLink]" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}">
                     <i class="icon" [ngClass]="item.icon"></i>
                     <span>{{item.label | translate | async}}</span>
                 </a>
-                <a *ngIf="item.label !== 'Cerrar Sesión'">
+                <a *ngIf="item.label === 'Cerrar Sesión'" (click)="logOut()">
                     <i class="icon" [ngClass]="item.icon"></i>
                     <span>{{item.label | translate | async}}</span>
                 </a>

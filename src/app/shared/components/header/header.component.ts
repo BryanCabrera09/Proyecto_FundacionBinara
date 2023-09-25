@@ -11,11 +11,6 @@ import jwt_decode from 'jwt-decode';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 
-interface ResponseBody {
-  token: string;
-  // Otras propiedades si las hay
-}
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -54,7 +49,7 @@ export class HeaderComponent implements OnInit {
 
     let token = sessionStorage.getItem('token-session') as string;
     this.bodyAuthGoogle = this.decodeToken(token);
-    console.log(this.bodyAuthGoogle);
+    //console.log(this.bodyAuthGoogle);
 
     this.isLogged();
   }
@@ -81,8 +76,17 @@ export class HeaderComponent implements OnInit {
   goToAnalytics() {
     this.router.navigate(['manager/dashboard']);
   }
+
   goToBlogs() {
     this.router.navigate(['user/blogs']);
+  }
+
+  goToAuthorities() {
+    this.router.navigate(['manager/settings/authorities'])
+  }
+
+  goToContact() {
+    this.router.navigate(['user/contact-us'])
   }
 
   showDialog() {
@@ -182,10 +186,10 @@ export class HeaderComponent implements OnInit {
                 break;
               case "USER_ROLE":
                 this.goToBlogs();
-                break; 
+                break;
               default:
             }
-            
+
           }
         }
       );

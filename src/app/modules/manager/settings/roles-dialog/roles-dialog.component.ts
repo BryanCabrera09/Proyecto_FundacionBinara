@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-roles-dialog',
   templateUrl: './roles-dialog.component.html',
-  styleUrls: ['./roles-dialog.component.css']
+  styleUrls: ['./roles-dialog.component.scss']
 })
 export class RolesDialogComponent implements OnInit {
 

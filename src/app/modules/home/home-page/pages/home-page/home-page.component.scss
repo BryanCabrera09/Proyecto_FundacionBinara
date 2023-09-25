@@ -352,8 +352,19 @@ h4 {
     }
   }
 
-  p {
+  .location {
+    text-align: center;
+  }
+
+  .tamañoParrafo {
     font-size: 1.5rem;
+    /* Tamaño de fuente fijo que desees */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    /* Número de líneas visibles antes de los puntos suspensivos */
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
