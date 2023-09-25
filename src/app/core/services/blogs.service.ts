@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import baserUrl from "../helpers/helperUrl";
 import { Blogs } from "../models/blogs";
 import { Observable } from "rxjs";
@@ -48,4 +48,15 @@ export class BlogsService {
     activarBlog(id: number): Observable<any> {
         return this.http.put(`${this.blogsUrl}/${id}/activar`, {});
     }
+
+    uploadImage(blogId: string, file: File) {
+        const formData = new FormData();
+        formData.append('archivo', file);
+    
+        const headers = new HttpHeaders();
+    
+        const url = `${baserUrl}/imagen/blog/${blogId}`;
+    
+        return this.http.post(url, formData, { headers });
+      }
 }

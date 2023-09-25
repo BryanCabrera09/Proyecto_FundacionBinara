@@ -4,5 +4,5 @@ export class Blogcomentarios {
     id_blog?: string;
     nombre?: string;
     fecha?: Date;
-    comentario?: string;
+    comentario?: string[];
 }
