@@ -160,7 +160,7 @@ imageSrc: string | ArrayBuffer | null = null;
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: '<success>Blog creado con éxito!</strong>',
+          title: '<success>Blog creado con éxito!</seccess>',
           showConfirmButton: false,
           timer: 3000
         });

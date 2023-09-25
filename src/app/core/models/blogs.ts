@@ -10,4 +10,5 @@ export class Blogs {
     parrafo?: string;
     bibliografia?: string;
     visible?: boolean;
+    comentarios?: string[];
 }

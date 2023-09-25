@@ -8,7 +8,7 @@
     
         <ul class="iconos">
             <li>
-                <img src="../../../../../../assets/img/like.png" alt="img">
+                <img class="boton-like" src="../../../../../../assets/img/like.png" alt="img">
                 <p>283</p>
     
                 <img src="../../../../../../assets/img/dislike.png" alt="img">
@@ -20,7 +20,7 @@
             
             <li>
                 <img id="btn-abrir-popup" class="edit" (click)="formularioEditar()" src="../../../../../../assets/img/edit.png" alt="img edit">
-                <img class="delete" (click)="confirmDeleteBlog(blog)" src="../../../../../../assets/img/delete.png" alt="img delete">
+                <img class="delete" (click)="desactivar()" src="../../../../../../assets/img/delete.png" alt="img delete">
             </li>
         </ul>
     
@@ -84,7 +84,6 @@
     </div>
 
     <!-- Editar -->
-
     <div class="overlay" id="overlay">
         <form class="formulario" id="popup" action="procesar_comentario.php" method="post">
             <div class="header-form">

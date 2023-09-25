@@ -31,7 +31,7 @@ export class VerBlogsComponent implements OnInit {
   id_blog?: number;
   nombre?: string = '';
   fecha?: string = '';
-  comentario?: string = '';
+  comentario: string[] = [''];
   idEditar?: string = '';
 
   visible: boolean = true;
@@ -53,6 +53,7 @@ export class VerBlogsComponent implements OnInit {
 
       if(data.blog != null){
         this.blogedit = data.blog._id;
+
       }
 
     if(data.blogcomentario != null){
@@ -118,7 +119,7 @@ export class VerBlogsComponent implements OnInit {
   //Datos
   Datos(): void{
     //this.blogcomentario._id = this.id_blog;
-    this.blogcomentario.nombre = this.nombre;
+    //this.blogcomentario.nombre = this.nombre;
     this.blogcomentario.comentario = this.comentario;
   }
     //Crear Comentario
@@ -246,28 +247,26 @@ export class VerBlogsComponent implements OnInit {
     });
   }
 
-  delete(blog: Blogs): void {
-    this.blogsService.deleteBlog(blog._id!).subscribe(
+  desactivar() {
+    this.blogsService.deleteBlog(this.blogs._id!).subscribe(
     response => {
-      console.log('Blog desactivado con exito', response);
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: '<success>Blog desactivado correctamente</success>',
+        showConfirmButton: false,
+        timer: 2000
+      });
     },
     error => {
-      console.log('Error al eliminar el blog', error);
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: '<strong>Error al desactivar blog</strong>' + error,
+        showConfirmButton: false,
+        timer: 2000
+      });
     }  
     );
-  }
-
-
-  confirmMessage: string = '';
-  isConfirmVisible: boolean = false;
-  blogDelete: Blogs | null = null;
-  confirmDeleteBlog(blog: Blogs): void {
-    if (blog.visible) {
-        this.confirmMessage = `¿Estás seguro de que deseas DESACTIVAR el blog "${blog.titulo}"?`;
-    } else {
-        this.confirmMessage = `¿Estás seguro de que deseas ACTIVAR el proyecto "${blog.titulo}"?`;
-    }
-    this.blogDelete = blog;
-    this.isConfirmVisible = true;
   }
 }
