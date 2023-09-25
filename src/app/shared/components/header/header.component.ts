@@ -10,6 +10,7 @@ import { LoadScriptService } from 'src/app/core/services/load-script.service';
 import jwt_decode from 'jwt-decode';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { ToastrService } from 'ngx-toastr';
 
 interface ResponseBody {
   token: string;
@@ -40,7 +41,7 @@ export class HeaderComponent implements OnInit {
   userItems = userItems;
 
   constructor(private router: Router, private loadScriptService: LoadScriptService, private fbLog: FormBuilder, private fbSign: FormBuilder,
-    private authService: AuthService, private userService: UsuarioService, private storageServ: StorageService) {
+    private authService: AuthService, private userService: UsuarioService, private toastr: ToastrService) {
 
     /* Damos el nombre del Script que queremos cargar */
     loadScriptService.loadScript(['menu-toggle']);
@@ -214,14 +215,13 @@ export class HeaderComponent implements OnInit {
           let status = error.status
           switch (status) {
             case 400:
-              console.log("Usuario exixstente")
+              this.toastr.error("El usuario " + this.usuario.correo + " ya existe", 'Info');
               break
             default:
-              console.log("ERROR DEL SERVIDOR")
+              this.toastr.error("Server error", 'Error');
           }
         }
       )
-      console.log(this.usuario);
     } else {
       console.log(this.formSignUp.errors);
     }
