@@ -178,7 +178,9 @@ export class HeaderComponent implements OnInit {
             let usr: Usuario = userLoged;
             usr.authStatus = "AUTH"
             window.sessionStorage.setItem("userdetails",JSON.stringify(usr));
+            localStorage.setItem("roles", userLoged.rol)
             console.log(window.sessionStorage.getItem("userdetails"))
+            console.log(window.localStorage.getItem("roles"))
             switch (userLoged.rol) {
               case "ADMIN_ROLE":
                 this.router.navigate(['user/projects']);
