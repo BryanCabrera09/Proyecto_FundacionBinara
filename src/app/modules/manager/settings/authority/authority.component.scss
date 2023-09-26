@@ -1,0 +1,98 @@
+@import '../../../../core/styles/global-styles.scss';
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.container {
+  width: 95%;
+  max-width: 150rem;
+  margin: 0 auto;
+  margin-top: calc($separacion / 2);
+  margin-bottom: calc($separacion / 2);
+}
+
+/* Estilo de la tabla */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+h1 {
+  margin-top: 2%;
+  margin-bottom: 2%;
+  text-align: center;
+  font-weight: bold;
+}
+
+.h {
+  margin-top: 2%;
+  text-align: center;
+  font-weight: bold;
+}
+
+#text {
+  text-align: center;
+}
+
+#text-btn {
+  text-align: center;
+  white-space: pre-wrap;
+}
+
+.btn:hover {
+  background-color: #4daacf;
+}
+
+table td:hover {
+  background-color: rgb(255, 255, 255);
+}
+
+tr,
+button {
+  font-family: $fuente_principal;
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: $negro;
+}
+
+th {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+#header {
+  margin: 3;
+  text-align: center;
+}

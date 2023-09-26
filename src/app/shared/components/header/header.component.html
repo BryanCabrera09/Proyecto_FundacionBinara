@@ -13,28 +13,35 @@
                 </li>
                 <li><a href="#" (click)="changeBackground('Anuncios')">{{'Anuncios' | translate | async}}</a></li>
                 <li><a (click)="goToBlogs(); changeBackground('Blog')">{{'Blog' | translate | async}}</a></li>
-                <li><a href="#" (click)="changeBackground('Contactanos')">{{'Contactanos' | translate | async}}</a></li>
-                <li><a href="#" (click)="changeBackground('Involúcrate')">{{'Involúcrate' | translate | async}}</a></li>
+                <li><a (click)="goToContact(); changeBackground('Contactanos')">{{'Contactanos' | translate |
+                        async}}</a></li>
+                <!-- <li><a href="#" (click)="changeBackground('Involúcrate')">{{'Involúcrate' | translate | async}}</a></li> -->
                 <!-- <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">{{'Estadisticas' | translate |
                         async}}</a></li> -->
             </ul>
 
-            <button *ngIf="!logueado" class="log-in" (click)="goToLogin()">{{'Log In' | translate | async}}</button>
-
-            <div class="toggle_btn">
-                <i class='bx bx-menu' id="menu-icon"></i>
-            </div>
+            <button *ngIf="!logueado" class="log-in" (click)="form.reset()" data-bs-toggle="modal"
+                data-bs-target="#modalSignIn">{{'Log In' |
+                translate | async}}</button>
 
             <div *ngIf="logueado" class="head-content-right">
                 <div class="head-user-avatar-container">
                     <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
-                        <img *ngIf="bodyAuthGoogle.picture"
-                            src="{{(bodyAuthGoogle.picture) ? bodyAuthGoogle.picture : 'https://cdn-icons-png.flaticon.com/512/16/16363.png'}}"
+                        <img *ngIf="bodyAuthGoogle.picture; else defaultImage" src="{{ bodyAuthGoogle.picture }}"
                             alt="user" class="user-avatar" srcset="">
+
+                        <ng-template #defaultImage>
+                            <img src="https://cdn-icons-png.flaticon.com/512/16/16363.png" alt="user"
+                                class="user-avatar" srcset="">
+                        </ng-template>
                         <div class="circle-indicator pulse">
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="toggle_btn">
+                <i class='bx bx-menu' id="menu-icon"></i>
             </div>
 
         </div>
@@ -46,18 +53,23 @@
             </li>
             <li><a href="#" (click)="changeBackground('Anuncios')">{{'Anuncios' | translate | async}}</a></li>
             <li><a (click)="goToBlogs(); changeBackground('Blog')">{{'Blog' | translate | async}}</a></li>
-            <li><a href="#" (click)="changeBackground('Contactanos')">{{'Contactanos' | translate | async}}</a></li>
-            <li><a href="#" (click)="changeBackground('Involúcrate')">{{'Involúcrate' | translate | async}}</a></li>
+            <li><a (click)="goToContact(); changeBackground('Contactanos')">{{'Contactanos' | translate |
+                    async}}</a></li>
+            <!-- <li><a href="#" (click)="changeBackground('Involúcrate')">{{'Involúcrate' | translate | async}}</a></li> -->
             <!-- <li><a (click)="goToAnalytics(); changeBackground('Estadisticas')">{{'Estadisticas' | translate |
                     async}}</a></li> -->
-            <li><button *ngIf="!logueado" class="log-in">{{'Log In' | translate | async}}</button></li>
-            <li>
+            <li><button *ngIf="!logueado" class="log-in" (click)="form.reset(); formUp.reset()" data-bs-toggle="modal"
+                    data-bs-target="#modalSignIn">{{'Log In' | translate | async}}</button></li>
+            <li class="logged">
                 <div *ngIf="logueado" class="head-content-right">
                     <div class="head-user-avatar-container">
                         <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
-                            <img *ngIf="bodyAuthGoogle.picture"
-                                src="{{(bodyAuthGoogle.picture) ? bodyAuthGoogle.picture : 'https://cdn-icons-png.flaticon.com/512/16/16363.png'}}"
+                            <img *ngIf="bodyAuthGoogle.picture; else defaultImage" src="{{ bodyAuthGoogle.picture }}"
                                 alt="user" class="user-avatar" srcset="">
+                            <ng-template #defaultImage>
+                                <img src="https://cdn-icons-png.flaticon.com/512/16/16363.png" alt="user"
+                                    class="user-avatar" srcset="">
+                            </ng-template>
                             <div class="circle-indicator pulse">
                             </div>
                         </div>
@@ -74,11 +86,12 @@
     <div class="overlay overlay-user overlay-fall">
         <ul>
             <li *ngFor="let item of userItems" cdkMenuItem>
-                <a *ngIf="item.label === 'Cerrar Sesión'" (click)="logOut()">
+                <a *ngIf="item.label !== 'Cerrar Sesión'" [routerLink]="[item.routeLink]" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}">
                     <i class="icon" [ngClass]="item.icon"></i>
                     <span>{{item.label | translate | async}}</span>
                 </a>
-                <a *ngIf="item.label !== 'Cerrar Sesión'">
+                <a *ngIf="item.label === 'Cerrar Sesión'" (click)="logOut()">
                     <i class="icon" [ngClass]="item.icon"></i>
                     <span>{{item.label | translate | async}}</span>
                 </a>
@@ -86,3 +99,129 @@
         </ul>
     </div>
 </ng-template>
+
+<!-- Modal Login - Register -->
+<div class="modal fade modal-signin py-5" tabindex="-1" role="dialog" id="modalSignIn">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h1 class="fw-bold mb-4 fs-1">Sign In</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body p-5 pt-0">
+                <form class="signin-form" [formGroup]="formLogIn" (ngSubmit)="logIn()" #form>
+                    <div class="form-floating mb-4">
+                        <input type="email" class="form-control rounded-3" id="floatingInput" formControlName="username"
+                            placeholder="Correo Electrónico" [class.is-invalid]="isInvalidForm('username')">
+                        <label for="floatingInput">Dirección de Correo</label>
+                        <i class='bx bxs-user'></i>
+                        <small *ngIf="isInvalidForm('username')" class="text-danger">Ingresa un email</small>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <input type="password" class="form-control rounded-3" id="floatingPassword"
+                            formControlName="password" placeholder="Contraseña"
+                            [class.is-invalid]="isInvalidForm('password')">
+                        <label for="floatingPassword">Contraseña</label>
+                        <i class='bx bxs-lock-alt'></i>
+                        <small *ngIf="isInvalidForm('password')" class="text-danger">Ingresa una contraseña</small>
+                    </div>
+                    <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Iniciar Sesión</button>
+                    <span class="text-muted fs-5">¿No posees una cuenta?
+                        <a (click)="formUp.reset()" data-bs-toggle="modal" href="#modalSignUp">Registrate</a>
+                    </span>
+                    <hr class="my-4">
+                    <h2 class="fs-4 fw-bold mb-3">O usa tu cuenta de Google</h2>
+                    <div *ngIf="!logueado" class="login-google">
+                        <div id="g_id_onload"
+                            data-client_id="713010332294-6d3e25kg62qlkha8lcqne687un71dt6l.apps.googleusercontent.com"
+                            data-context="use" data-ux_mode="popup" data-itp_support="true"
+                            data-callback="handleCredentialResponse">
+                        </div>
+
+                        <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_black"
+                            data-text="continue_with" data-size="large" data-logo_alignment="left">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-signup py-5" tabindex="-1" role="dialog" id="modalSignUp">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h1 class="fw-bold mb-4 fs-1">Sign Up</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body p-5 pt-0">
+                <form class="signup-form" [formGroup]="formSignUp" (ngSubmit)="guardarUsuario()" #formUp>
+                    <div class="form-floating mb-4">
+                        <input type="text" id="nombre" formControlName="nombre" id="floatingInput"
+                            class="form-control rounded-3" placeholder="Nombre"
+                            [class.is-invalid]="isInvalidFormS('nombre')">
+                        <label for="floatingInput">Nombre:</label>
+                        <small *ngIf="isInvalidFormS('nombre')" class="text-danger">Nombre es requerido..</small>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input type="text" id="apellido" formControlName="apellido" id="floatingInput"
+                            class="form-control rounded-3" placeholder="Apellido"
+                            [class.is-invalid]="isInvalidFormS('apellido')">
+                        <label for="floatingInput">Apellido:</label>
+                        <small *ngIf="isInvalidFormS('apellido')" class="text-danger">Apellido es requerido.</small>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input type="email" id="correo" formControlName="correo" id="floatingEmail"
+                            class="form-control rounded-3" placeholder="Correo"
+                            [class.is-invalid]="isInvalidFormS('correo')">
+                        <label for="floatingEmail">Correo Electrónico:</label>
+                        <small *ngIf="isInvalidFormS('correo')" class="text-danger">Correo electrónico es requerido y
+                            debe ser válido.</small>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input type="password" id="password" formControlName="password" id="floatingPassword"
+                            class="form-control rounded-3" placeholder="Contraseña"
+                            [class.is-invalid]="isInvalidFormS('password')">
+                        <label for="floatingPassword">Contraseña:</label>
+                        <small *ngIf="isInvalidFormS('password')" class="text-danger">La contraseña debe tener al menos
+                            6
+                            caracteres, incluir al menos una letra mayúscula, un número y un carácter especial
+                            (@$!%*?&)</small>
+                    </div>
+
+                    <div class="buttons">
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                        <button type="submit" class="btn btn-primary" (click)="form.reset()" data-bs-toggle="modal"
+                            data-bs-target="#modalSignIn">Sign In</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalToggle2" aria-labelledby="exampleModalToggleLabel2" tabindex="-1"
+    style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Hide this modal and show the first with the button below.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to
+                    first</button>
+            </div>
+        </div>
+    </div>
+</div>

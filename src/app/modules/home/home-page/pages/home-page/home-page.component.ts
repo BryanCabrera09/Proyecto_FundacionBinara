@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import baserUrl from 'src/app/core/helpers/helperUrl';
 import { Proyectos } from 'src/app/core/models/proyectos';
 import { ProyectosService } from 'src/app/core/services/proyectos.service';
 
@@ -11,6 +12,8 @@ import { ProyectosService } from 'src/app/core/services/proyectos.service';
 export class HomePageComponent implements OnInit {
 
   projects?: Proyectos[];
+  baseUrl: string = baserUrl;
+  roluser: string = "ADMIN_ROLE"
 
   bodyAuth: any = {};
   userRole?: string;
@@ -24,7 +27,7 @@ export class HomePageComponent implements OnInit {
   /* Sabias que */
   sabias = 'Aunque se conoce como “Tierra”, nuestro planeta es más de 70% agua y casi 30% tierra. Por eso'
     + 'también recibe el nombre de “planeta azul”, ya que, desde el espacio, se ve como una gran masa de este'
-    + 'color. De toda esta agua, el 96\'5% está en los océanos y el otro 3\'5% en forma de agua dulce y hielo.';
+    + 'color. De toda esta agua, el 96,5% está en los océanos y el otro 3,5% en forma de agua dulce y hielo.';
 
   /* Quienes Somos */
   quienes_somos_parrU = 'Fundación BINARA es una persona jurídica de derecho privado, sin fines de lucro, con'
@@ -61,27 +64,25 @@ export class HomePageComponent implements OnInit {
   constructor(private router: Router, private projectService: ProyectosService) { }
 
   ngOnInit() {
-    this.startSlider();
+
+    this.listProjects();
 
     let token = sessionStorage.getItem('token') as string;
     this.bodyAuth = this.decodeJwt(token);
     //console.log('BodyAuth', this.bodyAuth);
 
     this.userRole = this.bodyAuth.usuario.rol;
-    console.log(this.userRole);
+    //console.log(this.userRole);
   }
 
   listProjects() {
-    this.projectService.getActiveProjects().subscribe(data => {
-      this.projects = data;
-    });
+    this.projectService.getProjects().subscribe(
+      data => {
+        this.projects = data;
+      });
   }
 
-  goToArticle(e: any) {
-    this.router.navigate(['usuario/ver/proyecto']);
-  }
-
-  changeImage() {
+ /*  changeImage() {
     const background = document.querySelector('.background') as HTMLElement;
     background.style.backgroundImage = `url('assets/slider/${this.sliderImages[this.currentIndex]}')`;
     this.currentIndex = (this.currentIndex + 1) % this.sliderImages.length;
@@ -91,7 +92,7 @@ export class HomePageComponent implements OnInit {
     setInterval(() => {
       this.changeImage();
     }, 2000);
-  }
+  } */
 
   decodeJwt(token: string): any {
 
@@ -102,6 +103,18 @@ export class HomePageComponent implements OnInit {
     }).join(''));
 
     return JSON.parse(jsonPayload);
+  }
+
+  getProvincia(lugar: any): string {
+    return lugar.split(';')[0];
+  }
+
+  goToArticle(projectId: any) {
+    if (projectId !== undefined) {
+      this.router.navigate(['user/ver/proyecto', projectId]);
+    } else {
+      console.log(projectId);
+    }
   }
 
 }

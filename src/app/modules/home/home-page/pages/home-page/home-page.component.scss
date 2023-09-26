@@ -280,10 +280,11 @@ h4 {
   align-items: center;
   padding: 30px 32px;
   /* Imagenes Slider */
-  background-repeat: no-repeat;
+
+  background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url('https://www.henkel.es/resource/image/1084248/16x9/1920/1080/7a7530443937d70f83dbb22c6423158c/F34BFB3EAF33429AAFA08601DD0B63E2/2020-06-05-d%C3%ADa-mundial-del-medio-ambiente-jpg.webp') no-repeat 0 50%;
+  //opacity: .75;
   background-position: center;
   background-size: cover;
-  transition: background-image 0.5s ease-in-out;
 }
 
 .articles {
@@ -352,8 +353,19 @@ h4 {
     }
   }
 
-  p {
+  .location {
+    text-align: center;
+  }
+
+  .tamañoParrafo {
     font-size: 1.5rem;
+    /* Tamaño de fuente fijo que desees */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    /* Número de líneas visibles antes de los puntos suspensivos */
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 

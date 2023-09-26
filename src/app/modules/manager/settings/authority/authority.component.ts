@@ -7,7 +7,7 @@ import { RolesDialogComponent } from '../roles-dialog/roles-dialog.component';
 @Component({
   selector: 'app-authority',
   templateUrl: './authority.component.html',
-  styleUrls: ['./authority.component.css']
+  styleUrls: ['./authority.component.scss']
 })
 export class AuthorityComponent implements OnInit {
 

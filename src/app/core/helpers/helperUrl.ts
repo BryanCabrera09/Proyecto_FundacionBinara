@@ -1,2 +1,2 @@
-let baserUrl = 'http://localhost:10001/api'
+let baserUrl = 'https://binara-api-prueba.azurewebsites.net/api'
 export default baserUrl;
