@@ -85,9 +85,9 @@ export class VerBlogsComponent implements OnInit {
   buscarBlogPorId(id: String): void {
     this.blogsService.searchBlogById(id).subscribe({
       next: (data: any) => {
-        const blogs = data;
-        console.log(blogs);
-        this.blogs = blogs.blogs;
+        const blog = data;
+        console.log(blog);
+        this.blogs = blog.blog;
       },
       error: (error: any) => {
         console.error('Error obteniendo el blog:', error);
@@ -174,7 +174,7 @@ export class VerBlogsComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.imageSrc = e.target.result;
-        this.blogs.imagen = e.target.result;
+        this.blogs.foto = e.target.result;
       };
       reader.readAsDataURL(input.files[0]);
     }
@@ -183,7 +183,7 @@ export class VerBlogsComponent implements OnInit {
 
   DatosBlog(): void{
     this.blog.titulo = this.blogs.titulo;
-    this.blog.imagen = this.blogs.imagen; 
+    this.blog.foto = this.blogs.foto; 
     this.blog.nombre_autor = this.blogs.nombre_autor;
     this.blog.apellido_autor = this.blogs.apellido_autor;
     this.blog.email_autor = this.blogs.email_autor;
@@ -193,7 +193,7 @@ export class VerBlogsComponent implements OnInit {
   }
 
   subirimagen(id: string) {
-    const base64String = this.blog.imagen; // tu cadena base64 aquí
+    const base64String = this.blog.foto; // tu cadena base64 aquí
     const byteCharacters = atob(base64String.split(',')[1]);
     const byteNumbers = new Array(byteCharacters.length);
     for (let i = 0; i < byteCharacters.length; i++) {

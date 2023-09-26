@@ -2,7 +2,7 @@ export class Blogpost {
 
     id?: string;
     titulo?: string;
-    imagen?: any;
+    foto?: any;
     nombre_autor?: string;
     apellido_autor?: string;
     email_autor?: string;

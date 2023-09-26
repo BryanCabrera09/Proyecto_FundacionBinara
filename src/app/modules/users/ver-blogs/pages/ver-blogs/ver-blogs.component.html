@@ -3,7 +3,7 @@
         <h1> {{ blogs.titulo }}</h1>
     
         <div class="portada">
-            <img  [src]="blogs.imagen" alt="Imagen de Blog" />
+            <img  [src]="blogs.foto" alt="Imagen de Blog" />
             </div>
     
         <ul class="iconos">
@@ -93,7 +93,7 @@
 
             <label for="titulo">Imagen:</label>
             <input type="file" (change)="onFileSelected($event)" accept="image/*">
-            <img [src]="blogs.imagen"  alt="imageUpload">
+            <img [src]="blogs.foto"  alt="imageUpload">
 
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" placeholder="Nombre del Autor" [(ngModel)]="blogs.nombre_autor" required>

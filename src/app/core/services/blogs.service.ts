@@ -10,7 +10,7 @@ import { Blogpost } from "../models/blogpost";
 })
 export class BlogsService {
 
-    blogsUrl = `${baserUrl}/blogs`;
+    blogsUrl = `${baserUrl}/blog`;
 
     constructor(private http: HttpClient) { }
 
