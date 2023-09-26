@@ -107,7 +107,7 @@ export class HeaderComponent implements OnInit {
   logOut() {
     window.sessionStorage.clear();
     window.localStorage.clear();
-    this.router.navigate(['/']);
+    // this.router.navigate(['/']);
     window.location.reload();
   }
 
@@ -196,11 +196,8 @@ export class HeaderComponent implements OnInit {
         (res) => {
           this.formSignUp.reset();
           this.toastr.success("Usuario " + this.usuario.correo + " registrado!", 'Info');
-          this.router.navigate(['/']);
           window.location.reload();
-          this.toastr.info("Inicia sesión!", "info", { timeOut: 2500 })
-          console.log(res)
-
+          this.toastr.info("Inicia sesión!", "info", { timeOut: 3000 })
         },
         (error) => {
           let status = error.status
