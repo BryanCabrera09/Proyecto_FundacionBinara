@@ -70,6 +70,7 @@ export class RegisterActivityComponent {
 
   }
   ngOnInit(): void {
+    
     if (this.proyectoId) {
       this.obtenerDetallesDelProyecto(this.proyectoId);
       
@@ -222,7 +223,12 @@ export class RegisterActivityComponent {
     this.actividad.num_adoloscentes_beneficiarios = this.num_adolescentes_beneficiarios;
     this.actividad.num_adultos_beneficiarios = this.num_adultos_beneficiarios;
     this.actividad.visible = this.visible;
-    this.actividad.usuario = this.usuario;
+    const userDetailsJSON = window.sessionStorage.getItem("userdetails");
+const userDetailsObj = JSON.parse(userDetailsJSON!);
+const uid = userDetailsObj.uid;
+console.log(uid);
+
+    this.actividad.usuario = uid;
   }
 
   Register(id: Mapas[]) {
