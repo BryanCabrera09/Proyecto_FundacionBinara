@@ -30,15 +30,15 @@
         <p>{{ proyecto.parrafoTres }}</p>
     </div>
 
-    <div class="text-container">
+    <div class="activity-container">
         <h4 class="section-header">Actividades</h4>
         <div *ngFor="let actividad of actividades" class="activity-card">
             <h5 (click)="toggleDetalle(actividad._id!)" class="activity-title">
                 <span class="toggle-icon" [ngClass]="{'expanded': detallesVisibles.has(actividad._id!)}"> + </span>
                 {{ actividad.titulo }}
             </h5>
+            <p class="activity-description">{{ actividad.descripcion }}</p>
             <div *ngIf="detallesVisibles.has(actividad._id!)" class="activity-details">
-                <p><strong><i class="fas fa-align-left"></i> Descripción:</strong> {{ actividad.descripcion }}</p>
                 <p><strong><i class="fas fa-layer-group"></i> Número de Áreas:</strong> {{ actividad.num_areas }}</p>
                 <p><strong><i class="fas fa-hands-helping"></i> Número de Personas Beneficiarias:</strong> {{
                     actividad.num_personas_beneficiarias }}</p>
@@ -55,8 +55,8 @@
                         ✎
                     </button>
                     <button class="delete-button" (click)="confirmDeleteProject(actividad)">
-                        <span *ngIf="actividad.visible" title="Desactivar" >✘</span>
-                        <span *ngIf="!actividad.visible" title="Activar" >✓</span>
+                        <span *ngIf="actividad.visible" title="Desactivar">✘</span>
+                        <span *ngIf="!actividad.visible" title="Activar">✓</span>
                     </button>
                     <div *ngIf="isConfirmVisible" class="custom-confirm">
                         <div class="confirm-content">
@@ -82,6 +82,7 @@
                 <div #mapContainer class="map-container" id="mapContainer{{i}}"></div>
                 <div class="coordinates-display"> {{ mapa?.coorX }} , {{ lng }}</div>
             </div>
+            <br><br>
             <div class="location-info mapa text-container">
                 <div>
                     Provincia: <input type="text" [value]="mapa.lugar!.split(';')[0]" readonly>
@@ -98,11 +99,8 @@
             </button>
         </div>
     </div>
-    
+
     <div class="button-container" *ngIf="roluser === 'ADMIN_ROLE'">
         <button class="add-project-button" (click)="agregarmapa()">Añadir nueva ubicación</button>
     </div>
-    
-    
-    
 </div>

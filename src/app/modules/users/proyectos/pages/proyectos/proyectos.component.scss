@@ -7,26 +7,23 @@
     font-family: $fuente_principal;
 }
 
-/* body {
-    background-color: #261E5A;
-} */
-
 .article-container {
+    position: relative;
+    border-radius: 1rem;
+    box-shadow: 0 5px 6px #030405;
+    margin: 10px;
+}
+
+
+.image-container {
     position: relative;
 }
 
-.image-container {
-    width: 500px; 
-    height: 200px; 
-    overflow: hidden; 
-    display: flex; 
-}
-
 .image-container img {
-    max-width: 100%; 
-    max-height: 100%;
+    max-width: 100%;
+    transform-origin: center;
+    transition: transform 0.4s ease-in-out;
 }
-
 
 .action-buttons {
     display: flex;
@@ -53,17 +50,17 @@
 .edit-button:hover,
 .delete-button:hover {
     color: red;
-
 }
-
-
 
 .background {
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    padding: 80px 32px;
+    align-items: center;
+    padding: 30px 32px;
+    background: linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, .5)), url('https://www.henkel.es/resource/image/1084248/16x9/1920/1080/7a7530443937d70f83dbb22c6423158c/F34BFB3EAF33429AAFA08601DD0B63E2/2020-06-05-d%C3%ADa-mundial-del-medio-ambiente-jpg.webp') no-repeat 0 50%;
+    background-position: center;
+    background-size: cover;
 }
 
 .articles {
@@ -72,10 +69,11 @@
     gap: 24px;
 
     display: flex;
-    flex-wrap: nowrap; /* Esto previene que los artículos se envuelvan a la siguiente línea */
+    flex-wrap: nowrap;
+    /* Esto previene que los artículos se envuelvan a la siguiente línea */
     margin: 0 auto;
-    justify-content: flex-start; 
- 
+    justify-content: flex-start;
+
 }
 
 .articles article {
@@ -88,7 +86,8 @@
     background: var(--background-gradient);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 
-    width: 300px;  /* Ancho fijo para todas las tarjetas */
+    width: 300px;
+    /* Ancho fijo para todas las tarjetas */
     height: 600px;
 }
 
@@ -108,32 +107,97 @@
     transition: color 0.3s ease-out;
 }
 
+article {
+    max-width: 310px;
+    max-height: 550px;
+    cursor: pointer;
+    position: relative;
+    display: block;
+    transition: all 0.4s ease-in-out;
+    overflow: hidden;
+    border-radius: 16px;
+
+    a {
+        display: inline-flex;
+        color: var(#DD946F);
+        text-decoration: none;
+    }
+
+    h2 {
+        margin: 0 0 18px 0;
+        font-size: 1.6rem;
+        color: var(#261E5A);
+        transition: color 0.3s ease-out;
+    }
+
+    img {
+        max-width: 100%;
+        transform-origin: center;
+        transition: transform 0.4s ease-in-out;
+    }
+}
+
+figure {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+
+    img {
+        height: 100%;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        object-fit: cover;
+    }
+}
 
 .article-preview {
     padding: 24px;
     background: white;
-    color: #666;
+
+    .boton {
+        display: flex;
+        align-items: center;
+
+        .btn {
+            margin: auto;
+            font-weight: bold;
+        }
+    }
 }
 
-.articles figure {
-    width: 100%;
-    height: 150px;
+.btn {
+    width: 9em;
+    height: 3em;
+    border-radius: 30em;
+    font-size: 15px;
+    border: none;
+    position: relative;
+    cursor: pointer;
     overflow: hidden;
+    z-index: 1;
+    box-shadow: 6px 6px 12px #c5c5c5 -6px -6px 12px #ffffff;
 }
 
-.articles figure img {
-    max-width: 100%;
-    height: 100%;
-    object-fit: contain;
-    overflow: hidden;
-    transition: transform 0.4s ease-in-out;
+.btn::before {
+    content: '';
+    width: 0;
+    height: 3em;
+    border-radius: 30em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+    transition: .5s ease;
+    display: block;
+    z-index: -1;
 }
 
+.btn:hover::before {
+    width: 9em;
+}
 
 .articles article:hover img {
     transform: scale(1.5);
-    transform: translateY(-10px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.16);
 }
 
 .articles article:hover {
@@ -160,19 +224,32 @@
 .negrita {
     font-weight: bold;
 }
-/* styles.css */
+
 .tamañoParrafo {
-    font-size: 16px; /* Tamaño de fuente fijo que desees */
+    font-size: 16px;
+    /* Tamaño de fuente fijo que desees */
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3; /* Número de líneas visibles antes de los puntos suspensivos */
+    -webkit-line-clamp: 3;
+    /* Número de líneas visibles antes de los puntos suspensivos */
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 /* ... estilos existentes ... */
 
 .centering {
     /* Añade estas propiedades para manejar el desbordamiento horizontal */
     display: flex;
-    overflow-x: auto; 
+    overflow-x: auto;
+}
+
+h2 {
+    font-size: 3.4rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.p1 {
+    text-align: center;
 }

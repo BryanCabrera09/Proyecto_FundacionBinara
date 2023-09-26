@@ -12,8 +12,10 @@
             <article *ngFor="let blog of blogs" id="abrir-blog"  class="article-container" (click)="onDivClick(blog._id)">
                 <div class="image-container">
                     <figure >
-                        <img [src]="blog.imagen" alt="Portada de {{blog.titulo}}"
-                        title="Portada de {{blog.titulo}}" />
+                        <!-- <img [src]="blog.imagen" alt="Portada de {{blog.titulo}}"
+                        title="Portada de {{blog.titulo}}" /> -->
+                        <img [src]="blog.foto" alt="Portada de {{blog.titulo}}"
+                                title="Portada de {{blog.titulo}}" />
                     </figure>
                 </div>
 

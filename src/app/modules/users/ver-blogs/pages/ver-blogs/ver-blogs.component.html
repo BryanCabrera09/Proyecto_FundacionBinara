@@ -3,7 +3,7 @@
         <h1> {{ blogs.titulo }}</h1>
     
         <div class="portada">
-            <img  [src]="blogs.imagen" alt="Imagen de Blog" />
+            <img  [src]="blogs.foto" alt="Imagen de Blog" />
             </div>
     
         <ul class="iconos">
@@ -19,9 +19,10 @@
             </li>
             
             <li>
+                
                 <img id="btn-abrir-popup" class="edit" (click)="formularioEditar()" src="../../../../../../assets/img/edit.png" alt="img edit">
-                <img class="delete" (click)="desactivar()" src="../../../../../../assets/img/delete.png" alt="img delete">
-            </li>
+                <!-- <img class="delete" (click)="estado()" src="../../../../../../assets/img/delete.png" alt="img delete"> -->
+                <button class="activo" id="boton">Activo</button>
         </ul>
     
         <ul class="iconos user">
@@ -47,18 +48,13 @@
                 <ul class="iconos user">
                     <li>
                         <img src="../../../../../../assets/img/user.png" alt="img">
-                        <h1>{{ blogs.nombre_autor }} {{ blogs.apellido_autor }}</h1>
+                        <h1>Nombre</h1>
                     </li>
                 </ul>
-                date: 'dd-MM-yyyy'</div>
-            <div class="comentario">
-                <ul class="iconos user">
-                    <li>
-                        <img src="../../../../../../assets/img/user.png" alt="img">
-                        <h1>{{ blogs.nombre_autor }} {{ blogs.apellido_autor }}</h1>
-                    </li>
+                <ul>comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario.
                 </ul>
-                date: 'dd-MM-yyyy'</div>
+                
+            </div>
 
             <input id="btn-abrir-popup-comentario" type="submit" value="Deja tu comentario">
         </div>
@@ -97,7 +93,7 @@
 
             <label for="titulo">Imagen:</label>
             <input type="file" (change)="onFileSelected($event)" accept="image/*">
-            <img [src]="blogs.imagen"  alt="imageUpload">
+            <img [src]="blogs.foto"  alt="imageUpload">
 
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" placeholder="Nombre del Autor" [(ngModel)]="blogs.nombre_autor" required>

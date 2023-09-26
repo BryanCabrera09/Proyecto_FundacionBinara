@@ -50,6 +50,7 @@ export class HeaderComponent implements OnInit {
 
     let token = sessionStorage.getItem('token-session') as string;
     this.bodyAuthGoogle = this.decodeToken(token);
+    this.decodeJWT(window.sessionStorage.getItem("X-Token")!)
     //console.log(this.bodyAuthGoogle);
 
     this.isLogged();
@@ -104,7 +105,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut() {
-    sessionStorage.clear();
+    window.sessionStorage.clear();
     this.router.navigate(['/']);
     window.location.reload();
   }
@@ -173,29 +174,9 @@ export class HeaderComponent implements OnInit {
       this.authService.login(this.formLogIn.get('username')?.value, this.formLogIn.get('password')?.value).subscribe(
         (response) => {
           this.formLogIn.reset();
-          console.log(response)
           const body: any = response.body;
           if (body && typeof body === 'object' && 'token' in body) {
-            const xTokenBody = body.token;
-            window.sessionStorage.setItem("X-Token", body.token); // to save the JWT in the sessionStorage
-            const decodedToken: any = jwt_decode(xTokenBody);
-            const userLoged = decodedToken.usuario;
-            let usr: Usuario = userLoged;
-            usr.authStatus = "AUTH"
-            window.sessionStorage.setItem("userdetails",JSON.stringify(usr));
-            localStorage.setItem("roles", userLoged.rol)
-            console.log(window.sessionStorage.getItem("userdetails"))
-            console.log(window.localStorage.getItem("roles"))
-            switch (userLoged.rol) {
-              case "ADMIN_ROLE":
-                this.router.navigate(['user/projects']);
-                break;
-              case "USER_ROLE":
-                this.goToBlogs();
-                break;
-              default:
-            }
-
+            this.decodeJWT(body.token);
           }
         }
       );
@@ -228,6 +209,27 @@ export class HeaderComponent implements OnInit {
       )
     } else {
       console.log(this.formSignUp.errors);
+    }
+  }
+
+  decodeJWT(xTokenBody: string) {
+    window.sessionStorage.setItem("X-Token", xTokenBody); // to save the JWT in the sessionStorage
+    const decodedToken: any = jwt_decode(xTokenBody);
+    const userLoged = decodedToken.usuario;
+    let usr: Usuario = userLoged;
+    usr.authStatus = "AUTH"
+    window.sessionStorage.setItem("userdetails", JSON.stringify(usr));
+    localStorage.setItem("roles", userLoged.rol)
+    console.log(window.sessionStorage.getItem("userdetails"))
+    console.log(window.localStorage.getItem("roles"))
+    switch (userLoged.rol) {
+      case "ADMIN_ROLE":
+        this.router.navigate(['user/projects']);
+        break;
+      case "USER_ROLE":
+        this.goToBlogs();
+        break;
+      default:
     }
   }
 }

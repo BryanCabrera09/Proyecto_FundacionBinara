@@ -242,3 +242,21 @@ textarea{
   min-height: 5rem;
   white-space: pre-line;
 }
+
+.activo {
+  border: none;
+  border-radius: .5rem;
+  padding: 0 2rem;
+  margin: 0 0 0 2rem;
+  background-color: green;
+  color: white;
+}
+
+.inactivo {
+  border: none;
+  border-radius: .5rem;
+  padding: 0 2rem;
+  margin: 0 0 0 2rem;
+  background-color: red;
+  color: white;
+}

@@ -7,6 +7,7 @@ import { Blogs } from 'src/app/core/models/blogs';
 import { BlogsService } from 'src/app/core/services/blogs.service';
 import { VerBlogsComponent } from '../../../ver-blogs/pages/ver-blogs/ver-blogs.component';
 import Swal from 'sweetalert2';
+import baserUrl from 'src/app/core/helpers/helperUrl';
 
 @Component({
   selector: 'app-blogs',
@@ -17,6 +18,7 @@ import Swal from 'sweetalert2';
 export class BlogsComponent implements OnInit{
 
   blogs?: Blogs[];
+  baseUrl: string = baserUrl;
 
   //Declaracion de datos
   titulo: string = '';
@@ -144,7 +146,7 @@ imageSrc: string | ArrayBuffer | null = null;
   
   Datos(): void{
     this.blog.titulo = this.titulo;
-    this.blog.imagen = this.imagen; 
+    this.blog.foto = this.imagen; 
     this.blog.nombre_autor = this.nombre_autor;
     this.blog.apellido_autor = this.apellido_autor;
     this.blog.email_autor = this.email_autor;
@@ -156,7 +158,8 @@ imageSrc: string | ArrayBuffer | null = null;
   publicarBlog(){
     this.Datos();
     this.blogsService.createBlog(this.blog).subscribe(
-      (response) => {
+      (response:any) => {
+        this.subirimagen(response.blog._id);
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -170,7 +173,7 @@ imageSrc: string | ArrayBuffer | null = null;
       },
       (error) => {
         console.error('Error al registrar blog', error);
-        console.log(this.blog.imagen)
+        console.log(this.blog.foto)
       }
     );
   }
@@ -187,7 +190,7 @@ imageSrc: string | ArrayBuffer | null = null;
       },
       (error) => {
         console.error('Error al registrar blog', error);
-        console.log(this.blog.imagen)
+        console.log(this.blog.foto)
       }
     );
   }
@@ -198,6 +201,27 @@ imageSrc: string | ArrayBuffer | null = null;
       horizontalPosition: 'center',
       verticalPosition: 'top',
       panelClass: ['success-snackbar']
+    });
+  }
+
+  subirimagen(id: string) {
+    const base64String = this.blog.foto; // tu cadena base64 aquí
+    const byteCharacters = atob(base64String.split(',')[1]);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: 'image/jpeg' });
+    const file = new File([blob], 'imagen.jpg', { type: 'image/jpeg' }); // Creando un objeto File
+
+    this.blogsService.uploadImage(id, file).subscribe({ // Usando el objeto File aquí
+      next: (response) => {
+        console.log('Imagen subida exitosamente', response);
+      },
+      error: (error) => {
+        console.error('Error al subir la imagen', error);
+      },
     });
   }
 

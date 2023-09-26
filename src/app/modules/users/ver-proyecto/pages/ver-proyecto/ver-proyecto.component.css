@@ -141,6 +141,8 @@
 .text-container {
     font-family: 'Arial, sans-serif';
     margin-top: 20px;
+    margin-left: 60px;
+    margin-right: 60px;
 }
 
 .section-header {
@@ -169,7 +171,6 @@
 .activity-details {
     margin-left: 30px;
     padding: 10px;
-    border-left: 3px solid #00f;
     transition: max-height 0.3s ease, opacity 0.3s ease;
 }
 
