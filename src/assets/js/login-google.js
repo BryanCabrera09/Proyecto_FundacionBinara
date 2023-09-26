@@ -12,7 +12,7 @@ loadGoogleSignInScript();
 function handleCredentialResponse(response) {
   const body = { id_token: response.credential };
 
-  fetch("http://localhost:10001/api/login/google", {
+  fetch("https://binara-api-prueba.azurewebsites.net/api/login/google", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ function handleCredentialResponse(response) {
     .then((resp) => resp.json())
     .then((resp) => {
       console.log(resp);
-      sessionStorage.setItem("token", resp.token);
+      sessionStorage.setItem("X-Token", resp.token);
       window.location.href = "/";
     })
     .catch((err) => {
