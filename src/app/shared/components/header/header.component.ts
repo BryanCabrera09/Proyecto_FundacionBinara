@@ -71,6 +71,10 @@ export class HeaderComponent implements OnInit {
     this.selectedLink = link;
   }
 
+  goToNosotros(){
+    this.router.navigate(['user/nosotros'])
+  }
+
   goToProjects() {
     this.router.navigate(['user/projects']);
   }

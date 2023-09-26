@@ -8,7 +8,7 @@
 
             <ul class="links">
                 <li><a href="#" (click)="changeBackground('Home')">Home</a></li>
-                <li><a href="#" (click)="changeBackground('Nosotros')">{{'Sobre Nosotros' | translate | async}}</a></li>
+                <li><a (click)="goToNosotros();changeBackground('Nosotros')">{{'Sobre Nosotros' | translate | async}}</a></li>
                 <li><a (click)="goToProjects(); changeBackground('Proyectos')">{{'Proyectos' | translate | async}}</a>
                 </li>
                 <!-- <li><a href="#" (click)="changeBackground('Anuncios')">{{'Anuncios' | translate | async}}</a></li> -->
@@ -48,7 +48,7 @@
 
         <div class="dropdown_menu">
             <li><a href="#" (click)="changeBackground('Home')">Home</a></li>
-            <li><a href="#" (click)="changeBackground('Nosotros')">{{'Sobre Nosotros' | translate | async}}</a></li>
+            <li><a (click)="goToNosotros(); changeBackground('Nosotros')">{{'Sobre Nosotros' | translate | async}}</a></li>
             <li><a (click)="goToProjects(); changeBackground('Proyectos')">{{'Proyectos' | translate | async}}</a>
             </li>
             <li><a href="#" (click)="changeBackground('Anuncios')">{{'Anuncios' | translate | async}}</a></li>
