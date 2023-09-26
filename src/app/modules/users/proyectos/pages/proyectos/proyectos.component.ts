@@ -56,19 +56,6 @@ baseUrl: string= baserUrl;
     });
   }
 
-
-  detailsProject(projectId: number | undefined) {
-
-    if (projectId !== undefined) {
-        this.router.navigate(['user/ver/proyecto', projectId]);
-    } else {
-      console.log(projectId);
-    }
-    
-}
-
-
-
   getProvincia(lugar: any): string {
     return lugar.split(';')[0];
   }
@@ -140,5 +127,12 @@ baseUrl: string= baserUrl;
     });
   }
   
+  goToArticle(projectId: any) {
+    if (projectId !== undefined) {
+      this.router.navigate(['user/ver/proyecto', projectId]);
+    } else {
+      console.log(projectId);
+    }
+  }
 }
 
