@@ -34,13 +34,13 @@
         <h2>{{'QUE HACEMOS' | translate | async}}</h2>
         <div class="container about-us">
 
-            <div class="mision">
-                <h3>{{'MISIÓN' | translate | async}}</h3>
-                <p>{{mision | translate | async}}</p>
-            </div>
             <div class="vision">
                 <h3>{{'VISIÓN' | translate | async}}</h3>
                 <p>{{vision | translate | async}}</p>
+            </div>
+            <div class="mision">
+                <h3>{{'MISIÓN' | translate | async}}</h3>
+                <p>{{mision | translate | async}}</p>
             </div>
             <div class="nosotros">
                 <h3>{{'SOBRE NOSOTROS' | translate | async}}</h3>
@@ -69,7 +69,8 @@
                     </div>
                     <div class="article-preview">
                         <h2>{{ project.titulo }}</h2>
-                        <p class="location" *ngIf="project.mapas && project.mapas.length > 0">{{ getProvincia(project.mapas[0].lugar) }}
+                        <p class="location" *ngIf="project.mapas && project.mapas.length > 0">{{
+                            getProvincia(project.mapas[0].lugar) }}
                         </p>
                         <p class="tamañoParrafo">{{ project.parrafoUno }}</p>
                         <div class="boton">
@@ -89,69 +90,23 @@
     <div class="container seccion-inferior">
         <div class="blog">
             <h2>{{'BLOG' | translate | async}}</h2>
-            <article class="entrada-blog">
+
+            <article *ngFor="let blog of blogs" id="abrir-blog" class="entrada-blog" (click)="onDivClick(blog._id)">
                 <div class="imagen">
                     <picture>
-                        <img loading="lazy"
-                            src="https://img.freepik.com/free-photo/pathway-middle-green-leafed-trees-with-sun-shining-through-branches_181624-4539.jpg?w=900&t=st=1687123477~exp=1687124077~hmac=6e8b1735a2cb25be79f248b6a3307a37a15b080dee114565d01704b97d432a80"
-                            alt="Texto entrada blog1">
+                        <img [src]="blog.foto" alt="Portada de {{blog.titulo}}" title="Portada de {{blog.titulo}}" />
                     </picture>
                 </div>
                 <div class="texto-entrada">
                     <a>
-                        <h4>{{'El comercio como oportunidad de negocio' | translate | async}}</h4>
-                        <p>{{'Escrito el: ' | translate | async}}<span>26/12/21</span> {{'Por:' | translate | async}}
-                            <span>Erick Ochoa Tocachi</span>
+                        <h4>{{ blog.titulo }}</h4>
+                        <p>{{'Escrito el: ' | translate | async}}<span>{{ blog.fecha | date: 'dd-MM-yyyy'}}</span>
+                            {{'Por:' | translate | async}}
+                            <span>{{ blog.nombre_autor }}, {{ blog.apellido_autor }}</span>
                         </p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde, voluptatem eius
-                            sequi
-                            in beatae
-                            est delectus cumque.</p>
-                    </a>
-                </div>
-            </article>
-
-            <article class="entrada-blog">
-                <div class="imagen">
-                    <picture>
-                        <img loading="lazy"
-                            src="https://img.freepik.com/free-photo/pathway-middle-green-leafed-trees-with-sun-shining-through-branches_181624-4539.jpg?w=900&t=st=1687123477~exp=1687124077~hmac=6e8b1735a2cb25be79f248b6a3307a37a15b080dee114565d01704b97d432a80"
-                            alt="Texto entrada blog1">
-                    </picture>
-                </div>
-                <div class="texto-entrada">
-                    <a>
-                        <h4>{{'El rincón del café' | translate | async}}</h4>
-                        <p>{{'Escrito el: ' | translate | async}}<span>26/12/21</span> {{'Por:' | translate | async}}
-                            <span>Erick Ochoa Tocachi</span>
-                        </p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde, voluptatem eius
-                            sequi
-                            in beatae
-                            est delectus cumque.</p>
-                    </a>
-                </div>
-            </article>
-
-            <article class="entrada-blog">
-                <div class="imagen">
-                    <picture>
-                        <img loading="lazy"
-                            src="https://img.freepik.com/free-photo/pathway-middle-green-leafed-trees-with-sun-shining-through-branches_181624-4539.jpg?w=900&t=st=1687123477~exp=1687124077~hmac=6e8b1735a2cb25be79f248b6a3307a37a15b080dee114565d01704b97d432a80"
-                            alt="Texto entrada blog1">
-                    </picture>
-                </div>
-
-                <div class="texto-entrada">
-                    <a>
-                        <h4>{{'Importancia de las rosas ecuatorianas' | translate | async}}</h4>
-                        <p>{{'Escrito el: ' | translate | async}}<span>26/12/21</span> {{'Por:' | translate | async}}
-                            <span>Erick Ochoa Tocachi</span>
-                        </p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde, voluptatem eius
-                            sequi
-                            in beatae
-                            est delectus cumque.</p>
+                        <div class="paragraph">
+                            <p class="content"> {{ blog.parrafo }}</p>
+                        </div>
                     </a>
                 </div>
             </article>
