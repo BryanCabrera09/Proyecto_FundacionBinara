@@ -68,16 +68,17 @@
 
 .articles {
     display: flex;
-    flex-wrap: wrap;
     margin: 0 auto;
-    justify-content: center;
-    max-width: 1200px;
     gap: 24px;
+
+    display: flex;
+    flex-wrap: nowrap; /* Esto previene que los artículos se envuelvan a la siguiente línea */
+    margin: 0 auto;
+    justify-content: flex-start; 
  
 }
 
 .articles article {
-    max-width: 320px;
     cursor: pointer;
     position: relative;
     display: block;
@@ -86,6 +87,9 @@
     border-radius: 6px;
     background: var(--background-gradient);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+    width: 300px;  /* Ancho fijo para todas las tarjetas */
+    height: 600px;
 }
 
 .articles article a {
@@ -166,3 +170,9 @@
     text-overflow: ellipsis;
 }
 /* ... estilos existentes ... */
+
+.centering {
+    /* Añade estas propiedades para manejar el desbordamiento horizontal */
+    display: flex;
+    overflow-x: auto; 
+}

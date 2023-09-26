@@ -16,18 +16,34 @@ export class ProyectosComponent implements OnInit {
 
   projects?: Proyectos[];
 baseUrl: string= baserUrl;
-  roluser: string= "ADMIN_ROLE"
+  roluser: string= window.localStorage.getItem("roles") ?? "sin rol";
 
   constructor(private dialog: MatDialog, private router: Router, private projectService: ProyectosService) { }
 
   ngOnInit() {
-
-    this.getActiveProjectsList();
+    if(this.roluser=="ADMIN_ROLE"){
+      this.geProjectsList();
+      console.log("adminnnnnnnnnnnnnnnn")
+   
+    }else{
+      this.getActiveProjectsList();
+      console.log("useer")
+    }
 
 
   }
 
   getActiveProjectsList(): void {
+    this.projectService.getActiveProjects().subscribe(
+      proyectos => {
+        this.projects = proyectos;
+      },
+      error => {
+        console.error('Error obteniendo proyectos:', error);
+      }
+    );
+  }
+  geProjectsList(): void {
     this.projectService.getProjects().subscribe(
       proyectos => {
         this.projects = proyectos;

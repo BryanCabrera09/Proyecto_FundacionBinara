@@ -28,12 +28,13 @@ export class VerProyectoComponent {
   lat: string = "";
   lng: string = "";
   baseUrl: string = baserUrl;
-  roluser: string= "ADMIN_ROLE"
+  roluser: string= window.localStorage.getItem("roles") ?? "sin rol";
 
   constructor(private dialog: MatDialog, private route: ActivatedRoute, private proyectosService: ProyectosService, private acticidadesService: ActividadesService) { }
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.buscarProyectoPorId(id!);
+    console.log(this.roluser);
   }
 
   buscarProyectoPorId(id: String): void {
