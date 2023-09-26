@@ -431,6 +431,8 @@ h4 {
   width: 9em;
 }
 
+
+
 .formulario {
   margin: 4rem auto;
   max-width: 70rem;
@@ -522,4 +524,24 @@ form.active{
 } 
 .texto-invisible {
   display: none;
+}
+
+input[type="submit"] {
+  position: relative;
+  background-color: $azul;
+  width: 20rem;
+  color: $blanco;
+  font-weight: $bold;
+  padding: 1rem;
+  border: none;
+  border-radius: .5rem;
+  cursor: pointer;
+  box-shadow: 0 5px 6px $gris;
+  transition: .4s;
+  margin: 2rem;
+}
+
+input[type="submit"]:hover {
+  transform: scale(1.05);
+
 }
