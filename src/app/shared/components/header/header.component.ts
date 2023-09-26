@@ -109,6 +109,7 @@ export class HeaderComponent implements OnInit {
     window.localStorage.clear();
     // this.router.navigate(['/']);
     window.location.reload();
+    window.location.href = "/";
   }
 
   decodeToken(token: string): any {
@@ -245,7 +246,8 @@ export class HeaderComponent implements OnInit {
       console.log('entronc acasddsf')
 
       window.location.reload();
-      this.router.navigate(['/']);
+      // this.router.navigate(['/']);
+      window.location.href = "/";
     }
   }
 }
