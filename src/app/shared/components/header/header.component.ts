@@ -106,6 +106,7 @@ export class HeaderComponent implements OnInit {
 
   logOut() {
     window.sessionStorage.clear();
+    window.localStorage.clear();
     this.router.navigate(['/']);
     window.location.reload();
   }
@@ -194,7 +195,12 @@ export class HeaderComponent implements OnInit {
       this.userService.createUser(this.usuario).subscribe(
         (res) => {
           this.formSignUp.reset();
+          this.toastr.success("Usuario " + this.usuario.correo + " registrado!", 'Info');
+          this.router.navigate(['/']);
+          window.location.reload();
+          this.toastr.info("Inicia sesión!", "info", { timeOut: 2500 })
           console.log(res)
+
         },
         (error) => {
           let status = error.status
@@ -242,6 +248,7 @@ export class HeaderComponent implements OnInit {
       console.log('entronc acasddsf')
 
       window.location.reload();
+      this.router.navigate(['/']);
     }
   }
 }
