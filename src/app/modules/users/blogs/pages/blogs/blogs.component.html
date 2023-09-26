@@ -2,58 +2,62 @@
     <div class="seccion container">
 
         <div class="titulo">
-            <h2> Nuestro Blog <span>Binara</span></h2>
+            <h1> Nuestro Blog <span>Binara</span></h1>
             <input id="btn-abrir-popup" type="submit" value="Crear Nuevo Blog" (click)="getForm()">
         </div>
 
-        <div class="background centering articles">
-        
-    
-            <article *ngFor="let blog of blogs" id="abrir-blog"  class="article-container" (click)="onDivClick(blog._id)">
-                <div class="image-container">
-                    <figure >
-                        <!-- <img [src]="blog.imagen" alt="Portada de {{blog.titulo}}"
-                        title="Portada de {{blog.titulo}}" /> -->
-                        <img [src]="blog.foto" alt="Portada de {{blog.titulo}}"
-                                title="Portada de {{blog.titulo}}" />
-                    </figure>
-                </div>
+        <div class="background">
 
-                <ul class="iconos">
-                    <li>
-                        <img src="../../../../../../assets/img/like.png" alt="img">
-                        <p>283</p>
-                    </li>
-                    <li>
-                        <img src="../../../../../../assets/img/dislike.png" alt="img">
-                        <p>283</p>
-                    </li>
-                    <li>
-                        <img src="../../../../../../assets/img/comentarios.png" alt="img">
-                        <p>283</p>
-                    </li>
-                </ul>
+            <span class="centering">
+                <section class="articles">
+                    <article *ngFor="let blog of blogs" id="abrir-blog" class="article-container"
+                        (click)="onDivClick(blog._id)">
+                        <div class="image-container">
+                            <figure>
+                                <!-- <img [src]="blog.imagen" alt="Portada de {{blog.titulo}}"
+                                title="Portada de {{blog.titulo}}" /> -->
+                                <img [src]="blog.foto" alt="Portada de {{blog.titulo}}"
+                                    title="Portada de {{blog.titulo}}" />
+                            </figure>
+                        </div>
 
-                <div class="article-preview">
-                    <h2 class="titulo-blog">{{ blog.titulo }}</h2>
+                        <ul class="iconos">
+                            <li>
+                                <img src="../../../../../../assets/img/like.png" alt="img">
+                                <p>283</p>
+                            </li>
+                            <li>
+                                <img src="../../../../../../assets/img/dislike.png" alt="img">
+                                <p>283</p>
+                            </li>
+                            <li>
+                                <img src="../../../../../../assets/img/comentarios.png" alt="img">
+                                <p>283</p>
+                            </li>
+                        </ul>
 
-                    <ul class="iconos detalle">
-                        <li>
-                            <h4>{{ blog.nombre_autor }}, {{ blog.apellido_autor }}</h4>
-                        </li>
-                        <li>
-                            <h4>{{ blog.fecha | date: 'dd-MM-yyyy'}}</h4>
-                        </li>
-                    </ul>
-                    <p class="limitarparrafo"> {{ blog.parrafo }}</p>
-                </div>
-            </article>
+                        <div class="article-preview">
+                            <h2 class="titulo-blog">{{ blog.titulo }}</h2>
+
+                            <ul class="iconos detalle">
+                                <li>
+                                    <h4>{{ blog.nombre_autor }}, {{ blog.apellido_autor }}</h4>
+                                </li>
+                                <li>
+                                    <h4>{{ blog.fecha | date: 'dd-MM-yyyy'}}</h4>
+                                </li>
+                            </ul>
+                            <p class="limitarparrafo"> {{ blog.parrafo }}</p>
+                        </div>
+                    </article>
+                </section>
+            </span>
         </div>
 
     </div>
 
 
-    
+
     <div class="overlay" id="overlay">
         <form class="formulario" id="popup" action="procesar_comentario.php" method="post">
             <div class="header-form">
@@ -70,23 +74,29 @@
             <img [src]="imageSrc" *ngIf="imageSrc" alt="imageUpload">
 
             <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Nombre del Autor" [(ngModel)]="nombre_autor" required>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre del Autor" [(ngModel)]="nombre_autor"
+                required>
 
             <label for="apellido">Apellido:</label>
-            <input type="text" id="apellido" name="nombre" placeholder="Apellido del Autor" [(ngModel)]="apellido_autor" required>
-    
+            <input type="text" id="apellido" name="nombre" placeholder="Apellido del Autor" [(ngModel)]="apellido_autor"
+                required>
+
             <label for="e-mail">Email:</label>
-            <input type="email" id="e-mail" name="e-mail" placeholder="Email del Autor" [(ngModel)]="email_autor" required>
+            <input type="email" id="e-mail" name="e-mail" placeholder="Email del Autor" [(ngModel)]="email_autor"
+                required>
 
             <label for="parrafo1-blog">Contenido del Blog:</label>
-            <textarea class="textarea-auto" id="parrafo1-blog" name="parrafo1-blog" placeholder="Escriba el contenido del Blog" [(ngModel)]="parrafo" required></textarea>
+            <textarea class="textarea-auto" id="parrafo1-blog" name="parrafo1-blog"
+                placeholder="Escriba el contenido del Blog" [(ngModel)]="parrafo" required></textarea>
 
             <label for="parrafo3-blog">Bibliografia:</label>
-            <textarea class="textarea-auto" id="parrafo3-blog" name="parrafo3-blog" placeholder="Escriba la Bibliografia del Blog" [(ngModel)]="bibliografia"></textarea>
+            <textarea class="textarea-auto" id="parrafo3-blog" name="parrafo3-blog"
+                placeholder="Escriba la Bibliografia del Blog" [(ngModel)]="bibliografia"></textarea>
 
             <div class="botones-form-blog">
                 <input id="publicar" type="submit" value="Publicar" (click)="publicarBlog()">
-                <input id="guardar" type="submit" value="Guardar sin publicar" [(ngModel)]="visible" (click)="guardarSinPublicarBlog()">
+                <input id="guardar" type="submit" value="Guardar sin publicar" [(ngModel)]="visible"
+                    (click)="guardarSinPublicarBlog()">
             </div>
         </form>
     </div>

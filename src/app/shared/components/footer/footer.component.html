@@ -76,13 +76,13 @@
             <menu>
                 <h2>{{'Menu Rapido' | translate | async}}</h2>
                 <li>
-                    <a>{{'Blog' | translate | async}}</a>
+                    <a (click)="goToBlogs();">{{'Blog' | translate | async}}</a>
                 </li>
                 <li>
                     <a>{{'Sobre Nosotros' | translate | async}}</a>
                 </li>
                 <li>
-                    <a> {{'Contacto' | translate | async}}</a>
+                    <a (click)="goToContact()">{{'Contacto' | translate | async}}</a>
                 </li>
             </menu>
         </section>

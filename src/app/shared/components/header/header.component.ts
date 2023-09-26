@@ -45,6 +45,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
+    this.isLogged();
+    
     this.formLogIn = this.startForm();
     this.formSignUp = this.startFormSignUp();
 
@@ -52,8 +54,6 @@ export class HeaderComponent implements OnInit {
     this.bodyAuthGoogle = this.decodeToken(token);
     this.decodeJWT(window.sessionStorage.getItem("X-Token")!)
     //console.log(this.bodyAuthGoogle);
-
-    this.isLogged();
   }
 
   backgroundImages: { [key: string]: string } = {
@@ -97,7 +97,7 @@ export class HeaderComponent implements OnInit {
 
   isLogged() {
 
-    if (sessionStorage.getItem('token-session')) {
+    if (sessionStorage.getItem('token-session') || sessionStorage.getItem('X-Token')) {
       this.logueado = true;
     } else {
       this.logueado = false;
@@ -222,7 +222,9 @@ export class HeaderComponent implements OnInit {
     localStorage.setItem("roles", userLoged.rol)
     console.log(window.sessionStorage.getItem("userdetails"))
     console.log(window.localStorage.getItem("roles"))
-    switch (userLoged.rol) {
+    this.router.navigate(['/']);
+    window.location.reload();
+    /* switch (userLoged.rol) {
       case "ADMIN_ROLE":
         this.router.navigate(['user/projects']);
         break;
@@ -230,6 +232,6 @@ export class HeaderComponent implements OnInit {
         this.goToBlogs();
         break;
       default:
-    }
+    } */
   }
 }
