@@ -1,7 +1,7 @@
 <body>
     <div class="seccion container">
 
-        <div class="titulo">
+        <div class="titulo" *ngIf="storageServ.getRole() === 'ADMIN_ROLE'">
             <h1> Nuestro Blog <span>Binara</span></h1>
             <input id="btn-abrir-popup" type="submit" value="Crear Nuevo Blog" (click)="getForm()">
         </div>

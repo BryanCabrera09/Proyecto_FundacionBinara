@@ -8,6 +8,7 @@ import { BlogsService } from 'src/app/core/services/blogs.service';
 import { VerBlogsComponent } from '../../../ver-blogs/pages/ver-blogs/ver-blogs.component';
 import Swal from 'sweetalert2';
 import baserUrl from 'src/app/core/helpers/helperUrl';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
   selector: 'app-blogs',
@@ -38,7 +39,8 @@ export class BlogsComponent implements OnInit{
     private router: Router, 
     private snackBar: MatSnackBar, 
     private blogsService: BlogsService,  
-    @Inject(MAT_DIALOG_DATA) public data: any){
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public storageServ: StorageService){
       
     if(data.blog != null){
       this.titulo = data.blog.titulo;
