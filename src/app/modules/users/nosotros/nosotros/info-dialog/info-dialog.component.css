@@ -39,11 +39,27 @@ input[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-right: 10px; /* Agrega un margen derecho para separar los botones */
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #00b31e;
 }
+
+input[type="button"] {
+    background-color: #ccc; /* Cambia el color de fondo del botón "Cancelar" */
+    color: #000; /* Cambia el color del texto del botón "Cancelar" */
+    padding: 10px 25px; /* Ajusta el padding para que el botón "Cancelar" sea más ancho */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="button"]:hover {
+    background-color: #b65656;
+}
+
 
 /* Agrega este estilo en tu archivo de hojas de estilo CSS o en línea si lo prefieres */
 .form-control {

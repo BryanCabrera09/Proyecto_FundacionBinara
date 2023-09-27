@@ -1,19 +1,19 @@
 <div class="container">
 
     <!-- ABOUT US -->
-    <div class="card" style="width: 18rem;">
+    <!-- <div class="card" style="width: 18rem;">
         <img src="https://www.diariosostenible.cl/files/623cbc6d800b6_890x533.jpg" alt="Preview" title="Preview" />
         <div class="card-body">
             <p class="card-text">{{ aboutUs.texto1 }}</p>
         </div>
-    </div>
+    </div> -->
 
     <div class="nosotros">
         
         <div class="centered-container">
             <h2 class="inline-block">QUE HACEMOS</h2> 
             <br>
-            <button class="edit-button" title="Editar" (click)="openDialog()">
+            <button *ngIf="storageServ.getRole() === 'ADMIN_ROLE'" class="edit-button" title="Editar" (click)="openDialog()">
                ✎
             </button>
           </div>
@@ -40,7 +40,7 @@
         <h3>Nuestro Equipo de Trabajo</h3>
     </div>
 
-    <div class="titulo">
+    <div class="titulo" *ngIf="storageServ.getRole() === 'ADMIN_ROLE'">
         <input id="btn-abrir-popup" type="submit" value="Nuevo Colaborador" (click)="getForm()">
     </div>
 
@@ -50,7 +50,7 @@
         </figure>
         <div class="nombre">{{t.texto1}}</div>
         <div class="titulo">{{t.texto2}}</div>
-        <input id="btn-abrir-popup2" type="submit" value="Modificar" (click)="getForm()">
+        <input *ngIf="storageServ.getRole() === 'ADMIN_ROLE'" id="btn-abrir-popup2" type="submit" value="Modificar" (click)="getForm()">
     </div>
 
 
@@ -63,7 +63,7 @@
             </div>
 
             <label for="titulo">Nombre:</label>
-            <input type="text" id="llave" name="llave" placeholder="Título del blog" [(ngModel)]="parametro.llave"
+            <input type="text" id="llave" name="llave" placeholder="Título del blog" [(ngModel)]="parametro.texto1"
                 required>
 
             <label for="titulo">Imagen:</label>

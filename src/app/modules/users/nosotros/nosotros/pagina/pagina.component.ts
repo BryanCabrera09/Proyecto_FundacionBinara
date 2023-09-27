@@ -7,6 +7,7 @@ import { Parametropost } from 'src/app/core/models/parametropost';
 import { Parametro } from 'src/app/core/models/parametros';
 import { ParametrosService } from 'src/app/core/services/parametros.service';
 import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class PaginaComponent implements OnInit {
 
 
   constructor(private router: Router, private parametroServicio: ParametrosService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog, public storageServ: StorageService) { }
 
   ngOnInit() {
     this.getAboutUs();
@@ -76,6 +77,7 @@ export class PaginaComponent implements OnInit {
 
   Guardar() {
     this.parametro.visible = true;
+    this.parametro.llave = "colaborator"
     this.parametroServicio.crearpa(this.parametro).subscribe(
       (data: any) => {
         if (this.imageng) {
