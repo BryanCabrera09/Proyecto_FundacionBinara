@@ -216,7 +216,7 @@ export class RegisterProjectComponent {
     this.proyecto.parrafoTres = this.parrafoTres;
     this.proyecto.presupuesto = this.presupuesto;
     this.proyecto.recolectado = this.recolectado;
-    this.proyecto.portada = this.portada;
+    this.proyecto.portada = "hola";
     this.proyecto.visible = this.visible;
     this.proyecto.fechaInicio = this.fechaInicio;
     this.proyecto.fechaFin = this.fechaFin;
@@ -344,7 +344,7 @@ export class RegisterProjectComponent {
     return index;
   }
   subirimagen(id: string) {
-    const base64String = this.proyecto.portada; // tu cadena base64 aquí
+    const base64String = this.portada; // tu cadena base64 aquí
     const byteCharacters = atob(base64String.split(',')[1]);
     const byteNumbers = new Array(byteCharacters.length);
     for (let i = 0; i < byteCharacters.length; i++) {
