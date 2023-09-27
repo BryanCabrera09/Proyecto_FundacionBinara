@@ -60,7 +60,7 @@
         <span class="centering">
             <section class="articles">
 
-                <article *ngFor="let project of projects" class="article-container">
+                <article *ngFor="let project of displayedProjects" class="article-container">
                     <div class="image-container">
                         <figure>
                             <img [src]="baseUrl + '/imagen/proyecto/'+ project.portada"
@@ -82,6 +82,13 @@
                 </article>
 
             </section>
+
+            <div class="see-more">
+                <button class="btn-see-more" (click)="goToProjects()">
+                    {{'Ver todo' | translate | async}}
+                </button>
+            </div>
+
         </span>
     </div>
     <br>
@@ -91,7 +98,8 @@
         <div class="blog">
             <h2>{{'BLOG' | translate | async}}</h2>
 
-            <article *ngFor="let blog of blogs" id="abrir-blog" class="entrada-blog" (click)="onDivClick(blog._id)">
+            <article *ngFor="let blog of displayedBlogs" id="abrir-blog" class="entrada-blog"
+                (click)="onDivClick(blog._id)">
                 <div class="imagen">
                     <picture>
                         <img [src]="blog.foto" alt="Portada de {{blog.titulo}}" title="Portada de {{blog.titulo}}" />

@@ -21,7 +21,8 @@
                     <div class="data">
                         <label>Activo</label>
                         <span>
-                            <p-toggleButton [(ngModel)]="estado" onLabel="Yes" offLabel="No"></p-toggleButton>
+                            <p-toggleButton [(ngModel)]="estado" onLabel="Yes" offLabel="No" [onIcon]="'pi pi-check'"
+                                [offIcon]="'pi pi-times'"></p-toggleButton>
                         </span>
                     </div>
                 </div>
@@ -33,8 +34,8 @@
                     <div class="data">
                         <label>Nuevo rol</label>
                         <div>
-                            <p-dropdown [options]="authorities" optionLabel="label" optionValue="value"
-                                [(ngModel)]="selectedRole" placeholder="Cambiar rol"></p-dropdown>
+                            <p-dropdown [style]="{'font-size':'12px'}" [options]="authorities" optionLabel="label"
+                                optionValue="value" [(ngModel)]="selectedRole" placeholder="Cambiar rol"></p-dropdown>
                         </div>
                     </div>
                 </div>

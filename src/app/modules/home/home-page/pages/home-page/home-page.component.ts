@@ -14,6 +14,10 @@ import { ProyectosService } from 'src/app/core/services/proyectos.service';
 export class HomePageComponent implements OnInit {
 
   projects?: Proyectos[];
+
+  displayedProjects?: any[];
+  displayedBlogs?: any[];
+
   baseUrl: string = baserUrl;
   roluser: string = "ADMIN_ROLE"
 
@@ -84,6 +88,7 @@ export class HomePageComponent implements OnInit {
     this.projectService.getProjects().subscribe(
       data => {
         this.projects = data;
+        this.displayedProjects = this.projects.slice(0, 3);
       });
   }
 
@@ -92,6 +97,7 @@ export class HomePageComponent implements OnInit {
     this.blogsService.getBlogs().subscribe(
       blogs => {
         this.blogs = blogs;
+        this.displayedBlogs = this.blogs.slice(0, 3);
       },
       error => {
         console.error('Error obteniedo blogs:', error);
@@ -103,6 +109,7 @@ export class HomePageComponent implements OnInit {
     console.log("this.blogs")
     this.blogsService.getBlogs().subscribe(data => {
       this.blogs = data;
+      this.displayedBlogs = this.blogs.slice(0, 3);
     })
   }
 
@@ -145,6 +152,10 @@ export class HomePageComponent implements OnInit {
     } else {
       console.log(projectId);
     }
+  }
+
+  goToProjects(){
+    this.router.navigate(['/user/projects']);
   }
 
 }

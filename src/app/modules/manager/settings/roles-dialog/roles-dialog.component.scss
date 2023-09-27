@@ -38,13 +38,16 @@
     flex-wrap: wrap;
     gap: 24px;
 
+    /* box-shadow: 0 0 0 0.2rem #000000fb;
+    border-radius: 15px; */
+
     .popup-content {
 
         display: flex;
         flex-direction: column;
         margin: 20px auto;
         gap: 24px;
-
+        
         .data {
             display: flex;
             flex-direction: column;
@@ -67,9 +70,28 @@
     /* La columna se expandirá para ocupar el espacio disponible */
 }
 
-:host ::ng-deep .p-dropdown {
+:host ::ng-deep .p-dropdown-label {
     font-family: $fuente_principal;
-    font-size: 2.5rem;
+    font-size: 1.3rem;
+}
+
+:host ::ng-deep .p-dropdown-items {
+    font-family: $fuente_principal;
+    font-size: 1.2rem;
+}
+
+:host ::ng-deep .p-highlight.p-togglebutton,
+:host ::ng-deep .p-highlight.p-togglebutton:hover {
+    background: $azul;
+    border: none;
+    color: white;
+    font-family: $fuente_principal;
+    font-size: 1.3rem;
+}
+
+:host ::ng-deep .p-togglebutton {
+    font-family: $fuente_principal;
+    font-size: 1.3rem;
 }
 
 .button-container {
