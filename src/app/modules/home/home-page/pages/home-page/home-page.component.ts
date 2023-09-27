@@ -4,6 +4,7 @@ import baserUrl from 'src/app/core/helpers/helperUrl';
 import { Blogs } from 'src/app/core/models/blogs';
 import { Proyectos } from 'src/app/core/models/proyectos';
 import { BlogsService } from 'src/app/core/services/blogs.service';
+import { ParametrosService } from 'src/app/core/services/parametros.service';
 import { ProyectosService } from 'src/app/core/services/proyectos.service';
 
 @Component({
@@ -44,30 +45,20 @@ export class HomePageComponent implements OnInit {
     + 'agrícolas; organizaciones indígenas; y, colectivos urbanos mediante la canalización de'
     + 'recursos monetarios y no monetarios para proteger, conservar y restaurar ecosistemas'
     + 'y servicios ecosistémicos clave para las poblaciones que dependen de ellos.';
-  /* Mision */
-  mision = 'Proteger la biodiversidad del Ecuador y a las comunidades que dependen de ella.'
-    + 'Para eso, trabajamos en conjunto con las y los pobladores locales de los ecosistemas'
-    + 'más importantes para la vida en Ecuador en la búsqueda de medios de vida dignos y'
-    + 'sustentables para sus familias. Su desarrollo integral y sustentable es nuestra prioridad.'
-    + 'Perseguimos fines sociales y no participamos, bajo ningún concepto, en asuntos de'
-    + 'política partidista o religiosa, coordinamos nuestras actividades con otras personas'
-    + 'naturales o jurídicas, nacionales y extranjeras, bajo los principios de libre asociación y'
-    + 'autodeterminación.';
-  /* Vision */
-  vision = 'Proteger, conservar y restaurar ecosistemas y servicios ecosistémicos clave'
-    + 'para las poblaciones que dependen de ellos, mediante la canalización de recursos'
-    + 'monetarios y no monetarios a través de alianzas con empresas privadas, donantes'
-    + 'particulares, agencias de cooperación y gobiernos nacionales y locales.'
-  /* Sobre Nosotros */
-  nosotros = 'Trabajamos incansablemente para promover la sostenibilidad ambiental y el bienestar de'
-    + 'las comunidades que interactúan con el entorno natural.\nNuestra labor abarca diversas'
-    + 'iniciativas, desde proyectos de reforestación hasta la implementación de prácticas agrícolas'
-    + 'sostenibles y la conservación de ecosistemas acuáticos.';
 
 
-  constructor(private router: Router, private projectService: ProyectosService, private blogsService: BlogsService) { }
+    aboutUs: any;
+    mission: any;
+    vision: any;
+
+
+  constructor(private router: Router, private projectService: ProyectosService, private blogsService: BlogsService,
+    private parametroServ: ParametrosService) { }
 
   ngOnInit() {
+    this.getAboutUs();
+    this.getMission();
+    this.getVision();
 
     this.listProjects();
     this.getActiveBlogsList();
@@ -145,6 +136,30 @@ export class HomePageComponent implements OnInit {
     } else {
       console.log(projectId);
     }
+  }
+
+  getAboutUs() {
+    this.parametroServ.findByLlave("aboutUs").subscribe(
+      (res) => {
+        this.aboutUs = res.parametros[0]
+      }
+    )
+  }
+
+  getMission() {
+    this.parametroServ.findByLlave("mission").subscribe(
+      (res) => {
+        this.mission = res.parametros[0]
+      }
+    )
+  }
+
+  getVision() {
+    this.parametroServ.findByLlave("vision").subscribe(
+      (res) => {
+        this.vision = res.parametros[0]
+      }
+    )
   }
 
 }

@@ -48,4 +48,9 @@ export class ParametrosService {
 
     return this.http.post(url, formData, { headers });
   }
+
+  findByLlave(llave: string): Observable<any> {
+    return this.http.get(this.projectsUrl + `/llave/${llave}`);
+  }
+
 }
