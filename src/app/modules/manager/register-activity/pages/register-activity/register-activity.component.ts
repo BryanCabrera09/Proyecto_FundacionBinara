@@ -28,7 +28,6 @@ export class RegisterActivityComponent {
       coorY: '-179.78456'
     }
   ];
-  usuario: string = '650f5095330c83d2bc270bfd'
 
 
   num_areas: number = 0;
