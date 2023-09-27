@@ -17,7 +17,7 @@ declare var google: any;
 @Component({
   selector: 'app-ver-proyecto',
   templateUrl: './ver-proyecto.component.html',
-  styleUrls: ['./ver-proyecto.component.css'],
+  styleUrls: ['./ver-proyecto.component.scss'],
   providers: [DatePipe]
 })
 export class VerProyectoComponent {
@@ -28,12 +28,13 @@ export class VerProyectoComponent {
   lat: string = "";
   lng: string = "";
   baseUrl: string = baserUrl;
-  roluser: string= "ADMIN_ROLE"
+  roluser: string = window.localStorage.getItem("roles") ?? "sin rol";
 
   constructor(private dialog: MatDialog, private route: ActivatedRoute, private proyectosService: ProyectosService, private acticidadesService: ActividadesService) { }
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.buscarProyectoPorId(id!);
+    console.log(this.roluser);
   }
 
   buscarProyectoPorId(id: String): void {
@@ -75,15 +76,15 @@ export class VerProyectoComponent {
     if (this.proyecto && this.proyecto.mapas) {
       this.proyecto.mapas.forEach((mapa, index) => {
         if (mapa && typeof mapa.coorX === 'string' && typeof mapa.coorY === 'string') {
-          
+
           const coorX = parseFloat(mapa.coorX);
           const coorY = parseFloat(mapa.coorY);
-  
+
           const mapOptions = {
             center: { lat: coorX, lng: coorY },
             zoom: 15
           };
-  
+
           const mapContainer = document.getElementById(`mapContainer${index}`) as HTMLElement;
           if (mapContainer) {
             const map = new google.maps.Map(mapContainer, mapOptions);
@@ -98,13 +99,13 @@ export class VerProyectoComponent {
       console.error("Datos del proyecto no disponibles");
     }
   }
-  
+
   abrirRegistrodeactividad(idProyecto: number) {
     this.dialog.open(RegisterActivityComponent, {
       width: '800px',
       hasBackdrop: false,
       height: '600px',
-      data: { proyectoId: idProyecto, editing:false }
+      data: { proyectoId: idProyecto, editing: false }
     });
   }
   editarproyecto(activity: Actividades) {
@@ -154,9 +155,9 @@ export class VerProyectoComponent {
 
   confirmDeleteProject(activity: Actividades): void {
     if (activity.visible) {
-        this.confirmMessage = `¿Está seguro de que desea DESACTIVAR el proyecto "${activity.titulo}"?`;
+      this.confirmMessage = `¿Está seguro de que desea DESACTIVAR el proyecto "${activity.titulo}"?`;
     } else {
-        this.confirmMessage = `¿Está seguro de que desea ACTIVAR el proyecto "${activity.titulo}"?`;
+      this.confirmMessage = `¿Está seguro de que desea ACTIVAR el proyecto "${activity.titulo}"?`;
     }
     this.projectToDelete = activity;
     this.isConfirmVisible = true;
@@ -205,13 +206,13 @@ export class VerProyectoComponent {
       }
     );
   }
-  
-  agregarmapa():void{
+
+  agregarmapa(): void {
     this.dialog.open(RegisterMapComponent, {
       width: '800px',
       hasBackdrop: false,
       height: '600px',
-      data: { proyecto: this.proyecto, editing:true }  
+      data: { proyecto: this.proyecto, editing: true }
     });
   }
 
@@ -225,15 +226,15 @@ export class VerProyectoComponent {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Sí, ¡bórralo!',
       cancelButtonText: 'Cancelar'
-      
+
     }).then((result) => {
       if (result.isConfirmed) {
-         this.proyecto.mapas!.splice(index, 1);
-         
-         const ids: string[] = this.proyecto.mapas!.map(mapa => mapa._id as string);
-         console.log(ids)
-  
-         this.proyectosService.editarmapa(ids,this.proyecto.uid+"").subscribe({
+        this.proyecto.mapas!.splice(index, 1);
+
+        const ids: string[] = this.proyecto.mapas!.map(mapa => mapa._id as string);
+        console.log(ids)
+
+        this.proyectosService.editarmapa(ids, this.proyecto.uid + "").subscribe({
           next: response => {
             console.log('Respuesta recibida', response);
             Swal.fire({
@@ -244,7 +245,7 @@ export class VerProyectoComponent {
               timer: 2000
             });
             window.location.reload();
-      
+
           },
           error: error => {
             console.error('Error enviando datos', error);
@@ -263,6 +264,6 @@ export class VerProyectoComponent {
       }
     })
   }
-  
-  
+
+
 }

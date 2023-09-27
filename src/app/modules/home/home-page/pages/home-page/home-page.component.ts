@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import baserUrl from 'src/app/core/helpers/helperUrl';
+import { Blogs } from 'src/app/core/models/blogs';
 import { Proyectos } from 'src/app/core/models/proyectos';
+import { BlogsService } from 'src/app/core/services/blogs.service';
 import { ProyectosService } from 'src/app/core/services/proyectos.service';
 
 @Component({
@@ -14,6 +16,8 @@ export class HomePageComponent implements OnInit {
   projects?: Proyectos[];
   baseUrl: string = baserUrl;
   roluser: string = "ADMIN_ROLE"
+
+  blogs?: Blogs[];
 
   bodyAuth: any = {};
   userRole?: string;
@@ -56,16 +60,17 @@ export class HomePageComponent implements OnInit {
     + 'particulares, agencias de cooperación y gobiernos nacionales y locales.'
   /* Sobre Nosotros */
   nosotros = 'Trabajamos incansablemente para promover la sostenibilidad ambiental y el bienestar de'
-    + 'las comunidades que interactúan con el entorno natural.<br>Nuestra labor abarca diversas'
+    + 'las comunidades que interactúan con el entorno natural.\nNuestra labor abarca diversas'
     + 'iniciativas, desde proyectos de reforestación hasta la implementación de prácticas agrícolas'
     + 'sostenibles y la conservación de ecosistemas acuáticos.';
 
 
-  constructor(private router: Router, private projectService: ProyectosService) { }
+  constructor(private router: Router, private projectService: ProyectosService, private blogsService: BlogsService) { }
 
   ngOnInit() {
 
     this.listProjects();
+    this.getActiveBlogsList();
 
     let token = sessionStorage.getItem('token') as string;
     this.bodyAuth = this.decodeJwt(token);
@@ -82,17 +87,42 @@ export class HomePageComponent implements OnInit {
       });
   }
 
- /*  changeImage() {
-    const background = document.querySelector('.background') as HTMLElement;
-    background.style.backgroundImage = `url('assets/slider/${this.sliderImages[this.currentIndex]}')`;
-    this.currentIndex = (this.currentIndex + 1) % this.sliderImages.length;
+  //Listar blogs
+  getActiveBlogsList(): void {
+    this.blogsService.getBlogs().subscribe(
+      blogs => {
+        this.blogs = blogs;
+      },
+      error => {
+        console.error('Error obteniedo blogs:', error);
+      }
+    );
   }
 
-  startSlider() {
-    setInterval(() => {
-      this.changeImage();
-    }, 2000);
-  } */
+  listBlogs() {
+    console.log("this.blogs")
+    this.blogsService.getBlogs().subscribe(data => {
+      this.blogs = data;
+    })
+  }
+
+  onDivClick(blogId: number | undefined) {
+    if (blogId !== undefined) {
+      this.router.navigate(['user/ver-blogs', blogId]);
+    }
+  }
+
+  /*  changeImage() {
+     const background = document.querySelector('.background') as HTMLElement;
+     background.style.backgroundImage = `url('assets/slider/${this.sliderImages[this.currentIndex]}')`;
+     this.currentIndex = (this.currentIndex + 1) % this.sliderImages.length;
+   }
+ 
+   startSlider() {
+     setInterval(() => {
+       this.changeImage();
+     }, 2000);
+   } */
 
   decodeJwt(token: string): any {
 

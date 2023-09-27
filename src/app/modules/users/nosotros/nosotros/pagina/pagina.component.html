@@ -1,0 +1,257 @@
+<main class="container seccion">
+    <h1>Conoce sobre Nosotros<span class="logo__bold"></span></h1>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat molestiae omnis corporis similique suscipit
+        maxime beatae recusandae hic et doloribus, nemo in voluptate magnam quo placeat ipsum dolor. Dicta, repellendus!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nesciunt nam voluptatem velit dignissimos eius
+        corporis,
+        dolor minus? Beatae illo assumenda odit eaque quaerat dolorum iure harum provident hic officia?
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat molestiae omnis corporis similique suscipit
+        maxime beatae recusandae hic et doloribus, nemo in voluptate magnam quo placeat ipsum dolor. Dicta, repellendus!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nesciunt nam voluptatem velit dignissimos eius
+        corporis,
+        dolor minus? Beatae illo assumenda odit eaque quaerat dolorum iure harum provident hic officia?</p>
+</main>
+
+<body>
+
+    <div class="seccion container">
+        <figure>
+            <img src="https://www.diariosostenible.cl/files/623cbc6d800b6_890x533.jpg"
+                alt="Preview" title="Preview" />
+        </figure>
+    </div>
+
+    <!-- QUIENES SOMOS -->
+    <!-- <section class="container">
+        <h2>Curiosidades</h2>
+    
+        <div class="iconos-nosotros">
+    
+            <div class="icono">
+                <img src="../../img/presion.png" alt="Icono presión" loading="lazy">
+                <h3>Presión</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, itaque asperiores exercitationem eaque
+                    repellat sit dolores error, deserunt rerum esse, suscipit et neque molestiae iste nam reprehenderit
+                    cupiditate.
+                    Deserunt, maiores.</p>
+            </div>
+            <div class="icono">
+                <img src="build/img/contaminacion.png" alt="Icono contaminación" loading="lazy">
+                <h3>Contaminación</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, itaque asperiores exercitationem eaque
+                    repellat sit dolores error, deserunt rerum esse, suscipit et neque molestiae iste nam reprehenderit
+                    cupiditate.
+                    Deserunt, maiores.</p>
+            </div>
+            <div class="icono">
+                <img src="../../../build/img/temperatura.png" alt="Icono temperatura" loading="lazy">
+                <h3>Temperatura</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, itaque asperiores exercitationem eaque
+                    repellat sit dolores error, deserunt rerum esse, suscipit et neque molestiae iste nam reprehenderit
+                    cupiditate.
+                    Deserunt, maiores.</p>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- SOBRE NOSOTROS -->
+    <section class="nosotros">
+        <h2>QUE HACEMOS</h2>
+        <br>
+        <div class="container about-us">
+
+            <div class="mision">
+                <h3>MISIÓN</h3>
+                <p>Proteger la biodiversidad del Ecuador y a las comunidades que dependen de ella.
+                    Para eso, trabajamos en conjunto con las y los pobladores locales de los ecosistemas
+                    más importantes para la vida en Ecuador en la búsqueda de medios de vida dignos y
+                    sustentables para sus familias. Su desarrollo integral y sustentable es nuestra prioridad.
+                    Perseguimos fines sociales y no participamos, bajo ningún concepto, en asuntos de
+                    política partidista o religiosa, coordinamos nuestras actividades con otras personas
+                    naturales o jurídicas, nacionales y extranjeras, bajo los principios de libre asociación y
+                    autodeterminación.</p>
+            </div>
+            <div class="vision">
+                <h3>VISIÓN</h3>
+                <p>Proteger, conservar y restaurar ecosistemas y servicios ecosistémicos clave
+                    para las poblaciones que dependen de ellos, mediante la canalización de recursos
+                    monetarios y no monetarios a través de alianzas con empresas privadas, donantes
+                    particulares, agencias de cooperación y gobiernos nacionales y locales.</p>
+            </div>
+            
+        </div>
+    </section>
+    <div class="Equipo">
+        <h3>Nuestro Equipo de Trabajo</h3>
+</div>
+
+<div class="titulo">
+    
+    <input id="btn-abrir-popup" type="submit" value="Nuevo Colaborador" (click)="getForm()">
+</div>
+   
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjetas de Presentación</title>
+    <style>
+        /* Estilos para las tarjetas */
+        .tarjeta {
+            width: 300px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        /* Estilos para la imagen de perfil */
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        /* Estilos para el nombre */
+        .nombre {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Estilos para el título */
+        .titulo {
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* Estilos para la información de contacto */
+        .contacto {
+            margin-top: 10px;
+        }
+
+        /* Estilos para los iconos de contacto */
+        .icono {
+            font-size: 20px;
+            margin-right: 10px;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="tarjeta" *ngFor="let t of parametroArray">
+        <figure>
+            <img [src]="baseUrl + '/imagen/parametro/' +t.imagen"
+                alt="Preview" title="Preview" />
+        </figure>
+        <div class="texto-invisible">{{t.uid}}</div>
+        <div class="nombre">{{t.llave}}</div>
+        <div class="titulo">{{t.texto2}}</div>
+        <div class="contacto">
+            <i class="icono fas fa-envelope"></i> {{t.texto1}}<br>
+        </div>
+        <input id="btn-abrir-popup2" type="submit" value="Modificar" (click)="getForm()">
+         
+    </div>
+
+   
+
+    <div class="overlay" id="overlay">
+        <form (ngSubmit)="Guardar()" class="formulario" id="popup" method="post">
+            <div class="header-form">
+                <h1>Nuevo Colaborador</h1>
+                <a id="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+            </div>
+
+            <label for="titulo">Nombre:</label>
+            <input type="text" id="llave" name="llave" placeholder="Título del blog" [(ngModel)]="parametro.llave" required>
+
+            <label for="titulo">Imagen:</label>
+            <input type="file" (change)="onFileSelected($event)" accept="image/*">
+            <img [src]="imageSrc" *ngIf="imageSrc" alt="imageUpload">
+    
+            <label for="e-mail">Email:</label>
+            <input type="email" id="e-mail" name="e-mail" placeholder="Email " [(ngModel)]="parametro.texto1" required>
+
+            <label for="parrafo1-blog">Funcion:</label>
+            <textarea class="textarea-auto" id="parrafo1-blog" name="parrafo1-blog" placeholder="Escriba el contenido del Blog" [(ngModel)]="parametro.texto2" required></textarea>
+            
+
+            <div class="botones-form-blog"> 
+                <input id="btn-cerrar-popup" type="submit" value="Cerrar" (click)="getForm()">
+                <input type="submit" value="Guardar">
+            </div>
+        </form>
+    </div>
+
+
+    <div class="overlay" id="overlay2">
+        <form (ngSubmit)="Guardar()" class="formulario" id="popup2" method="post">
+            <div class="header-form">
+                <h1>Modificar colaborador</h1>
+                <a id="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+            </div>
+
+            <label for="titulo">Nombre:</label>
+            <input type="text" id="llave" name="llave" placeholder="Título del blog" [(ngModel)]="parametro.llave" required>
+
+            <label for="titulo">Imagen:</label>
+            <input type="file" (change)="onFileSelected($event)" accept="image/*">
+            <img [src]="imageSrc" *ngIf="imageSrc" alt="imageUpload">
+    
+            <label for="e-mail">Email:</label>
+            <input type="email" id="e-mail" name="e-mail" placeholder="Email " [(ngModel)]="parametro.texto1" required>
+
+            <label for="parrafo1-blog">Funcion:</label>
+            <textarea class="textarea-auto" id="parrafo1-blog" name="parrafo1-blog" placeholder="Escriba el contenido del Blog" [(ngModel)]="parametro.texto2" required></textarea>
+            
+            <label> estado</label>
+            <div>
+                //un boton que cambie de activo a inactivo?
+                <button></button>
+            </div>
+            <!-- <select class="form-select" name="disponibilidad"[(ngModel)]="parametrosP.visible" 
+                                    required>
+                                    <option value="" selected disabled
+                                       >Seleccione
+                                    </option>
+                                    <option value="true">Disponible</option>
+                                    <option value="false">No Disponible</option>
+                                </select> -->
+            <div class="botones-form-blog">
+                <input id="publicar" type="submit" value="Cerrar" >
+                <input type="submit" value="Guardar">
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
+
+          
+
+ 
+            
+
+           
+      
+
+    <!-- SABIAS -->
+    <div class="sabias container">
+        <h3>Sabías que...?</h3>
+        <div class="sabias">
+            <blockquote>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi dicta reiciendis maxime maiores
+                officia enim
+                at dolores praesentium voluptatum. consectetur, adipisicing elit. Quasi dicta reiciendis maxime maiores
+                officia enim
+                at dolores praesentium voluptatum. </blockquote>
+            <p>- Autor desconocido</p>
+        </div>
+    </div>
+
+</body>

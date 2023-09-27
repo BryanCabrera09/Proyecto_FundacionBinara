@@ -13,6 +13,7 @@ import { ComentariosService } from 'src/app/core/services/comentarios.service';
 import { __param } from 'tslib';
 import Swal from 'sweetalert2';
 import { style } from '@angular/animations';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 
 @Component({
@@ -45,7 +46,8 @@ export class VerBlogsComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<VerBlogsComponent, BlogsComponent>, 
     private router: Router, 
-    private snackBar: MatSnackBar, 
+    private snackBar: MatSnackBar,
+    public storageServ: StorageService,
     private comentariosService: ComentariosService, 
     private dialog:MatDialog, 
     private route: ActivatedRoute, 

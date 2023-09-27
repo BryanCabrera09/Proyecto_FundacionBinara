@@ -45,29 +45,34 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
+    this.isLogged();
+
     this.formLogIn = this.startForm();
     this.formSignUp = this.startFormSignUp();
 
     let token = sessionStorage.getItem('token-session') as string;
     this.bodyAuthGoogle = this.decodeToken(token);
+    this.decodeJWT(sessionStorage.getItem("X-Token") as string)
     //console.log(this.bodyAuthGoogle);
-
-    this.isLogged();
   }
 
   backgroundImages: { [key: string]: string } = {
     '': 'url("assets/img/portada_binara.png")',
     'Home': 'url("assets/img/portada_binara.png")',
     'Nosotros': 'url("https://di-sitebuilder-assets.s3.amazonaws.com/GMimages/gmMLP/chevrolet/Corvette/2023/Content-1.jpg")',
-    'Proyectos': 'url("https://di-sitebuilder-assets.s3.amazonaws.com/GMimages/gmMLP/chevrolet/Corvette/2023/Content-1.jpg")',
+    'Proyectos': 'url("assets/img/projects.jpg")',
     'Anuncios': 'url("../assets/images/anuncios-background.jpg")',
-    'Blog': 'url("../assets/img/blog-background.jpeg")',
-    'Contactanos': 'url("../assets/images/contactanos-background.jpg")',
+    'Blog': 'url("assets/img/blogs.jpg")',
+    'Contactanos': 'url("assets/img/contact-us.jpg")',
     'Involúcrate': 'url("../assets/images/involucrate-background.jpg")'
   };
 
-  changeBackground(link: string): void {
+  changeBackground(link: string) {
     this.selectedLink = link;
+  }
+
+  goToNosotros(){
+    this.router.navigate(['user/nosotros'])
   }
 
   goToProjects() {
@@ -96,7 +101,7 @@ export class HeaderComponent implements OnInit {
 
   isLogged() {
 
-    if (sessionStorage.getItem('token-session')) {
+    if (sessionStorage.getItem('token-session') || sessionStorage.getItem('X-Token')) {
       this.logueado = true;
     } else {
       this.logueado = false;
@@ -104,9 +109,11 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut() {
-    sessionStorage.clear();
-    this.router.navigate(['/']);
+    window.sessionStorage.clear();
+    window.localStorage.clear();
+    // this.router.navigate(['/']);
     window.location.reload();
+    window.location.href = "/";
   }
 
   decodeToken(token: string): any {
@@ -173,29 +180,9 @@ export class HeaderComponent implements OnInit {
       this.authService.login(this.formLogIn.get('username')?.value, this.formLogIn.get('password')?.value).subscribe(
         (response) => {
           this.formLogIn.reset();
-          console.log(response)
           const body: any = response.body;
           if (body && typeof body === 'object' && 'token' in body) {
-            const xTokenBody = body.token;
-            window.sessionStorage.setItem("X-Token", body.token); // to save the JWT in the sessionStorage
-            const decodedToken: any = jwt_decode(xTokenBody);
-            const userLoged = decodedToken.usuario;
-            let usr: Usuario = userLoged;
-            usr.authStatus = "AUTH"
-            window.sessionStorage.setItem("userdetails",JSON.stringify(usr));
-            localStorage.setItem("roles", userLoged.rol)
-            console.log(window.sessionStorage.getItem("userdetails"))
-            console.log(window.localStorage.getItem("roles"))
-            switch (userLoged.rol) {
-              case "ADMIN_ROLE":
-                this.router.navigate(['user/projects']);
-                break;
-              case "USER_ROLE":
-                this.goToBlogs();
-                break;
-              default:
-            }
-
+            this.decodeJWT(body.token);
           }
         }
       );
@@ -213,7 +200,9 @@ export class HeaderComponent implements OnInit {
       this.userService.createUser(this.usuario).subscribe(
         (res) => {
           this.formSignUp.reset();
-          console.log(res)
+          this.toastr.success("Usuario " + this.usuario.correo + " registrado!", 'Info');
+          window.location.reload();
+          this.toastr.info("Inicia sesión!", "info", { timeOut: 3000 })
         },
         (error) => {
           let status = error.status
@@ -228,6 +217,41 @@ export class HeaderComponent implements OnInit {
       )
     } else {
       console.log(this.formSignUp.errors);
+    }
+  }
+
+  decodeJWT(xTokenBody: string) {
+    /* window.sessionStorage.setItem("X-Token", xTokenBody);
+    const decodedToken: any = jwt_decode(xTokenBody);
+    const userLoged = decodedToken.usuario;
+    let usr: Usuario = userLoged;
+    usr.authStatus = "AUTH"
+    window.sessionStorage.setItem("userdetails", JSON.stringify(usr));
+    localStorage.setItem("roles", userLoged.rol)
+    console.log(window.sessionStorage.getItem("userdetails"))
+    console.log(window.localStorage.getItem("roles"));
+    console.log('entronc acasddsf')
+    this.router.navigate(['/']);
+    window.location.reload(); */
+
+    const userDetails = window.sessionStorage.getItem("userdetails");
+
+    // Verificar si los detalles del usuario ya están en sessionStorage
+    if (!userDetails) {
+      window.sessionStorage.setItem("X-Token", xTokenBody); // to save the JWT in the sessionStorage
+      const decodedToken: any = jwt_decode(xTokenBody);
+      const userLoged = decodedToken.usuario;
+      let usr: Usuario = userLoged;
+      usr.authStatus = "AUTH"
+      window.sessionStorage.setItem("userdetails", JSON.stringify(usr));
+      localStorage.setItem("roles", userLoged.rol)
+      console.log(window.sessionStorage.getItem("userdetails"))
+      console.log(window.localStorage.getItem("roles"));
+      console.log('entronc acasddsf')
+
+      window.location.reload();
+      // this.router.navigate(['/']);
+      window.location.href = "/";
     }
   }
 }

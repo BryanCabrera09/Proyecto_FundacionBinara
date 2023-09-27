@@ -2,21 +2,24 @@
     <div class="background">
         <span class="centering">
             <section class="articles">
+
                 <article *ngFor="let project of projects" class="article-container">
                     <div class="image-container">
                         <figure>
-                            <img [src]="baseUrl + '/imagen/proyecto/'+ project.portada" alt="Portada de {{project.titulo}}"
-                                title="Portada de {{project.titulo}}" />
+                            <img [src]="baseUrl + '/imagen/proyecto/'+ project.portada"
+                                alt="Portada de {{project.titulo}}" title="Portada de {{project.titulo}}" />
                         </figure>
                     </div>
                     <div class="article-preview">
                         <h2>{{ project.titulo }}</h2>
-                        <p *ngIf="project.mapas && project.mapas.length > 0">{{ getProvincia(project.mapas[0].lugar) }}
+                        <p class="location p1" *ngIf="project.mapas && project.mapas.length > 0">{{ getProvincia(project.mapas[0].lugar) }}
                         </p>
                         <p class="tamañoParrafo">{{ project.parrafoUno }}</p>
-                        <a (click)="detailsProject(project.uid)" class="read-more negrita">
-                            leer más
-                        </a>
+                        <div class="boton">
+                            <button (click)="goToArticle(project.uid)" class="btn">
+                                {{'Leer más' | translate | async}}
+                            </button>
+                        </div>
                         <div class="action-buttons" *ngIf="roluser === 'ADMIN_ROLE'">
                             <button class="edit-button" title="Editar" (click)="editarproyecto(project)">
                                 ✎

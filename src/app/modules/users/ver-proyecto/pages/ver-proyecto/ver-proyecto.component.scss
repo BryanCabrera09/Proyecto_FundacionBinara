@@ -1,5 +1,20 @@
+@import '../../../../../core/styles/global-styles.scss';
+
+body {
+    font-family: $fuente_principal;
+    font-size: 1.6rem;
+    line-height: 1.8;
+}
+
+.container {
+    width: 95%;
+    max-width: 120rem;
+    margin: 0 auto;
+    margin-top: calc($separacion / 2);
+    margin-bottom: calc($separacion / 2);
+}
+
 .project-details {
-    font-family: 'Arial', sans-serif;
     padding: 30px;
     border: none;
     border-radius: 10px;
@@ -8,6 +23,12 @@
     flex-direction: column;
     align-items: center;
     background-color: #ffffff;
+
+    h1 {
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 2.1rem;
+    }
 }
 
 .titulo {
@@ -31,9 +52,11 @@
     gap: 30px;
     width: 70%;
 }
+
 .image-container {
     margin-top: 25px;
-    max-height: 300px; /* Cambia 300px al valor que desees */
+    max-height: 300px;
+    /* Cambia 300px al valor que desees */
     overflow: hidden;
 }
 
@@ -48,6 +71,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    h3 {
+        font-weight: bold;
+    }
 }
 
 .titulodetalle {
@@ -78,12 +105,13 @@
 .objetivos ul {
     padding-left: 20px;
 }
+
 .map-wrapper {
     position: relative;
     width: 100%;
-    padding-bottom: 30.25%; 
+    padding-bottom: 30.25%;
     margin: 0 auto;
-    padding-top: 50px; 
+    padding-top: 50px;
 }
 
 .map-sections-container {
@@ -106,6 +134,7 @@
 .add-project-button:hover {
     background-color: #2980b9;
 }
+
 .map-section {
     margin-bottom: 30px;
     border-radius: 10px;
@@ -116,7 +145,7 @@
 
 .map-label {
     position: absolute;
-    top: 10px; 
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
     margin-top: 20px;
@@ -134,19 +163,29 @@
     top: 0;
     left: 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    min-width: 800px; /* Cambiado a min-width */
-    height: 400px; /* Aumentado de 200px a 400px */
+    min-width: 800px;
+    /* Cambiado a min-width */
+    height: 400px;
+    /* Aumentado de 200px a 400px */
 }
 
 .text-container {
-    font-family: 'Arial, sans-serif';
     margin-top: 20px;
+    margin-left: 60px;
+    margin-right: 60px;
 }
 
 .section-header {
     margin-bottom: 20px;
     color: #333;
     font-size: 18px;
+}
+
+.activity-container {
+
+    h4 {
+        font-weight: bold;
+    }
 }
 
 .activity-card {
@@ -169,8 +208,14 @@
 .activity-details {
     margin-left: 30px;
     padding: 10px;
-    border-left: 3px solid #00f;
     transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.map-sections-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 24px;
 }
 
 .mapa {
@@ -191,16 +236,15 @@
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 25px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
-  }
-  
-  .eliminarmapa-button:hover {
+}
+
+.eliminarmapa-button:hover {
     background-color: #ff2f2f;
-    box-shadow: 0 12px 20px 0 rgba(0,0,0,0.25);
-  }
-  
-  .eliminarmapa-button i {
+    box-shadow: 0 12px 20px 0 rgba(0, 0, 0, 0.25);
+}
+
+.eliminarmapa-button i {
     margin-right: 8px;
-  }
-  
+}

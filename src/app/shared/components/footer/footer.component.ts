@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { languages } from '../../../core/models/dummy-data';
 import { TranslatorService } from '../../services/translator.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -14,7 +15,7 @@ export class FooterComponent implements OnInit {
 
   languages = languages;
 
-  constructor(private translatorService: TranslatorService) {
+  constructor(private translatorService: TranslatorService, private router: Router) {
 
     this.translator = translatorService;
     /* translatorService.translateText("Hello World How are you").subscribe((data: any) => console.log(data)); */
@@ -28,5 +29,13 @@ export class FooterComponent implements OnInit {
     console.log(this.translator.lang);
     localStorage.setItem('lamguage', this.translator.lang);
     window.location.reload();
+  }
+
+  goToBlogs() {
+    this.router.navigate(['user/blogs']);
+  }
+
+  goToContact() {
+    this.router.navigate(['user/contact-us'])
   }
 }

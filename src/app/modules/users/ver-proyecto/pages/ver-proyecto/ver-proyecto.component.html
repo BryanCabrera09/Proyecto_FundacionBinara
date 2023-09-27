@@ -1,108 +1,114 @@
-<div class="project-details">
-    <h1 class="titulo">{{ proyecto.titulo }}</h1>
-    <h5 *ngIf="proyecto.mapas && proyecto.mapas.length > 0" class="subtitulo">{{ getProvincia(proyecto.mapas[0].lugar)}}
-    </h5>
-    <div class="details-grid">
-        <div class="image-container">
-            <img [src]="baseUrl + '/imagen/proyecto/'+ proyecto.portada" alt="Imagen del proyecto">
-        </div>
-        <div class="details-column">
-            <h3 class="titulodetalle">Detalles del Proyecto</h3>
-            <div class="distanciaDetalle">
-                <p><strong>Fecha Inicio:</strong> {{ proyecto.fechaInicio | date:'dd' }} de {{ proyecto.fechaInicio |
-                    date:'MMMM' }} del {{ proyecto.fechaInicio | date:'y' }}</p>
-                <p><strong>Fecha Fin:</strong> {{ proyecto.fechaFin | date:'dd' }} de {{ proyecto.fechaFin | date:'MMMM'
-                    }} del {{ proyecto.fechaFin | date:'y' }}</p>
-
-                <p><i class="fas fa-dollar-sign"></i><span> Presupuesto:</span> {{ proyecto.presupuesto }}</p>
-                <p><i class="fas fa-hand-holding-usd"></i><span> Recolectado:</span> {{ proyecto.recolectado }}</p>
-            </div>
-        </div>
-    </div>
-    <div class="text-container">
-        <p><strong>Objetivo principal:</strong> {{ proyecto.objetivoPrincipal }}</p>
-        <p><strong>Objetivos Secundarios:</strong></p>
-        <ul>
-            <li *ngFor="let objetivo of proyecto.objetivosSecundarios">{{ objetivo }}</li>
-        </ul>
-        <p>{{ proyecto.parrafoUno }}</p>
-        <p>{{ proyecto.parrafoDos }}</p>
-        <p>{{ proyecto.parrafoTres }}</p>
-    </div>
-
-    <div class="text-container">
-        <h4 class="section-header">Actividades</h4>
-        <div *ngFor="let actividad of actividades" class="activity-card">
-            <h5 (click)="toggleDetalle(actividad._id!)" class="activity-title">
-                <span class="toggle-icon" [ngClass]="{'expanded': detallesVisibles.has(actividad._id!)}"> + </span>
-                {{ actividad.titulo }}
+<body>
+    <div class="container">
+        <div class="project-details">
+            <h1 class="titulo">{{ proyecto.titulo }}</h1>
+            <h5 *ngIf="proyecto.mapas && proyecto.mapas.length > 0" class="subtitulo">{{
+                getProvincia(proyecto.mapas[0].lugar)}}
             </h5>
-            <div *ngIf="detallesVisibles.has(actividad._id!)" class="activity-details">
-                <p><strong><i class="fas fa-align-left"></i> Descripción:</strong> {{ actividad.descripcion }}</p>
-                <p><strong><i class="fas fa-layer-group"></i> Número de Áreas:</strong> {{ actividad.num_areas }}</p>
-                <p><strong><i class="fas fa-hands-helping"></i> Número de Personas Beneficiarias:</strong> {{
-                    actividad.num_personas_beneficiarias }}</p>
-                <p><strong><i class="fas fa-female"></i> Número de Mujeres Beneficiarias:</strong> {{
-                    actividad.num_mujeres_beneficiarias}}</p>
-                <p><strong><i class="fas fa-baby"></i> Número de Niños y Niñas Beneficiarias:</strong> {{
-                    actividad['num_niños_niñas_beneficiarias'] }}</p>
-                <p><strong><i class="fas fa-user-graduate"></i>Número de Adolescentes Beneficiarios:</strong> {{
-                    actividad.num_adoloscentes_beneficiarios}}</p>
-                <p><strong><i class="fas fa-user-tie"></i> Número de Adultos Beneficiarios:</strong> {{
-                    actividad.num_adultos_beneficiarios}}</p>
-                <div class="action-buttons" *ngIf="roluser === 'ADMIN_ROLE'">
-                    <button class="edit-button" title="Editar" (click)="editarproyecto(actividad)">
-                        ✎
-                    </button>
-                    <button class="delete-button" (click)="confirmDeleteProject(actividad)">
-                        <span *ngIf="actividad.visible" title="Desactivar" >✘</span>
-                        <span *ngIf="!actividad.visible" title="Activar" >✓</span>
-                    </button>
-                    <div *ngIf="isConfirmVisible" class="custom-confirm">
-                        <div class="confirm-content">
-                            <p>{{ confirmMessage }}</p>
-                            <button (click)="confirm()">Confirmar</button>
-                            <button (click)="cancel()">Cancelar</button>
+            <div class="details-grid">
+                <div class="image-container">
+                    <img [src]="baseUrl + '/imagen/proyecto/'+ proyecto.portada" alt="Imagen del proyecto">
+                </div>
+                <div class="details-column">
+                    <h3 class="titulodetalle">Detalles del Proyecto</h3>
+                    <div class="distanciaDetalle">
+                        <p><strong>Fecha Inicio:</strong> {{ proyecto.fechaInicio | date:'dd' }} de {{ proyecto.fechaInicio
+                            |
+                            date:'MMMM' }} del {{ proyecto.fechaInicio | date:'y' }}</p>
+                        <p><strong>Fecha Fin:</strong> {{ proyecto.fechaFin | date:'dd' }} de {{ proyecto.fechaFin |
+                            date:'MMMM'
+                            }} del {{ proyecto.fechaFin | date:'y' }}</p>
+    
+                        <p><i class="fas fa-dollar-sign"></i><span> Presupuesto:</span> {{ proyecto.presupuesto }}</p>
+                        <p><i class="fas fa-hand-holding-usd"></i><span> Recolectado:</span> {{ proyecto.recolectado }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-container">
+                <p><strong>Objetivo principal:</strong> {{ proyecto.objetivoPrincipal }}</p>
+                <p><strong>Objetivos Secundarios:</strong></p>
+                <ul>
+                    <li *ngFor="let objetivo of proyecto.objetivosSecundarios">{{ objetivo }}</li>
+                </ul>
+                <p>{{ proyecto.parrafoUno }}</p>
+                <p>{{ proyecto.parrafoDos }}</p>
+                <p>{{ proyecto.parrafoTres }}</p>
+            </div>
+    
+            <div class="activity-container">
+                <h4 class="section-header">Actividades</h4>
+                <div *ngFor="let actividad of actividades" class="activity-card">
+                    <h5 (click)="toggleDetalle(actividad._id!)" class="activity-title">
+                        <span class="toggle-icon" [ngClass]="{'expanded': detallesVisibles.has(actividad._id!)}"> + </span>
+                        {{ actividad.titulo }}
+                    </h5>
+                    <p class="activity-description">{{ actividad.descripcion }}</p>
+                    <div *ngIf="detallesVisibles.has(actividad._id!)" class="activity-details">
+                        <p><strong><i class="fas fa-layer-group"></i> Número de Áreas:</strong> {{ actividad.num_areas }}
+                        </p>
+                        <p><strong><i class="fas fa-hands-helping"></i> Número de Personas Beneficiarias:</strong> {{
+                            actividad.num_personas_beneficiarias }}</p>
+                        <p><strong><i class="fas fa-female"></i> Número de Mujeres Beneficiarias:</strong> {{
+                            actividad.num_mujeres_beneficiarias}}</p>
+                        <p><strong><i class="fas fa-baby"></i> Número de Niños y Niñas Beneficiarias:</strong> {{
+                            actividad['num_niños_niñas_beneficiarias'] }}</p>
+                        <p><strong><i class="fas fa-user-graduate"></i>Número de Adolescentes Beneficiarios:</strong> {{
+                            actividad.num_adoloscentes_beneficiarios}}</p>
+                        <p><strong><i class="fas fa-user-tie"></i> Número de Adultos Beneficiarios:</strong> {{
+                            actividad.num_adultos_beneficiarios}}</p>
+                        <div class="action-buttons" *ngIf="roluser === 'ADMIN_ROLE'">
+                            <button class="edit-button" title="Editar" (click)="editarproyecto(actividad)">
+                                ✎
+                            </button>
+                            <button class="delete-button" (click)="confirmDeleteProject(actividad)">
+                                <span *ngIf="actividad.visible" title="Desactivar">✘</span>
+                                <span *ngIf="!actividad.visible" title="Activar">✓</span>
+                            </button>
+                            <div *ngIf="isConfirmVisible" class="custom-confirm">
+                                <div class="confirm-content">
+                                    <p>{{ confirmMessage }}</p>
+                                    <button (click)="confirm()">Confirmar</button>
+                                    <button (click)="cancel()">Cancelar</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="button-container" *ngIf="roluser === 'ADMIN_ROLE'">
+                <button class="add-project-button" (click)="proyecto.uid && abrirRegistrodeactividad(proyecto.uid)">Añadir
+                    Actividad</button>
+            </div>
+            <br>
+    
+            <div class="map-sections-container">
+                <div *ngFor="let mapa of proyecto?.mapas; let i = index" class="map-section">
+                    <h4 class="map-label text-container">UBICACIÓN</h4>
+                    <div class="map-wrapper">
+                        <div #mapContainer class="map-container" id="mapContainer{{i}}"></div>
+                        <div class="coordinates-display"> {{ mapa?.coorX }} , {{ lng }}</div>
+                    </div>
+                    <br><br>
+                    <div class="location-info mapa text-container">
+                        <div>
+                            Provincia: <input type="text" [value]="mapa.lugar!.split(';')[0]" readonly>
+                        </div>
+                        <div>
+                            Cantón: <input type="text" [value]="mapa.lugar!.split(';')[1]" readonly>
+                        </div>
+                        <div>
+                            Parroquia: <input type="text" [value]="mapa.lugar!.split(';')[2]" readonly>
+                        </div>
+                    </div>
+                    <button (click)="eliminarmapa(i)" class="eliminarmapa-button" *ngIf="roluser === 'ADMIN_ROLE'">
+                        <i class="fas fa-trash-alt"></i> Eliminar
+                    </button>
+                </div>
+            </div>
+    
+            <div class="button-container" *ngIf="roluser === 'ADMIN_ROLE'">
+                <button class="add-project-button" (click)="agregarmapa()">Añadir nueva ubicación</button>
+            </div>
         </div>
     </div>
-    <div class="button-container" *ngIf="roluser === 'ADMIN_ROLE'">
-        <button class="add-project-button" (click)="proyecto.uid && abrirRegistrodeactividad(proyecto.uid)">Añadir
-            Actividad</button>
-    </div>
-    <br>
-
-    <div class="map-sections-container">
-        <div *ngFor="let mapa of proyecto?.mapas; let i = index" class="map-section">
-            <h4 class="map-label text-container">UBICACIÓN</h4>
-            <div class="map-wrapper">
-                <div #mapContainer class="map-container" id="mapContainer{{i}}"></div>
-                <div class="coordinates-display"> {{ mapa?.coorX }} , {{ lng }}</div>
-            </div>
-            <div class="location-info mapa text-container">
-                <div>
-                    Provincia: <input type="text" [value]="mapa.lugar!.split(';')[0]" readonly>
-                </div>
-                <div>
-                    Cantón: <input type="text" [value]="mapa.lugar!.split(';')[1]" readonly>
-                </div>
-                <div>
-                    Parroquia: <input type="text" [value]="mapa.lugar!.split(';')[2]" readonly>
-                </div>
-            </div>
-            <button (click)="eliminarmapa(i)" class="eliminarmapa-button" *ngIf="roluser === 'ADMIN_ROLE'">
-                <i class="fas fa-trash-alt"></i> Eliminar
-            </button>
-        </div>
-    </div>
-    
-    <div class="button-container" *ngIf="roluser === 'ADMIN_ROLE'">
-        <button class="add-project-button" (click)="agregarmapa()">Añadir nueva ubicación</button>
-    </div>
-    
-    
-    
-</div>
+</body>

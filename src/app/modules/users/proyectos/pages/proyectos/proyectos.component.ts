@@ -16,18 +16,34 @@ export class ProyectosComponent implements OnInit {
 
   projects?: Proyectos[];
 baseUrl: string= baserUrl;
-  roluser: string= "ADMIN_ROLE"
+  roluser: string= window.localStorage.getItem("roles") ?? "sin rol";
 
   constructor(private dialog: MatDialog, private router: Router, private projectService: ProyectosService) { }
 
   ngOnInit() {
-
-    this.getActiveProjectsList();
+    if(this.roluser=="ADMIN_ROLE"){
+      this.geProjectsList();
+      console.log("adminnnnnnnnnnnnnnnn")
+   
+    }else{
+      this.getActiveProjectsList();
+      console.log("useer")
+    }
 
 
   }
 
   getActiveProjectsList(): void {
+    this.projectService.getActiveProjects().subscribe(
+      proyectos => {
+        this.projects = proyectos;
+      },
+      error => {
+        console.error('Error obteniendo proyectos:', error);
+      }
+    );
+  }
+  geProjectsList(): void {
     this.projectService.getProjects().subscribe(
       proyectos => {
         this.projects = proyectos;
@@ -55,19 +71,6 @@ baseUrl: string= baserUrl;
       data: { proyecto: null, editing:false } 
     });
   }
-
-
-  detailsProject(projectId: number | undefined) {
-
-    if (projectId !== undefined) {
-        this.router.navigate(['user/ver/proyecto', projectId]);
-    } else {
-      console.log(projectId);
-    }
-    
-}
-
-
 
   getProvincia(lugar: any): string {
     return lugar.split(';')[0];
@@ -140,5 +143,12 @@ baseUrl: string= baserUrl;
     });
   }
   
+  goToArticle(projectId: any) {
+    if (projectId !== undefined) {
+      this.router.navigate(['user/ver/proyecto', projectId]);
+    } else {
+      console.log(projectId);
+    }
+  }
 }
 

@@ -119,6 +119,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;
+    justify-content: center;
     gap: 24px;
     align-items: flex-start;
 
@@ -126,7 +127,7 @@ body {
     .vision,
     .nosotros {
 
-      flex: 1;
+      /* flex: 1; */
       padding: 20px;
       border-radius: 1rem;
       box-shadow: 0 2px 4px 2px #009A63;
@@ -141,6 +142,15 @@ body {
         font-size: 1.5rem;
       }
     }
+
+    .mision {
+      width: 485px;
+    }
+
+    .vision,
+    .nosotros {
+      width: 290px;
+    }
   }
 }
 
@@ -148,11 +158,12 @@ body {
 .entrada-blog {
   display: grid;
   grid-template-columns: 1fr 2fr;
-
+  cursor: pointer;
   margin-bottom: 4rem;
   padding: 20px;
   border-radius: 1rem;
   box-shadow: 4px 4px 4px 4px #979695;
+  max-width: 120rem;
 
   .imagen {
     display: flex;
@@ -164,6 +175,7 @@ body {
       max-width: 80%;
       margin: 0 auto;
       height: auto;
+      border-radius: 1rem;
     }
   }
 
@@ -177,6 +189,23 @@ body {
     p,
     span {
       font-size: 1.8rem;
+    }
+
+    .paragraph {
+      max-width: 750px;
+
+      .content {
+
+        font-size: 1.5rem;
+        /* Tamaño de fuente fijo que desees */
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        /* Número de líneas visibles antes de los puntos suspensivos */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+      }
     }
   }
 }
@@ -248,7 +277,7 @@ h4 {
   }
 
   span {
-    color: $amarillo;
+    color: $tomate;
   }
 }
 
@@ -281,7 +310,7 @@ h4 {
   padding: 30px 32px;
   /* Imagenes Slider */
 
-  background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url('https://www.henkel.es/resource/image/1084248/16x9/1920/1080/7a7530443937d70f83dbb22c6423158c/F34BFB3EAF33429AAFA08601DD0B63E2/2020-06-05-d%C3%ADa-mundial-del-medio-ambiente-jpg.webp') no-repeat 0 50%;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.637)), url('https://www.henkel.es/resource/image/1084248/16x9/1920/1080/7a7530443937d70f83dbb22c6423158c/F34BFB3EAF33429AAFA08601DD0B63E2/2020-06-05-d%C3%ADa-mundial-del-medio-ambiente-jpg.webp') no-repeat 0 50%;
   //opacity: .75;
   background-position: center;
   background-size: cover;
@@ -456,6 +485,18 @@ h4 {
     p,
     span {
       font-size: 1.5rem;
+    }
+  }
+
+  .nosotros {
+
+    .about-us {
+
+      .mision,
+      .vision,
+      .nosotros {
+        width: 100%;
+      }
     }
   }
 }

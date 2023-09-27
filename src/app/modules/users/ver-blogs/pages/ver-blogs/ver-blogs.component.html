@@ -19,10 +19,11 @@
             </li>
             
             <li>
-                
-                <img id="btn-abrir-popup" class="edit" (click)="formularioEditar()" src="../../../../../../assets/img/edit.png" alt="img edit">
-                <!-- <img class="delete" (click)="estado()" src="../../../../../../assets/img/delete.png" alt="img delete"> -->
-                <button class="activo" id="boton">Activo</button>
+                <div *ngIf="storageServ.getRole() === 'ADMIN_ROLE'">
+                    <img id="btn-abrir-popup" class="edit" (click)="formularioEditar()" src="../../../../../../assets/img/edit.png" alt="img edit">
+                    <!-- <img class="delete" (click)="estado()" src="../../../../../../assets/img/delete.png" alt="img delete"> -->
+                    <button class="activo" id="boton">Activo</button>
+                </div>
         </ul>
     
         <ul class="iconos user">
@@ -55,7 +56,7 @@
                 </ul>
                 
             </div>
-
+            <!-- *ngIf="storageServ.getRole() === 'ADMIN_ROLE' || storageServ.getRole() === 'USER_ROLE'" -->
             <input id="btn-abrir-popup-comentario" type="submit" value="Deja tu comentario">
         </div> -->
     </div>
