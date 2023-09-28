@@ -1,0 +1,34 @@
+<div class="dialog-container">
+    <h1>Formulario de Empresa</h1>
+    
+    <form [formGroup]="formInfo" (ngSubmit)="editar()">
+
+        <div class="form-group">
+            <label for="mission">Misión:</label> <br>
+            <textarea id="mission" name="mision" rows="4" cols="50" formControlName="mission" class="form-control"
+                [class.is-invalid]="isInvalidForm('mission')"></textarea>
+            <small *ngIf="isInvalidForm('mission')" class="text-danger">Campo obligatorio y 500 carácteres permitidos.</small>
+            <br>
+        </div>
+
+        <div class="form-group">
+            <label for="vision">Visión:</label> <br>
+            <textarea id="vision" name="vision" rows="4" cols="50" formControlName="vision" class="form-control"
+                [class.is-invalid]="isInvalidForm('vision')"></textarea>
+            <small *ngIf="isInvalidForm('vision')" class="text-danger">Campo obligatorio y 500 carácteres permitidos.</small>
+            <br>
+        </div>
+
+        <div class="form-group">
+            <label for="aboutUs">Sobre Nosotros:</label> <br>
+            <textarea id="aboutUs" name="aboutUs" rows="4" cols="50" formControlName="aboutUs" class="form-control"
+                [class.is-invalid]="isInvalidForm('aboutUs')"></textarea>
+            <small *ngIf="isInvalidForm('aboutUs')" class="text-danger">Campo obligatorio y 500 carácteres permitidos.</small>
+            <br>
+        </div>
+
+        <input type="submit" value="Guardar">
+        <input type="button" value="Cancelar" (click)="closeDialog()">
+
+    </form>
+</div>
