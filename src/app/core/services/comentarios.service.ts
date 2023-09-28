@@ -10,22 +10,22 @@ import { Blogscomentariospost } from "../models/blogcomentariospost";
 })
 export class ComentariosService {
 
-    comentariosUrl = `${baserUrl}/ver-blogs`;
+    comentariosUrl = `${baserUrl}/comentario`;
 
     constructor(private http:HttpClient) {}
 
     //Registrar un nuevo comentario
-    createComentario(comentario: Blogscomentariospost) {
+    createComentario(comentario: Blogcomentarios) {
         return this.http.post(this.comentariosUrl, comentario);
     }
 
     //Listar comentarios
     getComentarios(): Observable<Blogcomentarios[]> {
-        return this.http.get<Blogcomentarios[]>(`${this.comentariosUrl}/`);
+        return this.http.get<Blogcomentarios[]>(`${this.comentariosUrl}/ver-blogs`);
     }
 
     //Eliminar comentario
     deleteCometario(id: number) {
-        return this.http.delete(`${this.comentariosUrl}/${id}`);
+        return this.http.delete(`${this.comentariosUrl}/ver-blogs/${id}`);
     }
 }

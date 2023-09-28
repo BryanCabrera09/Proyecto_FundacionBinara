@@ -1,8 +1,10 @@
 export class Blogcomentarios {
 
     _id?: number;
-    id_blog?: string;
-    nombre?: string;
-    fecha?: Date;
-    comentario?: string[];
+    texto?: string;
+    usuario?: number;
+    blog?: number;
+    fechaComentario?: Date;
+    visible?: boolean;
+    /* comentario?: string[]; */
 }

@@ -14,6 +14,8 @@ import { __param } from 'tslib';
 import Swal from 'sweetalert2';
 import { style } from '@angular/animations';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { Usuario } from 'src/app/core/models/usuario';
+import { UsuarioService } from 'src/app/core/services/usuario.service';
 
 
 @Component({
@@ -26,6 +28,7 @@ export class VerBlogsComponent implements OnInit {
   blogs!: Blogs;
   comentarios!: Blogcomentarios[];
   blog: Blogpost = new Blogpost();
+  user?: Usuario;
 
   editarBlog!: BlogsComponent;
 
@@ -42,24 +45,24 @@ export class VerBlogsComponent implements OnInit {
   blogedit: string = '';
   edit: boolean = false;
 
-  blogcomentario: Blogscomentariospost = new Blogscomentariospost();
+  blogcomentario: Blogcomentarios = new Blogcomentarios();
 
-  constructor(private dialogRef: MatDialogRef<VerBlogsComponent, BlogsComponent>, 
-    private router: Router, 
+  constructor(private dialogRef: MatDialogRef<VerBlogsComponent, BlogsComponent>,
+    private router: Router,
     private snackBar: MatSnackBar,
     public storageServ: StorageService,
-    private comentariosService: ComentariosService, 
-    private dialog:MatDialog, 
-    private route: ActivatedRoute, 
-    private blogsService: BlogsService, 
-    @Inject(MAT_DIALOG_DATA) public data: any){
+    private comentariosService: ComentariosService,
+    private dialog: MatDialog,
+    private route: ActivatedRoute,
+    private blogsService: BlogsService,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
 
-      if(data.blog != null){
-        this.blogedit = data.blog._id;
+    if (data.blog != null) {
+      this.blogedit = data.blog._id;
 
-      }
+    }
 
-    if(data.blogcomentario != null){
+    if (data.blogcomentario != null) {
       this.id_blog = data.blogcomentario.id_blog;
       this.nombre = data.blogcomentario.nombre;
       this.fecha = data.blogcomentario.fecha;
@@ -71,6 +74,8 @@ export class VerBlogsComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get('id');
     this.buscarBlogPorId(id!);
+    this.buscarUsuario()
+
     this.getForm();
     this.estado();
   }
@@ -88,68 +93,75 @@ export class VerBlogsComponent implements OnInit {
     this.blogsService.searchBlogById(id).subscribe({
       next: (data: any) => {
         const blog = data;
-        console.log(blog);
         this.blogs = blog.blog;
       },
       error: (error: any) => {
         console.error('Error obteniendo el blog:', error);
       },
-      complete:() => {
+      complete: () => {
         console.log('Busqueda de blog por ID completada')
       },
     });
   }
-  
-  //LLama a popup para crear comentarios
-  getForm(): void{
-    var btnAbrirPopup = document.getElementById('btn-abrir-popup-comentario'),
-    overlay = document.getElementById('overlay-comentario'),
-    popup = document.getElementById('popup-comentario'),
-    btnCerrarPopup = document.getElementById('btn-cerrar-popup-comentario');
 
-    btnAbrirPopup?.addEventListener('click', function(){
+  buscarUsuario() {
+
+    this.user = JSON.parse(sessionStorage.getItem('userdetails') || '');
+
+    this.nombre = this.user?.nombre;
+  }
+
+  //LLama a popup para crear comentarios
+  getForm(): void {
+    var btnAbrirPopup = document.getElementById('btn-abrir-popup-comentario'),
+      overlay = document.getElementById('overlay-comentario'),
+      popup = document.getElementById('popup-comentario'),
+      btnCerrarPopup = document.getElementById('btn-cerrar-popup-comentario');
+
+    btnAbrirPopup?.addEventListener('click', function () {
       overlay?.classList.add('active');
       popup?.classList.add('active');
     });
 
-    btnCerrarPopup?.addEventListener('click', function(){
+    btnCerrarPopup?.addEventListener('click', function () {
       overlay?.classList.remove('active');
       popup?.classList.remove('active');
     });
   }
 
   //Datos
-  Datos(): void{
-    //this.blogcomentario._id = this.id_blog;
-    //this.blogcomentario.nombre = this.nombre;
-    this.blogcomentario.comentario = this.comentario;
+
+  guardarComentario() {
+
+    this.blogcomentario.usuario = this.user?.uid;
+    this.blogcomentario.blog = this.blogs._id;
+
+
+    this.blogcomentario.visible = true;
+
+    this.comentariosService.createComentario(this.blogcomentario).subscribe(
+      (response) => {
+        console.log('Comentario publicado con éxito', response);
+
+        this.onClose();
+        window.location.reload();
+      },
+      (error) => {
+        console.error('Error de guardar comentario', error);
+      }
+    );
   }
-    //Crear Comentario
-    guardarComentario(){
-      this.Datos();
-      this.comentariosService.createComentario(this.blogcomentario).subscribe(
-        (response) => {
-          console.log('Comentario publicado con éxito', response);
 
-          this.onClose();
-          window.location.reload();
-        },
-        (error) => {
-          console.error('Error de guardar comentario', error);
-        }
-      );
-    }
+  openSuccessSnackBar() {
+    this.snackBar.open('Comentario registrado con éxito', 'cerrar', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: ['success-snackbar']
+    });
+  }
 
-    openSuccessSnackBar(){
-      this.snackBar.open('Comentario registrado con éxito', 'cerrar',{
-        duration: 3000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
-        panelClass: ['success-snackbar']
-      });
-    }
-
-    //Abrir formulario para editar blog
+  //Abrir formulario para editar blog
   formularioEditar(): void {
     var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
       overlay = document.getElementById('overlay'),
@@ -172,7 +184,7 @@ export class VerBlogsComponent implements OnInit {
   imageSrc: string | ArrayBuffer | null = null;
   onFileSelected(event: any): void {
     const input = event.target;
-    if(input.files && input.files[0]){
+    if (input.files && input.files[0]) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.imageSrc = e.target.result;
@@ -183,9 +195,9 @@ export class VerBlogsComponent implements OnInit {
   }
 
 
-  DatosBlog(): void{
+  DatosBlog(): void {
     this.blog.titulo = this.blogs.titulo;
-    this.blog.foto = this.blogs.foto; 
+    this.blog.foto = this.blogs.foto;
     this.blog.nombre_autor = this.blogs.nombre_autor;
     this.blog.apellido_autor = this.blogs.apellido_autor;
     this.blog.email_autor = this.blogs.email_autor;
@@ -217,8 +229,8 @@ export class VerBlogsComponent implements OnInit {
 
   actualizarBlog() {
     this.DatosBlog();
-    
-    this.blogsService.editBlog(this.blogs._id+'', this.blog).subscribe({
+
+    this.blogsService.editBlog(this.blogs._id + '', this.blog).subscribe({
       next: response => {
         console.log('Blog actualizado con éxito!', response);
         this.subirimagen(response.blog.uid)
@@ -250,12 +262,12 @@ export class VerBlogsComponent implements OnInit {
   }
 
 
-  estado(){
+  estado() {
     const boton = document.getElementById('boton') as HTMLButtonElement;
     let activo = true;
 
     boton.addEventListener('click', () => {
-      if(activo){
+      if (activo) {
         boton.innerText = 'No visible';
         boton.classList.remove('activo');
         boton.classList.add('inactivo')
@@ -277,16 +289,16 @@ export class VerBlogsComponent implements OnInit {
               showConfirmButton: false,
               timer: 2000
             });
-          }  
-          );
-      }else{
+          }
+        );
+      } else {
         boton.innerText = 'Visible'
         boton.classList.remove('inactivo');
         boton.classList.add('activo');
         this.DatosBlog()
         this.blogs.visible = true;
-    
-        this.blogsService.editBlog(this.blogs._id+'', this.blog).subscribe({
+
+        this.blogsService.editBlog(this.blogs._id + '', this.blog).subscribe({
           next: response => {
             console.log('Blog activado con éxito!', response);
             this.subirimagen(response.blog.uid)
@@ -312,9 +324,9 @@ export class VerBlogsComponent implements OnInit {
             console.log('La operación ha completado');
           }
         });
-        }
+      }
       activo = !activo;
     });
-   }
+  }
 
 }

@@ -1,30 +1,31 @@
 <main class="container">
     <div>
         <h1> {{ blogs.titulo }}</h1>
-    
+
         <div class="portada">
-            <img  [src]="blogs.foto" alt="Imagen de Blog" />
-            </div>
-    
+            <img [src]="blogs.foto" alt="Imagen de Blog" />
+        </div>
+
         <ul class="iconos">
             <li>
                 <img class="boton-like" src="../../../../../../assets/img/like.png" alt="img">
                 <p>283</p>
-    
+
                 <img src="../../../../../../assets/img/dislike.png" alt="img">
                 <p>283</p>
-    
+
                 <img src="../../../../../../assets/img/comentarios.png" alt="img">
                 <p>283</p>
             </li>
-            
+
             <li>
-                
-                <img id="btn-abrir-popup" class="edit" (click)="formularioEditar()" src="../../../../../../assets/img/edit.png" alt="img edit">
+
+                <img id="btn-abrir-popup" class="edit" (click)="formularioEditar()"
+                    src="../../../../../../assets/img/edit.png" alt="img edit">
                 <!-- <img class="delete" (click)="estado()" src="../../../../../../assets/img/delete.png" alt="img delete"> -->
                 <button class="activo" id="boton">Activo</button>
         </ul>
-    
+
         <ul class="iconos user">
             <li>
                 <img src="../../../../../../assets/img/user.png" alt="img">
@@ -34,7 +35,7 @@
                 {{ blogs.fecha | date: 'dd-MM-yyyy' }}
             </li>
         </ul>
-        
+
         <div class="parrafos">
             {{ blogs.parrafo }}
 
@@ -42,7 +43,7 @@
             {{ blogs.bibliografia }}
         </div>
 
-        <!-- <div class="contenedor-comentarios">
+        <div class="contenedor-comentarios">
             <h2>Comentarios:</h2>
             <div class="comentario">
                 <ul class="iconos user">
@@ -51,15 +52,17 @@
                         <h1>Nombre</h1>
                     </li>
                 </ul>
-                <ul>comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario comentario.
+                <ul>comentario comentario comentario comentario comentario comentario comentario comentario comentario
+                    comentario comentario comentario comentario comentario comentario comentario comentario comentario
+                    comentario comentario comentario comentario comentario comentario comentario comentario comentario
+                    comentario comentario comentario comentario.
                 </ul>
-                
             </div>
 
             <input id="btn-abrir-popup-comentario" type="submit" value="Deja tu comentario">
-        </div> -->
+        </div>
     </div>
-    
+
 
     <!-- Comentar -->
     <div class="overlay" id="overlay-comentario">
@@ -67,14 +70,14 @@
             <div class="header-form">
                 <h1>Deja tu Comentario</h1>
                 <a id="btn-cerrar-popup-comentario"><i class="fas fa-times"></i></a>
-                </div>
-            <label for="nombre-comentario">Tu Nombre y Apellido:</label>
-            <input type="text" id="nombre-comentario" name="nombre" placeholder="Eg: Pedro Campoverde" [(ngModel)]="nombre"
-                required>
-        
+            </div>
+            <label for="nombre-comentario">Usuario</label>
+            <input type="text" id="nombre-comentario" name="nombre" placeholder="Eg: Pedro Campoverde"
+                [(ngModel)]="nombre" disabled="true" required>
+
             <label for="comentario">Comentario:</label>
-            <textarea id="comentario" name="comentario" rows="5" [(ngModel)]="comentario" required></textarea>
-        
+            <textarea id="comentario" name="comentario" rows="4" [(ngModel)]="blogcomentario.texto" required></textarea>
+
             <input id="publicar" type="submit" value="Enviar Comentario" (click)="guardarComentario()">
         </form>
     </div>
@@ -89,26 +92,32 @@
             <div id="fecha"></div>
 
             <label for="titulo">Título:</label>
-            <input type="text" id="titulo" name="titulo" placeholder="Título del blog" [(ngModel)]='blogs.titulo' required>
+            <input type="text" id="titulo" name="titulo" placeholder="Título del blog" [(ngModel)]='blogs.titulo'
+                required>
 
             <label for="titulo">Imagen:</label>
             <input type="file" (change)="onFileSelected($event)" accept="image/*">
-            <img [src]="blogs.foto"  alt="imageUpload">
+            <img [src]="blogs.foto" alt="imageUpload">
 
             <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Nombre del Autor" [(ngModel)]="blogs.nombre_autor" required>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre del Autor" [(ngModel)]="blogs.nombre_autor"
+                required>
 
             <label for="apellido">Apellido:</label>
-            <input type="text" id="apellido" name="apellido" placeholder="Apellido del Autor" [(ngModel)]="blogs.apellido_autor" required>
-    
+            <input type="text" id="apellido" name="apellido" placeholder="Apellido del Autor"
+                [(ngModel)]="blogs.apellido_autor" required>
+
             <label for="e-mail">Email:</label>
-            <input type="email" id="e-mail" name="e-mail" placeholder="Email del Autor" [(ngModel)]="blogs.email_autor" required>
+            <input type="email" id="e-mail" name="e-mail" placeholder="Email del Autor" [(ngModel)]="blogs.email_autor"
+                required>
 
             <label for="contenido">Contenido del Blog:</label>
-            <textarea class="textarea-auto" id="contenido" name="contenido" placeholder="Escriba el contenido del Blog" [(ngModel)]="blogs.parrafo" required></textarea>
+            <textarea class="textarea-auto" id="contenido" name="contenido" placeholder="Escriba el contenido del Blog"
+                [(ngModel)]="blogs.parrafo" required></textarea>
 
             <label for="bibliografia">Bibliografia:</label>
-            <textarea class="textarea-auto" id="bibliografia" name="bibliografia" placeholder="Escriba la Bibliografia del Blog" [(ngModel)]="blogs.bibliografia"></textarea>
+            <textarea class="textarea-auto" id="bibliografia" name="bibliografia"
+                placeholder="Escriba la Bibliografia del Blog" [(ngModel)]="blogs.bibliografia"></textarea>
 
             <div class="botones-form-blog">
                 <input id="editar" type="submit" value="Editar" (click)="actualizarBlog()">

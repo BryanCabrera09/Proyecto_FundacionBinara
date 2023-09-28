@@ -110,7 +110,7 @@
                         <h4>{{ blog.titulo }}</h4>
                         <p>{{'Escrito el: ' | translate | async}}<span>{{ blog.fecha | date: 'dd-MM-yyyy'}}</span>
                             {{'Por:' | translate | async}}
-                            <span>{{ blog.nombre_autor }}, {{ blog.apellido_autor }}</span>
+                            <span>{{ blog.nombre_autor }} {{ blog.apellido_autor }}</span>
                         </p>
                         <div class="paragraph">
                             <p class="content"> {{ blog.parrafo }}</p>
