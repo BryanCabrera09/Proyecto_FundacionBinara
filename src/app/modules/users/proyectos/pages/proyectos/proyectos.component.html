@@ -1,4 +1,9 @@
 <body>
+
+    <div class="title">
+        <h1>Proyectos</h1>
+    </div>
+
     <div class="background">
         <span class="centering">
             <section class="articles">
@@ -12,7 +17,8 @@
                     </div>
                     <div class="article-preview">
                         <h2>{{ project.titulo }}</h2>
-                        <p class="location p1" *ngIf="project.mapas && project.mapas.length > 0">{{ getProvincia(project.mapas[0].lugar) }}
+                        <p class="location p1" *ngIf="project.mapas && project.mapas.length > 0">{{
+                            getProvincia(project.mapas[0].lugar) }}
                         </p>
                         <p class="tamañoParrafo">{{ project.parrafoUno }}</p>
                         <div class="boton">

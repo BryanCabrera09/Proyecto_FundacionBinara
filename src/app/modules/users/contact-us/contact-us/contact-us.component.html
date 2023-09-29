@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="form-contact">
-                    <form class="contact-us-form">
+                    <form class="contact-us-form" [formGroup]="sendMailForm">
                         <h2>Contactanos</h2>
                         <div class="form-group">
                             <label for="nombre">Nombre Completo</label>
@@ -86,10 +86,10 @@
                         </div>
                         <div class="form-group">
                             <label for="comentario">Consulta o comentario</label>
-                            <textarea id="comentario" formControlName="comentario" class="form-control"></textarea>
+                            <textarea id="comentario" formControlName="mensaje" class="form-control"></textarea>
                         </div>
                         <div class="form-send">
-                            <button class="btn btn-primary">Enviar</button>
+                            <button class="btn btn-primary" (click)="sendMail()">Enviar</button>
                         </div>
                     </form>
                 </div>

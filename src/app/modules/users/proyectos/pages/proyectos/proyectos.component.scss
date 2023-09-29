@@ -7,6 +7,18 @@
     font-family: $fuente_principal;
 }
 
+.title {
+
+    padding-top: 70px;
+    padding-bottom: 70px;
+
+    h1 {
+        text-align: center;
+        font-size: 3.7rem;
+        font-weight: bold;
+    }
+}
+
 .article-container {
     position: relative;
     border-radius: 1rem;
@@ -55,10 +67,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px 32px;
-    /* background: linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, .5)), url('https://www.henkel.es/resource/image/1084248/16x9/1920/1080/7a7530443937d70f83dbb22c6423158c/F34BFB3EAF33429AAFA08601DD0B63E2/2020-06-05-d%C3%ADa-mundial-del-medio-ambiente-jpg.webp') no-repeat 0 50%;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://media.ambito.com/p/4d3afbb1c6ce227487a1cfcad5500d19/adjuntos/239/imagenes/038/679/0038679054/1200x675/smart/educacion-ambientaljpg.jpg') no-repeat 0 50%;
     background-position: center;
-    background-size: cover; */
+    background-size: cover;
 }
 
 .articles {

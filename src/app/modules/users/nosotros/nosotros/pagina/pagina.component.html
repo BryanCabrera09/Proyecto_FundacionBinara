@@ -1,22 +1,37 @@
 <div class="container">
 
+    <div class="title">
+        <h1>Nosotros</h1>
+    </div>
+
     <!-- ABOUT US -->
-    <!-- <div class="card" style="width: 18rem;">
-        <img src="https://www.diariosostenible.cl/files/623cbc6d800b6_890x533.jpg" alt="Preview" title="Preview" />
-        <div class="card-body">
-            <p class="card-text">{{ aboutUs.texto1 }}</p>
+    <div class="quienes-somos">
+        <div class="title-somos">
+            <h2>Quienes Somos</h2>
         </div>
-    </div> -->
+        <div class="card-body">
+
+            <div class="card-content">
+                <p class="card-text">{{quienes_somos_parrU | translate | async}}<br><br>{{quienes_somos_parrD |
+                    translate | async}}</p>
+            </div>
+            <div class="card-img">
+                <img src="https://www.diariosostenible.cl/files/623cbc6d800b6_890x533.jpg" alt="Preview"
+                    title="Quienes Somos" />
+            </div>
+        </div>
+    </div>
 
     <div class="nosotros">
-        
+
         <div class="centered-container">
-            <h2 class="inline-block">QUE HACEMOS</h2> 
+            <h2 class="inline-block">QUE HACEMOS</h2>
             <br>
-            <button *ngIf="storageServ.getRole() === 'ADMIN_ROLE'" class="edit-button" title="Editar" (click)="openDialog()">
-               ✎
+            <button *ngIf="storageServ.getRole() === 'ADMIN_ROLE'" class="edit-button" title="Editar"
+                (click)="openDialog()">
+                ✎
             </button>
-          </div>
+        </div>
 
         <div class="container about-us">
             <div class="mision">
@@ -34,8 +49,6 @@
         </div>
     </div>
 
-
-
     <div class="Equipo">
         <h3>Nuestro Equipo de Trabajo</h3>
     </div>
@@ -50,7 +63,8 @@
         </figure>
         <div class="nombre">{{t.texto1}}</div>
         <div class="titulo">{{t.texto2}}</div>
-        <input *ngIf="storageServ.getRole() === 'ADMIN_ROLE'" id="btn-abrir-popup2" type="submit" value="Modificar" (click)="getForm()">
+        <input *ngIf="storageServ.getRole() === 'ADMIN_ROLE'" id="btn-abrir-popup2" type="submit" value="Modificar"
+            (click)="getForm()">
     </div>
 
 

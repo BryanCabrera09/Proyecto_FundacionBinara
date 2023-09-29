@@ -4,7 +4,10 @@
 *,
 *:before,
 *:after {
-  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $fuente_principal;
 }
 
 body {
@@ -18,12 +21,48 @@ p {
   font-size: 2rem;
 }
 
+.title {
+
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #009A63;
+
+  h1 {
+    text-align: center;
+    font-size: 3.5rem;
+    font-weight: bold;
+  }
+}
+
 .container {
   width: 95%;
   max-width: 120rem;
   margin: 0 auto;
-  margin-top: calc($separacion / 2);
   margin-bottom: calc($separacion / 2);
+}
+
+.card-body {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+
+  .card-img {
+
+    align-items: center;
+
+    img {
+      width: 5%;
+    }
+  }
+
+  .card-content {
+    p {
+      font-size: 1.4rem;
+    }
+  }
 }
 
 .nosotros {
@@ -132,18 +171,6 @@ h4 {
   justify-content: flex-end;
 }
 
-.boton-amarillo {
-  @include boton($grisOscuro, inline-block);
-}
-
-.boton-amarillo-block {
-  @include boton($grisOscuro, block);
-}
-
-.boton-verde {
-  @include boton($verde, inline-block);
-}
-
 .sabias {
   background-color: $verde;
   font-size: 2.4rem;
@@ -249,8 +276,6 @@ h4 {
   width: 9em;
 }
 
-
-
 .formulario {
   margin: 4rem auto;
   max-width: 70rem;
@@ -258,10 +283,12 @@ h4 {
   border-radius: 5px;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 70);
   background-color: rgb(248, 244, 244, 1);
-  h1{
+
+  h1 {
     font-size: 2.5rem;
     color: $negro;
   }
+
   //usado para animacion
   opacity: 0;
   transition: .3s ease;
@@ -285,61 +312,67 @@ textarea {
   border-radius: 1rem;
 }
 
-textarea{
+textarea {
   overflow-y: hidden;
   resize: none;
   min-height: 5rem;
   white-space: pre-line;
 }
 
-.overlay{
+.overlay {
   color: $blanco;
   background-color: rgba(0, 0, 0, .6);
   position: fixed;
   inset: 0;
   visibility: hidden;
   overflow-y: scroll;
-  img{
+
+  img {
     padding: 2rem;
   }
-  input[type="file"]{
+
+  input[type="file"] {
     color: $negro;
     margin-bottom: 2rem;
   }
 }
 
-.overlay.active{
+.overlay.active {
   visibility: visible;
 }
 
-.header-form a:hover{
+.header-form a:hover {
   color: $negro;
 }
 
 //animacion
-form.active{
+form.active {
   opacity: 1;
   transform: scale(1);
 }
 
-.botones-form-blog{
+.botones-form-blog {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.titulo{
+
+.titulo {
   margin: 4rem 2rem;
-  h2{
+
+  h2 {
     font-size: 6rem;
     font-weight: $delgada;
     margin-bottom: 3rem;
   }
-  span{
+
+  span {
     text-transform: uppercase;
     font-weight: $black;
   }
- 
-} 
+
+}
+
 .texto-invisible {
   display: none;
 }
@@ -410,14 +443,12 @@ input[type="submit"]:hover {
 
 .centered-container {
   display: flex;
-  justify-content: center; /* Centra horizontalmente los elementos dentro del contenedor */
-  align-items: center; /* Centra verticalmente los elementos dentro del contenedor */
+  justify-content: center;
+  /* Centra horizontalmente los elementos dentro del contenedor */
+  align-items: center;
+  /* Centra verticalmente los elementos dentro del contenedor */
 }
 
 
 
 // FOR EDIT INFO ABOUT BINARA
-
-
-
-

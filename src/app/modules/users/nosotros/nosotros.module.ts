@@ -9,13 +9,14 @@ import { NosotrosRoutingModule } from './nosotros-routing.module';
 import { PaginaComponent } from './nosotros/pagina/pagina.component';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { InfoDialogComponent } from './nosotros/info-dialog/info-dialog.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
   declarations: [
-  
+
     PaginaComponent,
-        InfoDialogComponent
+    InfoDialogComponent
   ],
   imports: [
     CommonModule,
@@ -23,11 +24,12 @@ import { InfoDialogComponent } from './nosotros/info-dialog/info-dialog.componen
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
-    
+    SharedModule
+
   ],
-  providers:[
-    {provide: MAT_DIALOG_DATA, useValue: {}},
-    {provide: MatDialogRef, useValue: {}}
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} }
   ]
 })
 export class NosotrosModule { }

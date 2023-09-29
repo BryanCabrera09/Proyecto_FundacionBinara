@@ -21,6 +21,17 @@ export class PaginaComponent implements OnInit {
   imagen: any = "link de imagen";
   baseUrl: string = baserUrl;
 
+  quienes_somos_parrU = 'Fundación BINARA es una persona jurídica de derecho privado, sin fines de lucro, con'
+  + 'patrimonio propio, administración autónoma, constituida en 2022 ante el Ministerio'
+  + 'de Agua, Ambiente y Transición Ecológica del Ecuador.'
+quienes_somos_parrD = 'En alianza con empresas privadas, donantes particulares, agencias de cooperación y'
+  + 'gobiernos nacionales y locales potenciamos el trabajo de organizaciones sin fines de'
+  + 'lucro; micro, pequeñas y medianas empresas; fondos de agua; redes, asociaciones y'
+  + 'cooperativas de la economía popular y solidaria; pequeños y medianos productores'
+  + 'agrícolas; organizaciones indígenas; y, colectivos urbanos mediante la canalización de'
+  + 'recursos monetarios y no monetarios para proteger, conservar y restaurar ecosistemas'
+  + 'y servicios ecosistémicos clave para las poblaciones que dependen de ellos.';
+
   aboutUs?: any;
   mission?: any;
   vision?: any;

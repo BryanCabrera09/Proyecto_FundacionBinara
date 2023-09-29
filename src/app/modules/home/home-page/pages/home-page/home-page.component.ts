@@ -145,7 +145,6 @@ export class HomePageComponent implements OnInit {
     }
   }
 
-
   goToProjects() {
     this.router.navigate(['/user/projects']);
   }
